@@ -1,0 +1,100 @@
+package org.una.municipalidad.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.entities.Usuarios;
+import org.una.municipalidad.exceptions.NotFoundInformationException;
+import org.una.municipalidad.repositories.UsuariosRepository;
+import org.una.municipalidad.utils.MapperUtils;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class UsuariosServiceImplementation implements UsuariosService{
+
+    @Autowired
+    private UsuariosRepository usuarioRepository;
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<UsuariosDTO>> findByUsuarioIgnoreCase(String Usuarios) {
+        List<Usuarios> usuarioList = usuarioRepository.findByUsuarioContainingIgnoreCase(Usuarios);
+        List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);
+        return Optional.ofNullable(usuarioDTOList);
+
+    }
+
+    private UsuariosDTO getSavedUsuarioDTO(UsuariosDTO usuarioDTO) {
+        Usuarios usuario = MapperUtils.EntityFromDto(usuarioDTO, Usuarios.class);
+        Usuarios usuarioCreated = usuarioRepository.save(usuario);
+        return MapperUtils.DtoFromEntity(usuarioCreated, UsuariosDTO.class);
+    }
+
+    @Override
+    @Transactional
+    public Optional<UsuariosDTO> create(UsuariosDTO usuarioDTO) {
+        return Optional.ofNullable(getSavedUsuarioDTO(usuarioDTO));
+    }
+
+
+    @Override
+    @Transactional
+    public Optional<UsuariosDTO> update(UsuariosDTO usuarioDTO, Long Id) {
+        if (usuarioRepository.findById(Id).isEmpty()) throw new NotFoundInformationException();
+
+        return Optional.ofNullable(getSavedUsuarioDTO(usuarioDTO));
+
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long Id) {
+        usuarioRepository.deleteById(Id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        usuarioRepository.deleteAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<UsuariosDTO> login(String Usuario, String Clave) {
+        Usuarios usuario = usuarioRepository.findByUsuarioAndClave(Usuario, Clave);
+        return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<UsuariosDTO> findById(Long Id) {
+        Optional<Usuarios> usuario = usuarioRepository.findById(Id);
+        if (usuario.isEmpty()) throw new NotFoundInformationException();
+
+        UsuariosDTO usuarioDTO = MapperUtils.DtoFromEntity(usuario.get(), UsuariosDTO.class);
+        return Optional.ofNullable(usuarioDTO);
+
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<UsuariosDTO>> findAll() {
+
+        List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioRepository.findAll(), UsuariosDTO.class);
+        return Optional.ofNullable(usuarioDTOList);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<UsuariosDTO>> findByUsuarioAproximate(String Usuario) {
+        List<Usuarios> usuarioList = usuarioRepository.findByUsuarioContaining(Usuario);
+        if (usuarioList.isEmpty()) throw new NotFoundInformationException();
+
+        List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);
+        return Optional.ofNullable(usuarioDTOList);
+    }
+}
