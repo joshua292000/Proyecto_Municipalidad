@@ -19,8 +19,8 @@ public class UsuariosServiceImplementation implements UsuariosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<UsuariosDTO>> findByUsuarioIgnoreCase(String Usuarios) {
-        List<Usuarios> usuarioList = usuarioRepository.findByUsuarioContainingIgnoreCase(Usuarios);
+    public Optional<List<UsuariosDTO>> findByNombreUsuarioAproximateIgnoreCase(String nombreUsuario) {
+        List<Usuarios> usuarioList = usuarioRepository.findByNombreUsuarioContainingIgnoreCase(nombreUsuario);
         List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);
         return Optional.ofNullable(usuarioDTOList);
 
@@ -41,17 +41,15 @@ public class UsuariosServiceImplementation implements UsuariosService{
 
     @Override
     @Transactional
-    public Optional<UsuariosDTO> update(UsuariosDTO usuarioDTO, Long Id) {
-        if (usuarioRepository.findById(Id).isEmpty()) throw new NotFoundInformationException();
-
+    public Optional<UsuariosDTO> update(UsuariosDTO usuarioDTO, Long id) {
+        if (usuarioRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(getSavedUsuarioDTO(usuarioDTO));
-
     }
 
     @Override
     @Transactional
-    public void delete(Long Id) {
-        usuarioRepository.deleteById(Id);
+    public void delete(Long id) {
+        usuarioRepository.deleteById(id);
     }
 
     @Override
@@ -62,16 +60,16 @@ public class UsuariosServiceImplementation implements UsuariosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UsuariosDTO> login(String Usuario, String Clave) {
-        Usuarios usuario = usuarioRepository.findByUsuarioAndClave(Usuario, Clave);
+    public Optional<UsuariosDTO> login(String nombreUsuario, String claveEncriptado) {
+        Usuarios usuario = usuarioRepository.findByNombreUsuarioAndClaveEncriptado(nombreUsuario, claveEncriptado);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
 
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UsuariosDTO> findById(Long Id) {
-        Optional<Usuarios> usuario = usuarioRepository.findById(Id);
+    public Optional<UsuariosDTO> findById(Long id) {
+        Optional<Usuarios> usuario = usuarioRepository.findById(id);
         if (usuario.isEmpty()) throw new NotFoundInformationException();
 
         UsuariosDTO usuarioDTO = MapperUtils.DtoFromEntity(usuario.get(), UsuariosDTO.class);
@@ -90,8 +88,8 @@ public class UsuariosServiceImplementation implements UsuariosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<UsuariosDTO>> findByUsuarioAproximate(String Usuario) {
-        List<Usuarios> usuarioList = usuarioRepository.findByUsuarioContaining(Usuario);
+    public Optional<List<UsuariosDTO>> findByNombreUsuarioAproximate(String nombreUsuario) {
+        List<Usuarios> usuarioList = usuarioRepository.findByNombreUsuarioContaining(nombreUsuario);
         if (usuarioList.isEmpty()) throw new NotFoundInformationException();
 
         List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);

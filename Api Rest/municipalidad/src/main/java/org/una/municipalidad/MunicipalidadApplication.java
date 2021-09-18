@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MunicipalidadApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(MunicipalidadApplication.class, args);
 	}
 

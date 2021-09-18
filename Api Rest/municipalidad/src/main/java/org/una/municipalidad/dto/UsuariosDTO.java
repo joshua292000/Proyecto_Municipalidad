@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 public class UsuariosDTO {
-    private Long Id;
-    private String Usuario;
+    private Long id;
+    private String nombreUsuario;
     private boolean estado;
 }

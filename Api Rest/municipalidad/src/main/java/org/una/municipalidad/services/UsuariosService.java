@@ -9,20 +9,20 @@ public interface UsuariosService {
 
     public Optional<List<UsuariosDTO>> findAll();
 
-    public Optional<UsuariosDTO> findById(Long Id);
+    public Optional<UsuariosDTO> findById(Long id);
 
-    public Optional<List<UsuariosDTO>> findByUsuarioIgnoreCase(String Usuario);
+    public Optional<List<UsuariosDTO>> findByNombreUsuarioAproximateIgnoreCase(String nombreUsuario);
 
-    public Optional<List<UsuariosDTO>> findByUsuarioAproximate(String cedula);
+    public Optional<List<UsuariosDTO>> findByNombreUsuarioAproximate(String nombreUsuario);
 
     public Optional<UsuariosDTO> create(UsuariosDTO usuariosDTO);
 
-    public Optional<UsuariosDTO> update(UsuariosDTO usuariosDTO, Long Id);
+    public Optional<UsuariosDTO> update(UsuariosDTO usuariosDTO, Long id);
 
-    public void delete(Long Id);
+    public void delete(Long id);
 
     public void deleteAll();
 
-    public Optional<UsuariosDTO> login(String Usuario,String Clave);
+    public Optional<UsuariosDTO> login(String nombreUsuario,String claveEncriptado);
 
 }

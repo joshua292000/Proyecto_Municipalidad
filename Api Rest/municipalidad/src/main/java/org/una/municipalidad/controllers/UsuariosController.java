@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Usuarios")
+@RequestMapping("/usuarios")
 @Api(tags = {"Usuarios"})
 public class UsuariosController {
     @Autowired
@@ -28,8 +28,8 @@ public class UsuariosController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una usuario a partir de su id", response = UsuariosDTO.class, tags = "Usuarios")
-    public ResponseEntity<?> findById(@PathVariable(value = "Id") Long Id) {
-        Optional<UsuariosDTO> usuarioFound = usuarioService.findById(Id);
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+        Optional<UsuariosDTO> usuarioFound = usuarioService.findById(id);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
 
     }
@@ -37,24 +37,25 @@ public class UsuariosController {
     @PutMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
-    public ResponseEntity<?> login(@PathVariable(value = "Usuario") String Usuario, @PathVariable(value = "Clave") String Clave) {
-        Optional<UsuariosDTO> usuarioFound = usuarioService.login(Usuario, Clave);
+    public ResponseEntity<?> login(@PathVariable(value = "nombreUsuario") String nombreUsuario, @PathVariable(value = "claveEncriptado") String claveEncriptado) {
+        Optional<UsuariosDTO> usuarioFound = usuarioService.login(nombreUsuario, claveEncriptado);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
 
-    @GetMapping("/Usuario/{term}")
-    @ApiOperation(value = "Obtiene una lista de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    public ResponseEntity<?> findByUsuarioIgnoreCase(@PathVariable(value = "term") String term) {
-        Optional<List<UsuariosDTO>> result = usuarioService.findByUsuarioIgnoreCase(term);
+    @GetMapping("/usuario/{term}")
+    @ApiOperation(value = "Obtiene una lista de las usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
+    public ResponseEntity<?> findByNombreUsuarioAproximate(@PathVariable(value = "term") String term) {
+        Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximate(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/Usuario/{term}")
-    @ApiOperation(value = "Obtiene una lista de las cedulas", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    public ResponseEntity<?> findByUsuarioAproximate(@PathVariable(value = "term") String term) {
-        Optional<List<UsuariosDTO>> result = usuarioService.findByUsuarioAproximate(term);
+    @GetMapping("/nombre/{term}")
+    @ApiOperation(value = "Obtiene una lista de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
+    public ResponseEntity<?> findByNombreUsuarioAproximateIgnoreCase(@PathVariable(value = "term") String term) {
+        Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximateIgnoreCase(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
@@ -68,18 +69,18 @@ public class UsuariosController {
         }
     }
 
-    @PutMapping("/{Id}")
+    @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = UsuariosDTO.class, tags = "Seguridad")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "Id") Long Id, @RequestBody UsuariosDTO usuarioModified) {
-        Optional<UsuariosDTO> usuarioUpdated = usuarioService.update(usuarioModified, Id);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody UsuariosDTO usuarioModified) {
+        Optional<UsuariosDTO> usuarioUpdated = usuarioService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{Id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "Id") Long Id) throws Exception {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         try {
-            usuarioService.delete(Id);
+            usuarioService.delete(id);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
 
         } catch (Exception e) {

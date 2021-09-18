@@ -3,10 +3,9 @@ package org.una.municipalidad.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,21 +15,18 @@ public class Usuarios implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
-    @Column(name = "Usuario", length = 100)
-    private String Usuario;
+    @Column(name = "nombre_usuario", length = 100)
+    private String nombreUsuario;
 
-    @Column(length = 100, name = "Clave")
-    private String Clave;
+    @Column(length = 100, name = "clave_encriptado")
+    private String claveEncriptado;
 
 
     @Column
     private boolean estado;
 
-    //@ManyToOne
-    //@JoinColumn(name="departamentos_id")
-    //private Long departamento;
 
     private static final long serialVersionUID = 1L;
 
@@ -39,8 +35,5 @@ public class Usuarios implements Serializable{
         estado=true;
     }
 
-    @PreUpdate
-    public void preUpdate() {
-       // fechaModificacion = new Date();
-    }
+
 }

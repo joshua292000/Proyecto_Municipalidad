@@ -9,11 +9,11 @@ import java.util.List;
 
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
-    public Usuarios findByUsuarioAndClave(String Usuario, String Clave);
+    public Usuarios findByNombreUsuarioAndClaveEncriptado(String nombreUsuario, String claveEncriptado);
 
-    public List<Usuarios> findByUsuarioContainingIgnoreCase(String Usuario);
+    public List<Usuarios> findByNombreUsuarioContainingIgnoreCase(String nombreUsuario);
 
-   public List<Usuarios> findByUsuarioContaining(String usuario);
+   public List<Usuarios> findByNombreUsuarioContaining(String nombreUsuario);
 
 
 
