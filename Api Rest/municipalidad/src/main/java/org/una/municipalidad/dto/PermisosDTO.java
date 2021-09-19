@@ -10,9 +10,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-
-public class UsuariosDTO {
+public class PermisosDTO {
     private Long id;
-    private String nombreUsuario;
-    private boolean estado;
+    private String nombrePermiso;
+    private String tipoPermiso;
+    private String descripcionPermiso;
+    private String categoriaPermiso;
 }
