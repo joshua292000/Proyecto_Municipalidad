@@ -64,4 +64,5 @@ public class Licencias_Comerciales implements Serializable{
     public void preUpdate() {
         ultima_Actualizacioncomercio = new Date();
     }
+
 }
