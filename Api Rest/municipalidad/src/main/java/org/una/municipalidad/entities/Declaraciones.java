@@ -18,7 +18,7 @@ public class Declaraciones implements Serializable{
     private Long id;
 
     @Column(name = "monto_declarado")
-    private int montoDeclarado;
+    private Long montoDeclarado;
 
     @Column(name = "anno_declarado", updatable = false)
     @Temporal(TemporalType.DATE)

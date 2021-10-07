@@ -23,7 +23,7 @@ public class Licencias_Comerciales implements Serializable{
     private String nombreComercio;
 
     @Column(name = "telefono_comercio")
-    private int telefonoComercio;
+    private Long telefonoComercio;
 
     @Column(name = "correo_comercio", length = 100)
     private String correoComercio;
