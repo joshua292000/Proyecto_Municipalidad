@@ -39,15 +39,15 @@ public class LicenciasComercialesController {
 
     @GetMapping("/{codigoComercio}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su codigo", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
-    public ResponseEntity<?> findByCodigo(@PathVariable(value = "codigoComercio") String codigoComercio) {
-        Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByCodigo(codigoComercio);
+    public ResponseEntity<?> findByCodigoComercio(@PathVariable(value = "codigoComercio") String codigoComercio) {
+        Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByCodigoComercio(codigoComercio);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
     }
 
     @GetMapping("/{nombreComercio}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su nombre", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
-    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombreComercio") String nombreComercio) {
-        Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByNombre(nombreComercio);
+    public ResponseEntity<?> findByNombreComercio(@PathVariable(value = "nombreComercio") String nombreComercio) {
+        Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByNombreComercio(nombreComercio);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
     }
 

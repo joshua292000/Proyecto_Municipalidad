@@ -39,15 +39,15 @@ public class DeclaracionesController {
 
     @GetMapping("/montoDeclarado/{term}")
     @ApiOperation(value = "Obtiene una lista de los montos declarados", response = DeclaracionesDTO.class, responseContainer = "List", tags = "Declaraciones")
-    public ResponseEntity<?> findByMonto(@PathVariable(value = "term") long term) {
-        Optional<List<DeclaracionesDTO>> result = declaracionService.findByMonto(term);
+    public ResponseEntity<?> findByMontoDeclarado(@PathVariable(value = "term") long term) {
+        Optional<List<DeclaracionesDTO>> result = declaracionService.findByMontoDeclarado(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/AnnoDeclarado/{term}")
-    @ApiOperation(value = "Obtiene una lista de los años en lo que ha declarado", response = DeclaracionesDTO.class, responseContainer = "List", tags = "Declaraciones")
-    public ResponseEntity<?> findByAnnoDeclaracion(@PathVariable(value = "term") Date term) {
-        Optional<List<DeclaracionesDTO>> result = declaracionService.findByAnnoDeclaracion(term);
+    @GetMapping("/id/{term}")
+    @ApiOperation(value = "Obtiene una lista de los años declarados por medio del id", response = DeclaracionesDTO.class, responseContainer = "List", tags = "Declaraciones")
+    public ResponseEntity<?> findByIdAndFechaDeclarado(@PathVariable(value = "term") Long term, Date fechaDeclarado) {
+        Optional<List<DeclaracionesDTO>> result = declaracionService.findByIdAndFechaDeclarado(term, fechaDeclarado);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

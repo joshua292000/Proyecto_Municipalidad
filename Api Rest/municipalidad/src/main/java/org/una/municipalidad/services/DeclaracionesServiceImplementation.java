@@ -38,8 +38,8 @@ public class DeclaracionesServiceImplementation implements DeclaracionesService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<DeclaracionesDTO>> findByMonto(Long montoDeclarado) {
-        List<Declaraciones> declaracionlList = declaracionesRepository.findByMonto(montoDeclarado);
+    public Optional<List<DeclaracionesDTO>> findByMontoDeclarado(Long montoDeclarado) {
+        List<Declaraciones> declaracionlList = declaracionesRepository.findByMontoDeclarado(montoDeclarado);
         if (declaracionlList.isEmpty()) throw new NotFoundInformationException();
         List<DeclaracionesDTO> declaracionDTOList = MapperUtils.DtoListFromEntityList(declaracionlList, DeclaracionesDTO.class);
         return Optional.ofNullable(declaracionDTOList);
@@ -47,8 +47,8 @@ public class DeclaracionesServiceImplementation implements DeclaracionesService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<DeclaracionesDTO>> findByAnnoDeclaracion(Date annoDeclarado) {
-        List<Declaraciones> declaracionlList = declaracionesRepository.findByAnnoDeclaracion(annoDeclarado);
+    public Optional<List<DeclaracionesDTO>> findByIdAndFechaDeclarado(Long id, Date fechaDeclarado) {
+        List<Declaraciones> declaracionlList = declaracionesRepository.findByIdAndFechaDeclarado(id, fechaDeclarado);
         if (declaracionlList.isEmpty()) throw new NotFoundInformationException();
         List<DeclaracionesDTO> declaracionDTOList = MapperUtils.DtoListFromEntityList(declaracionlList, DeclaracionesDTO.class);
         return Optional.ofNullable(declaracionDTOList);

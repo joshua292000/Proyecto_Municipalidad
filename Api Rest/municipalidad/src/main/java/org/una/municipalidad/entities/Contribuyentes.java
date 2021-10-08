@@ -21,8 +21,8 @@ public class Contribuyentes implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyentes")
-    private List<Licencias_Comerciales> licencias_comerciales= new ArrayList<>();
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyentes")
+    //private List<Licencias_Comerciales> licencias_comerciales= new ArrayList<>();
 
     @Column(name = "nombre_contribuyente", length = 100)
     private String nombreContribuyente;

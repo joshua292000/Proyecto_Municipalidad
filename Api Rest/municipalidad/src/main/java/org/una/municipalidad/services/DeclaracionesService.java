@@ -10,9 +10,9 @@ public interface DeclaracionesService {
 
     public Optional<DeclaracionesDTO> findById(Long id);
 
-    public Optional<List<DeclaracionesDTO>> findByMonto(Long montoDeclarado);
+    public Optional<List<DeclaracionesDTO>> findByMontoDeclarado(Long montoDeclarado);
 
-    public Optional<List<DeclaracionesDTO>> findByAnnoDeclaracion(Date annoDeclarado);
+    public Optional<List<DeclaracionesDTO>> findByIdAndFechaDeclarado(Long id, Date fechaDeclarado);
 
     public Optional<DeclaracionesDTO> create(DeclaracionesDTO declaracionesDTO);
 

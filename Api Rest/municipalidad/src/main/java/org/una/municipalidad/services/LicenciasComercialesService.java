@@ -10,9 +10,9 @@ public interface LicenciasComercialesService {
 
     public Optional<LicenciasComercialesDTO> findById(Long id);
 
-    public Optional<LicenciasComercialesDTO> findByCodigo(String codigoComercio);
+    public Optional<LicenciasComercialesDTO> findByCodigoComercio(String codigoComercio);
 
-    public Optional<LicenciasComercialesDTO> findByNombre(String nombreComercio);
+    public Optional<LicenciasComercialesDTO> findByNombreComercio(String nombreComercio);
 
     public Optional<LicenciasComercialesDTO> create(LicenciasComercialesDTO licenciacomercialDTO);
 

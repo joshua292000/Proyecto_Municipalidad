@@ -1,5 +1,5 @@
 package org.una.municipalidad.entities;
-
+/*
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Contribuyentes_Locales_Comerciales implements Serializable {
+@ToString*/
+public class Contribuyentes_Locales_Comerciales  {
 //pendiente a terminar, mañana lo hago :3
 }
