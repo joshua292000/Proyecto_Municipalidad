@@ -1,10 +1,6 @@
 package org.una.municipalidad.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
@@ -12,8 +8,6 @@ import org.una.municipalidad.entities.Licencias_Comerciales;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.LicenciasComercialesRepository;
 import org.una.municipalidad.utils.MapperUtils;
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -32,37 +26,60 @@ public class LicenciasComercialesServiceImplementation implements LicenciasComer
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<LicenciasComercialesDTO> findById(Long id) {
-        return Optional.empty();
+        Optional<Licencias_Comerciales> licenciacomercial = licenciacomercialRepository.findById(id);
+        if (licenciacomercial.isEmpty()) throw new NotFoundInformationException();
+        LicenciasComercialesDTO licenciasComercialesDTO = MapperUtils.DtoFromEntity(licenciacomercial.get(), LicenciasComercialesDTO.class);
+        return Optional.ofNullable(licenciasComercialesDTO);
     }
 
     @Override
-    public Optional<List<LicenciasComercialesDTO>> findByCodigo(String codigoComercio) {
-        return Optional.empty();
+    @Transactional(readOnly = true)
+    public Optional<LicenciasComercialesDTO> findByCodigo(String codigoComercio) {
+        Optional<Licencias_Comerciales> licenciacomercial = licenciacomercialRepository.findByCodigo(codigoComercio);
+        if (licenciacomercial.isEmpty()) throw new NotFoundInformationException();
+        LicenciasComercialesDTO licenciasComercialesDTO = MapperUtils.DtoFromEntity(licenciacomercial.get(), LicenciasComercialesDTO.class);
+        return Optional.ofNullable(licenciasComercialesDTO);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<LicenciasComercialesDTO>> findByNombre(String nombreComercio) {
-        return Optional.empty();
+        List<Licencias_Comerciales> licenciaComercialList = licenciacomercialRepository.findByNombre(nombreComercio);
+        if (licenciaComercialList.isEmpty()) throw new NotFoundInformationException();
+        List<LicenciasComercialesDTO> licenciaComercialDTOList = MapperUtils.DtoListFromEntityList(licenciaComercialList, LicenciasComercialesDTO.class);
+        return Optional.ofNullable(licenciaComercialDTOList);
+    }
+
+    private LicenciasComercialesDTO getSavedLicenciaComercialDTO(LicenciasComercialesDTO licenciaComercialDTO) {
+        Licencias_Comerciales licenciaComercial = MapperUtils.EntityFromDto(licenciaComercialDTO, Licencias_Comerciales.class);
+        Licencias_Comerciales licenciaComercialCreated = licenciacomercialRepository.save(licenciaComercial);
+        return MapperUtils.DtoFromEntity(licenciaComercialCreated, LicenciasComercialesDTO.class);
     }
 
     @Override
+    @Transactional
     public Optional<LicenciasComercialesDTO> create(LicenciasComercialesDTO licenciacomercialDTO) {
-        return Optional.empty();
+        return Optional.ofNullable(getSavedLicenciaComercialDTO(licenciacomercialDTO));
     }
 
     @Override
+    @Transactional
     public Optional<LicenciasComercialesDTO> update(LicenciasComercialesDTO licenciacomercialDTO, Long id) {
-        return Optional.empty();
+        if (licenciacomercialRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(getSavedLicenciaComercialDTO(licenciacomercialDTO));
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-
+        licenciacomercialRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
-
+        licenciacomercialRepository.deleteAll();
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface DeclaracionesRepository extends JpaRepository<Declaraciones, Long>{
 
     public List<Declaraciones> findByMonto(Long montoDeclarado);
-    public List<Declaraciones> findByAñoDeclaracion(Date annoDeclarado);
+    public List<Declaraciones> findByAnnoDeclaracion(Date annoDeclarado);
     public Declaraciones findDeclaracionByLicencia(Long id);
 
 }
