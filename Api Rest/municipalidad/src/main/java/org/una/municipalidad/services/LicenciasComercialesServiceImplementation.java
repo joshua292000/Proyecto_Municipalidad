@@ -39,17 +39,17 @@ public class LicenciasComercialesServiceImplementation implements LicenciasComer
     public Optional<LicenciasComercialesDTO> findByCodigo(String codigoComercio) {
         Optional<Licencias_Comerciales> licenciacomercial = licenciacomercialRepository.findByCodigo(codigoComercio);
         if (licenciacomercial.isEmpty()) throw new NotFoundInformationException();
-        LicenciasComercialesDTO licenciasComercialesDTO = MapperUtils.DtoFromEntity(licenciacomercial.get(), LicenciasComercialesDTO.class);
-        return Optional.ofNullable(licenciasComercialesDTO);
+        LicenciasComercialesDTO licenciaComercialDTO = MapperUtils.DtoFromEntity(licenciacomercial.get(), LicenciasComercialesDTO.class);
+        return Optional.ofNullable(licenciaComercialDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<LicenciasComercialesDTO>> findByNombre(String nombreComercio) {
-        List<Licencias_Comerciales> licenciaComercialList = licenciacomercialRepository.findByNombre(nombreComercio);
-        if (licenciaComercialList.isEmpty()) throw new NotFoundInformationException();
-        List<LicenciasComercialesDTO> licenciaComercialDTOList = MapperUtils.DtoListFromEntityList(licenciaComercialList, LicenciasComercialesDTO.class);
-        return Optional.ofNullable(licenciaComercialDTOList);
+    public Optional<LicenciasComercialesDTO> findByNombre(String nombreComercio) {
+        Optional<Licencias_Comerciales> licenciaComercial = licenciacomercialRepository.findByNombre(nombreComercio);
+        if (licenciaComercial.isEmpty()) throw new NotFoundInformationException();
+        LicenciasComercialesDTO licenciaComercialDTO = MapperUtils.DtoFromEntity(licenciaComercial.get(), LicenciasComercialesDTO.class);
+        return Optional.ofNullable(licenciaComercialDTO);
     }
 
     private LicenciasComercialesDTO getSavedLicenciaComercialDTO(LicenciasComercialesDTO licenciaComercialDTO) {

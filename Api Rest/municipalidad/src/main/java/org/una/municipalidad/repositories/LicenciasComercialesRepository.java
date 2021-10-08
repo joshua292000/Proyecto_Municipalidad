@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface LicenciasComercialesRepository extends JpaRepository<Licencias_Comerciales, Long> {
 
     public Optional<Licencias_Comerciales> findByCodigo(String codigoComercio);
-    public List<Licencias_Comerciales> findByNombre(String nombreComercio);
+    public Optional<Licencias_Comerciales> findByNombre(String nombreComercio);
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
 import org.una.municipalidad.services.UsuariosService;
 import java.util.List;
@@ -77,20 +78,17 @@ public class UsuariosController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Elimina un usuario por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        try {
-            usuarioService.delete(id);
-            return new ResponseEntity<>("Ok", HttpStatus.OK);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        usuarioService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Elimina todos los usuarios", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        //TODO: Implementar este método
-        throw new Exception("Not implemented Function");
+        usuarioService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 }
