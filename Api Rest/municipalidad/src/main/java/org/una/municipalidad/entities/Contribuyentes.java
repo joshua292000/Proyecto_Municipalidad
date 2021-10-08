@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "Contribuyentes")
 @Data
@@ -17,6 +20,9 @@ public class Contribuyentes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyentes")
+    private List<Licencias_Comerciales> licencias_comerciales= new ArrayList<>();
 
     @Column(name = "nombre_contribuyente", length = 100)
     private String nombreContribuyente;
