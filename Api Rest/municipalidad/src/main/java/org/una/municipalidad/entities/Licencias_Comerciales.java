@@ -44,10 +44,10 @@ public class Licencias_Comerciales implements Serializable{
     @Column(name = "codigo_comercio", length = 100)
     private String codigoComercio;
 
-    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciacomercial")
     private List<Declaraciones> declaraciones = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")
     private List<Cobros> cobros = new ArrayList<>();*/
 
     @Column

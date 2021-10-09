@@ -26,8 +26,8 @@ public class PropiedadesServiceImplementation implements PropiedadesService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<PropiedadesDTO> findById(Long id) {
-        Optional<Propiedades> propiedades = propiedadesRepository.findById(id);
+    public Optional<PropiedadesDTO> findById(Long propiedades_id) {
+        Optional<Propiedades> propiedades = propiedadesRepository.findById(propiedades_id);
         if (propiedades.isEmpty()) throw new NotFoundInformationException();
         PropiedadesDTO propiedadesDTO = MapperUtils.DtoFromEntity(propiedades.get(), PropiedadesDTO.class);
         return Optional.ofNullable(propiedadesDTO);
@@ -64,14 +64,14 @@ public class PropiedadesServiceImplementation implements PropiedadesService {
 
     @Override
     @Transactional
-    public Optional<PropiedadesDTO> update(PropiedadesDTO propiedadesDTO, Long id) {
-        if (propiedadesRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+    public Optional<PropiedadesDTO> update(PropiedadesDTO propiedadesDTO, Long propiedades_id) {
+        if (propiedadesRepository.findById(propiedades_id).isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(getSavedPropiedadesDTO(propiedadesDTO));
     }
 
     @Override
-    public void delete(Long id) {
-        propiedadesRepository.deleteById(id);
+    public void delete(Long propiedades_id) {
+        propiedadesRepository.deleteById(propiedades_id);
     }
 
     @Override

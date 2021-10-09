@@ -43,15 +43,15 @@ public class UsuariosController {
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
 
-    @GetMapping("/usuario/{term}")
-    @ApiOperation(value = "Obtiene una lista de las usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    public ResponseEntity<?> findByNombreUsuarioAproximate(@PathVariable(value = "term") String term) {
-        Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximate(term);
+    @GetMapping("/cedula/{term}")
+    @ApiOperation(value = "Obtiene una lista de las cedulas", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
+    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
+        Optional<List<UsuariosDTO>> result = usuarioService.findByCedulaAproximate(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/nombre/{term}")
-    @ApiOperation(value = "Obtiene una lista de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
+    @ApiOperation(value = "Obtiene una lista de los nombres de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByNombreUsuarioAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximateIgnoreCase(term);
         return new ResponseEntity<>(result, HttpStatus.OK);

@@ -26,9 +26,10 @@ public class Declaraciones implements Serializable{
     private Date fechaDeclarado;
 
     private static final long serialVersionUID = 1L;
-   /* @ManyToOne
-    @JoinColumn(name="comercio_id")
+
+    @ManyToOne
+    @JoinColumn(name="licencia_id")
     private Licencias_Comerciales licenciacomercial;
-*/
+
 
 }

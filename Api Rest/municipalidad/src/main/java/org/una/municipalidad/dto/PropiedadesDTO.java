@@ -9,7 +9,7 @@ import java.util.Date;
 @ToString
 @Builder
 public class PropiedadesDTO {
-    private Long id;
+    private Long propiedades_id;
     private String propiedadProvincia;
     private String propiedadCanton;
     private String propiedadDistrito;
