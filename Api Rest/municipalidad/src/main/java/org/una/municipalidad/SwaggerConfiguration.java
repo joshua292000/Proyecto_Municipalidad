@@ -24,7 +24,7 @@ public class SwaggerConfiguration {
                 .apis(
                         RequestHandlerSelectors
                                 .basePackage("org.una.municipalidad.controllers"))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(apiInfo())
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),

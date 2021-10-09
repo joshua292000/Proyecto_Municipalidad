@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Usuarios implements Serializable{
 
     @Id

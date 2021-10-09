@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Contribuyentes_Licencias_Comerciales implements Serializable{
 
     @Id

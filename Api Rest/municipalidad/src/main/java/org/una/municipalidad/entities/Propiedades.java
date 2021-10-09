@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Propiedades implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

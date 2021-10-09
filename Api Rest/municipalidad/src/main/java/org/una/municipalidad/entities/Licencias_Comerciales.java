@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Licencias_Comerciales implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

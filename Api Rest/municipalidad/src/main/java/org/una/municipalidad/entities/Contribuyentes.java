@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+//@Builder
+
 public class Contribuyentes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

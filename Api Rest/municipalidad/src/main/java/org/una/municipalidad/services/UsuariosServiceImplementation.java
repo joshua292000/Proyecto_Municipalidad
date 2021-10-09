@@ -96,7 +96,7 @@ public class UsuariosServiceImplementation implements UsuariosService{
     @Transactional(readOnly = true)
     public Optional<List<UsuariosDTO>> findByCedulaAproximate(String cedula) {
         List<Usuarios> usuarioList = usuarioRepository.findByCedulaContaining(cedula);
-        if (usuarioList.isEmpty()) throw new NotFoundInformationException();
+        //if (usuarioList.isEmpty()) throw new NotFoundInformationException();
         List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);
         return Optional.ofNullable(usuarioDTOList);
     }

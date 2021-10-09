@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class BitacoraCambios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

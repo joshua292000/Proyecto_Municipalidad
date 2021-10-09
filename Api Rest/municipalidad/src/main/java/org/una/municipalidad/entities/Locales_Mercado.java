@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class Locales_Mercado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

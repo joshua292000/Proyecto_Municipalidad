@@ -1,9 +1,6 @@
 package org.una.municipalidad.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Parametros {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
