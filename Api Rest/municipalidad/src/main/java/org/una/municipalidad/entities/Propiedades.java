@@ -24,7 +24,7 @@ public class Propiedades implements Serializable {
     private String propiedadProvincia;
 
     @Column(name = "propiedad_canton ", length = 100)
-    private Long propiedadCanton;
+    private String propiedadCanton;
 
     @Column(name = "propiedad_distrito", length = 100)
     private String propiedadDistrito;

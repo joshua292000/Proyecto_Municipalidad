@@ -17,18 +17,18 @@ public class BitacoraCambios {
     private Long id;
 
     @Column(name = "bitacora_tabla", length = 100)
-    private String bitacora_Tabla;
+    private String bitacoraTabla;
 
     @Column(name = "bitacora_descripcion", length = 500)
-    private String bitacora_Descripcion;
+    private String bitacoraDescripcion;
 
     @Column(name = "bitacora_usuario", length = 100)
-    private String bitacora_Usuario;
+    private String bitacoraUsuario;
 
     @Column(name = "bitacora_fecha", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date bitacora_Fecha;
+    private Date bitacoraFecha;
 
     @ManyToOne
     @JoinColumn(name="usuario_id")
@@ -38,11 +38,11 @@ public class BitacoraCambios {
 
     @PrePersist
     public void prePersist() {
-        bitacora_Fecha = new Date();
+        bitacoraFecha = new Date();
     }
 
     @PreUpdate
     public void preUpdate() {
-        bitacora_Fecha = new Date();
+        bitacoraFecha = new Date();
     }
 }

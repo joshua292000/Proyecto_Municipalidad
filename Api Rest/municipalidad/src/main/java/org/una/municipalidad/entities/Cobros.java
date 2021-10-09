@@ -17,20 +17,20 @@ public class Cobros {
     private Long id;
 
     @Column(name = "cobros_periodo", length = 100)
-    private String cobros_Periodo;
+    private String cobrosPeriodo;
 
     @Column(name = "cobros_monto")
-    private String cobros_Monto;
+    private Long cobrosMonto;
 
     @Column(name = "cobros_fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date cobros_Fecha_Creacion;
+    private Date cobrosFechaCreacion;
 
     @Column(name = "cobros_fecha_vencimiento", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date cobros_Fecha_Vencimiento;
+    private Date cobrosFechaVencimiento;
 
     @Column
     private boolean Estado;
@@ -38,7 +38,7 @@ public class Cobros {
     @Column(name = "cobros_fecha_pago", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date cobros_Fecha_Pago;
+    private Date cobrosFechaPago;
 
     @JoinColumn(name="licencias_comerciales_id")
     private Licencias_Comerciales licenciacomerciales;
@@ -49,7 +49,7 @@ public class Cobros {
 
     @ManyToOne
     @JoinColumn(name="tipo_cobros_id")
-    private Cobros cobros;*/
+    private TipoCobros tcobros;*/
 
     @ManyToOne
     @JoinColumn(name="locales_comerciales_id")
@@ -58,4 +58,19 @@ public class Cobros {
     @ManyToOne
     @JoinColumn(name="propiedades_id")
     private Propiedades propiedades;
+
+    private static final long serialVersionUID = 1L;
+
+    @PrePersist
+    public void prePersist() {
+        Estado=true;
+        cobrosFechaCreacion = new Date();
+        cobrosFechaVencimiento = new Date();
+        cobrosFechaPago = new Date();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+
+    }
 }

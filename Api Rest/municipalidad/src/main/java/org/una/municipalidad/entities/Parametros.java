@@ -20,10 +20,12 @@ public class Parametros {
     private Long id;
 
     @Column(name = "paramentros_llaves", length = 100)
-    private String parametros_Llaves;
+    private String parametrosLlaves;
 
     @Column(name = "parametros_valor", length = 150)
-    private String parametros_Valor;
+    private String parametrosValor;
+
+    private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
