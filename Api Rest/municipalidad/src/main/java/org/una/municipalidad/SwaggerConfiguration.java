@@ -37,7 +37,8 @@ public class SwaggerConfiguration {
                         new Tag("Bitacora", "Entidad de Bitacoras"),
                         new Tag("Cobros", "Entidad de Cobros"),
                         new Tag("Parametros", "Entidad de Parametros"),
-                        new Tag("Contribuyentes_Licencias_Comerciales", "Entidad de los contribuyentes que tienen una licencia comercial")
+                        new Tag("Contribuyentes_Licencias_Comerciales", "Entidad de los contribuyentes que tienen una licencia comercial"),
+                        new Tag("Propiedades", "Entidad de Propiedades")
                 );
 
     }
