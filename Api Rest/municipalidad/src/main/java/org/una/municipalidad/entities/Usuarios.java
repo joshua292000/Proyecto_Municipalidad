@@ -3,6 +3,8 @@ package org.una.municipalidad.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -35,5 +37,6 @@ public class Usuarios implements Serializable{
         estado=true;
     }
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarios")
+    private List<BitacoraCambios> bitacora_cambios = new ArrayList<>();
 }
