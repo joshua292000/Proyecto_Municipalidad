@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface PropiedadesService {
     public Optional<List<PropiedadesDTO>> findAll();
 
-    public Optional<PropiedadesDTO> findById(Long id);
+    public Optional<PropiedadesDTO> findById(Long propiedades_id);
 
     public Optional<PropiedadesDTO> findByPropiedadValorTerreno(long propiedadValorTerreno);
 
@@ -18,9 +18,9 @@ public interface PropiedadesService {
 
     public Optional<PropiedadesDTO> create(PropiedadesDTO propiedadesDTO);
 
-    public Optional<PropiedadesDTO> update(PropiedadesDTO propiedadesDTO, Long id);
+    public Optional<PropiedadesDTO> update(PropiedadesDTO propiedadesDTO, Long propiedades_id);
 
-    public void delete(Long id);
+    public void delete(Long propiedades_id);
 
     public void deleteAll();
 

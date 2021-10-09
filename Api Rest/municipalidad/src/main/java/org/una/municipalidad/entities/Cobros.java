@@ -41,7 +41,7 @@ public class Cobros {
     private Date cobrosFechaPago;
 
     @JoinColumn(name="licencias_comerciales_id")
-    private Licencias_Comerciales licenciacomerciales;
+    private Licencias_Comerciales licenciacomercial;
 
     /*@ManyToOne
     @JoinColumn(name="facturas_id")
@@ -52,8 +52,8 @@ public class Cobros {
     private TipoCobros tcobros;*/
 
     @ManyToOne
-    @JoinColumn(name="locales_comerciales_id")
-    private Locales_Mercado localescomerciales;
+    @JoinColumn(name="locales_mercado_id")
+    private Locales_Mercado localesmercado;
 
     @ManyToOne
     @JoinColumn(name="propiedades_id")

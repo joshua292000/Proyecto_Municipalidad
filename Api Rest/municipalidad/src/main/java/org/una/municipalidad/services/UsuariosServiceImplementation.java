@@ -60,10 +60,16 @@ public class UsuariosServiceImplementation implements UsuariosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UsuariosDTO> login(String nombreUsuario, String claveEncriptado) {
-        Usuarios usuario = usuarioRepository.findByNombreUsuarioAndClaveEncriptado(nombreUsuario, claveEncriptado);
+    public Optional<UsuariosDTO> login(String cedula, String claveEncriptado) {
+        Usuarios usuario = usuarioRepository.findByCedulaAndClaveEncriptado(cedula, claveEncriptado);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
+    }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<UsuariosDTO> findByCedula(String cedula) {
+        Optional<Usuarios> usuario = usuarioRepository.findByCedula(cedula);
+        return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
     }
 
     @Override
@@ -88,10 +94,9 @@ public class UsuariosServiceImplementation implements UsuariosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<UsuariosDTO>> findByNombreUsuarioAproximate(String nombreUsuario) {
-        List<Usuarios> usuarioList = usuarioRepository.findByNombreUsuarioContaining(nombreUsuario);
+    public Optional<List<UsuariosDTO>> findByCedulaAproximate(String cedula) {
+        List<Usuarios> usuarioList = usuarioRepository.findByCedulaContaining(cedula);
         if (usuarioList.isEmpty()) throw new NotFoundInformationException();
-
         List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);
         return Optional.ofNullable(usuarioDTOList);
     }

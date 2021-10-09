@@ -32,7 +32,7 @@ public class BitacoraCambios {
 
     @ManyToOne
     @JoinColumn(name="usuario_id")
-    private Usuarios usuario;
+    private Usuarios usuarios;
 
     private static final long serialVersionUID = 1L;
 

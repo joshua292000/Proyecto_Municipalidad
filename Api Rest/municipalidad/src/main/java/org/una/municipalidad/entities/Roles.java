@@ -3,6 +3,8 @@ package org.una.municipalidad.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -22,10 +24,11 @@ public class Roles implements Serializable{
     @Column(name = "descripcion_rol", length = 200)
     private String descripcionRol;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roles")
+    private List<Usuarios> usuarios = new ArrayList<>();
 
     @Column
     private boolean estado;
-
 
     private static final long serialVersionUID = 1L;
 

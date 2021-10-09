@@ -18,7 +18,7 @@ import java.util.List;
 public class Propiedades implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long propiedades_id;
 
     @Column(name = "propiedad_provincia", length = 100)
     private String propiedadProvincia;
