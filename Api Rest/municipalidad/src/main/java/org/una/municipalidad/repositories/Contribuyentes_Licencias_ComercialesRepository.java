@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface Contribuyentes_Licencias_ComercialesRepository extends JpaRepository<Contribuyentes_Licencias_Comerciales, Long>{
 
-    public Optional<Contribuyentes_Licencias_Comerciales> findByPorcentaje(Long porcentaje);
+    public Optional<Contribuyentes_Licencias_Comerciales> findByPorcentajeLicencia(Long porcentajeLicencia);
 
 }

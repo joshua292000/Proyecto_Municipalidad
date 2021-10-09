@@ -12,8 +12,8 @@ import org.una.municipalidad.services.BitacorasService;
 import java.util.List;
 import java.util.Optional;
 @RestController
-@RequestMapping("/bitacoras")
-@Api(tags = {"Bitacoras"})
+@RequestMapping("/bitacora")
+@Api(tags = {"Bitacora"})
 public class BitacoraController {
 
     @Autowired

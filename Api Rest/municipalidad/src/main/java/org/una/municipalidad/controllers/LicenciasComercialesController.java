@@ -64,21 +64,21 @@ public class LicenciasComercialesController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id", response = LicenciasComercialesDTO.class, tags = "Seguridad")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody LicenciasComercialesDTO licenciaComercialModified) {
         Optional<LicenciasComercialesDTO> licenciaComercialUpdated = licenciaComercialService.update(licenciaComercialModified, id);
         return new ResponseEntity<>(licenciaComercialUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina una licencia comercial por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina una licencia comercial por medio del id", response = LicenciasComercialesDTO.class, tags = "Seguridad")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         licenciaComercialService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina todas las licencias comerciales", response = DeclaracionesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todas las licencias comerciales", response = LicenciasComercialesDTO.class, tags = "Seguridad")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         licenciaComercialService.deleteAll();

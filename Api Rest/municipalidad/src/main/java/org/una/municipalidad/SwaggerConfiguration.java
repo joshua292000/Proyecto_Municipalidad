@@ -31,9 +31,13 @@ public class SwaggerConfiguration {
                         new Tag("Usuarios", "Entidad de Usuarios"),
                         new Tag("Roles", "Entidad de Roles"),
                         new Tag("Locales_Mercado", "Entidad de Locales_Mercado"),
-                        new Tag("Licencias_Comerciales", "Entidad de Licencias_Comerciales"),
+                        new Tag("LicenciasComerciales", "Entidad de Licencias_Comerciales"),
                         new Tag("Declaraciones", "Entidad de Declaraciones"),
-                        new Tag("Contribuyentes", "Entidad de Contribuyentes")
+                        new Tag("Contribuyentes", "Entidad de Contribuyentes"),
+                        new Tag("Bitacora", "Entidad de Bitacoras"),
+                        new Tag("Cobros", "Entidad de Cobros"),
+                        new Tag("Parametros", "Entidad de Parametros"),
+                        new Tag("Contribuyentes_Licencias_Comerciales", "Entidad de los contribuyentes que tienen una licencia comercial")
                 );
 
     }

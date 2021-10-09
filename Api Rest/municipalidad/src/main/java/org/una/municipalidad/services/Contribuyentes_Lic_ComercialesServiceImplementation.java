@@ -21,8 +21,8 @@ public class Contribuyentes_Lic_ComercialesServiceImplementation implements Cont
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Contribuyentes_Licencias_ComercialesDTO> findByPorcentaje(Long porcentaje) {
-        Optional<Contribuyentes_Licencias_Comerciales> contriLicCom = contribuyentes_licencias_comercialesRepository.findByPorcentaje(porcentaje);
+    public Optional<Contribuyentes_Licencias_ComercialesDTO> findByPorcentajeLicencia(Long porcentaje) {
+        Optional<Contribuyentes_Licencias_Comerciales> contriLicCom = contribuyentes_licencias_comercialesRepository.findByPorcentajeLicencia(porcentaje);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(contriLicCom, Contribuyentes_Licencias_ComercialesDTO.class));
     }
 
@@ -40,11 +40,11 @@ public class Contribuyentes_Lic_ComercialesServiceImplementation implements Cont
 
     @Override
     public Optional<Contribuyentes_Licencias_ComercialesDTO> update(Contribuyentes_Licencias_ComercialesDTO contLicComDTO) {
-        return Optional.empty();
+        return Optional.ofNullable(getSavedContribuyenteLicComDTO(contLicComDTO));
     }
 
     @Override
     public void deleteAll() {
-
+        contribuyentes_licencias_comercialesRepository.deleteAll();
     }
 }
