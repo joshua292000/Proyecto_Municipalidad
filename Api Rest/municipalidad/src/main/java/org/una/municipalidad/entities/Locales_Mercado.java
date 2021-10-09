@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "locales_mercado")
@@ -42,6 +44,9 @@ public class Locales_Mercado implements Serializable {
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date ultima_Actualizacionlocal;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "localesmercado")
+    private List<Cobros> cobros = new ArrayList<>();
 
     private static final long serialVersionUID = 1L;
 
