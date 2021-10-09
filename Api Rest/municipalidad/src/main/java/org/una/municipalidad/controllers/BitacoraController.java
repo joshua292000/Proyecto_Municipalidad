@@ -20,7 +20,7 @@ public class BitacoraController {
     private BitacorasService bitacoraService;
 
     @GetMapping()
-    @ApiOperation(value = "Obtiene una lista de todas las Licencias Comerciales", response = BitacorasDTO.class, responseContainer = "List", tags = "Bitacora")
+    @ApiOperation(value = "Obtiene una lista de todas las Licencias Comerciales.", response = BitacorasDTO.class, responseContainer = "List", tags = "Bitacora")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<BitacorasDTO>> result = bitacoraService.findAll();
