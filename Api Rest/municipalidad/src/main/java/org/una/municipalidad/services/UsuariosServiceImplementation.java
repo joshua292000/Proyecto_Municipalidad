@@ -16,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.AuthenticationRequest;
 import org.una.municipalidad.dto.AuthenticationResponse;
+import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
 import org.una.municipalidad.entities.Usuarios;
+import org.una.municipalidad.exceptions.InvalidCredentialsException;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.exceptions.PasswordIsBlankException;
 import org.una.municipalidad.jwt.JwtProvider;
@@ -83,13 +85,36 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         usuarioRepository.deleteAll();
     }
 
+    /*
     @Override
     public String login(AuthenticationRequest authenticationRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtProvider.generateToken(authenticationRequest);
+    }*/
 
+    @Override
+    @Transactional(readOnly = true)
+    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
+
+        Optional<Usuarios> usuario = usuarioRepository.findByCedula(authenticationRequest.getCedula());
+
+        if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getClaveEncriptado(),usuario.get().getClaveEncriptado())) {
+            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
+            UsuariosDTO usuarioDto = MapperUtils.DtoFromEntity(usuario.get(), UsuariosDTO.class);
+            authenticationResponse.setUsuarioDTO(usuarioDto);
+            authenticationResponse.setRolDTO(RolesDTO.builder().nombreRol(usuarioDto.getRoles().getNombreRol()).build());
+
+            return authenticationResponse;
+        } else {
+            throw new InvalidCredentialsException();
+        }
     }
 
    /* @Override
