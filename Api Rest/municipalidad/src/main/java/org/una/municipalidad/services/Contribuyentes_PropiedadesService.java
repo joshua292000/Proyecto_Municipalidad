@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface Contribuyentes_PropiedadesService {
 
-    public Optional<Contribuyentes_PropiedadesDTO> findByPorcentajePropiedades(Long porcentajePropiedad);
+    public Optional<Contribuyentes_PropiedadesDTO> findByPorcentajePropiedad(Long porcentajePropiedad);
 
     public Optional<Contribuyentes_PropiedadesDTO> create(Contribuyentes_PropiedadesDTO contProDTO);
 
