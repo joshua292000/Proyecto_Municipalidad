@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,6 +19,7 @@ import org.una.municipalidad.services.UsuariosServiceImplementation;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Autowired
     private UsuariosServiceImplementation usuarioService;
@@ -54,11 +56,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .authorizeRequests().antMatchers("/usuarios/**", "/v2/api-docs",
+                .authorizeRequests().antMatchers("/autenticacion/**", "/v2/api-docs",
                         "/swagger-resources/**",
                         "/swagger-ui.html**",
                         "/webjars/**").permitAll()
                 .anyRequest().authenticated().and()
+                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -70,5 +73,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
+
 
 }
