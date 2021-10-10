@@ -85,8 +85,8 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         usuarioRepository.deleteAll();
     }
 
-    /*
-    @Override
+
+   /* @Override
     public String login(AuthenticationRequest authenticationRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
@@ -96,7 +96,7 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
 
     @Override
     @Transactional(readOnly = true)
-    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse login2(AuthenticationRequest authenticationRequest) {
 
         Optional<Usuarios> usuario = usuarioRepository.findByCedula(authenticationRequest.getCedula());
 

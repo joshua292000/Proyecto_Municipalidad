@@ -27,7 +27,9 @@ public interface UsuariosService {
 
     public Optional<UsuariosDTO> login(String cedula,String claveEncriptado);
 
-    public AuthenticationResponse login(AuthenticationRequest authenticationRequest);
+    public AuthenticationResponse login2(AuthenticationRequest authenticationRequest);
+
+    //public String login(AuthenticationRequest authenticationRequest);
 
     public Optional<UsuariosDTO> findByCedula(String cedula);
 

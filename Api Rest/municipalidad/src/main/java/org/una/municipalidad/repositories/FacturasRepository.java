@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface FacturasRepository extends JpaRepository<Facturas, Long> {
-    public Optional<Facturas> findByFecha(Date fechapago);
+    public Optional<Facturas> findByFechaPago(Date fechapago);
 }

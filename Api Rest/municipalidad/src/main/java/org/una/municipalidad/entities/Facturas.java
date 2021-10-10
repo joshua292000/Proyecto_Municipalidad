@@ -21,7 +21,7 @@ public class Facturas implements Serializable {
     @Column(name = "fecha_pago", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fechapago;
+    private Date fechaPago;
 
     @Column(name = "Monto_Total")
     private Long Monto_Total;
@@ -46,7 +46,7 @@ public class Facturas implements Serializable {
     @PrePersist
     public void prePersist() {
         estado=true;
-        fechapago = new Date();
+        fechaPago = new Date();
 
     }
 

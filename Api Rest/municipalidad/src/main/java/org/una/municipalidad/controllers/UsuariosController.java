@@ -42,25 +42,27 @@ public class UsuariosController {
 
     }
 
-   /* @PutMapping("/login")
+   @PutMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
     public ResponseEntity<?> login(@PathVariable(value = "nombreUsuario") String nombreUsuario, @PathVariable(value = "claveEncriptado") String claveEncriptado) {
         Optional<UsuariosDTO> usuarioFound = usuarioService.login(nombreUsuario, claveEncriptado);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
-    }*/
+    }
 
-    @PutMapping("/login")
+    @PutMapping("/")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
-    public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
+    public ResponseEntity<?> login2( @Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+
         //String token = usuarioService.login(authenticationRequest);
-        AuthenticationResponse token = usuarioService.login(authenticationRequest);
-        if (token.getJwt() != null) {
+        AuthenticationResponse token = usuarioService.login2(authenticationRequest);
+        if (token.getJwt() != null)  {
             authenticationResponse.setJwt(token.getJwt());
-            System.out.println("dentro del if");
+            //authenticationResponse.setJwt(token);
+            //return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
             //TODO: Complete this   authenticationResponse.setUsuario(usuario);
             //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
             return new ResponseEntity(authenticationResponse, HttpStatus.OK);
