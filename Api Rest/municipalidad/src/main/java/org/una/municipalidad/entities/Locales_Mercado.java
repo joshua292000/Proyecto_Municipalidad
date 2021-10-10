@@ -49,6 +49,9 @@ public class Locales_Mercado implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "localesmercado")
     private List<Cobros> cobros = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "localesmercado")
+    private List<Contribuyentes_Locales_Mercado> contribuyentes_locales_mercados = new ArrayList<>();
+
     private static final long serialVersionUID = 1L;
 
     @PrePersist

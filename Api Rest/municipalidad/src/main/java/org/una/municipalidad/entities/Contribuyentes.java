@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//@Builder
+@Builder
 
 public class Contribuyentes implements Serializable {
     @Id
@@ -30,5 +30,14 @@ public class Contribuyentes implements Serializable {
     private Long cedulaContribuyente;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente")
+    private List<Contribuyentes_Locales_Mercado> contribuyentes_locales_mercados = new ArrayList<>();
+
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente")
+   // private List<Contribuyentes_Propiedades> contribuyentes_Propiedades = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente")
     private List<Contribuyentes_Licencias_Comerciales> contribuyentes_licencias_comerciales = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyentepro")
+    private List<Contribuyentes_Propiedades> contribuyentes_propiedades = new ArrayList<>();
 }

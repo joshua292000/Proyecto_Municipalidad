@@ -44,17 +44,21 @@ public class Cobros {
     @JoinColumn(name="licencias_comerciales_id")
     private Licencias_Comerciales licenciacomercial;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name="facturas_id")
     private Facturas facturas;
 
-    @ManyToOne
+   @ManyToOne
     @JoinColumn(name="tipo_cobros_id")
-    private TipoCobros tcobros;*/
+    private TipoCobros tipocobros;
 
     @ManyToOne
     @JoinColumn(name="locales_mercado_id")
     private Locales_Mercado localesmercado;
+
+    @ManyToOne
+    @JoinColumn(name="licencias_comerciales_id")
+    private Licencias_Comerciales licenciascomerciales;
 
     @ManyToOne
     @JoinColumn(name="propiedades_id")
