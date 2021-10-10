@@ -5,10 +5,17 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.AuthenticationRequest;
+import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.exceptions.InvalidCredentialsException;
+import org.una.municipalidad.exceptions.MissingInputsException;
 import org.una.municipalidad.services.UsuariosService;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,12 +42,30 @@ public class UsuariosController {
 
     }
 
-    @PutMapping("/login")
+   /* @PutMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
     public ResponseEntity<?> login(@PathVariable(value = "nombreUsuario") String nombreUsuario, @PathVariable(value = "claveEncriptado") String claveEncriptado) {
         Optional<UsuariosDTO> usuarioFound = usuarioService.login(nombreUsuario, claveEncriptado);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
+    }*/
+
+    @PutMapping("/login")
+    @ResponseBody
+    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        String token = usuarioService.login(authenticationRequest);
+        if (!token.isBlank()) {
+            authenticationResponse.setJwt(token);
+            //TODO: Complete this   authenticationResponse.setUsuario(usuario);
+            //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
+            return new ResponseEntity(authenticationResponse, HttpStatus.OK);
+        } else {
+            throw new InvalidCredentialsException();
+        }
+
     }
 
     @GetMapping("/cedula/{term}")

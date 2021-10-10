@@ -1,5 +1,7 @@
 package org.una.municipalidad.services;
 
+import org.una.municipalidad.dto.AuthenticationRequest;
+import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.UsuariosDTO;
 
 import java.util.List;
@@ -23,7 +25,9 @@ public interface UsuariosService {
 
     public void deleteAll();
 
-    public Optional<UsuariosDTO> login(String cedula,String claveEncriptado);
+    //public Optional<UsuariosDTO> login(String cedula,String claveEncriptado);
+
+    public String login(AuthenticationRequest authenticationRequest);
 
     public Optional<UsuariosDTO> findByCedula(String cedula);
 

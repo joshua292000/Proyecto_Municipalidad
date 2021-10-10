@@ -1,8 +1,12 @@
 package org.una.municipalidad.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +14,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.AuthenticationRequest;
+import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.UsuariosDTO;
 import org.una.municipalidad.entities.Usuarios;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.exceptions.PasswordIsBlankException;
+import org.una.municipalidad.jwt.JwtProvider;
 import org.una.municipalidad.repositories.UsuariosRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
@@ -26,6 +33,13 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
 
     @Autowired
     private UsuariosRepository usuarioRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtProvider jwtProvider;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -70,11 +84,20 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
     }
 
     @Override
+    public String login(AuthenticationRequest authenticationRequest) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return jwtProvider.generateToken(authenticationRequest);
+
+    }
+
+   /* @Override
     @Transactional(readOnly = true)
     public Optional<UsuariosDTO> login(String cedula, String claveEncriptado) {
         Usuarios usuario = usuarioRepository.findByCedulaAndClaveEncriptado(cedula, claveEncriptado);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
-    }
+    }*/
 
     @Override
     @Transactional(readOnly = true)
