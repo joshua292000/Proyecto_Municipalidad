@@ -28,7 +28,7 @@ public class Contribuyentes_Locales_Mercado implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="locales_id")
-    private Locales_Mercado Locales_Mercado;
+    private Locales_Mercado localesmercado;
 
     private static final long serialVersionUID = 1L;
 }

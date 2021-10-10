@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TipoCobros")
@@ -19,4 +21,7 @@ public class TipoCobros implements Serializable {
 
     @Column(name = "nombre_tipoCobro", length = 100)
     private String nombreTipoCobro;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipocobros")
+    private List<Cobros> cobros = new ArrayList<>();
 }
