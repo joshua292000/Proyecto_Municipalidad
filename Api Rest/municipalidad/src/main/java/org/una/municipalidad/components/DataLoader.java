@@ -37,18 +37,17 @@ public class DataLoader implements ApplicationRunner {
             Optional<DepartamentoDTO> cajasDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Cajas").build());
             Optional<DepartamentoDTO> informaticaDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Informatica").build());
 */
-            Optional<RolesDTO> gestorRol = rolService.create(RolesDTO.builder().nombreRol("Gestor").build());
-            Optional<RolesDTO> gerenteRol = rolService.create(RolesDTO.builder().nombreRol("Gerente").build());
-            Optional<RolesDTO> administradorRol = rolService.create(RolesDTO.builder().nombreRol("Administrador").build());
-            Optional<RolesDTO> usuarioRol = rolService.create(RolesDTO.builder().nombreRol("Usuario").build());
-            Optional<RolesDTO> auditorRol = rolService.create(RolesDTO.builder().nombreRol("Auditor").build());
+            Optional<RolesDTO> gestorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.GESTOR.name()).build());
+            Optional<RolesDTO> gerenteRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.GERENTE.name()).build());
+            Optional<RolesDTO> administradorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.ADMINISTRADOR.name()).build());
+            Optional<RolesDTO> auditorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.AUDITOR.name()).build());
 
             UsuariosDTO cajeroUsuario = UsuariosDTO.builder()
                     .cedula("0123456789")
                     .nombreUsuario("Panchito")
                     .claveEncriptado("agapito123")
                     .estado(true)
-                    .roles(usuarioRol.orElseThrow()).build();
+                    .roles(gestorRol.orElseThrow()).build();
             usuarioService.create(cajeroUsuario);
 
             UsuariosDTO auditorUsuario = UsuariosDTO.builder()

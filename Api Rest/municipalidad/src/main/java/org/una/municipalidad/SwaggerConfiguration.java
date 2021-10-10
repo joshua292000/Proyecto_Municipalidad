@@ -53,6 +53,7 @@ public class SwaggerConfiguration {
                         new Tag("Parametros", "Entidad de Parametros"),
                         new Tag("Contribuyentes_Licencias_Comerciales", "Entidad de los contribuyentes que tienen una licencia comercial"),
                         new Tag("Propiedades", "Entidad de Propiedades")
+
                 );
 
     }

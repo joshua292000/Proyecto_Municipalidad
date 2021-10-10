@@ -10,7 +10,7 @@ import java.util.Date;
 @ToString
 @Builder
 
-public class LocalMercadoDTO {
+public class LocalesMercadoDTO {
     private Long id;
     private String nombreComercio;
     private String correoComercio;
