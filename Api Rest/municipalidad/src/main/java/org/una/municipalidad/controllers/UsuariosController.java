@@ -56,17 +56,19 @@ public class UsuariosController {
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-        String token = usuarioService.login(authenticationRequest);
-        if (!token.isBlank()) {
-            authenticationResponse.setJwt(token);
+        //String token = usuarioService.login(authenticationRequest);
+        AuthenticationResponse token = usuarioService.login(authenticationRequest);
+        if (token.getJwt() != null) {
+            authenticationResponse.setJwt(token.getJwt());
+            System.out.println("dentro del if");
             //TODO: Complete this   authenticationResponse.setUsuario(usuario);
             //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
             return new ResponseEntity(authenticationResponse, HttpStatus.OK);
         } else {
             throw new InvalidCredentialsException();
         }
-
     }
+
 
     @GetMapping("/cedula/{term}")
     @ApiOperation(value = "Obtiene una lista de las cedulas", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
