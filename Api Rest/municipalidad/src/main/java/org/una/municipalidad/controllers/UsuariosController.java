@@ -50,26 +50,7 @@ public class UsuariosController {
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
 */
-    @PutMapping("/")
-    @ResponseBody
-    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
-    public ResponseEntity<?> login2( @Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
 
-        //String token = usuarioService.login(authenticationRequest);
-        AuthenticationResponse token = usuarioService.login2(authenticationRequest);
-        if (token.getJwt() != null)  {
-            authenticationResponse.setJwt(token.getJwt());
-            //authenticationResponse.setJwt(token);
-            //return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
-            //TODO: Complete this   authenticationResponse.setUsuario(usuario);
-            //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
-            return new ResponseEntity(authenticationResponse, HttpStatus.OK);
-        } else {
-            throw new InvalidCredentialsException();
-        }
-    }
 
 
     @GetMapping("/cedula/{term}")

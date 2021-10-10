@@ -42,6 +42,8 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
     @Autowired
     private JwtProvider jwtProvider;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional(readOnly = true)
@@ -94,28 +96,6 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         return jwtProvider.generateToken(authenticationRequest);
     }*/
 
-    @Override
-    @Transactional(readOnly = true)
-    public AuthenticationResponse login2(AuthenticationRequest authenticationRequest) {
-
-        Optional<Usuarios> usuario = usuarioRepository.findByCedula(authenticationRequest.getCedula());
-
-        if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getClaveEncriptado(),usuario.get().getClaveEncriptado())) {
-            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
-            UsuariosDTO usuarioDto = MapperUtils.DtoFromEntity(usuario.get(), UsuariosDTO.class);
-            authenticationResponse.setUsuarioDTO(usuarioDto);
-            authenticationResponse.setRolDTO(RolesDTO.builder().nombreRol(usuarioDto.getRoles().getNombreRol()).build());
-
-            return authenticationResponse;
-        } else {
-            throw new InvalidCredentialsException();
-        }
-    }
 
 
 /*
@@ -162,8 +142,6 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         return Optional.ofNullable(usuarioDTOList);
     }
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private String encriptarPassword(String password) {
         if (!password.isBlank()) {
