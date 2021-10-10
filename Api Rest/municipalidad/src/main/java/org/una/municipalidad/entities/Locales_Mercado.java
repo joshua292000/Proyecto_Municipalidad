@@ -22,13 +22,13 @@ public class Locales_Mercado implements Serializable {
     private Long id;
 
     @Column(name = "nombre_local", length = 100)
-    private String nombreComercio;
+    private String nombreLocal;
 
     @Column(name = "telefono_local")
-    private Long telefonoComercio;
+    private Long telefonoLocal;
 
     @Column(name = "correo_local", length = 100)
-    private String correoComercio;
+    private String correoLocal;
 
     @Column
     private boolean estado;
