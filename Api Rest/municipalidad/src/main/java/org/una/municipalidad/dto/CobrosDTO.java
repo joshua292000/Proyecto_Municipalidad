@@ -1,9 +1,7 @@
 package org.una.municipalidad.dto;
 
 import lombok.*;
-import org.una.municipalidad.entities.Licencias_Comerciales;
-import org.una.municipalidad.entities.Locales_Mercado;
-import org.una.municipalidad.entities.Propiedades;
+import org.una.municipalidad.entities.*;
 
 import java.util.Date;
 
@@ -21,8 +19,8 @@ public class CobrosDTO {
     private boolean Estado;
     private Date cobrosFechaPago;
     private Licencias_Comerciales licenciacomerciales;
-    //private Facturas facturas;
-    //private TipoCobros tcobros;
-    private Locales_Mercado localescomerciales;
+    private Facturas facturas;
+    private TipoCobros tipocobros;
+    private Locales_Mercado localesmercado;
     private Propiedades propiedades;
 }
