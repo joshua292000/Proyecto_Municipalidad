@@ -12,7 +12,7 @@ import org.una.municipalidad.utils.MapperUtils;
 import java.util.Optional;
 
 @Service
-public class Contribuyentes_PropiedadesImplementation implements Contribuyentes_PropiedadesService {
+public class Contribuyentes_PropiedadesServiceImplementation implements Contribuyentes_PropiedadesService {
     @Autowired
     private Contribuyentes_PropiedadesRepository contribuyentes_propiedadesRepository;
 
