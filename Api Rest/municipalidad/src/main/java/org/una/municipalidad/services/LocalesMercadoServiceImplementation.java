@@ -1,6 +1,7 @@
 package org.una.municipalidad.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.FacturasDTO;
@@ -14,6 +15,7 @@ import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.Optional;
 
+@Service
 public class LocalesMercadoServiceImplementation implements LocalesMercadoService {
     @Autowired
     private LocalesMercadoRepository localesMercadoRepository;
