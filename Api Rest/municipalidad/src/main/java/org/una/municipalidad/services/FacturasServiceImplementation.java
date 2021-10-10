@@ -1,8 +1,12 @@
 package org.una.municipalidad.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.FacturasDTO;
+import org.una.municipalidad.entities.Contribuyentes;
 import org.una.municipalidad.entities.Facturas;
+import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.FacturasRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
@@ -14,8 +18,19 @@ public class FacturasServiceImplementation implements FacturasService{
     private FacturasRepository facturasRepository;
 
     @Override
-    public Optional<FacturasDTO> findByFecha(Date fechapago) {
-        Optional<Facturas> facturas = facturasRepository.findByFecha(fechapago) ;
+    @Transactional(readOnly = true)
+    public Optional<FacturasDTO> findById(Long id) {
+        Optional<Facturas> facturas = facturasRepository.findById(id);
+        if (facturas.isEmpty()) throw new NotFoundInformationException();
+
+        FacturasDTO facturasDTO = MapperUtils.DtoFromEntity(facturas.get(), FacturasDTO.class);
+        return Optional.ofNullable(facturasDTO);
+
+    }
+
+    @Override
+    public Optional<FacturasDTO> findByFechaPago(Date fechapago) {
+        Optional<Facturas> facturas = facturasRepository.findByFechaPago(fechapago) ;
         return Optional.ofNullable(MapperUtils.DtoFromEntity(facturas, FacturasDTO.class));
     }
 

@@ -7,11 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.Contribuyentes_Licencias_ComercialesDTO;
-import org.una.municipalidad.dto.DeclaracionesDTO;
-import org.una.municipalidad.dto.UsuariosDTO;
 import org.una.municipalidad.services.Contribuyentes_Lic_ComercialesService;
-import org.una.municipalidad.services.UsuariosService;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
