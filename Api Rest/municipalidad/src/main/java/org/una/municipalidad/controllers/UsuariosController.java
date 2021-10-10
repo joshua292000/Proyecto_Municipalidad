@@ -41,7 +41,7 @@ public class UsuariosController {
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
 
     }
-
+/*
    @PutMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
@@ -49,7 +49,7 @@ public class UsuariosController {
         Optional<UsuariosDTO> usuarioFound = usuarioService.login(nombreUsuario, claveEncriptado);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
-
+*/
     @PutMapping("/")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
