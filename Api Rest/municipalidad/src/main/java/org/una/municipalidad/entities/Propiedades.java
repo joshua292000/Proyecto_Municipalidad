@@ -73,8 +73,11 @@ public class Propiedades implements Serializable {
     private Date propiedad_ultima_Actualizacion;
 
 
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedades")
-        private List<Cobros> cobros = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedades")
+    private List<Cobros> cobros = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedades")
+    private List<Contribuyentes_Propiedades> contribuyentes_propiedades = new ArrayList<>();
 
     private static final long serialVersionUID = 1L;
 

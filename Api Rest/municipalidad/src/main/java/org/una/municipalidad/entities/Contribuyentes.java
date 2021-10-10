@@ -37,4 +37,7 @@ public class Contribuyentes implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente")
     private List<Contribuyentes_Licencias_Comerciales> contribuyentes_licencias_comerciales = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyentepro")
+    private List<Contribuyentes_Propiedades> contribuyentes_propiedades = new ArrayList<>();
 }
