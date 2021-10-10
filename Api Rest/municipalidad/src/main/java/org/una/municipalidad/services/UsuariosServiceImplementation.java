@@ -117,12 +117,12 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         }
     }
 
-   /* @Override
+   @Override
     @Transactional(readOnly = true)
     public Optional<UsuariosDTO> login(String cedula, String claveEncriptado) {
         Usuarios usuario = usuarioRepository.findByCedulaAndClaveEncriptado(cedula, claveEncriptado);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
-    }*/
+    }
 
     @Override
     @Transactional(readOnly = true)

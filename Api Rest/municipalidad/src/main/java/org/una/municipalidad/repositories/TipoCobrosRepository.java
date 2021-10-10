@@ -7,5 +7,5 @@ import org.una.municipalidad.entities.TipoCobros;
 import java.util.Optional;
 
 public interface TipoCobrosRepository extends JpaRepository<TipoCobros, Long> {
-    public Optional<TipoCobros> findByNombre(String tipocobros);
+    public Optional<TipoCobros> findByNombreTipoCobro(String nombreTipoCobro);
 }

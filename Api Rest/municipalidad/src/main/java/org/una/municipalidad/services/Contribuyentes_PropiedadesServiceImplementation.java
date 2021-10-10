@@ -18,8 +18,8 @@ public class Contribuyentes_PropiedadesServiceImplementation implements Contribu
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Contribuyentes_PropiedadesDTO> findByPorcentajePropiedades(Long porcentajePropiedad) {
-        Optional<Contribuyentes_Propiedades> contriPro = contribuyentes_propiedadesRepository.findByPorcentajePropiedades(porcentajePropiedad);
+    public Optional<Contribuyentes_PropiedadesDTO> findByPorcentajePropiedad(Long porcentajePropiedad) {
+        Optional<Contribuyentes_Propiedades> contriPro = contribuyentes_propiedadesRepository.findByPorcentajePropiedad(porcentajePropiedad);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(contriPro, Contribuyentes_PropiedadesDTO.class));
     }
 

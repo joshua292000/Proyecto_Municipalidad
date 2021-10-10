@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface ContribuyentesRepository  extends JpaRepository<Contribuyentes, Long> {
-    public Optional<Contribuyentes> findByNombre(String nombre);
-    public Optional<Contribuyentes> findByCedula(Long cedula);
+    public Optional<Contribuyentes> findByNombreContribuyente(String nombreContribuyente);
+    public Optional<Contribuyentes> findByCedulaContribuyente(Long cedulaContribuyente);
 
 }
