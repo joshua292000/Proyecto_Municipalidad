@@ -3,15 +3,17 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "Contribuyentes")
+@Table(name = "Facturas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Factura implements Serializable {
+public class Facturas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,6 +39,9 @@ public class Factura implements Serializable {
     private boolean estado;
 
     private static final long serialVersionUID = 1L;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facturas")
+    private List<Cobros> cobros = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
