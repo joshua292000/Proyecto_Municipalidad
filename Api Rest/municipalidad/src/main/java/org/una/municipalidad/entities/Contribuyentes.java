@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
+//@Builder
 
 public class Contribuyentes implements Serializable {
     @Id

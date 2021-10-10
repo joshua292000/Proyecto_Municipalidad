@@ -19,7 +19,7 @@ public class TipoCobrosServiceImplementation implements TipoCobrosService{
     private TipoCobrosRepository tipoCobrosRepository;
 
     @Override
-    @Transactional(readOnly = true)s
+    @Transactional(readOnly = true)
     public Optional<TipoCobrosDTO> findById(Long id) {
         Optional<TipoCobros> tipoCobros = tipoCobrosRepository.findById(id);
         if (tipoCobros.isEmpty()) throw new NotFoundInformationException();
