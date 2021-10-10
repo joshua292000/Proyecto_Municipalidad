@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface DeclaracionesRepository extends JpaRepository<Declaraciones, Long>{
 
-    public List<Declaraciones> findByMonto(Long montoDeclarado);
-    public List<Declaraciones> findByAñoDeclaracion(Date annoDeclarado);
-    public Declaraciones findDeclaracionByLicencia(Long id);
+    public List<Declaraciones> findByMontoDeclarado(Long montoDeclarado);
+    public List<Declaraciones> findByIdAndFechaDeclarado(Long id, Date fechaDeclarado);
+    //public Declaraciones findDeclaracionByLicencia(Long id);
 
 }

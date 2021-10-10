@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Licencias_Comerciales implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +44,14 @@ public class Licencias_Comerciales implements Serializable{
     @Column(name = "codigo_comercio", length = 100)
     private String codigoComercio;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciacomercial")
     private List<Declaraciones> declaraciones = new ArrayList<>();
+
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")
+    private List<Cobros> cobros = new ArrayList<>();*/
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciacomercial")
+    private List<Contribuyentes_Licencias_Comerciales> contribuyentes_licencias_comerciales = new ArrayList<>();
 
     @Column
     private boolean estado;

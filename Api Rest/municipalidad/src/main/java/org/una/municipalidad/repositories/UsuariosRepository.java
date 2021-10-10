@@ -6,16 +6,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.una.municipalidad.entities.Usuarios;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
-    public Usuarios findByNombreUsuarioAndClaveEncriptado(String nombreUsuario, String claveEncriptado);
+
+    public Usuarios findByCedulaAndClaveEncriptado(String cedula, String claveEncriptado);
 
     public List<Usuarios> findByNombreUsuarioContainingIgnoreCase(String nombreUsuario);
 
-   public List<Usuarios> findByNombreUsuarioContaining(String nombreUsuario);
+    public List<Usuarios> findByCedulaContaining(String cedula);
 
-
+    public Optional<Usuarios> findByCedula(String cedula);
 
     //@Query("select u from Usuario u where UPPER(u.nombreCompleto) like CONCAT('%',UPPER(:nombreCompleto),'%')\"")
     //public Usuario findNombreCompletoWithLikeSQL(@Param("nombreCompleto")String nombreCompleto);

@@ -5,9 +5,17 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.AuthenticationRequest;
+import org.una.municipalidad.dto.AuthenticationResponse;
+import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.exceptions.InvalidCredentialsException;
+import org.una.municipalidad.exceptions.MissingInputsException;
 import org.una.municipalidad.services.UsuariosService;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,23 +42,41 @@ public class UsuariosController {
 
     }
 
-    @PutMapping("/login")
+   /* @PutMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
     public ResponseEntity<?> login(@PathVariable(value = "nombreUsuario") String nombreUsuario, @PathVariable(value = "claveEncriptado") String claveEncriptado) {
         Optional<UsuariosDTO> usuarioFound = usuarioService.login(nombreUsuario, claveEncriptado);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
+    }*/
+
+    @PutMapping("/login")
+    @ResponseBody
+    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        String token = usuarioService.login(authenticationRequest);
+        if (!token.isBlank()) {
+            authenticationResponse.setJwt(token);
+            //TODO: Complete this   authenticationResponse.setUsuario(usuario);
+            //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
+            return new ResponseEntity(authenticationResponse, HttpStatus.OK);
+        } else {
+            throw new InvalidCredentialsException();
+        }
+
     }
 
-    @GetMapping("/usuario/{term}")
-    @ApiOperation(value = "Obtiene una lista de las usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    public ResponseEntity<?> findByNombreUsuarioAproximate(@PathVariable(value = "term") String term) {
-        Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximate(term);
+    @GetMapping("/cedula/{term}")
+    @ApiOperation(value = "Obtiene una lista de las cedulas", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
+    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
+        Optional<List<UsuariosDTO>> result = usuarioService.findByCedulaAproximate(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/nombre/{term}")
-    @ApiOperation(value = "Obtiene una lista de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
+    @ApiOperation(value = "Obtiene una lista de los nombres de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
     public ResponseEntity<?> findByNombreUsuarioAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximateIgnoreCase(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -77,20 +103,17 @@ public class UsuariosController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Elimina un usuario por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        try {
-            usuarioService.delete(id);
-            return new ResponseEntity<>("Ok", HttpStatus.OK);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        usuarioService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Elimina todos los usuarios", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        //TODO: Implementar este método
-        throw new Exception("Not implemented Function");
+        usuarioService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 }

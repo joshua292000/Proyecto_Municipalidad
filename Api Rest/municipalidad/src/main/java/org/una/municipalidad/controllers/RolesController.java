@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.services.RolesService;
@@ -73,27 +74,24 @@ public class RolesController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id", response = RolesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id los roles", response = RolesDTO.class, tags = "Seguridad")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolesDTO rolesModified) {
         Optional<RolesDTO> rolesUpdated = rolesService.update(rolesModified, id);
         return new ResponseEntity<>(rolesUpdated, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Elimina un rol por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        try {
             rolesService.delete(id);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
+    @ApiOperation(value = "Elimina todos los roles", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        //TODO: Implementar este método
-        throw new Exception("Not implemented Function");
+        rolesService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 }

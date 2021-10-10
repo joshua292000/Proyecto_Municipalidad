@@ -5,11 +5,12 @@ import org.springframework.stereotype.Repository;
 import org.una.municipalidad.entities.Licencias_Comerciales;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LicenciasComercialesRepository extends JpaRepository<Licencias_Comerciales, Long> {
 
-    public List<Licencias_Comerciales> findByCodigo(String codigoComercio);
-    public List<Licencias_Comerciales> findByNombre(String nombreComercio);
+    public Optional<Licencias_Comerciales> findByCodigoComercio(String codigoComercio);
+    public Optional<Licencias_Comerciales> findByNombreComercio(String nombreComercio);
 
 }

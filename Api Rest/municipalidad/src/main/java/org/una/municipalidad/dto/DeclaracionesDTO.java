@@ -13,6 +13,6 @@ import java.util.Date;
 public class DeclaracionesDTO {
     private Long id;
     private Long montoDeclarado;
-    private Date annoDeclarado;
+    private Date fechaDeclarado;
     private LicenciasComercialesDTO licenciacomercial;
 }

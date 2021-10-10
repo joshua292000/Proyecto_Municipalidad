@@ -2,14 +2,14 @@ package org.una.municipalidad.dto;
 
 import lombok.*;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class RolesDTO {
+public class ParametrosDTO {
     private Long id;
-    private String nombreRol;
-    private String descripcionRol;
-    private boolean estado;
+    private String parametrosLlaves;
+    private String parametrosValor;
 }
