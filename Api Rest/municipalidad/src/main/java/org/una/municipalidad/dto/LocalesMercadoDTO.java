@@ -13,6 +13,7 @@ import java.util.Date;
 public class LocalesMercadoDTO {
     private Long id;
     private String nombreComercio;
+    private String ubicacionLocal;
     private String correoComercio;
     private Long telefonoComercio;
     private Long Monto_Alquiler_Local;
