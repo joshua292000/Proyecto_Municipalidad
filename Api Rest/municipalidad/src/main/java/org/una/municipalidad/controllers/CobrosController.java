@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.entities.Cobros;
@@ -22,6 +23,7 @@ public class CobrosController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los cobros", response = CobrosDTO.class, responseContainer = "List", tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<CobrosDTO>> result = cobrosService.findAll();
@@ -30,6 +32,7 @@ public class CobrosController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un cobro a partir de su id", response = CobrosDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CobrosDTO> cobrosFound = cobrosService.findById(id);
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
@@ -37,6 +40,7 @@ public class CobrosController {
 
     @GetMapping("/{cobrosPeriodo}")
     @ApiOperation(value = "Obtiene el periodo de un cobro", response = CobrosDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByCobrosPeriodo(@PathVariable(value = "cobrosPeriodo") String cobrosPeriodo) {
         Optional<CobrosDTO> cobrosFound = cobrosService.findByCobrosPeriodo(cobrosPeriodo);
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
@@ -44,6 +48,7 @@ public class CobrosController {
 
     @GetMapping("/{cobrosMonto}")
     @ApiOperation(value = "Obtiene el monto de un cobro", response = CobrosDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByCobrosMonto(@PathVariable(value = "cobrosMonto") Long cobrosMonto) {
         Optional<CobrosDTO> cobrosFound = cobrosService.findByCobrosMonto(cobrosMonto);
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
@@ -51,6 +56,7 @@ public class CobrosController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
+    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> create(@RequestBody CobrosDTO cobrosDTO) {
         try {
             Optional<CobrosDTO> cobrosCreated = cobrosService.create(cobrosDTO);
@@ -63,6 +69,7 @@ public class CobrosController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = CobrosDTO.class, tags = "Cobros")
     @ResponseBody
+    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobrosDTO cobrosModified) {
         Optional<CobrosDTO> cobrosUpdated = cobrosService.update(cobrosModified, id);
         return new ResponseEntity<>(cobrosUpdated, HttpStatus.OK);
@@ -70,6 +77,7 @@ public class CobrosController {
 
     @ApiOperation(value = "Elimina un cobro por medio del id", response = CobrosDTO.class, tags = "Cobros")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('GERENTE')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         cobrosService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -77,6 +85,7 @@ public class CobrosController {
 
     @ApiOperation(value = "Elimina todos los cobros", response = CobrosDTO.class, tags = "Cobros")
     @DeleteMapping("/")
+    @PreAuthorize("hasRole('GERENTE')")
     public ResponseEntity<?> deleteAll() throws Exception {
         cobrosService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
