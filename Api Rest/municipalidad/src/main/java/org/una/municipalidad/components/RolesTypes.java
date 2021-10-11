@@ -1,10 +1,10 @@
 package org.una.municipalidad.components;
 
 public enum RolesTypes {
-    GESTOR("GESTOR"),
-    GERENTE("GERENTE"),
-    AUDITOR("AUDITOR"),
-    ADMINISTRADOR("ADMINISTRADOR");
+    ROLE_GESTOR("GESTOR"),
+    ROLE_GERENTE("GERENTE"),
+    ROLE_AUDITOR("AUDITOR"),
+    ROLE_ADMINISTRADOR("ADMINISTRADOR");
     private final String codigo;
 
     RolesTypes(String codigo) {
