@@ -24,6 +24,9 @@ public class Locales_Mercado implements Serializable {
     @Column(name = "nombre_local", length = 100)
     private String nombreLocal;
 
+    @Column(name = "ubicacion_local", length = 100)
+    private String ubicacionLocal;
+
     @Column(name = "telefono_local")
     private Long telefonoLocal;
 
