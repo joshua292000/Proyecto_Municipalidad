@@ -40,7 +40,7 @@ public class CobrosController {
 
     @GetMapping("/{cobrosPeriodo}")
     @ApiOperation(value = "Obtiene el periodo de un cobro", response = CobrosDTO.class, tags = "Cobros")
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
     public ResponseEntity<?> findByCobrosPeriodo(@PathVariable(value = "cobrosPeriodo") String cobrosPeriodo) {
         Optional<CobrosDTO> cobrosFound = cobrosService.findByCobrosPeriodo(cobrosPeriodo);
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
