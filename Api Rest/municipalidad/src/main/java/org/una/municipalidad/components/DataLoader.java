@@ -83,8 +83,8 @@ public class DataLoader implements ApplicationRunner {
             usuarioService.create(gerenteUsuario);
 
             ParametrosDTO horario = ParametrosDTO.builder()
-                            .parametrosLlaves("Horario")
-                                    .parametrosValor("5am.5pm")
+                            .llaveParametro("Horario")
+                                    .valorParametro("5am.5pm")
                                             .build();
             parametroService.create(horario);
 

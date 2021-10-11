@@ -10,6 +10,6 @@ import lombok.*;
 @Builder
 public class ParametrosDTO {
     private Long id;
-    private String parametrosLlaves;
-    private String parametrosValor;
+    private String llaveParametro;
+    private String valorParametro;
 }

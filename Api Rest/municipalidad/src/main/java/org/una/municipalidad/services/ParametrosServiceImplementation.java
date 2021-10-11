@@ -39,8 +39,8 @@ public class ParametrosServiceImplementation implements ParametrosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<ParametrosDTO> findByParametrosLlaves(String parametrosLlaves) {
-        Optional<Parametros> parametros = parametrosRepository.findByParametrosLlaves(parametrosLlaves);
+    public Optional<ParametrosDTO> findByLlaveParametro(String llaveParametro) {
+        Optional<Parametros> parametros = parametrosRepository.findByLlaveParametro(llaveParametro);
         if (parametros.isEmpty()) throw new NotFoundInformationException();
         ParametrosDTO parametrosDTO = MapperUtils.DtoFromEntity(parametros.get(), ParametrosDTO.class);
         return Optional.ofNullable(parametrosDTO);
@@ -48,8 +48,8 @@ public class ParametrosServiceImplementation implements ParametrosService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<ParametrosDTO> findByParametrosValor(String parametrosValor) {
-        Optional<Parametros> parametros = parametrosRepository.findByParametrosValor(parametrosValor);
+    public Optional<ParametrosDTO> findByValorParametro(String valorParametro) {
+        Optional<Parametros> parametros = parametrosRepository.findByValorParametro(valorParametro);
         if (parametros.isEmpty()) throw new NotFoundInformationException();
         ParametrosDTO parametrosDTO = MapperUtils.DtoFromEntity(parametros.get(), ParametrosDTO.class);
         return Optional.ofNullable(parametrosDTO);

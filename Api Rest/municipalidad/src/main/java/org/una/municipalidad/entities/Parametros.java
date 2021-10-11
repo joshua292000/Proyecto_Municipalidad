@@ -16,11 +16,11 @@ public class Parametros {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "paramentros_llaves", length = 100)
-    private String parametrosLlaves;
+    @Column(name = "llave_parametro", length = 100)
+    private String llaveParametro;
 
-    @Column(name = "parametros_valor", length = 150)
-    private String parametrosValor;
+    @Column(name = "valor_parametro", length = 150)
+    private String valorParametro;
 
     private static final long serialVersionUID = 1L;
 

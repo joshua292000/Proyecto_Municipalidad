@@ -10,9 +10,9 @@ public interface ParametrosService {
 
     public Optional<ParametrosDTO> findById(Long id);
 
-    public Optional<ParametrosDTO> findByParametrosLlaves(String parametrosLlaves);
+    public Optional<ParametrosDTO> findByLlaveParametro(String llaveParametro);
 
-    public Optional<ParametrosDTO> findByParametrosValor(String parametrosValor);
+    public Optional<ParametrosDTO> findByValorParametro(String valorParametro);
 
     public Optional<ParametrosDTO> create(ParametrosDTO parametrosDTO);
 

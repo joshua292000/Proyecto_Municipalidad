@@ -8,7 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface ParametrosRepository extends JpaRepository<Parametros, Long> {
-    public Optional<Parametros> findByParametrosLlaves(String parametrosLlaves);
-    public Optional<Parametros> findByParametrosValor(String parametrosValor);
+
+    public Optional<Parametros> findByLlaveParametro(String llaveParametro);
+
+    public Optional<Parametros> findByValorParametro(String valorParametro);
 }
 

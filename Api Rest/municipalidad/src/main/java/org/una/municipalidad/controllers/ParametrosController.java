@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/parametros")
 @Api(tags = {"Parametros"})
-
 public class ParametrosController {
     @Autowired
     private ParametrosService parametrosService;
@@ -30,28 +29,26 @@ public class ParametrosController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtiene un parametro a partir de su id", response = RolesDTO.class, tags = "Parametros")
-    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @ApiOperation(value = "Obtiene un parametro a partir de su id", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ParametrosDTO> parametroFound = parametrosService.findById(id);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
 
     }
 
-    @GetMapping("/{parametrosLlaves}")
+    @GetMapping("/")
     @ApiOperation(value = "Obtiene un parametro a partir de su llave", response = ParametrosDTO.class, tags = "Parametros")
-    public ResponseEntity<?> findByParametrosLlaves(@PathVariable(value = "parametrosLlaves") String parametrosLlaves) {
-        Optional<ParametrosDTO> parametroFound = parametrosService.findByParametrosLlaves(parametrosLlaves);
+    public ResponseEntity<?> findByLlaveParametro(@PathVariable(value = "llaveParametro") String llaveParametro) {
+        Optional<ParametrosDTO> parametroFound = parametrosService.findByLlaveParametro(llaveParametro);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
-
-    @GetMapping("/{parametrosValor}")
+/*    @GetMapping()
     @ApiOperation(value = "Obtiene un parametro a partir de su valor", response = ParametrosDTO.class, tags = "Parametros")
-    public ResponseEntity<?> findByParametrosValor(@PathVariable(value = "parametrosValor") String parametrosValor) {
-        Optional<ParametrosDTO> parametroFound = parametrosService.findByParametrosValor(parametrosValor);
+    public ResponseEntity<?> findByValorParametro(@PathVariable(value = "valorParametro") String valorParametro) {
+        Optional<ParametrosDTO> parametroFound = parametrosService.findByValorParametro(valorParametro);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
-
+*/
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
