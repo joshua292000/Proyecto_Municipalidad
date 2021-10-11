@@ -36,8 +36,6 @@ public class AutenticacionController {
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
         AuthenticationResponse token = autenticacionService.login(authenticationRequest);
         if (token.getJwt() != null) {
-            //authenticationResponse.setJwt(token.getJwt());
-           // return new ResponseEntity(authenticationResponse, HttpStatus.OK);
             return new ResponseEntity(autenticacionService.login(authenticationRequest), HttpStatus.OK);
         } else {
             throw new InvalidCredentialsException();
