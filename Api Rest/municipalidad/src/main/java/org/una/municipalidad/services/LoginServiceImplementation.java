@@ -25,7 +25,7 @@ import java.util.Optional;
 @Service
 public class LoginServiceImplementation implements LoginService {
     @Autowired
-    private UsuariosRepository usuarioRepository;
+    private UsuariosService usuariosService;
     @Autowired
     private JwtProvider jwtProvider;
     @Autowired
@@ -33,16 +33,20 @@ public class LoginServiceImplementation implements LoginService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    public LoginServiceImplementation(){
+
+    }
+
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login2(AuthenticationRequest authenticationRequest) {
 
-        Optional<Usuarios> usuario = usuarioRepository.findByCedula(authenticationRequest.getCedula());
+        Optional<UsuariosDTO> usuario = usuariosService.findByCedula(authenticationRequest.getCedula());
 
         if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getClaveEncriptado(),usuario.get().getClaveEncriptado())) {
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(),
+                    authenticationRequest.getClaveEncriptado()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
