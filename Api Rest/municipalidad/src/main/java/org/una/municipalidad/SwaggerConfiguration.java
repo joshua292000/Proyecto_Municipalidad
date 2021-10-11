@@ -56,7 +56,7 @@ public class SwaggerConfiguration {
                         new Tag("Facturas", "Entidad de Facturas"),
                         new Tag("Tipo_cobro", "Entidad de Tipo cobros"),
                         new Tag("Contribuyentes_Locales_Mercado", "Entidad de los contribuyentes que tienen un local de mercado"),
-                        new Tag("Contribuyentes_Propiedades", "Entidad de los contribuyentes que tienen propiedades"),
+                        new Tag("Contribuyentes_Propiedades", "Entidad de los contribuyentes que tienen propiedades")
                 );
 
     }
