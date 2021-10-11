@@ -16,4 +16,6 @@ public interface RolesRepository extends JpaRepository<Roles, Long>{
 
     public List<Roles> findByNombreRolContaining(String nombreRol);
 
+
+
 }
