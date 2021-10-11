@@ -12,8 +12,6 @@ public interface RolesService {
 
     public Optional<List<RolesDTO>> findByNombreRolAproximateIgnoreCase(String nombreRol);
 
-    public Optional<List<RolesDTO>> findByNombreRolAproximate(String nombreRol);
-
     public Optional<RolesDTO> create(RolesDTO rolesDTO);
 
     public Optional<RolesDTO> update(RolesDTO rolesDTO, Long id);

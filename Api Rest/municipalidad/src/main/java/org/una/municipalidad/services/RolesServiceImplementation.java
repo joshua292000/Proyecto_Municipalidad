@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class RolesServiceImplementation implements RolesService{
 
     @Autowired
@@ -26,7 +27,7 @@ public class RolesServiceImplementation implements RolesService{
 
     }
 
-    private RolesDTO getSavedUsuarioDTO(RolesDTO rolesDTO) {
+    private RolesDTO getSavedRolDTO(RolesDTO rolesDTO) {
         Roles roles = MapperUtils.EntityFromDto(rolesDTO, Roles.class);
         Roles rolesCreated = rolesRepository.save(roles);
         return MapperUtils.DtoFromEntity(rolesCreated, RolesDTO.class);
@@ -35,7 +36,7 @@ public class RolesServiceImplementation implements RolesService{
     @Override
     @Transactional
     public Optional<RolesDTO> create(RolesDTO rolesDTO) {
-        return Optional.ofNullable(getSavedUsuarioDTO(rolesDTO));
+        return Optional.ofNullable(getSavedRolDTO(rolesDTO));
     }
 
 
@@ -43,7 +44,7 @@ public class RolesServiceImplementation implements RolesService{
     @Transactional
     public Optional<RolesDTO> update(RolesDTO rolesDTO, Long id) {
         if (rolesRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(getSavedUsuarioDTO(rolesDTO));
+        return Optional.ofNullable(getSavedRolDTO(rolesDTO));
     }
 
     @Override
@@ -59,19 +60,11 @@ public class RolesServiceImplementation implements RolesService{
     }
 
 
-    /*@Override
-    @Transactional(readOnly = true)
-    public Optional<RolesDTO> login(String nombreRol, String descripcionRol) {
-        Roles roles = rolesRepository.findByNombreRolAndDescripcionRol(nombreRol, descripcionRol);
-        return Optional.ofNullable(MapperUtils.DtoFromEntity(roles, RolesDTO.class));
-    }*/
-
     @Override
     @Transactional(readOnly = true)
     public Optional<RolesDTO> findById(Long id) {
         Optional<Roles> roles = rolesRepository.findById(id);
         if (roles.isEmpty()) throw new NotFoundInformationException();
-
         RolesDTO rolesDTO = MapperUtils.DtoFromEntity(roles.get(), RolesDTO.class);
         return Optional.ofNullable(rolesDTO);
 
@@ -86,13 +79,5 @@ public class RolesServiceImplementation implements RolesService{
         return Optional.ofNullable(rolesDTOList);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<List<RolesDTO>> findByNombreRolAproximate(String nombreRol) {
-        List<Roles> rolesList = rolesRepository.findByNombreRolContaining(nombreRol);
-        if (rolesList.isEmpty()) throw new NotFoundInformationException();
 
-        List<RolesDTO> rolesDTOList = MapperUtils.DtoListFromEntityList(rolesList, RolesDTO.class);
-        return Optional.ofNullable(rolesDTOList);
-    }
 }

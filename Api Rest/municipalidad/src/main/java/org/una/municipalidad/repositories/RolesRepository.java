@@ -8,6 +8,7 @@ import org.una.municipalidad.entities.Roles;
 
 import java.util.List;
 
+@Repository
 public interface RolesRepository extends JpaRepository<Roles, Long>{
     public Roles findByNombreRolAndDescripcionRol(String nombreRol, String descripcionRol);
 

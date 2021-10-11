@@ -1,5 +1,6 @@
 package org.una.municipalidad.services;
 
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
+@Builder
 public class UsuariosServiceImplementation implements UsuariosService, UserDetailsService {
 
     @Autowired
@@ -89,29 +90,12 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
     }
 
 
-   /* @Override
-    public String login(AuthenticationRequest authenticationRequest) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return jwtProvider.generateToken(authenticationRequest);
-    }
-
-
-
-   @Override
-    @Transactional(readOnly = true)
-    public Optional<UsuariosDTO> login(String cedula, String claveEncriptado) {
-        Usuarios usuario = usuarioRepository.findByCedulaAndClaveEncriptado(cedula, claveEncriptado);
-        return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
-    }*/
-
-
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuariosDTO> findByCedula(String cedula) {
         Optional<Usuarios> usuario = usuarioRepository.findByCedula(cedula);
-        return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
+        UsuariosDTO usuarioDTO = MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class);
+        return Optional.ofNullable(usuarioDTO);
     }
 
     @Override
@@ -138,7 +122,6 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
     @Transactional(readOnly = true)
     public Optional<List<UsuariosDTO>> findByCedulaAproximate(String cedula) {
         List<Usuarios> usuarioList = usuarioRepository.findByCedulaContaining(cedula);
-        //if (usuarioList.isEmpty()) throw new NotFoundInformationException();
         List<UsuariosDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuariosDTO.class);
         return Optional.ofNullable(usuarioDTOList);
     }
@@ -163,6 +146,5 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         } else {
             throw new UsernameNotFoundException("Username not found, check your request");
         }
-
     }
 }

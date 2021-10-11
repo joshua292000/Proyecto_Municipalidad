@@ -14,17 +14,19 @@ import org.una.municipalidad.dto.AuthenticationRequest;
 import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.entities.Usuarios;
 import org.una.municipalidad.exceptions.InvalidCredentialsException;
 import org.una.municipalidad.jwt.JwtProvider;
+import org.una.municipalidad.repositories.UsuariosRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.Optional;
 
 
-@Repository
+@Service
 public class AutenticacionServiceImplementation implements AutenticacionService{
     @Autowired
-    private UsuariosService usuariosService;
+    private UsuariosRepository usuariosRepository;
 
     @Autowired
     private JwtProvider jwtProvider;
@@ -35,20 +37,19 @@ public class AutenticacionServiceImplementation implements AutenticacionService{
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AutenticacionServiceImplementation(){
-
-    }
 
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
 
-        Optional<UsuariosDTO> usuario = usuariosService.findByCedula(authenticationRequest.getCedula());
+        Optional<Usuarios> usuario = usuariosRepository.findByCedula(authenticationRequest.getCedula());
+
 
         if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getClave(),usuario.get().getClaveEncriptado())) {
+
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(),
-                    authenticationRequest.getClave()));
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClave()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
@@ -58,6 +59,7 @@ public class AutenticacionServiceImplementation implements AutenticacionService{
 
             return authenticationResponse;
         } else {
+
             throw new InvalidCredentialsException();
         }
     }
