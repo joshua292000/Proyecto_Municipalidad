@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.una.municipalidad.dto.ParametrosDTO;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.services.ParametrosService;
 import org.una.municipalidad.services.RolesService;
 import org.una.municipalidad.services.UsuariosService;
 
@@ -26,6 +28,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private RolesService rolService;
+
+    @Autowired
+    private ParametrosService parametroService;
 
 
     @Override
@@ -76,6 +81,12 @@ public class DataLoader implements ApplicationRunner {
                     .estado(true)
                     .roles(gerenteRol.orElseThrow()).build();
             usuarioService.create(gerenteUsuario);
+
+            ParametrosDTO horario = ParametrosDTO.builder()
+                            .parametrosLlaves("Horario")
+                                    .parametrosValor("5am.5pm")
+                                            .build();
+            parametroService.create(horario);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
         }else {

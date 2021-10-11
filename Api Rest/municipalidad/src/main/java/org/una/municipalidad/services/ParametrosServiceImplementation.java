@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.ParametrosDTO;
+import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.entities.Parametros;
+import org.una.municipalidad.entities.Roles;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.ParametrosRepository;
 import org.una.municipalidad.utils.MapperUtils;
@@ -14,8 +16,10 @@ import java.util.Optional;
 
 @Service
 public class ParametrosServiceImplementation implements ParametrosService{
+
     @Autowired
     private ParametrosRepository parametrosRepository;
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<ParametrosDTO>> findAll() {

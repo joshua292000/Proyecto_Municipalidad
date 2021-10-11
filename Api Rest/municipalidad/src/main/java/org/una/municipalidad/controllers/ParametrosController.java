@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.ParametrosDTO;
+import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.services.ParametrosService;
 
 import java.util.List;
@@ -29,24 +30,26 @@ public class ParametrosController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtiene un parametro a partir de su id", response = ParametrosDTO.class, tags = "Parametros")
+    @ApiOperation(value = "Obtiene un parametro a partir de su id", response = RolesDTO.class, tags = "Parametros")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ParametrosDTO> parametrosFound = parametrosService.findById(id);
-        return new ResponseEntity<>(parametrosFound, HttpStatus.OK);
+        Optional<ParametrosDTO> parametroFound = parametrosService.findById(id);
+        return new ResponseEntity<>(parametroFound, HttpStatus.OK);
+
     }
 
-    @GetMapping("/{codigoComercio}")
+    @GetMapping("/{parametrosLlaves}")
     @ApiOperation(value = "Obtiene un parametro a partir de su llave", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findByParametrosLlaves(@PathVariable(value = "parametrosLlaves") String parametrosLlaves) {
-        Optional<ParametrosDTO> parametrosFound = parametrosService.findByParametrosLlaves(parametrosLlaves);
-        return new ResponseEntity<>(parametrosFound, HttpStatus.OK);
+        Optional<ParametrosDTO> parametroFound = parametrosService.findByParametrosLlaves(parametrosLlaves);
+        return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 
-    @GetMapping("/{nombreComercio}")
-    @ApiOperation(value = "Obtiene un parametroa a partir de su valor", response = ParametrosDTO.class, tags = "Parametros")
+    @GetMapping("/{parametrosValor}")
+    @ApiOperation(value = "Obtiene un parametro a partir de su valor", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findByParametrosValor(@PathVariable(value = "parametrosValor") String parametrosValor) {
-        Optional<ParametrosDTO> parametrosFound = parametrosService.findByParametrosValor(parametrosValor);
-        return new ResponseEntity<>(parametrosFound, HttpStatus.OK);
+        Optional<ParametrosDTO> parametroFound = parametrosService.findByParametrosValor(parametrosValor);
+        return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)
