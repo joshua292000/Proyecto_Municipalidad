@@ -35,6 +35,10 @@ public class AutenticacionServiceImplementation implements AutenticacionService{
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    public AutenticacionServiceImplementation(){
+
+    }
+
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {

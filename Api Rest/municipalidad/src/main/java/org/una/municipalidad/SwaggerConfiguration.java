@@ -38,7 +38,7 @@ public class SwaggerConfiguration {
                 .select()
                 .apis(
                         RequestHandlerSelectors
-                                .basePackage("org.una.inventario.controllers"))
+                                .basePackage("org.una.municipalidad.controllers"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(apiInfo())

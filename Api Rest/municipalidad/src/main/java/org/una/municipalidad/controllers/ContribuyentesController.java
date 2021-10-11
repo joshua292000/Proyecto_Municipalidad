@@ -35,7 +35,7 @@ public class ContribuyentesController {
     }
 
     @GetMapping("/cedula/{cedula}")
-    @ApiOperation(value = "Obtiene un contribuyente a partir de su cedula", response = ContribuyentesDTO.class, tags = "Contribuyyente")
+    @ApiOperation(value = "Obtiene un contribuyente a partir de su cedula", response = ContribuyentesDTO.class, tags = "Contribuyente")
     public ResponseEntity<?> findByCedulaContribuyente(@PathVariable(value = "cedula")Long cedula) {
         Optional<ContribuyentesDTO>result = contribuyentesService.findByCedulaContribuyente(cedula);
         return new ResponseEntity<>(result, HttpStatus.OK);
