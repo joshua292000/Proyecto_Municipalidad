@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.AuthenticationRequest;
@@ -31,7 +33,7 @@ public class AutenticacionController {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
         AuthenticationResponse token = autenticacionService.login(authenticationRequest);
-        if (token.getJwt() != null)  {
+        if (token.getJwt() != null) {
             return new ResponseEntity(autenticacionService.login(authenticationRequest), HttpStatus.OK);
         } else {
             throw new InvalidCredentialsException();

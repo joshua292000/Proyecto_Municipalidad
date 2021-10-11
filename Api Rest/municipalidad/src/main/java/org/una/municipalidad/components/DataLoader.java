@@ -18,7 +18,7 @@ public class DataLoader implements ApplicationRunner {
     @Value("${app.admin-user}")
     private String cedula;
 
-    @Value("${app.claveEncriptado}")
+   @Value("${app.claveEncriptado}")
     private String claveEncriptado;
 
     @Autowired

@@ -25,16 +25,15 @@ import java.util.Optional;
 public class AutenticacionServiceImplementation implements AutenticacionService{
     @Autowired
     private UsuariosService usuariosService;
+
     @Autowired
     private JwtProvider jwtProvider;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    public AutenticacionServiceImplementation(){
-
-    }
 
     @Override
     @Transactional(readOnly = true)
@@ -42,10 +41,10 @@ public class AutenticacionServiceImplementation implements AutenticacionService{
 
         Optional<UsuariosDTO> usuario = usuariosService.findByCedula(authenticationRequest.getCedula());
 
-        if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getClaveEncriptado(),usuario.get().getClaveEncriptado())) {
+        if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getClave(),usuario.get().getClaveEncriptado())) {
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(),
-                    authenticationRequest.getClaveEncriptado()));
+                    authenticationRequest.getClave()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));

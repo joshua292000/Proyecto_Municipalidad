@@ -36,6 +36,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         return bCryptPasswordEncoder;
     }
 
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(usuarioService).passwordEncoder(bCrypt);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+       http.cors().and().csrf().disable()
+                .authorizeRequests().antMatchers("/autenticacion/**", "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html**",
+                        "/webjars/**").permitAll()
+                .anyRequest().authenticated().and()
+                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).and()
+                .exceptionHandling().authenticationEntryPoint(entryPoint).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+
+    }
+
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -47,36 +72,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         return super.authenticationManagerBean();
     }
 
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(usuarioService).passwordEncoder(bCrypt);
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-<<<<<<< HEAD
-                .authorizeRequests().antMatchers("/usuarios/**", "/v2/api-docs",
-=======
-                .authorizeRequests().antMatchers("/Login/**", "/v2/api-docs",
->>>>>>> b1df1380fb52d499ba5ec25cd8c3fe768ce5789e
-                        "/swagger-resources/**",
-                        "/swagger-ui.html**",
-                        "/webjars/**").permitAll()
-                .anyRequest().authenticated().and()
-                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).and()
-                .exceptionHandling().authenticationEntryPoint(entryPoint).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-    }
-
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
 
 }

@@ -12,6 +12,6 @@ import lombok.ToString;
 
 public class AuthenticationRequest {
     private String cedula;
-    private String claveEncriptado;
+    private String clave;
 
 }

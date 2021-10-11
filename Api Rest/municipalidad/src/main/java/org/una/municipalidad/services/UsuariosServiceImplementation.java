@@ -95,17 +95,17 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getClaveEncriptado()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtProvider.generateToken(authenticationRequest);
-    }*/
+    }
 
 
 
-/*
    @Override
     @Transactional(readOnly = true)
     public Optional<UsuariosDTO> login(String cedula, String claveEncriptado) {
         Usuarios usuario = usuarioRepository.findByCedulaAndClaveEncriptado(cedula, claveEncriptado);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(usuario, UsuariosDTO.class));
     }*/
+
 
     @Override
     @Transactional(readOnly = true)

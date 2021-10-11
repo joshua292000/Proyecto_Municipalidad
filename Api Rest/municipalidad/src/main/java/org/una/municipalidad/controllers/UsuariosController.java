@@ -45,15 +45,15 @@ public class UsuariosController {
 
     }
 /*
-   @PutMapping("/login")
+    @PutMapping("/login")
     @ResponseBody
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Seguridad")
-    public ResponseEntity<?> login(@PathVariable(value = "nombreUsuario") String nombreUsuario, @PathVariable(value = "claveEncriptado") String claveEncriptado) {
-        Optional<UsuariosDTO> usuarioFound = usuarioService.login(nombreUsuario, claveEncriptado);
+    public ResponseEntity<?> login(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "claveEncriptado") String claveEncriptado) {
+        Optional<UsuariosDTO> usuarioFound = usuarioService.login(cedula, claveEncriptado);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
-*/
 
+*/
 
 
     @GetMapping("/cedula/{term}")

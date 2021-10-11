@@ -1,5 +1,7 @@
 package org.una.municipalidad;
 
+import static io.swagger.annotations.ApiKeyAuthDefinition.ApiKeyLocation.HEADER;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -40,7 +42,6 @@ public class SwaggerConfiguration {
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(apiInfo())
-
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),
                         new Tag("Usuarios", "Entidad de Usuarios"),
                         new Tag("Roles", "Entidad de Roles"),
