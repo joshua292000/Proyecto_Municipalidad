@@ -25,6 +25,7 @@ public class RolesController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los roles", response = RolesDTO.class, responseContainer = "List", tags = "Roles")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<RolesDTO>> result = rolesService.findAll();
@@ -33,6 +34,7 @@ public class RolesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un rol a partir de su id", response = RolesDTO.class, tags = "Roles")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<RolesDTO> rolFound = rolesService.findById(id);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
@@ -41,6 +43,7 @@ public class RolesController {
 
     @GetMapping("/nombre/{term}")
     @ApiOperation(value = "Obtiene una lista de los nombres de los roles", response = RolesDTO.class, responseContainer = "List", tags = "Roles")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     public ResponseEntity<?> findByNombreRolAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         Optional<List<RolesDTO>> result = rolesService.findByNombreRolAproximateIgnoreCase(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -49,7 +52,7 @@ public class RolesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> create(@RequestBody RolesDTO rolesDTO) {
         try {
             Optional<RolesDTO> rolesCreated = rolesService.create(rolesDTO);
@@ -62,7 +65,7 @@ public class RolesController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id los roles", response = RolesDTO.class, tags = "Roles")
     @ResponseBody
-    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolesDTO rolesModified) {
         Optional<RolesDTO> rolesUpdated = rolesService.update(rolesModified, id);
         return new ResponseEntity<>(rolesUpdated, HttpStatus.OK);
@@ -70,7 +73,7 @@ public class RolesController {
 
     @ApiOperation(value = "Elimina un rol por medio del id", response = DeclaracionesDTO.class, tags = "Roles")
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
             rolesService.delete(id);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -78,7 +81,7 @@ public class RolesController {
 
     @ApiOperation(value = "Elimina todos los roles", response = DeclaracionesDTO.class, tags = "Roles")
     @DeleteMapping("/")
-   // @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> deleteAll() throws Exception {
         rolesService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
