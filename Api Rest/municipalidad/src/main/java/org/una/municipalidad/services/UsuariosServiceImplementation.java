@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class UsuariosServiceImplementation implements UsuariosService, UserDetailsService {
 
     @Autowired
@@ -158,10 +159,10 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
             Usuarios usuario = usuarioBuscado.get();
             List<GrantedAuthority> roles = new ArrayList<>();
             roles.add(new SimpleGrantedAuthority(usuario.getRoles().getNombreRol()));
-            //UserDetails userDetails = new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
             return new User(usuario.getCedula(), usuario.getClaveEncriptado(), roles);
         } else {
             throw new UsernameNotFoundException("Username not found, check your request");
         }
+
     }
 }

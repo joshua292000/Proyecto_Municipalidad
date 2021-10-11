@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.RolesDTO;
@@ -24,6 +25,7 @@ public class RolesController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los roles", response = RolesDTO.class, responseContainer = "List", tags = "Roles")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<RolesDTO>> result = rolesService.findAll();
@@ -32,6 +34,7 @@ public class RolesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un rol a partir de su id", response = RolesDTO.class, tags = "Roles")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<RolesDTO> rolFound = rolesService.findById(id);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
@@ -64,6 +67,7 @@ public class RolesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> create(@RequestBody RolesDTO rolesDTO) {
         try {
             Optional<RolesDTO> rolesCreated = rolesService.create(rolesDTO);
@@ -76,6 +80,7 @@ public class RolesController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id los roles", response = RolesDTO.class, tags = "Seguridad")
     @ResponseBody
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolesDTO rolesModified) {
         Optional<RolesDTO> rolesUpdated = rolesService.update(rolesModified, id);
         return new ResponseEntity<>(rolesUpdated, HttpStatus.OK);
@@ -83,6 +88,7 @@ public class RolesController {
 
     @ApiOperation(value = "Elimina un rol por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
             rolesService.delete(id);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -90,6 +96,7 @@ public class RolesController {
 
     @ApiOperation(value = "Elimina todos los roles", response = DeclaracionesDTO.class, tags = "Seguridad")
     @DeleteMapping("/")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> deleteAll() throws Exception {
         rolesService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
