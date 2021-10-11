@@ -29,7 +29,7 @@ public class UsuariosController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<UsuariosDTO>> result = usuarioService.findAll();
@@ -38,7 +38,7 @@ public class UsuariosController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una usuario a partir de su id", response = UsuariosDTO.class, tags = "Usuarios")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<UsuariosDTO> usuarioFound = usuarioService.findById(id);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
@@ -48,7 +48,7 @@ public class UsuariosController {
 
     @GetMapping("/cedula/{term}")
     @ApiOperation(value = "Obtiene una lista de las cedulas", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         Optional<List<UsuariosDTO>> result = usuarioService.findByCedulaAproximate(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -56,7 +56,7 @@ public class UsuariosController {
 
     @GetMapping("/nombre/{term}")
     @ApiOperation(value = "Obtiene una lista de los nombres de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> findByNombreUsuarioAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximateIgnoreCase(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -66,7 +66,7 @@ public class UsuariosController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> create(@RequestBody UsuariosDTO usuarioDTO) {
         try {
             Optional<UsuariosDTO> usuarioCreated = usuarioService.create(usuarioDTO);
@@ -79,7 +79,7 @@ public class UsuariosController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = UsuariosDTO.class, tags = "Usuarios")
     @ResponseBody
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody UsuariosDTO usuarioModified) {
         Optional<UsuariosDTO> usuarioUpdated = usuarioService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
@@ -87,7 +87,7 @@ public class UsuariosController {
 
     @ApiOperation(value = "Elimina un usuario por medio del id", response = DeclaracionesDTO.class, tags = "Usuarios")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         usuarioService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -95,7 +95,7 @@ public class UsuariosController {
 
     @ApiOperation(value = "Elimina todos los usuarios", response = DeclaracionesDTO.class, tags = "Usuarios")
     @DeleteMapping("/")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+   //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> deleteAll() throws Exception {
         usuarioService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);

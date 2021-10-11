@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.BitacorasDTO;
 import org.una.municipalidad.services.BitacorasService;
@@ -22,7 +21,6 @@ public class BitacoraController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todas las Licencias Comerciales.", response = BitacorasDTO.class, responseContainer = "List", tags = "Bitacora")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<BitacorasDTO>> result = bitacoraService.findAll();
@@ -31,7 +29,6 @@ public class BitacoraController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una bitacora a partir de su id", response = BitacorasDTO.class, tags = "Bitacora")
-    @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<BitacorasDTO> bitacoraFound = bitacoraService.findById(id);
         return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
@@ -39,7 +36,6 @@ public class BitacoraController {
 
     @GetMapping("/{codigoComercio}")
     @ApiOperation(value = "Obtiene una tabal de la bitacora", response = BitacorasDTO.class, tags = "Bitacora")
-    @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findByBitacoraTabla(@PathVariable(value = "bitacoraTabla") String bitacoraTabla) {
         Optional<BitacorasDTO> bitacoraFound = bitacoraService.findByBitacoraTabla(bitacoraTabla);
         return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
@@ -47,7 +43,6 @@ public class BitacoraController {
 
     @GetMapping("/{nombreComercio}")
     @ApiOperation(value = "Obtiene una descripcion de la bitacora", response = BitacorasDTO.class, tags = "Bitacora")
-    @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findByBitacoraDescripcion(@PathVariable(value = "bitacoraDescripcion") String bitacoraDescripcion) {
         Optional<BitacorasDTO> bitacoraFound = bitacoraService.findByBitacoraDescripcion(bitacoraDescripcion);
         return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
@@ -56,7 +51,6 @@ public class BitacoraController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> create(@RequestBody BitacorasDTO bitacoraDTO) {
         try {
             Optional<BitacorasDTO> bitacoraCreated = bitacoraService.create(bitacoraDTO);
@@ -69,7 +63,6 @@ public class BitacoraController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = BitacorasDTO.class, tags = "Bitacora")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BitacorasDTO bitacoraModified) {
         Optional<BitacorasDTO> bitacoraUpdated = bitacoraService.update(bitacoraModified, id);
         return new ResponseEntity<>(bitacoraUpdated, HttpStatus.OK);
@@ -77,7 +70,6 @@ public class BitacoraController {
 
     @ApiOperation(value = "Elimina una bitacora por medio del id", response = BitacorasDTO.class, tags = "Bitacora")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         bitacoraService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -85,7 +77,6 @@ public class BitacoraController {
 
     @ApiOperation(value = "Elimina todas las bitacoras", response = BitacorasDTO.class, tags = "Bitacora")
     @DeleteMapping("/")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> deleteAll() throws Exception {
         bitacoraService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);

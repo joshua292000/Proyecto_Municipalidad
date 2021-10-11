@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.services.DeclaracionesService;
@@ -25,7 +24,6 @@ public class DeclaracionesController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todas las declaraciones", response = DeclaracionesDTO.class, responseContainer = "List", tags = "Declaraciones")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR') or hasRole('GESTOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<DeclaracionesDTO>> result = declaracionService.findAll();
@@ -34,7 +32,6 @@ public class DeclaracionesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una declaracion a partir de su id", response = DeclaracionesDTO.class, tags = "Declaraciones")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<DeclaracionesDTO> declaracionFound = declaracionService.findById(id);
         return new ResponseEntity<>(declaracionFound, HttpStatus.OK);
@@ -42,7 +39,6 @@ public class DeclaracionesController {
 
     @GetMapping("/montoDeclarado/{term}")
     @ApiOperation(value = "Obtiene una lista de los montos declarados", response = DeclaracionesDTO.class, responseContainer = "List", tags = "Declaraciones")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
     public ResponseEntity<?> findByMontoDeclarado(@PathVariable(value = "term") long term) {
         Optional<List<DeclaracionesDTO>> result = declaracionService.findByMontoDeclarado(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -50,7 +46,6 @@ public class DeclaracionesController {
 
     @GetMapping("/id/{term}")
     @ApiOperation(value = "Obtiene una lista de los años declarados por medio del id", response = DeclaracionesDTO.class, responseContainer = "List", tags = "Declaraciones")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
     public ResponseEntity<?> findByIdAndFechaDeclarado(@PathVariable(value = "term") Long term, Date fechaDeclarado) {
         Optional<List<DeclaracionesDTO>> result = declaracionService.findByIdAndFechaDeclarado(term, fechaDeclarado);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -59,7 +54,6 @@ public class DeclaracionesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> create(@RequestBody DeclaracionesDTO declaracionDTO) {
         try {
             Optional<DeclaracionesDTO> declaracionCreated = declaracionService.create(declaracionDTO);
@@ -72,7 +66,6 @@ public class DeclaracionesController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = DeclaracionesDTO.class, tags = "Declaraciones")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody DeclaracionesDTO declaracionModified) {
         Optional<DeclaracionesDTO> declaracionUpdated = declaracionService.update(declaracionModified, id);
         return new ResponseEntity<>(declaracionUpdated, HttpStatus.OK);
@@ -80,7 +73,6 @@ public class DeclaracionesController {
 
     @ApiOperation(value = "Elimina una declaracion por medio del id", response = DeclaracionesDTO.class, tags = "Declaraciones")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
             declaracionService.delete(id);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -88,7 +80,6 @@ public class DeclaracionesController {
 
     @ApiOperation(value = "Elimina todas las declaraciones", response = DeclaracionesDTO.class, tags = "Declaraciones")
     @DeleteMapping("/")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> deleteAll() throws Exception {
         declaracionService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);

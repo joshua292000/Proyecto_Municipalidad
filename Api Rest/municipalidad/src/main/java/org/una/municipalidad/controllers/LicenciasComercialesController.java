@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
@@ -25,7 +24,6 @@ public class LicenciasComercialesController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todas las Licencias Comerciales", response = LicenciasComercialesDTO.class, responseContainer = "List", tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE') or hasRole('AUDITOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<LicenciasComercialesDTO>> result = licenciaComercialService.findAll();
@@ -34,7 +32,6 @@ public class LicenciasComercialesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su id", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findById(id);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
@@ -42,7 +39,6 @@ public class LicenciasComercialesController {
 
     @GetMapping("/{codigoComercio}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su codigo", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByCodigoComercio(@PathVariable(value = "codigoComercio") String codigoComercio) {
         Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByCodigoComercio(codigoComercio);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
@@ -50,7 +46,6 @@ public class LicenciasComercialesController {
 
     @GetMapping("/{nombreComercio}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su nombre", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByNombreComercio(@PathVariable(value = "nombreComercio") String nombreComercio) {
         Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByNombreComercio(nombreComercio);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
@@ -59,7 +54,6 @@ public class LicenciasComercialesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> create(@RequestBody LicenciasComercialesDTO licenciaComercialDTO) {
         try {
             Optional<LicenciasComercialesDTO> licenciaComercialCreated = licenciaComercialService.create(licenciaComercialDTO);
@@ -72,7 +66,6 @@ public class LicenciasComercialesController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody LicenciasComercialesDTO licenciaComercialModified) {
         Optional<LicenciasComercialesDTO> licenciaComercialUpdated = licenciaComercialService.update(licenciaComercialModified, id);
         return new ResponseEntity<>(licenciaComercialUpdated, HttpStatus.OK);
@@ -80,7 +73,6 @@ public class LicenciasComercialesController {
 
     @ApiOperation(value = "Elimina una licencia comercial por medio del id", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         licenciaComercialService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
@@ -88,7 +80,6 @@ public class LicenciasComercialesController {
 
     @ApiOperation(value = "Elimina todas las licencias comerciales", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
     @DeleteMapping("/")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> deleteAll() throws Exception {
         licenciaComercialService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);

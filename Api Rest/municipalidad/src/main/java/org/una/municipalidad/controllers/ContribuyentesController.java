@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.services.ContribuyentesService;
@@ -22,7 +21,6 @@ public class ContribuyentesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un contribuyente a partir de su id", response = ContribuyentesDTO.class, tags = "Contribuyentes")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ContribuyentesDTO> contribuyenteFound = contribuyentesService.findById(id);
         return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
@@ -31,7 +29,6 @@ public class ContribuyentesController {
 
     @GetMapping("/nombre/{term}")
     @ApiOperation(value = "Obtiene un contribuyente a partir de su nombre", response = ContribuyentesDTO.class, tags = "Contribuyentes")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByNombreContribuyente(@PathVariable(value = "term") String term) {
         Optional<ContribuyentesDTO>result = contribuyentesService.findByNombreContribuyente(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -39,7 +36,6 @@ public class ContribuyentesController {
 
     @GetMapping("/{cedula}")
     @ApiOperation(value = "Obtiene un contribuyente a partir de su cedula", response = ContribuyentesDTO.class, tags = "Contribuyentes")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByCedulaContribuyente(@PathVariable(value = "cedula")Long cedula) {
         Optional<ContribuyentesDTO>result = contribuyentesService.findByCedulaContribuyente(cedula);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -49,7 +45,6 @@ public class ContribuyentesController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> create(@RequestBody ContribuyentesDTO contribuyenteDTO) {
         try {
             Optional<ContribuyentesDTO> contribuyenteCreated = contribuyentesService.create(contribuyenteDTO);
@@ -62,7 +57,6 @@ public class ContribuyentesController {
     @PutMapping("/")
     @ApiOperation(value = "Actualiza la informacion", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> update(@RequestBody ContribuyentesDTO contribuyenteModified) {
         Optional<ContribuyentesDTO> ContribuyenteUpdated = contribuyentesService.update(contribuyenteModified);
         return new ResponseEntity<>(ContribuyenteUpdated, HttpStatus.OK);

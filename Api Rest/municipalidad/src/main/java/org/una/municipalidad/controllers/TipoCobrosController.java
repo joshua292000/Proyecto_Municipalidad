@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.TipoCobrosDTO;
@@ -22,7 +21,6 @@ public class TipoCobrosController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un tipo de cobro a partir de su id", response = TipoCobrosDTO.class, tags = "TipoCobros")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<TipoCobrosDTO> tipoCobrosFound = tipoCobrosService.findById(id);
         return new ResponseEntity<>(tipoCobrosFound, HttpStatus.OK);
@@ -31,7 +29,6 @@ public class TipoCobrosController {
 
     @GetMapping("/nombre/{term}")
     @ApiOperation(value = "Obtiene un tipo de cobro a partir de su nombre", response = TipoCobrosDTO.class, tags = "TipoCobros")
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByNombreTipoCobro(@PathVariable(value = "term") String term) {
         Optional<TipoCobrosDTO>result = tipoCobrosService.findByNombreTipoCobro(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -40,7 +37,6 @@ public class TipoCobrosController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> create(@RequestBody TipoCobrosDTO tipoCobrosDTO) {
         try {
             Optional<TipoCobrosDTO> tipoCobrosCreated = tipoCobrosService.create(tipoCobrosDTO);
@@ -53,7 +49,6 @@ public class TipoCobrosController {
     @PutMapping("/")
     @ApiOperation(value = "Actualiza la informacion", response = TipoCobrosDTO.class, tags = "TipoCobros")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> update(@RequestBody TipoCobrosDTO tipoCobrosModified) {
         Optional<TipoCobrosDTO> TipoCobrosUpdated = tipoCobrosService.update(tipoCobrosModified);
         return new ResponseEntity<>(TipoCobrosUpdated, HttpStatus.OK);
