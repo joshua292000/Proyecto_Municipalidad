@@ -13,10 +13,8 @@ import org.una.municipalidad.dto.AuthenticationRequest;
 import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
-import org.una.municipalidad.entities.Usuarios;
 import org.una.municipalidad.exceptions.InvalidCredentialsException;
 import org.una.municipalidad.jwt.JwtProvider;
-import org.una.municipalidad.repositories.UsuariosRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.Optional;
