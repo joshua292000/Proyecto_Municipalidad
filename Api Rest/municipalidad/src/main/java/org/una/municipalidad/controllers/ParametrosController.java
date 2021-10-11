@@ -39,20 +39,20 @@ public class ParametrosController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping("/id/{llaveParametro}")
     @ApiOperation(value = "Obtiene un parametro a partir de su llave", response = ParametrosDTO.class, tags = "Parametros")
     @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findByLlaveParametro(@PathVariable(value = "llaveParametro") String llaveParametro) {
         Optional<ParametrosDTO> parametroFound = parametrosService.findByLlaveParametro(llaveParametro);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
-/*    @GetMapping()
+    @GetMapping("/id/llaveParametro/{valorParametro}")
     @ApiOperation(value = "Obtiene un parametro a partir de su valor", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findByValorParametro(@PathVariable(value = "valorParametro") String valorParametro) {
         Optional<ParametrosDTO> parametroFound = parametrosService.findByValorParametro(valorParametro);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
-*/
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
