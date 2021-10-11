@@ -28,6 +28,7 @@ public class ParametrosController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un parametro a partir de su id", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -36,12 +37,14 @@ public class ParametrosController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping("/id/{llaveParametro}")
     @ApiOperation(value = "Obtiene un parametro a partir de su llave", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findByLlaveParametro(@PathVariable(value = "llaveParametro") String llaveParametro) {
         Optional<ParametrosDTO> parametroFound = parametrosService.findByLlaveParametro(llaveParametro);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
+
+
 /*    @GetMapping()
     @ApiOperation(value = "Obtiene un parametro a partir de su valor", response = ParametrosDTO.class, tags = "Parametros")
     public ResponseEntity<?> findByValorParametro(@PathVariable(value = "valorParametro") String valorParametro) {

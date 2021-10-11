@@ -34,7 +34,7 @@ public class RolesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un rol a partir de su id", response = RolesDTO.class, tags = "Roles")
-    //@PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<RolesDTO> rolFound = rolesService.findById(id);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
