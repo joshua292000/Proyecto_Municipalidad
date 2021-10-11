@@ -7,23 +7,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.AuthenticationRequest;
 import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
-import org.una.municipalidad.entities.Usuarios;
 import org.una.municipalidad.exceptions.InvalidCredentialsException;
 import org.una.municipalidad.jwt.JwtProvider;
-import org.una.municipalidad.repositories.UsuariosRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.Optional;
 
 
-@Service
-public class LoginServiceImplementation implements LoginService {
+@Repository
+public class AutenticacionServiceImplementation implements AutenticacionService{
     @Autowired
     private UsuariosService usuariosService;
     @Autowired
@@ -33,13 +32,13 @@ public class LoginServiceImplementation implements LoginService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public LoginServiceImplementation(){
+    public AutenticacionServiceImplementation(){
 
     }
 
     @Override
     @Transactional(readOnly = true)
-    public AuthenticationResponse login2(AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
 
         Optional<UsuariosDTO> usuario = usuariosService.findByCedula(authenticationRequest.getCedula());
 
@@ -59,5 +58,6 @@ public class LoginServiceImplementation implements LoginService {
             throw new InvalidCredentialsException();
         }
     }
+
 
 }
