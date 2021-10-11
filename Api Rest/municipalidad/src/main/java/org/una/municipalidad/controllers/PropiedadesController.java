@@ -62,21 +62,21 @@ public class PropiedadesController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id", response = PropiedadesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id", response = PropiedadesDTO.class, tags = "Propiedades")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PropiedadesDTO propiedadesModified) {
         Optional<PropiedadesDTO> propiedadesUpdated = propiedadesService.update(propiedadesModified, id);
         return new ResponseEntity<>(propiedadesUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina una propiedad por medio del id", response = PropiedadesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina una propiedad por medio del id", response = PropiedadesDTO.class, tags = "Propiedades")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         propiedadesService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina todas las propiedades", response = PropiedadesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todas las propiedades", response = PropiedadesDTO.class, tags = "Propiedades")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         propiedadesService.deleteAll();

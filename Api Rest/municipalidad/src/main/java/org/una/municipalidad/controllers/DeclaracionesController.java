@@ -64,21 +64,21 @@ public class DeclaracionesController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id", response = DeclaracionesDTO.class, tags = "Declaraciones")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody DeclaracionesDTO declaracionModified) {
         Optional<DeclaracionesDTO> declaracionUpdated = declaracionService.update(declaracionModified, id);
         return new ResponseEntity<>(declaracionUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina una declaracion por medio del id", response = DeclaracionesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina una declaracion por medio del id", response = DeclaracionesDTO.class, tags = "Declaraciones")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
             declaracionService.delete(id);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina todas las declaraciones", response = DeclaracionesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todas las declaraciones", response = DeclaracionesDTO.class, tags = "Declaraciones")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         declaracionService.deleteAll();

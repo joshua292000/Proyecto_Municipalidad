@@ -30,7 +30,7 @@ public class Contribuyente_Lic_ComercialController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = Contribuyentes_Licencias_ComercialesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = Contribuyentes_Licencias_ComercialesDTO.class, tags = "Contribuyentes_Licencias_Comerciales")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody Contribuyentes_Licencias_ComercialesDTO ContriLicComModified) {
         Optional<Contribuyentes_Licencias_ComercialesDTO> ContriLicComUpdated = contriuyenteliccomService.update(ContriLicComModified);
@@ -39,7 +39,7 @@ public class Contribuyente_Lic_ComercialController {
 
 
 
-    @ApiOperation(value = "Elimina todos los contribuyentes relacionados a una licencia comercial", response = Contribuyentes_Licencias_ComercialesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todos los contribuyentes relacionados a una licencia comercial", response = Contribuyentes_Licencias_ComercialesDTO.class, tags = "Contribuyentes_Licencias_Comerciales")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         contriuyenteliccomService.deleteAll();

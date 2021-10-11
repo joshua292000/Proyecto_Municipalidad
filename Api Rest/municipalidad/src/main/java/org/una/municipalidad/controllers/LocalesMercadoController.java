@@ -13,14 +13,14 @@ import org.una.municipalidad.services.LocalesMercadoService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/locales mercado")
-@Api(tags = {"Locales Mercado"})
+@RequestMapping("/localesmercado")
+@Api(tags = {"LocalesMercado"})
 public class LocalesMercadoController {
     @Autowired
     private LocalesMercadoService localesMercadoService;
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtiene un local del mercado a partir de su id", response = LocalesMercadoDTO.class, tags = "Local Mercado")
+    @ApiOperation(value = "Obtiene un local del mercado a partir de su id", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<LocalesMercadoDTO> localesMercadoFound = localesMercadoService.findById(id);
         return new ResponseEntity<>(localesMercadoFound, HttpStatus.OK);
@@ -28,7 +28,7 @@ public class LocalesMercadoController {
     }
 
     @GetMapping("/nombre/{term}")
-    @ApiOperation(value = "Obtiene un local del mercado a partir de su nombre", response = LocalesMercadoDTO.class, tags = "Local Mercado")
+    @ApiOperation(value = "Obtiene un local del mercado a partir de su nombre", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     public ResponseEntity<?> findByNombreLocal(@PathVariable(value = "term") String term) {
         Optional<LocalesMercadoDTO>result = localesMercadoService.findByNombreLocal(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -47,7 +47,7 @@ public class LocalesMercadoController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = LocalesMercadoDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody LocalesMercadoDTO localesMercadoModified) {
         Optional<LocalesMercadoDTO> LocalesMercadoUpdated =  localesMercadoService.update(localesMercadoModified);

@@ -48,7 +48,7 @@ public class FacturasController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = FacturasDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = FacturasDTO.class, tags = "Facturas")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody FacturasDTO facturasModified) {
         Optional<FacturasDTO> FacturasUpdated = facturasService.update(facturasModified);

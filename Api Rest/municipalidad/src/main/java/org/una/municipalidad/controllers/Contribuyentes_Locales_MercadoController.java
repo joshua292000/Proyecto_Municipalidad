@@ -32,7 +32,7 @@ public class Contribuyentes_Locales_MercadoController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = Contribuyentes_Locales_MercadoDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = Contribuyentes_Locales_MercadoDTO.class, tags = "Contribuyentes_Locales_Mercado")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody Contribuyentes_Locales_MercadoDTO contLocMercModified) {
         Optional<Contribuyentes_Locales_MercadoDTO> ContLocMercUpdated = contribuyentes_loc_mercadoService.update(contLocMercModified);
@@ -41,7 +41,7 @@ public class Contribuyentes_Locales_MercadoController {
 
 
 
-    @ApiOperation(value = "Elimina todos los contribuyentes relacionados a un local del mercado", response = Contribuyentes_Locales_MercadoDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todos los contribuyentes relacionados a un local del mercado", response = Contribuyentes_Locales_MercadoDTO.class, tags = "Contribuyentes_Locales_Mercado")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         contribuyentes_loc_mercadoService.deleteAll();

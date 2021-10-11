@@ -13,14 +13,14 @@ import org.una.municipalidad.services.TipoCobrosService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tipo cobros")
-@Api(tags = {"tipo cobros"})
+@RequestMapping("/tipocobros")
+@Api(tags = {"TipoCobros"})
 public class TipoCobrosController {
     @Autowired
     private TipoCobrosService tipoCobrosService;
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtiene un tipo de cobro a partir de su id", response = TipoCobrosDTO.class, tags = "Tipo Cobros")
+    @ApiOperation(value = "Obtiene un tipo de cobro a partir de su id", response = TipoCobrosDTO.class, tags = "TipoCobros")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<TipoCobrosDTO> tipoCobrosFound = tipoCobrosService.findById(id);
         return new ResponseEntity<>(tipoCobrosFound, HttpStatus.OK);
@@ -28,7 +28,7 @@ public class TipoCobrosController {
     }
 
     @GetMapping("/nombre/{term}")
-    @ApiOperation(value = "Obtiene un tipo de cobro a partir de su nombre", response = TipoCobrosDTO.class, tags = "Tipo Cobros")
+    @ApiOperation(value = "Obtiene un tipo de cobro a partir de su nombre", response = TipoCobrosDTO.class, tags = "TipoCobros")
     public ResponseEntity<?> findByNombreTipoCobro(@PathVariable(value = "term") String term) {
         Optional<TipoCobrosDTO>result = tipoCobrosService.findByNombreTipoCobro(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -47,7 +47,7 @@ public class TipoCobrosController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = TipoCobrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = TipoCobrosDTO.class, tags = "TipoCobros")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody TipoCobrosDTO tipoCobrosModified) {
         Optional<TipoCobrosDTO> TipoCobrosUpdated = tipoCobrosService.update(tipoCobrosModified);

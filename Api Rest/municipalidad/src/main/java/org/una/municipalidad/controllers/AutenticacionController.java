@@ -29,16 +29,16 @@ public class AutenticacionController {
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuariosDTO.class, tags = "Autenticaciones")
     @PostMapping("")
     @ResponseBody
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
+    public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new MissingInputsException();
         }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
         AuthenticationResponse token = autenticacionService.login(authenticationRequest);
-        if (!token.getJwt().isEmpty()) {
-            authenticationResponse.setJwt(token.getJwt());
-
-            return new ResponseEntity(authenticationResponse, HttpStatus.OK);
+        if (token.getJwt() != null) {
+            //authenticationResponse.setJwt(token.getJwt());
+           // return new ResponseEntity(authenticationResponse, HttpStatus.OK);
+            return new ResponseEntity(autenticacionService.login(authenticationRequest), HttpStatus.OK);
         } else {
             throw new InvalidCredentialsException();
         }

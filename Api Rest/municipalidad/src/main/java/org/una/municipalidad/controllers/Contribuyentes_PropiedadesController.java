@@ -32,7 +32,7 @@ public class Contribuyentes_PropiedadesController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = Contribuyentes_PropiedadesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = Contribuyentes_PropiedadesDTO.class, tags = "Contribuyentes_Propiedades")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody Contribuyentes_PropiedadesDTO ContriProModified) {
         Optional<Contribuyentes_PropiedadesDTO> ContriproUpdated = contriuyenteproService.update(ContriProModified);
@@ -41,7 +41,7 @@ public class Contribuyentes_PropiedadesController {
 
 
 
-    @ApiOperation(value = "Elimina todos los contribuyentes relacionados a una propiedad", response = Contribuyentes_PropiedadesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todos los contribuyentes relacionados a una propiedad", response = Contribuyentes_PropiedadesDTO.class, tags = "Contribuyentes_Propiedades")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         contriuyenteproService.deleteAll();

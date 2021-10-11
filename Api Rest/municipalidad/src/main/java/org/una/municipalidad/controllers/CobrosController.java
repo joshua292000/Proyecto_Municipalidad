@@ -61,21 +61,21 @@ public class CobrosController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id", response = CobrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id", response = CobrosDTO.class, tags = "Cobros")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobrosDTO cobrosModified) {
         Optional<CobrosDTO> cobrosUpdated = cobrosService.update(cobrosModified, id);
         return new ResponseEntity<>(cobrosUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina un cobro por medio del id", response = CobrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina un cobro por medio del id", response = CobrosDTO.class, tags = "Cobros")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         cobrosService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina todos los cobros", response = CobrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todos los cobros", response = CobrosDTO.class, tags = "Cobros")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         cobrosService.deleteAll();

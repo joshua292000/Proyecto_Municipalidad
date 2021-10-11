@@ -62,21 +62,21 @@ public class ParametrosController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id ", response = ParametrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id ", response = ParametrosDTO.class, tags = "Parametros")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametrosDTO paramentrosModified) {
         Optional<ParametrosDTO> parametrosUpdated = parametrosService.update(paramentrosModified, id);
         return new ResponseEntity<>(parametrosUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina los parametros por medio del id", response = ParametrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina los parametros por medio del id", response = ParametrosDTO.class, tags = "Parametros")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         parametrosService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina todos los parametros", response = ParametrosDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todos los parametros", response = ParametrosDTO.class, tags = "Parametros")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         parametrosService.deleteAll();

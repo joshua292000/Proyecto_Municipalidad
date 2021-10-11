@@ -28,14 +28,14 @@ public class ContribuyentesController {
     }
 
     @GetMapping("/nombre/{term}")
-    @ApiOperation(value = "Obtiene un contribuyente a partir de su nombre", response = ContribuyentesDTO.class, tags = "Contribuyente")
+    @ApiOperation(value = "Obtiene un contribuyente a partir de su nombre", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     public ResponseEntity<?> findByNombreContribuyente(@PathVariable(value = "term") String term) {
         Optional<ContribuyentesDTO>result = contribuyentesService.findByNombreContribuyente(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/cedula/{cedula}")
-    @ApiOperation(value = "Obtiene un contribuyente a partir de su cedula", response = ContribuyentesDTO.class, tags = "Contribuyente")
+    @GetMapping("/{cedula}")
+    @ApiOperation(value = "Obtiene un contribuyente a partir de su cedula", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     public ResponseEntity<?> findByCedulaContribuyente(@PathVariable(value = "cedula")Long cedula) {
         Optional<ContribuyentesDTO>result = contribuyentesService.findByCedulaContribuyente(cedula);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class ContribuyentesController {
     }
 
     @PutMapping("/")
-    @ApiOperation(value = "Actualiza la informacion", response = ContribuyentesDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza la informacion", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     @ResponseBody
     public ResponseEntity<?> update(@RequestBody ContribuyentesDTO contribuyenteModified) {
         Optional<ContribuyentesDTO> ContribuyenteUpdated = contribuyentesService.update(contribuyenteModified);

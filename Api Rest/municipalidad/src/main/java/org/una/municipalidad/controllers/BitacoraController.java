@@ -61,21 +61,21 @@ public class BitacoraController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Actualiza por medio del id", response = BitacorasDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Actualiza por medio del id", response = BitacorasDTO.class, tags = "Bitacora")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BitacorasDTO bitacoraModified) {
         Optional<BitacorasDTO> bitacoraUpdated = bitacoraService.update(bitacoraModified, id);
         return new ResponseEntity<>(bitacoraUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina una bitacora por medio del id", response = BitacorasDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina una bitacora por medio del id", response = BitacorasDTO.class, tags = "Bitacora")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         bitacoraService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Elimina todas las bitacoras", response = BitacorasDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Elimina todas las bitacoras", response = BitacorasDTO.class, tags = "Bitacora")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         bitacoraService.deleteAll();

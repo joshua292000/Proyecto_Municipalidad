@@ -27,16 +27,11 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private RolesService rolService;
 
-    @Autowired
-    //private DepartamentoService departamentoService;
 
     @Override
     public void run(ApplicationArguments args) {
         if (usuarioService.findByCedulaAproximate(cedula).get().size()==0) {
-           /* Optional<DepartamentoDTO> contabilidadDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Contabilidad").build());
-            Optional<DepartamentoDTO> cajasDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Cajas").build());
-            Optional<DepartamentoDTO> informaticaDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Informatica").build());
-*/
+
             Optional<RolesDTO> gestorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.GESTOR.name()).build());
             Optional<RolesDTO> gerenteRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.GERENTE.name()).build());
             Optional<RolesDTO> administradorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.ADMINISTRADOR.name()).build());
