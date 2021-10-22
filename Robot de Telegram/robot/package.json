@@ -1,0 +1,28 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "nodemon src/index.ts --exec ts-node --ignore *.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "node-schedule": "^2.0.0",
+    "save-dev": "0.0.1-security",
+    "telegraf": "^3.39.0",
+    "telegraf-inline-menu": "^6.3.0",
+    "telegram-keyboard": "^2.2.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.2",
+    "nodemon": "^2.0.14",
+    "ts-node": "^10.3.1"
+  }
+}
