@@ -1,10 +1,54 @@
 import { text } from "stream/consumers";
 import { Telegraf } from "telegraf";
 import { Keyboard } from "telegram-keyboard";
-
-
+import { usuario } from "./usuario";
+import axios, { Axios } from "axios";
+import { response } from "express";
+import { User } from "telegram-bot-ts-types";
 
 const bot = new Telegraf("2075715068:AAG_ldiisWuyZzSvLPjJrWn-rGPVpyKx0nU")
+var loggin: usuario;
+var tokenInicial=false;
+
+function logginF(){
+var error = false;
+axios.interceptors.response.use(response=>{
+  return response;
+},
+err =>{const{config,response:{status,data}}=err;
+const originalRequest = config;
+if(status===401||data.message==="Unauthorized"){
+  axios.post('http://localhost:8089/Autenticaciones',{
+    cedula:"botTelegram",contrasenia:"bot2021"
+  },{headers:{'Content-Type':'application/json'}})
+.then(response=>{
+  var botToken=response.data as usuario;
+  loggin.tokencito=botToken.tokencito;
+  console.log('Se venció el token')
+})
+.catch(err=>{console.log(err,err.response);});
+error=true;
+}else{
+  console.log('Logueo con éxito');
+}
+}
+);
+if(!error){
+
+}
+error=false;
+}
+
+function inicio(){
+  axios.post('http://localhost:8089/Autenticaciones',{
+    cedula:"botTelegram",contrasenia:"bot2021"
+  },{headers:{'Content-Type':'application/json'}})
+.then(response=>{
+  var botToken=response.data as usuario;
+  loggin.tokencito=botToken.tokencito;
+  console.log('Se venció el token')
+})
+}
 bot.telegram.getMe().then((botInfo: any) => {
   bot.options.username = botInfo.username;
 });
