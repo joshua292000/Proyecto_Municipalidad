@@ -1,16 +1,17 @@
 import { parametros } from './Parametros';
 import { Telegraf } from "telegraf";
 import { Keyboard } from "telegram-keyboard";
-import { usuario } from "./usuario";
+import { user} from "./usuario";
 import axios, { Axios } from "axios";
 import { consultas_service} from "./consultas_service";
 
 const bot = new Telegraf("2075715068:AAG_ldiisWuyZzSvLPjJrWn-rGPVpyKx0nU")
-var loggin: usuario;
+var token: user;
 var tokenInicial=false;
+var param: parametros;
 var consultasS=new consultas_service;
 
-function logginF(opc:number,parameters:string[],bot:Telegraf,chatId:number){
+function logginF(opc:number,parameters:string,bot:Telegraf,chatId:number){
 var error = false;
 axios.interceptors.response.use(response=>{
   return response;
@@ -18,51 +19,57 @@ axios.interceptors.response.use(response=>{
 err =>{const{config,response:{status,data}}=err;
 const originalRequest = config;
 if(status===401||data.message==="Unauthorized"){
-  axios.post('http://localhost:8089/Autenticaciones',{
-    cedula:"botTelegram",contrasenia:"bot2021"
-  },{headers:{'Content-Type':'application/json'}})
+  axios.post('http://localhost:8089/autenticacion',{
+    cedula:"botTelegram",clave:"bot2021"
+  },{headers:{'Content-Type':'application/json'}}
+  )
 .then(response=>{
-  var botToken=response.data as usuario;
-  loggin.tokencito=botToken.tokencito;
-  consultas(opc,botToken.tokencito,parameters,bot,chatId);
+  var botToken=response.data as user;
+  token.jwt = botToken.jwt;
+  consultas(opc,botToken.jwt,parameters,bot,chatId);
   console.log('Se venció el token')
 })
 .catch(err=>{console.log(err,err.response);});
 error=true;
 }else{
   console.log('Logueo con éxito');
-  consultas(opc,loggin.tokencito,parameters,bot,chatId);
+  consultas(opc,token.jwt,parameters,bot,chatId);
 }
 }
 );
 if(!error){
-  consultas(opc,loggin.tokencito,parameters,bot,chatId);
+  consultas(opc,token.jwt,parameters,bot,chatId);
 }
 error=false;
 }
 
-function consultas(opc:number,token:string,parameters:string[],bot:Telegraf,chatId:number){
-  switch(opc){
+function consultas(opc:number,token:string,parameters:string,bot:Telegraf,chatId:number){
+  /*switch(opc){
     case 1:
       consultasS.Horario(token,parameters,bot,chatId);
     break;
     case 2:
       consultasS.Formula(token,parameters,bot,chatId);
+      break;
+  }*/
+  if(opc == 1){
+    consultasS.Horario(token,parameters,bot,chatId);
   }
 
 }
 function inicio(){
-  axios.post('http://localhost:8089/Autenticaciones',{
-    cedula:"botTelegram",contrasenia:"bot2021"
+  axios.post('http://localhost:8089/autenticacion',{
+    cedula:"botTelegram",clave:"bot2021"
   },{headers:{'Content-Type':'application/json'}})
 .then(response=>{
-  loggin=response.data as usuario;
-}).catch(err=>{console.log(err,err.response)})
+  token=response.data as user;
+}).catch(err=>{console.log("No copio el token");})
 };
 
 bot.start((ctx: any) => ctx.reply('Hola sexy. Escribe "Menu" para comenzar. '))
-inicio();
+
 bot.hears('Menu', async (ctx) => {
+  inicio();
   const keyboard = Keyboard.make([
     ['Consulta simple'],
     ['Consulta personal'],
@@ -87,16 +94,16 @@ bot.hears('Consulta simple', async ctx => {
  ctx.reply('Formula propiedad: Consulta la formula del impuesto de la propiedad')
 });
 
-bot.hears('Horario',async ctx=>{
-var mensaje=ctx.message.text;
-var mensaje2=mensaje.split(' ');
-logginF(1,mensaje2,bot,ctx.from.id);
+bot.hears('Horario',async (cxt)=>{
+var msg = cxt.message.text;
+//var msgArray = msg.split(' ');
+logginF(1,msg,bot, cxt.from.id);
 })
 
 bot.hears('Formula propiedad',async ctx=>{
   var mensaje=ctx.message.text;
-  var mensaje2=mensaje.split(' ');
-  logginF(1,mensaje2,bot,ctx.from.id);
+  //var mensaje2=mensaje.split(' ');
+  logginF(2,mensaje,bot,ctx.from.id);
   })
 //console.log(keyboard)
 console.log('start')

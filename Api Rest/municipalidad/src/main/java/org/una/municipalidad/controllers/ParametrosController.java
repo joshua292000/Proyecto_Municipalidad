@@ -40,7 +40,7 @@ public class ParametrosController {
 
     }
 
-    @GetMapping("/id/{llaveParametro}")
+    @GetMapping("/findByLlaveParametro/{llaveParametro}")
     @ApiOperation(value = "Obtiene un parametro a partir de su llave", response = ParametrosDTO.class, tags = "Parametros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> findByLlaveParametro(@PathVariable(value = "llaveParametro") String llaveParametro) {

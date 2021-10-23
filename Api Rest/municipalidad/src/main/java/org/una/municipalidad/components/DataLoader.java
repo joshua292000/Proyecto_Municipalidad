@@ -88,6 +88,12 @@ public class DataLoader implements ApplicationRunner {
                                             .build();
             parametroService.create(horario);
 
+            ParametrosDTO formula = ParametrosDTO.builder()
+                    .llaveParametro("Formula")
+                    .valorParametro("no te importa")
+                    .build();
+            parametroService.create(formula);
+
             System.out.println("Se agrega el usuario inicial a la aplicación");
         }else {
             System.out.println("Se encontro el usuario administrador, continuando...");
