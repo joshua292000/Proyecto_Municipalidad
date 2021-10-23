@@ -5,7 +5,7 @@ import { parametros } from './Parametros';
 
 
 export class consultas_service{
-    Horario(token: string, parameters: string, bot: Telegraf,chat:number){
+    Horario(token: string, parameters: string[], bot: Telegraf,chat:number){
         axios.get('http://localhost:8089/parametros/' + parameters[1], 
         {headers: {
             Authorization: 'bearer ' + token,
@@ -17,7 +17,7 @@ export class consultas_service{
             console.log(err, err.response);
         });
     }
-    Formula(token: string, parameters: string, bot: Telegraf,chat:number){
+    Formula(token: string, parameters: string[], bot: Telegraf,chat:number){
         axios.get('http://localhost:8089/parametros/'+parameters[1], {headers: {    
           Authorization: 'bearer ' + token,
         }}).then(response => {

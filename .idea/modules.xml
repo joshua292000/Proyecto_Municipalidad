@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Proyecto_Municipalidad.iml" filepath="$PROJECT_DIR$/.idea/Proyecto_Municipalidad.iml" />
       <module fileurl="file://$PROJECT_DIR$/App de Escritorio/escritorio/escritorio.iml" filepath="$PROJECT_DIR$/App de Escritorio/escritorio/escritorio.iml" />
       <module fileurl="file://$PROJECT_DIR$/Api Rest/municipalidad/municipalidad.iml" filepath="$PROJECT_DIR$/Api Rest/municipalidad/municipalidad.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Robot de Telegram/robot/robot.iml" filepath="$PROJECT_DIR$/Robot de Telegram/robot/robot.iml" />
     </modules>
   </component>
 </project>

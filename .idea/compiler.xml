@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="municipalidad" />
         <module name="escritorio" />
-        <module name="robot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
