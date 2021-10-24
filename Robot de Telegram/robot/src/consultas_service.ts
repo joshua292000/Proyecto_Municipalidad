@@ -21,7 +21,7 @@ export class consultas_service{
         });
     }
     Formula(token: string, parameters: string, bot: Telegraf,chat:number){
-        axios.get('http://localhost:8089/parametros/'+parameters, {headers: {    
+        axios.get('http://localhost:8089/parametros/findByLlaveParametro/'+parameters, {headers: {    
           Authorization: 'bearer ' + token,
         }}).then(response => {
           var parametro = response.data as parametros;

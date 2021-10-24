@@ -88,11 +88,23 @@ public class DataLoader implements ApplicationRunner {
                                             .build();
             parametroService.create(horario);
 
-            ParametrosDTO formula = ParametrosDTO.builder()
-                    .llaveParametro("Formula")
-                    .valorParametro("no te importa")
+            ParametrosDTO formula1 = ParametrosDTO.builder()
+                    .llaveParametro("Formula impuesto de licencia comercial")
+                    .valorParametro("Ganancias declaradas * 0,2%.")
                     .build();
-            parametroService.create(formula);
+            parametroService.create(formula1);
+
+            ParametrosDTO formula2 = ParametrosDTO.builder()
+                    .llaveParametro("Formula bienes inmuebles")
+                    .valorParametro("Valor anual del total de la propiedad * 0,025.")
+                    .build();
+            parametroService.create(formula2);
+
+            ParametrosDTO formula3 = ParametrosDTO.builder()
+                    .llaveParametro("Formula locales de mercado")
+                    .valorParametro("Este impuesto se cobra mensualmente la cantidad acordada,sin embargo cada dos meses aumenta un 2%.")
+                    .build();
+            parametroService.create(formula3);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
         }else {
