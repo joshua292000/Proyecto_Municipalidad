@@ -62,24 +62,37 @@ public class CobrosController {
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
     }
 
-        @GetMapping("/findByCobrosFechaPago/{startDate}/{endDate}")
+        @GetMapping("/findByCobrosFechaPagoBetween/{startDate}/{endDate}")
         @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
-        @PreAuthorize("hasRole('GESTOR')")
-        public ResponseEntity<?> findByCobrosFechaPago(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date endDate){
+        @PreAuthorize("hasRole('ADMINISTRADOR')")
+        public ResponseEntity<?> findByCobrosFechaPagoBetween(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date endDate){
             try{
-                Optional<List<CobrosDTO>> result = cobrosService.findByCobrosFechaPago(startDate,endDate);
+                Optional<List<CobrosDTO>> result = cobrosService.findByCobrosFechaPagoBetween(startDate,endDate);
                 return new ResponseEntity<>(result,HttpStatus.OK);
             }catch (Exception e){
                 return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        @GetMapping("/findCobroByCedulaContribuyente/{cedulaContribuyente}")
+    @GetMapping("/findByCobrosBetweenCedulaContribuyenteAndFecha/{cedulaContribuyente}/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de cobros cancelados de acuerdo a la cedula del contribuyente y dos fechas dadas", response = CobrosDTO.class, responseContainer = "CobrosDTO", tags = "Cobros")
+    public ResponseEntity<?> findByCobrosBetweenCedulaContribuyenteAndFecha(@PathVariable(value = "cedulaContribuyente") String cedulaContribuyente, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+        try {
+            Optional<List<CobrosDTO>> result = cobrosService.findByCobrosBetweenCedulaContribuyenteAndFecha(cedulaContribuyente,startDate,endDate);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+        @GetMapping("/findCobrosByCedulaContribuyente/{cedulaContribuyente}")
         @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
         @PreAuthorize("hasRole('GESTOR')")
-        public ResponseEntity<?> findCobroByCedulaContribuyente(@PathVariable (value ="cedulaContribuyente") String cedulaContribuyente){
+        public ResponseEntity<?> findCobrosByCedulaContribuyente(@PathVariable (value ="cedulaContribuyente") String cedula){
             try{
-                Optional<List<CobrosDTO>> result = cobrosService.findCobroByCedulaContribuyente(cedulaContribuyente);
+                Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyente(cedula);
                 return new ResponseEntity<>(result,HttpStatus.OK);
             }catch (Exception e){
                 return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);

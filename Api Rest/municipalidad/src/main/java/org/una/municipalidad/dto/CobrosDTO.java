@@ -18,9 +18,9 @@ public class CobrosDTO {
     private Date cobrosFechaVencimiento;
     private boolean Estado;
     private Date cobrosFechaPago;
-    private Licencias_Comerciales licenciacomerciales;
-    private Facturas facturas;
-    private TipoCobros tipocobros;
-    private Locales_Mercado localesmercado;
-    private Propiedades propiedades;
+    private LicenciasComercialesDTO licenciacomerciales;
+    private FacturasDTO facturas;
+    private TipoCobrosDTO tipocobros;
+    private LocalesMercadoDTO localesmercado;
+    private PropiedadesDTO propiedades;
 }

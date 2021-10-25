@@ -19,9 +19,11 @@ public interface CobrosService {
 
     public Optional<CobrosDTO> findByCobrosMonto(Long cobrosMonto);
 
-  public Optional<List<CobrosDTO>> findByCobrosFechaPago(Date startDate, Date endDate);
+   public Optional<List<CobrosDTO>> findByCobrosFechaPagoBetween(Date startDate, Date endDate);
 
-    public Optional<List<CobrosDTO>> findCobroByCedulaContribuyente(@Param("cedulaContribuyente")String cedulaContribuyente);
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyente(@Param("cedulaContribuyente")String cedulaContribuyente);
+
+    public Optional<List<CobrosDTO>> findByCobrosBetweenCedulaContribuyenteAndFecha(@Param("cedulaContribuyente")String cedulaContribuyente, @Param("startDate")Date startDate, @Param("endDate")Date endDate);
 
     public Optional<CobrosDTO> create(CobrosDTO cobrosDTO);
 

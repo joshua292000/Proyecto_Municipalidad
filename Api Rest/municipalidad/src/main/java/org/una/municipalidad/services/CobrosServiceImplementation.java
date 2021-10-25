@@ -56,19 +56,29 @@ public class CobrosServiceImplementation implements CobrosService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CobrosDTO>> findByCobrosFechaPago(Date startDate, Date endDate) {
-        List<Cobros> Fechacobroslist = cobrosRepository.findByCobrosFechaPago(startDate, endDate);
+    public Optional<List<CobrosDTO>> findByCobrosFechaPagoBetween(Date startDate, Date endDate) {
+        List<Cobros> Fechacobroslist = cobrosRepository.findByCobrosFechaPagoBetween(startDate, endDate);
         List<CobrosDTO> FechacobrosDtolist = MapperUtils.DtoListFromEntityList(Fechacobroslist,CobrosDTO.class);
         return Optional.ofNullable(FechacobrosDtolist);
     }
 
    @Override
     @Transactional(readOnly = true)
-    public Optional<List<CobrosDTO>> findCobroByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente) {
-        List<Cobros> Cobroslist = cobrosRepository.findCobroByCedulaContribuyente(cedulaContribuyente);
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente) {
+        List<Cobros> Cobroslist = cobrosRepository.findCobrosByCedulaContribuyente(cedulaContribuyente);
         List<CobrosDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,CobrosDTO.class);
         return Optional.ofNullable(CobrosDtolist);
     }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findByCobrosBetweenCedulaContribuyenteAndFecha(@Param("cedulaContribuyente")String cedulaContribuyente,@Param("startDate") Date startDate,@Param("endDate") Date endDate) {
+        List<Cobros> cobroCanceladoList = cobrosRepository.findByCobrosBetweenCedulaContribuyenteAndFecha(cedulaContribuyente,startDate,endDate);
+        List<CobrosDTO> cobroCanceladoDTOList = MapperUtils.DtoListFromEntityList(cobroCanceladoList,CobrosDTO.class);
+        return Optional.ofNullable(cobroCanceladoDTOList);
+    }
+
 
     private CobrosDTO getSavedCobrosDTO(CobrosDTO cobrosDTO) {
         Cobros cobros = MapperUtils.EntityFromDto(cobrosDTO, Cobros.class);
