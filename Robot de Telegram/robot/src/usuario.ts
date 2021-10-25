@@ -21,5 +21,5 @@ export interface user{
 
 export interface Usuario{
     id: number;
-    Token: string;
+    jwt: string;
 }

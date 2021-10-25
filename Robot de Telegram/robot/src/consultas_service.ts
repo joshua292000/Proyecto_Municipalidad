@@ -32,4 +32,16 @@ export class consultas_service{
         });
   
     }
+    Telefono(token: string, parametro: string, bot: Telegraf,chat:number){
+      axios.get('http://localhost:8089/parametros/findByLlaveParametro/'+parametro, {headers: {    
+        Authorization: 'bearer ' + token,
+      }}).then(response => {
+        var parametro = response.data as parametros;
+        bot.telegram.sendMessage(chat,parametro.valorParametro);
+      })
+      .catch(err => {
+        console.log(err, err.response);
+      });
+
+  }
 }
