@@ -35,7 +35,7 @@ public class ContribuyentesServiceImplementation implements ContribuyentesServic
     }
 
     @Override
-    public Optional<ContribuyentesDTO> findByCedulaContribuyente(Long cedulaContribuyente) {
+    public Optional<ContribuyentesDTO> findByCedulaContribuyente(String cedulaContribuyente) {
         Optional<Contribuyentes> contribuyentes = contribuyentesRepository.findByCedulaContribuyente(cedulaContribuyente);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(contribuyentes, ContribuyentesDTO.class));
     }

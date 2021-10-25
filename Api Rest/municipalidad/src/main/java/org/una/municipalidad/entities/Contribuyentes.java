@@ -27,7 +27,7 @@ public class Contribuyentes implements Serializable {
     private String apellidoContribuyente;
 
     @Column(name = "cedula_contribuyente")
-    private Long cedulaContribuyente;
+    private String cedulaContribuyente;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente")
     private List<Contribuyentes_Locales_Mercado> contribuyentes_locales_mercados = new ArrayList<>();
