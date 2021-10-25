@@ -1,8 +1,12 @@
 package org.una.municipalidad.services;
 
 
+import org.hibernate.mapping.Value;
+import org.springframework.data.repository.query.Param;
 import org.una.municipalidad.dto.CobrosDTO;
+import org.una.municipalidad.entities.Cobros;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,10 @@ public interface CobrosService {
     public Optional<CobrosDTO> findByCobrosPeriodo(String cobrosPeriodo);
 
     public Optional<CobrosDTO> findByCobrosMonto(Long cobrosMonto);
+
+    //public Optional<List<CobrosDTO>> findByCobrosFechaPago(Date startDate, Date endDate);
+
+    public Optional<List<CobrosDTO>> findCobroByCedulaContribuyente(@Param("cedulaContribuyente")String cedulaContribuyente);
 
     public Optional<CobrosDTO> create(CobrosDTO cobrosDTO);
 

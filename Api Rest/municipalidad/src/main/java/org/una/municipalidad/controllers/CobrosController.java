@@ -3,6 +3,8 @@ package org.una.municipalidad.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +13,7 @@ import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.entities.Cobros;
 import org.una.municipalidad.services.CobrosService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +56,32 @@ public class CobrosController {
         Optional<CobrosDTO> cobrosFound = cobrosService.findByCobrosMonto(cobrosMonto);
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
     }
+
+    /*@GetMapping("/findByCobrosFechaPago/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
+    public ResponseEntity<?> findByCobrosFechaPago(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date endDate){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findByCobrosFechaPago(startDate,endDate);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+
+    @GetMapping("/findCobroByCedulaContribuyente/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
+    public ResponseEntity<?> findCobroByCedulaContribuyente(@PathVariable (value ="cedulaContribuyente") String cedulaContribuyente){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findCobroByCedulaContribuyente(cedulaContribuyente);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody

@@ -34,6 +34,7 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private ParametrosService parametroService;
+    @Autowired
     private ContribuyentesService contribuyentesService;
 
 

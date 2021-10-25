@@ -1,6 +1,7 @@
 package org.una.municipalidad.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.CobrosDTO;
@@ -9,6 +10,7 @@ import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.CobrosRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +52,22 @@ public class CobrosServiceImplementation implements CobrosService {
         if (cobros.isEmpty()) throw new NotFoundInformationException();
         CobrosDTO cobrosDTO = MapperUtils.DtoFromEntity(cobros.get(), CobrosDTO.class);
         return Optional.ofNullable(cobrosDTO);
+    }
+/*
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findByCobrosFechaPago(Date startDate, Date endDate) {
+        List<Cobros> Fechacobroslist = cobrosRepository.findByCobrosFechaPago(startDate, endDate);
+        List<CobrosDTO> FechacobrosDtolist = MapperUtils.DtoListFromEntityList(Fechacobroslist,CobrosDTO.class);
+        return Optional.ofNullable(FechacobrosDtolist);
+    }
+*/
+   @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findCobroByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente) {
+        List<Cobros> Cobroslist = cobrosRepository.findCobroByCedulaContribuyente(cedulaContribuyente);
+        List<CobrosDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,CobrosDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
     }
 
     private CobrosDTO getSavedCobrosDTO(CobrosDTO cobrosDTO) {
