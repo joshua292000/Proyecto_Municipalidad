@@ -1,17 +1,15 @@
 import { parametros } from './Parametros';
 import { Telegraf } from "telegraf";
 import { Keyboard } from "telegram-keyboard";
-import { user} from "./usuario";
+import { Usuario} from "./usuario";
 import axios, { Axios } from "axios";
 import { consultas_service} from "./consultas_service";
 
 const bot = new Telegraf("2075715068:AAG_ldiisWuyZzSvLPjJrWn-rGPVpyKx0nU")
-var token: user;
-var tokenInicial=false;
-var param: parametros;
+var token: Usuario;
 var consultasS=new consultas_service;
 
-function logginF(opc:number,parameters:string,bot:Telegraf,chatId:number){
+function logginF(consultaL:number,parametroL:string,idL:number){
 var error = false;
 axios.interceptors.response.use(response=>{
   return response;
@@ -24,38 +22,38 @@ if(status===401||data.message==="Unauthorized"){
   },{headers:{'Content-Type':'application/json'}}
   )
 .then(response=>{
-  var botToken=response.data as user;
-  token.jwt = botToken.jwt;
-  consultas(opc,botToken.jwt,parameters,bot,chatId);
+  var botToken=response.data as Usuario;
+  token.Token = botToken.Token;
+  consultas(consultaL,botToken.Token,parametroL,bot,idL);
   console.log('Se venció el token')
 })
 .catch(err=>{console.log(err,err.response);});
 error=true;
 }else{
   console.log('Logueo con éxito');
-  consultas(opc,token.jwt,parameters,bot,chatId);
+  consultas(consultaL,token.Token,parametroL,bot,idL);
 }
 }
 );
 if(!error){
-  consultas(opc,token.jwt,parameters,bot,chatId);
+  consultas(consultaL,token.Token,parametroL,bot,idL);
 }
 error=false;
 }
 
-function consultas(opc:number,token:string,parameters:string,bot:Telegraf,chatId:number){
-  switch(opc){
+function consultas(consultaC:number,tokenC:string,parametroC:string,botC:Telegraf,idC:number){
+  switch(consultaC){
     case 1:
-      consultasS.Horario(token,parameters,bot,chatId);
+      consultasS.Horario(tokenC,parametroC,bot,idC);
     break;
     case 2:
-      consultasS.Formula(token,parameters,bot,chatId);
+      consultasS.Formula(tokenC,parametroC,bot,idC);
     break;
     case 3:
-      consultasS.Formula(token,parameters,bot,chatId);
+      consultasS.Formula(tokenC,parametroC,bot,idC);
     break;
     case 4:
-      consultasS.Formula(token,parameters,bot,chatId);
+      consultasS.Formula(tokenC,parametroC,bot,idC);
     break;
   }
 }
@@ -64,7 +62,7 @@ function inicio(){
     cedula:"botTelegram",clave:"bot2021"
   },{headers:{'Content-Type':'application/json'}})
 .then(response=>{
-  token=response.data as user;
+  token=response.data as Usuario;
 }).catch(err=>{console.log("No copio el token");})
 };
 
@@ -81,11 +79,9 @@ bot.hears('Menu', async (ctx) => {
  ctx.reply('Consulta simple: En estas se pueden realizar consultas que no ocupen de su cedula')
  ctx.reply('Consulta personal: En estas puedes consultar acerca de tus pendientes')
 
- //await ctx.reply('', keyboard.inline())
 })
 
 bot.hears('Consulta simple', async ctx => {
-  //await ctx.reply('horario')
   const keyboard = Keyboard.make([
     ['Horario'],
     ['Formula impuesto de licencia comercial'],
@@ -102,27 +98,22 @@ bot.hears('Consulta simple', async ctx => {
 
 bot.hears('Horario',async (cxt)=>{
 var msg = cxt.message.text;
-//var msgArray = msg.split(' ');
-logginF(1,msg,bot, cxt.from.id);
+logginF(1,msg, cxt.from.id);
 })
 
 bot.hears('Formula impuesto de licencia comercial',async ctx=>{
   var mensaje=ctx.message.text;
-  //var mensaje2=mensaje.split(' ');
-  logginF(2,mensaje,bot,ctx.from.id);
+  logginF(2,mensaje,ctx.from.id);
   })
 
 bot.hears('Formula bienes inmuebles',async ctx=>{
   var messag=ctx.message.text;
-  //var mensaje2=mensaje.split(' ');
-  logginF(3,messag,bot,ctx.from.id);
+  logginF(3,messag,ctx.from.id);
   })
 
 bot.hears('Formula locales de mercado',async ctx=>{
   var m=ctx.message.text;
-  //var mensaje2=mensaje.split(' ');
-  logginF(4,m,bot,ctx.from.id);
+  logginF(4,m,ctx.from.id);
   })
-//console.log(keyboard)
 console.log('start')
 bot.launch()

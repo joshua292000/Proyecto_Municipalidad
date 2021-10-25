@@ -1,4 +1,4 @@
-export interface UsuariosDTO{
+/*export interface UsuariosDTO{
     id: number;
     nombreUsuario: string;
     claveEncriptado: string;
@@ -17,4 +17,9 @@ export interface RolesDTO{
 export interface user{
     jwt: string;
     usuario: UsuariosDTO;
+}*/
+
+export interface Usuario{
+    id: number;
+    Token: string;
 }
