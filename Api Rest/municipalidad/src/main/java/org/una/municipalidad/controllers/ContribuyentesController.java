@@ -29,20 +29,20 @@ public class ContribuyentesController {
 
     }
 
-    @GetMapping("/nombre/{term}")
+    @GetMapping("/findByNombreContribuyente/{nombreContribuyente}")
     @ApiOperation(value = "Obtiene un contribuyente a partir de su nombre", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     @PreAuthorize("hasRole('GESTOR')")
-    public ResponseEntity<?> findByNombreContribuyente(@PathVariable(value = "term") String term) {
-        Optional<ContribuyentesDTO>result = contribuyentesService.findByNombreContribuyente(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<?> findByNombreContribuyente(@PathVariable(value = "nombreContribuyente") String nombreContribuyente) {
+        Optional<ContribuyentesDTO>contribuyenteFound= contribuyentesService.findByNombreContribuyente(nombreContribuyente);
+        return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
     }
 
-    @GetMapping("/{cedula}")
+    @GetMapping("/findByCedulaContribuyente/{cedulaContribuyente}")
     @ApiOperation(value = "Obtiene un contribuyente a partir de su cedula", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     @PreAuthorize("hasRole('GESTOR')")
-    public ResponseEntity<?> findByCedulaContribuyente(@PathVariable(value = "cedula")String cedula) {
-        Optional<ContribuyentesDTO>result = contribuyentesService.findByCedulaContribuyente(cedula);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<?> findByCedulaContribuyente(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
+        Optional<ContribuyentesDTO>contribuyenteFound = contribuyentesService.findByCedulaContribuyente(cedulaContribuyente);
+        return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
     }
 
 

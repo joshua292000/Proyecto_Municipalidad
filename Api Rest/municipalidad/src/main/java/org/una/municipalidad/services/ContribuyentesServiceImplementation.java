@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.ContribuyentesDTO;
+import org.una.municipalidad.dto.ParametrosDTO;
 import org.una.municipalidad.entities.Contribuyentes;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.ContribuyentesRepository;
@@ -22,30 +23,37 @@ public class ContribuyentesServiceImplementation implements ContribuyentesServic
     public Optional<ContribuyentesDTO> findById(Long id) {
         Optional<Contribuyentes> contribuyente = contribuyentesRepository.findById(id);
         if (contribuyente.isEmpty()) throw new NotFoundInformationException();
-
         ContribuyentesDTO contribuyentesDTO = MapperUtils.DtoFromEntity(contribuyente.get(), ContribuyentesDTO.class);
         return Optional.ofNullable(contribuyentesDTO);
 
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ContribuyentesDTO> findByNombreContribuyente(String nombreContribuyente) {
         Optional<Contribuyentes> contribuyentes = contribuyentesRepository.findByNombreContribuyente(nombreContribuyente);
-        return Optional.ofNullable(MapperUtils.DtoFromEntity(contribuyentes, ContribuyentesDTO.class));
+        if(contribuyentes.isEmpty()) throw new NotFoundInformationException();
+        ContribuyentesDTO contribuyentesDTO = MapperUtils.DtoFromEntity(contribuyentes.get(),ContribuyentesDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ContribuyentesDTO> findByCedulaContribuyente(String cedulaContribuyente) {
         Optional<Contribuyentes> contribuyentes = contribuyentesRepository.findByCedulaContribuyente(cedulaContribuyente);
-        return Optional.ofNullable(MapperUtils.DtoFromEntity(contribuyentes, ContribuyentesDTO.class));
+        if(contribuyentes.isEmpty()) throw new NotFoundInformationException();
+        ContribuyentesDTO contribuyentesDTO = MapperUtils.DtoFromEntity(contribuyentes.get(),ContribuyentesDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
     }
 
     @Override
+    @Transactional
     public Optional<ContribuyentesDTO> create(ContribuyentesDTO contribuyentesDTO) {
         return Optional.ofNullable(getSavedContribuyentesDTO(contribuyentesDTO));
     }
 
     @Override
+    @Transactional
     public Optional<ContribuyentesDTO> update(ContribuyentesDTO contribuyentesDTO) {
         return Optional.ofNullable(getSavedContribuyentesDTO(contribuyentesDTO));
     }

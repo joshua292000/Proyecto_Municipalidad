@@ -53,7 +53,7 @@ public class CobrosServiceImplementation implements CobrosService {
         CobrosDTO cobrosDTO = MapperUtils.DtoFromEntity(cobros.get(), CobrosDTO.class);
         return Optional.ofNullable(cobrosDTO);
     }
-/*
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<CobrosDTO>> findByCobrosFechaPago(Date startDate, Date endDate) {
@@ -61,7 +61,7 @@ public class CobrosServiceImplementation implements CobrosService {
         List<CobrosDTO> FechacobrosDtolist = MapperUtils.DtoListFromEntityList(Fechacobroslist,CobrosDTO.class);
         return Optional.ofNullable(FechacobrosDtolist);
     }
-*/
+
    @Override
     @Transactional(readOnly = true)
     public Optional<List<CobrosDTO>> findCobroByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente) {

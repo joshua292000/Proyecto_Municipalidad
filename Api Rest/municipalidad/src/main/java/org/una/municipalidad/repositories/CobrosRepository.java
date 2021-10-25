@@ -14,9 +14,9 @@ import java.util.Optional;
 public interface CobrosRepository extends JpaRepository<Cobros, Long> {
     public Optional<Cobros> findByCobrosPeriodo(String cobrosPeriodo);
     public Optional<Cobros> findByCobrosMonto(Long cobrosMonto);
-   // public List<Cobros> findByCobrosFechaPago(Date startDate, Date endDate);
+    public List<Cobros> findByCobrosFechaPago(Date startDate, Date endDate);
 
-   @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.Contribuyentes_Lic_ComercialesService e WHERE e Cantribuyentes.cedulaContribuyente=:cedulaContribuyente")
+   @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.Contribuyentes_Lic_ComercialesService e WHERE e Contribuyentes.cedulaContribuyente=:cedulaContribuyente")
     public List<Cobros> findCobroByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente);
 
 

@@ -40,7 +40,7 @@ public class Cobros {
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date cobrosFechaPago;
-
+//Hay que BORRARLO
     @JoinColumn(name="licencias_comerciales_id")
     private Licencias_Comerciales licenciacomercial;
 
