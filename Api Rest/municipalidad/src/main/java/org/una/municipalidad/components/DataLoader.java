@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.una.municipalidad.controllers.RolesController;
+import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.ParametrosDTO;
 import org.una.municipalidad.dto.RolesDTO;
 import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.services.ContribuyentesService;
 import org.una.municipalidad.services.ParametrosService;
 import org.una.municipalidad.services.RolesService;
 import org.una.municipalidad.services.UsuariosService;
@@ -31,6 +34,7 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private ParametrosService parametroService;
+    private ContribuyentesService contribuyentesService;
 
 
     @Override
@@ -84,8 +88,8 @@ public class DataLoader implements ApplicationRunner {
 
             ParametrosDTO horario = ParametrosDTO.builder()
                             .llaveParametro("Horario")
-                                    .valorParametro("5am.5pm")
-                                            .build();
+                            .valorParametro("5am.5pm")
+                            .build();
             parametroService.create(horario);
 
             ParametrosDTO formula1 = ParametrosDTO.builder()
@@ -106,7 +110,28 @@ public class DataLoader implements ApplicationRunner {
                     .build();
             parametroService.create(formula3);
 
+           ContribuyentesDTO contribuyente1 = ContribuyentesDTO.builder()
+                   .apellidoContribuyente("Santamaría Sánchez")
+                   .cedulaContribuyente("197683604")
+                   .nombreContribuyente("Randall")
+                   .build();
+            contribuyentesService.create(contribuyente1);
+
+            ContribuyentesDTO contribuyente2 = ContribuyentesDTO.builder()
+                    .apellidoContribuyente("Rodríguez Navarro")
+                    .cedulaContribuyente("123456789")
+                    .nombreContribuyente("Alicia")
+                    .build();
+            contribuyentesService.create(contribuyente2);
+
+            ContribuyentesDTO contribuyente3 = ContribuyentesDTO.builder()
+                    .apellidoContribuyente("Mora Ortiz")
+                    .cedulaContribuyente("234567891")
+                    .nombreContribuyente("Camila")
+                    .build();
+            contribuyentesService.create(contribuyente3);
             System.out.println("Se agrega el usuario inicial a la aplicación");
+
         }else {
             System.out.println("Se encontro el usuario administrador, continuando...");
         }

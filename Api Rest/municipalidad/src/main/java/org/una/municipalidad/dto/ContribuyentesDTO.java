@@ -11,6 +11,6 @@ public class ContribuyentesDTO {
     private Long id;
     private String nombreContribuyente;
     private String apellidoContribuyente;
-    private Long cedulaContribuyente;
+    private String cedulaContribuyente;
 
 }

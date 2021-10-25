@@ -8,7 +8,7 @@ public interface ContribuyentesService {
 
     public Optional<ContribuyentesDTO> findById(Long id);
     public Optional<ContribuyentesDTO> findByNombreContribuyente(String nombreContribuyente);
-    public Optional<ContribuyentesDTO> findByCedulaContribuyente(Long cedulaContribuyente);
+    public Optional<ContribuyentesDTO> findByCedulaContribuyente(String cedulaContribuyente);
     public Optional<ContribuyentesDTO> create(ContribuyentesDTO contribuyentesDTO);
     public Optional<ContribuyentesDTO> update(ContribuyentesDTO contribuyentesDTO);
 
