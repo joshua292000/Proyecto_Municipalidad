@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Telegraf} from 'telegraf';
 import { parametros } from './Parametros';
+import { Usuario } from './usuario';
 
 export class consultas_service{
 
@@ -42,6 +43,17 @@ export class consultas_service{
       .catch(err => {
         console.log(err, err.response);
       });
-
   }
+
+  Cobrospagados(token: string, parametro: string, bot: Telegraf,chat:number){
+    axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyente/'+parametro, {headers: {    
+      Authorization: 'bearer ' + token,
+    }}).then(response => {
+      var cedula = response.data as Usuario;
+      bot.telegram.sendMessage(chat,cedula.jwt);
+    })
+    .catch(err => {
+      console.log(err, err.response);
+    });
+}
 }

@@ -58,6 +58,10 @@ function consultas(consultaC:number,tokenC:string,parametroC:string,botC:Telegra
     case 5:
       consultasS.Telefono(tokenC,parametroC,bot,idC);
     break;
+    case 6:
+
+      consultasS.Cobrospagados(tokenC,parametroC,bot,idC);
+    break;
   }
 }
 function inicio(){
@@ -91,7 +95,6 @@ bot.hears('Consulta simple', async ctx => {
     ['Formula bienes inmuebles'],
     ['Formula locales de mercado'],
     ['Telefono']
-    
   ])
  await ctx.reply('Seleccione una opcion', keyboard.reply())
  ctx.reply('Horario: Consulta el horario de la muni')
@@ -125,5 +128,28 @@ bot.hears('Telefono',async ctx=>{
     var m=ctx.message.text;
     logginF(5,m,ctx.from.id);
     })
+
+    bot.hears('Consulta personal', async ctx => {
+      const keyboard = Keyboard.make([
+        ['Lista de cobros pagados'],
+       // ['Formula impuesto de licencia comercial'],
+       // ['Formula bienes inmuebles'],
+       // ['Formula locales de mercado'],
+      //  ['Telefono']
+      ])
+     await ctx.reply('Seleccione una opcion', keyboard.reply())
+     ctx.reply('Lista de cobros pagados:Obtiene una lista de los cobros pagados')
+    // ctx.reply('Formula impuesto de licencia comercial: Consulta la formula del impuesto de licencia comercial')
+     //ctx.reply('Formula bienes inmuebles: Consulta la formula para calcular el monto de los bienes inmuebles')
+     //ctx.reply('Formula locales de mercado: Consulta la formula para calcular el monto de los locales de mercado')
+     //ctx.reply('Telefono: Consulta el teléfono de la municipalidad')
+    });
+
+    bot.hears('Lista de cobros pagados',async (cxt)=>{
+      bot.hears('Digite su cedula:',async (cxt)=>{
+        var msg = cxt.message.text;
+        logginF(6,msg, cxt.from.id);
+        })
+      })
 console.log('start')
 bot.launch()
