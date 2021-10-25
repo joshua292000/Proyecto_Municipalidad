@@ -5,7 +5,7 @@ import { Usuario} from "./usuario";
 import axios, { Axios } from "axios";
 import { consultas_service} from "./consultas_service";
 
-const bot = new Telegraf("2075715068:AAG_ldiisWuyZzSvLPjJrWn-rGPVpyKx0nU")
+const bot = new Telegraf("2043955263:AAHWY_nmFKRY2MUR8V-h4t0PI8EaMO9toPY")
 var token: Usuario;
 var consultasS=new consultas_service;
 
@@ -23,20 +23,20 @@ if(status===401||data.message==="Unauthorized"){
   )
 .then(response=>{
   var botToken=response.data as Usuario;
-  token.Token = botToken.Token;
-  consultas(consultaL,botToken.Token,parametroL,bot,idL);
+  token.jwt = botToken.jwt;
+  consultas(consultaL,botToken.jwt,parametroL,bot,idL);
   console.log('Se venció el token')
 })
 .catch(err=>{console.log(err,err.response);});
 error=true;
 }else{
   console.log('Logueo con éxito');
-  consultas(consultaL,token.Token,parametroL,bot,idL);
+  consultas(consultaL,token.jwt,parametroL,bot,idL);
 }
 }
 );
 if(!error){
-  consultas(consultaL,token.Token,parametroL,bot,idL);
+  consultas(consultaL,token.jwt,parametroL,bot,idL);
 }
 error=false;
 }
@@ -54,6 +54,9 @@ function consultas(consultaC:number,tokenC:string,parametroC:string,botC:Telegra
     break;
     case 4:
       consultasS.Formula(tokenC,parametroC,bot,idC);
+    break;
+    case 5:
+      consultasS.Telefono(tokenC,parametroC,bot,idC);
     break;
   }
 }
@@ -86,7 +89,8 @@ bot.hears('Consulta simple', async ctx => {
     ['Horario'],
     ['Formula impuesto de licencia comercial'],
     ['Formula bienes inmuebles'],
-    ['Formula locales de mercado']
+    ['Formula locales de mercado'],
+    ['Telefono']
     
   ])
  await ctx.reply('Seleccione una opcion', keyboard.reply())
@@ -94,6 +98,7 @@ bot.hears('Consulta simple', async ctx => {
  ctx.reply('Formula impuesto de licencia comercial: Consulta la formula del impuesto de licencia comercial')
  ctx.reply('Formula bienes inmuebles: Consulta la formula para calcular el monto de los bienes inmuebles')
  ctx.reply('Formula locales de mercado: Consulta la formula para calcular el monto de los locales de mercado')
+ ctx.reply('Telefono: Consulta el teléfono de la municipalidad')
 });
 
 bot.hears('Horario',async (cxt)=>{
@@ -115,5 +120,10 @@ bot.hears('Formula locales de mercado',async ctx=>{
   var m=ctx.message.text;
   logginF(4,m,ctx.from.id);
   })
+
+bot.hears('Telefono',async ctx=>{
+    var m=ctx.message.text;
+    logginF(5,m,ctx.from.id);
+    })
 console.log('start')
 bot.launch()
