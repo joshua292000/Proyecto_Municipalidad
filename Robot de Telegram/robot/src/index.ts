@@ -59,8 +59,10 @@ function consultas(consultaC:number,tokenC:string,parametroC:string,botC:Telegra
       consultasS.Telefono(tokenC,parametroC,bot,idC);
     break;
     case 6:
-
       consultasS.Cobrospagados(tokenC,parametroC,bot,idC);
+    break;
+    case 7:
+      consultasS.ListaCobros(tokenC,parametroC,bot,idC);
     break;
   }
 }
@@ -132,24 +134,34 @@ bot.hears('Telefono',async ctx=>{
     bot.hears('Consulta personal', async ctx => {
       const keyboard = Keyboard.make([
         ['Lista de cobros pagados'],
-       // ['Formula impuesto de licencia comercial'],
+        ['Pagos realizados'],
        // ['Formula bienes inmuebles'],
        // ['Formula locales de mercado'],
       //  ['Telefono']
       ])
      await ctx.reply('Seleccione una opcion', keyboard.reply())
      ctx.reply('Lista de cobros pagados:Obtiene una lista de los cobros pagados')
-    // ctx.reply('Formula impuesto de licencia comercial: Consulta la formula del impuesto de licencia comercial')
+     ctx.reply('Pagos realizados: Obtiene una lista de los pagos realizados ultimamente')
      //ctx.reply('Formula bienes inmuebles: Consulta la formula para calcular el monto de los bienes inmuebles')
      //ctx.reply('Formula locales de mercado: Consulta la formula para calcular el monto de los locales de mercado')
      //ctx.reply('Telefono: Consulta el teléfono de la municipalidad')
     });
 
     bot.hears('Lista de cobros pagados',async (cxt)=>{
-      bot.hears('Digite su cedula:',async (cxt)=>{
-        var msg = cxt.message.text;
-        logginF(6,msg, cxt.from.id);
-        })
+      cxt.reply('Digite su numero de cedula')
+      bot.on('text', async(ctx)=>{
+        var m=ctx.message.text;
+        logginF(6,m,ctx.from.id);
       })
+      })
+
+    bot.hears('Pagos realizados',async (cxt)=>{
+      cxt.reply('Digite su numero de cedula y dos fechas por ejemplo /123456789/2021-09-25/2021-10-25')
+      bot.on('text', async(ctx)=>{
+        var m=ctx.message.text;
+        logginF(7,m,ctx.from.id);
+      })
+    })
+
 console.log('start')
 bot.launch()

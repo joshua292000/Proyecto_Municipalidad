@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Telegraf} from 'telegraf';
 import { parametros } from './Parametros';
 import { Usuario } from './usuario';
+import { Cobros } from './Cobros';
 
 export class consultas_service{
 
@@ -49,11 +50,40 @@ export class consultas_service{
     axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyente/'+parametro, {headers: {    
       Authorization: 'bearer ' + token,
     }}).then(response => {
+      var Cobros = response.data as Array<Cobros>
+      var Mensaje = '';
+      for(let entry of Cobros){
+        Mensaje += 
+        'Tipo de impuesto: ' +entry.tipocobros.nombreTipoCobro+'\n'+
+        'Monto: ' +entry.cobrosMonto+'\n'+
+        'Fecha de creacion: ' +entry.cobrosFechaCreacion+'\n'+
+        'Fecha de vencimiento: ' +entry.cobrosFechaVencimiento+'\n';
+      }
       var cedula = response.data as Usuario;
-      bot.telegram.sendMessage(chat,cedula.jwt);
+      bot.telegram.sendMessage(chat,Mensaje);
     })
     .catch(err => {
       console.log(err, err.response);
     });
+}
+
+ListaCobros(token: string, parametro: string, bot: Telegraf,chat:number){
+  axios.get('http://localhost:8089/cobros/findByCobrosBetweenCedulaContribuyenteAndFecha/'+parametro, {headers: {    
+    Authorization: 'bearer ' + token,
+  }}).then(response => {
+    var Cobros = response.data as Array<Cobros>
+    var Mensaje = '';
+    for(let entry of Cobros){
+      Mensaje += 
+      'Tipo de impuesto: ' +entry.tipocobros.nombreTipoCobro+'\n'+
+      'Monto Pagado: ' +entry.cobrosMonto+'\n'+
+      'Fecha en la que se pago: ' +entry.cobrosFechaPago+'\n';
+    }
+    var cedula = response.data as Usuario;
+    bot.telegram.sendMessage(chat,Mensaje);
+  })
+  .catch(err => {
+    console.log(err, err.response);
+  });
 }
 }
