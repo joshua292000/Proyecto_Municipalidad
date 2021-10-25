@@ -46,6 +46,7 @@ public class DataLoader implements ApplicationRunner {
             Optional<RolesDTO> gerenteRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.ROLE_GERENTE.name()).build());
             Optional<RolesDTO> administradorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.ROLE_ADMINISTRADOR.name()).build());
             Optional<RolesDTO> auditorRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.ROLE_AUDITOR.name()).build());
+            Optional<RolesDTO> botRol = rolService.create(RolesDTO.builder().nombreRol(RolesTypes.ROLE_BOT.name()).build());
 
             UsuariosDTO cajeroUsuario = UsuariosDTO.builder()
                     .cedula("0123456789")
@@ -54,6 +55,14 @@ public class DataLoader implements ApplicationRunner {
                     .estado(true)
                     .roles(gestorRol.orElseThrow()).build();
             usuarioService.create(cajeroUsuario);
+
+            UsuariosDTO BotTelegram = UsuariosDTO.builder()
+                    .cedula("botTelegram")
+                    .nombreUsuario("Botcito")
+                    .claveEncriptado("bot2021")
+                    .estado(true)
+                    .roles(botRol.orElseThrow()).build();
+            usuarioService.create(BotTelegram);
 
             UsuariosDTO auditorUsuario = UsuariosDTO.builder()
                     .cedula("0948242")

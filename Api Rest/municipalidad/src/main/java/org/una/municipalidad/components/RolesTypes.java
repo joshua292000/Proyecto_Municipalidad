@@ -4,7 +4,8 @@ public enum RolesTypes {
     ROLE_GESTOR("GESTOR"),
     ROLE_GERENTE("GERENTE"),
     ROLE_AUDITOR("AUDITOR"),
-    ROLE_ADMINISTRADOR("ADMINISTRADOR");
+    ROLE_ADMINISTRADOR("ADMINISTRADOR"),
+    ROLE_BOT("BOT");
     private final String codigo;
 
     RolesTypes(String codigo) {
