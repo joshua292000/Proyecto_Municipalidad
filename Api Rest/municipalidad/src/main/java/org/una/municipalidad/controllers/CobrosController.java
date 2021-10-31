@@ -62,17 +62,17 @@ public class CobrosController {
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
     }
 
-        @GetMapping("/findByCobrosFechaPagoBetween/{startDate}/{endDate}")
-        @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
-        @PreAuthorize("hasRole('ADMINISTRADOR')")
-        public ResponseEntity<?> findByCobrosFechaPagoBetween(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date endDate){
-            try{
-                Optional<List<CobrosDTO>> result = cobrosService.findByCobrosFechaPagoBetween(startDate,endDate);
-                return new ResponseEntity<>(result,HttpStatus.OK);
-            }catch (Exception e){
-                return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    @GetMapping("/findByCobrosFechaPagoBetween/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<?> findByCobrosFechaPagoBetween(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date endDate){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findByCobrosFechaPagoBetween(startDate,endDate);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT')")
     @GetMapping("/findByCobrosBetweenCedulaContribuyenteAndFecha/{cedulaContribuyente}/{startDate}/{endDate}")
     @ApiOperation(value = "Obtiene una lista de cobros cancelados de acuerdo a la cedula del contribuyente y dos fechas dadas", response = CobrosDTO.class, responseContainer = "CobrosDTO", tags = "Cobros")
@@ -85,18 +85,29 @@ public class CobrosController {
         }
     }
 
-        @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT')")
-        @GetMapping("/findCobrosByCedulaContribuyente/{cedulaContribuyente}")
-        @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
-        public ResponseEntity<?> findCobrosByCedulaContribuyente(@PathVariable (value ="cedulaContribuyente") String cedula){
-            try{
-                Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyente(cedula);
-                return new ResponseEntity<>(result,HttpStatus.OK);
-            }catch (Exception e){
-                return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT')")
+    @GetMapping("/findCobrosByCedulaContribuyente/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    public ResponseEntity<?> findCobrosByCedulaContribuyente(@PathVariable (value ="cedulaContribuyente") String cedula){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyente(cedula);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT')")
+    @GetMapping("/findCobrosByCedulaContribuyentePendientes/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de cobros pendientes", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    public ResponseEntity<?> findCobrosByCedulaContribuyentePendientes(@PathVariable (value ="cedulaContribuyente") String cedula){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyentePendientes(cedula);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")

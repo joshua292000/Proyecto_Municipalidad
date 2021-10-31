@@ -79,6 +79,14 @@ public class CobrosServiceImplementation implements CobrosService {
         return Optional.ofNullable(cobroCanceladoDTOList);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyentePendientes(String cedulaContribuyente) {
+        List<Cobros> cobroCanceladoList = cobrosRepository.findCobrosByCedulaContribuyentePendientes(cedulaContribuyente);
+        List<CobrosDTO> cobroCanceladoDTOList = MapperUtils.DtoListFromEntityList(cobroCanceladoList,CobrosDTO.class);
+        return Optional.ofNullable(cobroCanceladoDTOList);
+    }
+
 
     private CobrosDTO getSavedCobrosDTO(CobrosDTO cobrosDTO) {
         Cobros cobros = MapperUtils.EntityFromDto(cobrosDTO, Cobros.class);
