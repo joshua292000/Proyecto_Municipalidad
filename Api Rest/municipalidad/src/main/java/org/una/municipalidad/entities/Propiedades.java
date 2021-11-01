@@ -33,13 +33,13 @@ public class Propiedades implements Serializable {
     private String propiedadDireccion;
 
     @Column(name = "propiedad_geolocalizacion", length = 100)
-    private Date propiedadGeolocalizacion;
+    private String propiedadGeolocalizacion;
 
     @Column(name = "propiedad_area")
     private Long propiedadArea;
 
     @Column(name = "propiedad_plano", length = 100)
-    private Date propiedadPlano;
+    private String propiedadPlano;
 
     @Column(name = "propiedad_metros_frente")
     private Long propiedadAMetrosFrente;
@@ -57,7 +57,7 @@ public class Propiedades implements Serializable {
     private boolean PerteneceEstado;
 
     @Column(name = "propiedad_zona", length = 100)
-    private Date propiedadZona;
+    private String propiedadZona;
 
     @Column
     private boolean Estado;

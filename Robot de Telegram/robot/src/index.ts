@@ -5,7 +5,7 @@ import { Usuario} from "./usuario";
 import axios, { Axios } from "axios";
 import { consultas_service} from "./consultas_service";
 
-const bot = new Telegraf("2043955263:AAHWY_nmFKRY2MUR8V-h4t0PI8EaMO9toPY")
+const bot = new Telegraf("2089106692:AAEI-0CldTy34ADnl_H2krSA7QuqxPQm9G8")
 var token: Usuario;
 var consultasS=new consultas_service;
 
@@ -63,6 +63,9 @@ function consultas(consultaC:number,tokenC:string,parametroC:string,botC:Telegra
     break;
     case 7:
       consultasS.ListaCobros(tokenC,parametroC,bot,idC);
+    break;
+    case 8:
+      consultasS.CobrosPendientes(tokenC,parametroC,bot,idC);
     break;
   }
 }
@@ -135,14 +138,14 @@ bot.hears('Telefono',async ctx=>{
       const keyboard = Keyboard.make([
         ['Lista de cobros pagados'],
         ['Pagos realizados'],
-       // ['Formula bienes inmuebles'],
+        ['Pendientes'],
        // ['Formula locales de mercado'],
       //  ['Telefono']
       ])
      await ctx.reply('Seleccione una opcion', keyboard.reply())
      ctx.reply('Lista de cobros pagados:Obtiene una lista de los cobros pagados')
      ctx.reply('Pagos realizados: Obtiene una lista de los pagos realizados ultimamente')
-     //ctx.reply('Formula bienes inmuebles: Consulta la formula para calcular el monto de los bienes inmuebles')
+     ctx.reply('Pendientes: obtiene el total de pendientes')
      //ctx.reply('Formula locales de mercado: Consulta la formula para calcular el monto de los locales de mercado')
      //ctx.reply('Telefono: Consulta el teléfono de la municipalidad')
     });
@@ -160,6 +163,14 @@ bot.hears('Telefono',async ctx=>{
       bot.on('text', async(ctx)=>{
         var m=ctx.message.text;
         logginF(7,m,ctx.from.id);
+      })
+    })
+
+    bot.hears('Pendientes',async (cxt)=>{
+      cxt.reply('Digite su numero de cedula')
+      bot.on('text', async(ctx)=>{
+        var m=ctx.message.text;
+        logginF(8,m,ctx.from.id);
       })
     })
 

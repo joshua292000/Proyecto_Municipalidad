@@ -86,4 +86,23 @@ ListaCobros(token: string, parametro: string, bot: Telegraf,chat:number){
     console.log(err, err.response);
   });
 }
+
+CobrosPendientes(token: string, parametro: string, bot: Telegraf,chat:number){
+  axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyentePendientes/'+parametro, {headers: {    
+    Authorization: 'bearer ' + token,
+  }}).then(response => {
+    var suma = 0;
+    var Cobros = response.data as Array<Cobros>
+    var Mensaje = '';
+    for(let entry of Cobros){
+      suma=suma+entry.cobrosMonto;
+    }
+    Mensaje+=suma;
+    var cedula = response.data as Usuario;
+    bot.telegram.sendMessage(chat,Mensaje);
+  })
+  .catch(err => {
+    console.log(err, err.response);
+  });
+}
 }

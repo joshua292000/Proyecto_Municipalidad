@@ -14,7 +14,7 @@ public class PropiedadesDTO {
     private String propiedadCanton;
     private String propiedadDistrito;
     private String propiedadDireccion;
-    private Date propiedadGeolocalizacion;
+    private String propiedadGeolocalizacion;
     private Long propiedadArea;
     private Date propiedadPlano;
     private Long propiedadAMetrosFrente;
