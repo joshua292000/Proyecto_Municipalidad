@@ -110,11 +110,9 @@ Impuestos(token: string, parametro: string, bot: Telegraf,chat:number){
   axios.get('http://localhost:8089/contribuyentes/findByCedulaContribuyente/'+parametro, {headers: {    
     Authorization: 'bearer ' + token,
   }}).then(response => {
-    console.log("Parametros "+ parametro);
-    var suma = 0;
-    var Contribuyentes = response.data as Array<Contribuyentes>
+    var contribuyentes = response.data as Contribuyentes
     var Mensaje = '';
-    for(let entry of Contribuyentes){
+    /*for(let entry of contribuyentes){
       
       if(entry.ContribuyenteXLicencia !=null){
         console.log("Entre0");
@@ -142,10 +140,9 @@ Impuestos(token: string, parametro: string, bot: Telegraf,chat:number){
         'Fecha en la que se pago: ' +entry.Propiedad.propiedad_fecha_Registro+'\n';
         console.log("Entre  3");
       }
-    }
-    Mensaje+="Pendiente ₡"+suma+"";
-    var cedula = response.data as Usuario;
-    bot.telegram.sendMessage(chat,Mensaje);
+    }*/
+    //var cedula = response.data as Usuario;
+    bot.telegram.sendMessage(chat,contribuyentes.contribuyentes_licencias_comerciales.licenciacomercial.nombreComercio);
   })
   .catch(err => {
     console.log(err, err.response);

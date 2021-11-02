@@ -13,9 +13,9 @@ export interface Cobros{
 export interface Contribuyentes{
     cedulaContribuyente: string;
     nombreContribuyente: string;
-    ContribuyenteXLicencia: Contribuyentes_Licencias_Comerciales;
-    LocalesMercado:LocalesMercado;
-    Propiedad:Propiedades;
+    contribuyentes_licencias_comerciales: Contribuyentes_Licencias_Comerciales;
+    //LocalesMercado:LocalesMercado;
+   // Propiedad:Propiedades;
 }
 
 export interface TipoCobros{
@@ -32,7 +32,7 @@ export interface Licencias_Comerciales{
 export interface Contribuyentes_Licencias_Comerciales{
     porcentajeLicencia: number;
     contribuyente: Contribuyentes;
-    licenciacomercial2: Licencias_Comerciales;
+    licenciacomercial: Licencias_Comerciales;
 }
 
 export interface Contribuyentes_LocalesMercado{
