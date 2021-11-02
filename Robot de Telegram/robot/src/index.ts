@@ -67,6 +67,9 @@ function consultas(consultaC:number,tokenC:string,parametroC:string,botC:Telegra
     case 8:
       consultasS.CobrosPendientes(tokenC,parametroC,bot,idC);
     break;
+    case 9:
+      consultasS.Impuestos(tokenC,parametroC,bot,idC);
+    break;
   }
 }
 function inicio(){
@@ -139,14 +142,14 @@ bot.hears('Telefono',async ctx=>{
         ['Lista de cobros pagados'],
         ['Pagos realizados'],
         ['Pendientes'],
-       // ['Formula locales de mercado'],
+        ['Impuestos contribuyentes'],
       //  ['Telefono']
       ])
      await ctx.reply('Seleccione una opcion', keyboard.reply())
      ctx.reply('Lista de cobros pagados:Obtiene una lista de los cobros pagados')
      ctx.reply('Pagos realizados: Obtiene una lista de los pagos realizados ultimamente')
      ctx.reply('Pendientes: obtiene el total de pendientes')
-     //ctx.reply('Formula locales de mercado: Consulta la formula para calcular el monto de los locales de mercado')
+     ctx.reply('Impuestos contribuyentes: Consulta sobre los impuestos que posee un contribuyente')
      //ctx.reply('Telefono: Consulta el teléfono de la municipalidad')
     });
 
@@ -171,6 +174,14 @@ bot.hears('Telefono',async ctx=>{
       bot.on('text', async(ctx)=>{
         var m=ctx.message.text;
         logginF(8,m,ctx.from.id);
+      })
+    })
+
+    bot.hears('Impuestos contribuyentes',async (cxt)=>{
+      cxt.reply('Digite su numero de cedula')
+      bot.on('text', async(ctx)=>{
+        var m=ctx.message.text;
+        logginF(9,m,ctx.from.id);
       })
     })
 
