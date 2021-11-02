@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.Contribuyentes_Licencias_ComercialesDTO;
+import org.una.municipalidad.dto.Contribuyentes_Locales_MercadoDTO;
 import org.una.municipalidad.dto.Contribuyentes_PropiedadesDTO;
+import org.una.municipalidad.entities.Contribuyentes_Locales_Mercado;
 import org.una.municipalidad.entities.Contribuyentes_Propiedades;
 import org.una.municipalidad.repositories.Contribuyentes_PropiedadesRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +24,14 @@ public class Contribuyentes_PropiedadesServiceImplementation implements Contribu
     public Optional<Contribuyentes_PropiedadesDTO> findByPorcentajePropiedad(Long porcentajePropiedad) {
         Optional<Contribuyentes_Propiedades> contriPro = contribuyentes_propiedadesRepository.findByPorcentajePropiedad(porcentajePropiedad);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(contriPro, Contribuyentes_PropiedadesDTO.class));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<Contribuyentes_PropiedadesDTO>> findContribuyentes_PropiedadesByCedula(String cedulaContribuyente) {
+        List<Contribuyentes_Propiedades> contribuyenteslist = contribuyentes_propiedadesRepository.findContribuyentes_PropiedadesByCedula(cedulaContribuyente);
+        List<Contribuyentes_PropiedadesDTO> contribuyentesDTO = MapperUtils.DtoListFromEntityList(contribuyenteslist,Contribuyentes_PropiedadesDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
     }
 
     private Contribuyentes_PropiedadesDTO getSavedContribuyenteProDTO(Contribuyentes_PropiedadesDTO contProDTO) {

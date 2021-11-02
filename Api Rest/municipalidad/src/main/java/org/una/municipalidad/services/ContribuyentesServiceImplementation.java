@@ -3,8 +3,10 @@ package org.una.municipalidad.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.ParametrosDTO;
+import org.una.municipalidad.entities.Cobros;
 import org.una.municipalidad.entities.Contribuyentes;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.ContribuyentesRepository;
@@ -12,6 +14,7 @@ import org.una.municipalidad.utils.MapperUtils;
 
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ContribuyentesServiceImplementation implements ContribuyentesService{
@@ -45,6 +48,7 @@ public class ContribuyentesServiceImplementation implements ContribuyentesServic
         ContribuyentesDTO contribuyentesDTO = MapperUtils.DtoFromEntity(contribuyentes.get(),ContribuyentesDTO.class);
         return Optional.ofNullable(contribuyentesDTO);
     }
+
 
     @Override
     @Transactional

@@ -11,6 +11,6 @@ import org.una.municipalidad.entities.Locales_Mercado;
 @Builder
 public class Contribuyentes_Locales_MercadoDTO {
     private Long porcentajeLocales;
-    private Contribuyentes contribuyente;
-    private Locales_Mercado localesmercado;
+    private ContribuyentesDTO contribuyente;
+    private Contribuyentes_Locales_MercadoDTO localesmercado;
 }

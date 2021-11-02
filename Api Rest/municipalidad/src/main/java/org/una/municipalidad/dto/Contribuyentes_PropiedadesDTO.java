@@ -11,6 +11,6 @@ import org.una.municipalidad.entities.Propiedades;
 @Builder
 public class Contribuyentes_PropiedadesDTO {
     private Long porcentajePropiedad;
-    private Contribuyentes contribuyente;
-    private Propiedades propiedades;
+    private ContribuyentesDTO contribuyente;
+    private Contribuyentes_PropiedadesDTO propiedades;
 }

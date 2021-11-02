@@ -1,7 +1,10 @@
 package org.una.municipalidad.services;
 
+import org.springframework.data.repository.query.Param;
 import org.una.municipalidad.dto.ContribuyentesDTO;
+import org.una.municipalidad.entities.Contribuyentes;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ContribuyentesService {
