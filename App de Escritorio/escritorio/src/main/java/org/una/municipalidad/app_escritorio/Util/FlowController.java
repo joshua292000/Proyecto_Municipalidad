@@ -62,7 +62,7 @@ public class FlowController {
             synchronized (FlowController.class) {
                 if (loader == null) {
                     try {
-                        loader = new FXMLLoader(Inicio.class.getResource("/org/una/inventario/app_escritorio/view/" + name + ".fxml"), this.idioma);
+                        loader = new FXMLLoader(Inicio.class.getResource("/org/una/municipalidad/app_escritorio/views/" + name + ".fxml"), this.idioma);
                         loader.load();
                         loaders.put(name, loader);
                     } catch (Exception ex) {

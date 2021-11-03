@@ -30,7 +30,7 @@ public class AutenticacionService {
                 .append("\"cedula\":\"" )
                 .append(cedula)
                 .append("\",")
-                .append("\"password\":\"" )
+                .append("\"clave\":\"" )
                 .append(password)
                 .append("\"")
                 .append("}").toString();
@@ -55,7 +55,7 @@ public class AutenticacionService {
             System.out.println("Contraseña correcta");
             System.out.println(response.body());
             AuthenticationResponse authenticationResponse = mapper.readValue(response.body(), AuthenticationResponse.class);
-            AppContext.getInstance().set("Rol", authenticationResponse);
+            AppContext.getInstance().set("roles", authenticationResponse.getRolDTO().getNombreRol());
 
             return authenticationResponse;
         }

@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class AuthenticationResponse {
     private String jwt;
-   // private UsuarioDTO usuarioDTO;
-    //private RolesDTO rolDTO;
+    private UsuariosDTO usuarioDTO;
+    private RolesDTO rolDTO;
 }

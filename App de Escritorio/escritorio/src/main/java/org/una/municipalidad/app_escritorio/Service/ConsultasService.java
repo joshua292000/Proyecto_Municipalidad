@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ConsultasService {
-    private static final HttpClient httpClient = HttpClient.newBuilder()
+   /* private static final HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
@@ -197,5 +197,5 @@ public class ConsultasService {
         return activos;
 
     }
-
+*/
 }

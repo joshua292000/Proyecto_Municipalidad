@@ -16,7 +16,7 @@ module org.una.municipalidad.app_escritorio {
     opens org.una.municipalidad.app_escritorio to javafx.fxml;
     opens org.una.municipalidad.app_escritorio.Controller to javafx.fxml;
     exports org.una.municipalidad.app_escritorio;
-    exports org.una.inventario.app_escritorio.Controller;
-    opens org.una.municipalidad.app_escritorio to javafx.fxml;
-    exports org.una.municipalidad.app_escritorio;
+    exports org.una.municipalidad.app_escritorio.Controller;
+    exports org.una.municipalidad.app_escritorio.DTO to com.fasterxml.jackson.databind;
+    opens org.una.municipalidad.app_escritorio.DTO to javafx.base;
 }

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
 import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import java.io.IOException;
@@ -32,8 +33,13 @@ public class LogginController extends Controller implements Initializable {
       AuthenticationResponse login = AutenticacionService.Autenticacion(txtCedula.getText().toString(), txtContrasenia.getText().toString());
 
         if(login != null){
-            FlowController.getInstance().goViewInWindow("Principalview");
-
+            System.out.println("el rol es " + AppContext.getInstance().get("roles"));
+            if(AppContext.getInstance().get("roles").equals("ROLE_GESTOR")){
+                FlowController.getInstance().goViewInWindow("Principal");
+            }
+            else{
+                System.out.println("No joda");
+            }
         }
     }
 }
