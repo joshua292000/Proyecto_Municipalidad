@@ -1,0 +1,18 @@
+package org.una.municipalidad.app_escritorio.DTO;
+
+import lombok.*;
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
+public class BitacorasDTO {
+    private Long id;
+    private String bitacoraTabla;
+    private String bitacoraDescripcion;
+    private String bitacoraUsuario;
+    private Date bitacoraFecha;
+    private UsuariosDTO usuario;
+}
