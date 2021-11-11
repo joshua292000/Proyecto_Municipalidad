@@ -56,7 +56,7 @@ public class AutenticacionService {
             System.out.println(response.body());
             AuthenticationResponse authenticationResponse = mapper.readValue(response.body(), AuthenticationResponse.class);
             AppContext.getInstance().set("roles", authenticationResponse.getRolDTO().getNombreRol());
-
+            AppContext.getInstance().set("rol", authenticationResponse);
             return authenticationResponse;
         }
         return null;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.GerenteViewController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <HBox prefHeight="16.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <VBox prefHeight="384.0" prefWidth="55.0" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <VBox prefHeight="384.0" prefWidth="90.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton />
+            <JFXButton fx:id="BtnAutorizar" onAction="#OnActionBtnAutorizar" prefHeight="89.0" prefWidth="90.0" text="Autorizar Gestores" textAlignment="CENTER" wrapText="true" />
+            <JFXButton />
+            <JFXButton />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

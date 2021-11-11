@@ -23,6 +23,14 @@ public class ContribuyentesServiceImplementation implements ContribuyentesServic
 
     @Override
     @Transactional(readOnly = true)
+    public Optional<List<ContribuyentesDTO>> findAll() {
+        List<ContribuyentesDTO> contribuyentesDTOList = MapperUtils.DtoListFromEntityList(contribuyentesRepository.findAll(), ContribuyentesDTO.class);
+        if (contribuyentesDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(contribuyentesDTOList);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<ContribuyentesDTO> findById(Long id) {
         Optional<Contribuyentes> contribuyente = contribuyentesRepository.findById(id);
         if (contribuyente.isEmpty()) throw new NotFoundInformationException();

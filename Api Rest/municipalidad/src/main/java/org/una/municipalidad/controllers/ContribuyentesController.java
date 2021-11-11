@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.entities.Contribuyentes;
+import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.services.ContribuyentesService;
 import org.una.municipalidad.utils.MapperUtils;
 
@@ -25,6 +26,14 @@ public class ContribuyentesController {
     @Autowired
     private ContribuyentesService contribuyentesService;
 
+    @GetMapping()
+    @ApiOperation(value = "Obtiene una lista de todos los contribuyentes", response = ContribuyentesDTO.class, responseContainer = "List", tags = "Contribuyentes")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<ContribuyentesDTO>> result = contribuyentesService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un contribuyente a partir de su id", response = ContribuyentesDTO.class, tags = "Contribuyentes")
     @PreAuthorize("hasRole('GESTOR')")

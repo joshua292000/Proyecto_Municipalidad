@@ -16,13 +16,13 @@ public class PropiedadesDTO {
     private String propiedadDireccion;
     private String propiedadGeolocalizacion;
     private Long propiedadArea;
-    private Date propiedadPlano;
+    private String propiedadPlano;
     private Long propiedadAMetrosFrente;
     private Long propiedadValorTerreno;
     private Long propiedadValorConstruccion;
     private Long propiedadOtrosValores;
     private boolean PerteneceEstado;
-    private Date propiedadZona;
+    private String propiedadZona;
     private boolean Estado;
     private Date propiedad_fecha_Registro;
     private Date propiedad_ultima_Actualizacion;
