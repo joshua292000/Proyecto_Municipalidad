@@ -23,6 +23,7 @@ public class PropiedadesController {
 
     @GetMapping()
     @ApiOperation(value = "Obtiene una lista de todas las propiedades", response = PropiedadesDTO.class, responseContainer = "List", tags = "Propiedades")
+    @PreAuthorize("hasRole('AUDITOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<PropiedadesDTO>> result = propiedadesService.findAll();
@@ -31,7 +32,7 @@ public class PropiedadesController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su id", response = PropiedadesDTO.class, tags = "Propiedades")
-    @PreAuthorize("hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<PropiedadesDTO> propiedadesFound = propiedadesService.findById(id);
         return new ResponseEntity<>(propiedadesFound, HttpStatus.OK);

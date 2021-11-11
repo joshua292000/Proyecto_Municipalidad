@@ -7,11 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="municipalidad" />
         <module name="escritorio" />
+        <module name="municipalidad" />
+        <module name="APP_escritorio" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="APP_escritorio" target="11" />
       <module name="escritorio" target="11" />
       <module name="municipalidad" target="11" />
       <module name="robot" target="11" />

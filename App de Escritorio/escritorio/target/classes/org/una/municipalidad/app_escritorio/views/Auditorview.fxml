@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="542.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AuditorController">
+   <children>
+      <BorderPane prefHeight="768.0" prefWidth="768.0">
+         <left>
+            <VBox prefHeight="768.0" prefWidth="132.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imgPerfil" fitHeight="100.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" translateX="16.0">
+                     <image>
+                        <Image url="@../resources/avatar-default-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblUsuario" text="Usuario gestor" translateX="20.0">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblListas" text="Listas de información:" translateX="2.0" translateY="14.0">
+                     <font>
+                        <Font name="Times New Roman" size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnListaCobros" buttonType="RAISED" onAction="#OnActionbtnListaCobros" prefHeight="25.0" prefWidth="126.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text="Cobros Realizados" translateX="3.0" translateY="24.0">
+                     <font>
+                        <Font name="Times New Roman" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnListaCobros1" buttonType="RAISED" prefHeight="25.0" prefWidth="126.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text="Cobros Realizados" translateX="3.0" translateY="42.0">
+                     <font>
+                        <Font name="Times New Roman" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
