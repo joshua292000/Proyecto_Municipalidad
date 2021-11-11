@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="BorderPane" prefHeight="667.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AutorizarViewController">
+   <center>
+      <VBox prefHeight="593.0" prefWidth="1033.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <HBox prefHeight="35.0" prefWidth="882.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="MenuBar">
+               <menus>
+                  <Menu mnemonicParsing="false" text="Cobros">
+                     <items>
+                        <MenuItem fx:id="MenuCobros" mnemonicParsing="false" onAction="#OnActionMenuCobros" text="Mostrar datos" />
+                     </items></Menu>
+                  <Menu mnemonicParsing="false" text="Informacion Contribuyentes">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Contribuyentes">
+                          <items>
+                            <MenuItem fx:id="MenuContri" mnemonicParsing="false" onAction="#OnActionMenuContri" text="Mostrar datos" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Por Local de mercado">
+                           <items>
+                              <MenuItem fx:id="MenuContriLocal" mnemonicParsing="false" onAction="#OnActionMenuContriLocal" text="Mostrar datos" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Por Propiedad">
+                           <items>
+                              <MenuItem fx:id="MenuContriPropiedad" mnemonicParsing="false" onAction="#OnActionMenuContriPropiedad" text="Mostrar datos" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Por Licencia Comercial">
+                           <items>
+                              <MenuItem fx:id="MenuContriLicencia" mnemonicParsing="false" onAction="#OnActionMenuContriLicencia" text="Mostrar datos" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Licencias Comerciales">
+                     <items>
+                        <MenuItem fx:id="MenuLicen" mnemonicParsing="false" onAction="#OnActionMenuLicen" text="Mostrar datos" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Propiedades">
+                     <items>
+                        <MenuItem fx:id="MenuPropiedades" mnemonicParsing="false" onAction="#OnActionMenuPropiedades" text="Mostrar datos" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Locales de Mercado">
+                     <items>
+                        <MenuItem fx:id="MenuLocales" mnemonicParsing="false" onAction="#OnActionMenuLocales" text="Mostrar datos" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

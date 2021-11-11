@@ -52,7 +52,7 @@ public abstract class Controller {
         try {
             root = FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/"+ ui +".fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LogginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ((VBox) border.getCenter()).getChildren().clear();
         ((VBox) border.getCenter()).getChildren().add(root);

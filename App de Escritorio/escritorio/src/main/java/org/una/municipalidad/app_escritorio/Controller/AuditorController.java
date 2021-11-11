@@ -4,6 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
 import org.una.municipalidad.app_escritorio.DTO.RolesDTO;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
@@ -13,6 +16,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AuditorController extends Controller implements Initializable {
+
+    public BorderPane BorderPaneFondo;
+    public VBox vboxBotones;
+    public StackPane stackPane;
+    public VBox vboxFondo;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -25,6 +33,21 @@ public class AuditorController extends Controller implements Initializable {
     }
 
     public void OnActionbtnListaCobros(ActionEvent actionEvent) {
-        FlowController.getInstance().goView("ImprimirCview");
+        loadUI("CobrosRealizadosView",BorderPaneFondo);
+    }
+
+    public void OnActionbtnMovimientosRealizados(ActionEvent actionEvent) {
+    }
+
+    public void OnActionbtnTodasDeclaraciones(ActionEvent actionEvent) {
+    }
+
+    public void OnActionbtnTodasLicenciasComerciales(ActionEvent actionEvent) {
+    }
+
+    public void OnActionbtnTodasPropiedades(ActionEvent actionEvent) {
+    }
+
+    public void OnActionbtnTodosRoles(ActionEvent actionEvent) {
     }
 }
