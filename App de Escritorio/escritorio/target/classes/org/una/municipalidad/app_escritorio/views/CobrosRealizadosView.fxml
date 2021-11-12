@@ -9,10 +9,14 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.CobrosRealizadosController">
    <children>
-      <TableView fx:id="Tview_CobrosLista" layoutX="69.0" layoutY="29.0" prefHeight="291.0" prefWidth="482.0">
+      <TableView fx:id="Tview_CobrosLista" layoutX="-20.0" prefHeight="400.0" prefWidth="620.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="tbcId" prefWidth="75.0" text="Id" />
+          <TableColumn prefWidth="75.0" text="estado" />
+            <TableColumn prefWidth="150.0" text="Fecha de creación" />
+            <TableColumn minWidth="0.0" prefWidth="90.0" text="fecha pago" />
+            <TableColumn prefWidth="75.0" text="fecha de vencimiento" />
+            <TableColumn prefWidth="75.0" text="monto" />
         </columns>
       </TableView>
    </children>

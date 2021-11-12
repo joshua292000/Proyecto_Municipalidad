@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,6 +16,10 @@ import java.net.URL;
 import java.util.*;
 
 public class ListadoViewController extends Controller implements Initializable {
+
+    @FXML
+    private ScrollPane ScPane;
+
     @FXML
     private TableView Tvdatos;
 
@@ -53,6 +58,23 @@ public class ListadoViewController extends Controller implements Initializable {
 
     @FXML
     private TableColumn Col10;
+
+    @FXML
+    private TableColumn Col13;
+
+    @FXML
+    private TableColumn Col14;
+
+    @FXML
+    private TableColumn Col15;
+
+    @FXML
+    private TableColumn Col16;
+
+    @FXML
+    private TableColumn Col17;
+
+
 
     private ObservableList<CobrosDTO> options = FXCollections.observableArrayList();
     private ObservableList<ContribuyentesDTO> optionscont = FXCollections.observableArrayList();

@@ -14,7 +14,7 @@
    <children>
       <BorderPane fx:id="BorderPaneFondo" prefHeight="768.0" prefWidth="768.0">
          <left>
-            <VBox fx:id="vboxBotones" prefHeight="768.0" prefWidth="155.0" style="-fx-background-color: #bdcfe0;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="768.0" prefWidth="155.0" style="-fx-background-color: #bdcfe0;" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="imgPerfil" fitHeight="100.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" translateX="26.0">
                      <image>
@@ -70,7 +70,11 @@
             </VBox>
          </left>
          <center>
-            <VBox fx:id="vboxFondo" prefHeight="768.0" prefWidth="592.0" BorderPane.alignment="CENTER" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="768.0" prefWidth="592.0" />
+               </children>
+            </StackPane>
          </center>
       </BorderPane>
    </children>
