@@ -44,7 +44,7 @@ public class LogginController extends Controller implements Initializable {
                 //FlowController.getInstance().goViewInWindow("Principal");
 
             }else if(AppContext.getInstance().get("roles").equals("ROLE_AUDITOR")){
-                //FlowController.getInstance().goViewInWindow("Principal");
+                FlowController.getInstance().goViewInWindow("AuditorView");
             }
             else{
                 System.out.println("No joda");

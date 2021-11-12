@@ -18,8 +18,6 @@ import java.util.ResourceBundle;
 public class AuditorController extends Controller implements Initializable {
 
     public BorderPane BorderPaneFondo;
-    public VBox vboxBotones;
-    public StackPane stackPane;
     public VBox vboxFondo;
 
     @Override
@@ -37,6 +35,7 @@ public class AuditorController extends Controller implements Initializable {
     }
 
     public void OnActionbtnMovimientosRealizados(ActionEvent actionEvent) {
+        loadUI("MovimientosRealizadosView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasDeclaraciones(ActionEvent actionEvent) {
