@@ -6,25 +6,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="BorderPane" prefHeight="667.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AutorizarViewController">
+<BorderPane fx:id="BorderPane" maxHeight="1.7976931348623157E308" prefHeight="682.0" prefWidth="1002.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AutorizarViewController">
    <center>
-      <VBox prefHeight="593.0" prefWidth="1033.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="647.0" prefWidth="1019.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <HBox prefHeight="35.0" prefWidth="882.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="882.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar fx:id="MenuBar">
                <menus>
                   <Menu mnemonicParsing="false" text="Cobros">
                      <items>
                         <MenuItem fx:id="MenuCobros" mnemonicParsing="false" onAction="#OnActionMenuCobros" text="Mostrar datos" />
-                     </items></Menu>
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Informacion Contribuyentes">
                      <items>
                         <Menu mnemonicParsing="false" text="Contribuyentes">
-                          <items>
-                            <MenuItem fx:id="MenuContri" mnemonicParsing="false" onAction="#OnActionMenuContri" text="Mostrar datos" />
-                          </items>
+                           <items>
+                              <MenuItem fx:id="MenuContri" mnemonicParsing="false" onAction="#OnActionMenuContri" text="Mostrar datos" />
+                           </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Por Local de mercado">
                            <items>
