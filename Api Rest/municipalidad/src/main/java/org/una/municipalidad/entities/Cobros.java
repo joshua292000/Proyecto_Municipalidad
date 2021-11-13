@@ -33,8 +33,8 @@ public class Cobros {
     @Setter(AccessLevel.NONE)
     private Date cobrosFechaVencimiento;
 
-    @Column
-    private boolean Estado;
+    @Column(name = "estado", length = 100)
+    private String estado;
 
     @Column(name = "cobros_fecha_pago", updatable = false)
     @Temporal(TemporalType.DATE)
@@ -66,7 +66,6 @@ public class Cobros {
 
     @PrePersist
     public void prePersist() {
-        Estado=true;
         cobrosFechaCreacion = new Date();
         cobrosFechaVencimiento = new Date();
         cobrosFechaPago = new Date();

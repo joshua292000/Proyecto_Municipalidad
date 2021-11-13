@@ -12,12 +12,12 @@ import java.util.Date;
 
 public class LocalesMercadoDTO {
     private Long id;
-    private String nombreComercio;
+    private String nombreLocal;
     private String ubicacionLocal;
-    private String correoComercio;
-    private Long telefonoComercio;
+    private String correoLocal;
+    private Long telefonoLocal;
     private Long Monto_Alquiler_Local;
     private Date fechaRegistrolocal;
     private Date ultima_Actualizacionlocal;
-    private boolean estado;
+    private String estado;
 }

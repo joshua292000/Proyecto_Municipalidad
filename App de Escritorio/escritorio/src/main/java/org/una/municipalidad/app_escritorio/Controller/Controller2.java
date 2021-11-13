@@ -24,9 +24,6 @@ public class Controller2 extends Controller implements Initializable {
     private Button btnOverview;
 
     @FXML
-    private Button btnOrders;
-
-    @FXML
     private Button btnCustomers;
 
     @FXML
@@ -45,17 +42,25 @@ public class Controller2 extends Controller implements Initializable {
     @FXML
     private Pane pnlOverview;
 
+    @FXML
+    private VBox vbxMenuIzq;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-       // }
-
+        vbxMenuIzq.setPrefWidth(20);
+        /*btnOverview.setVisible(false);
+        btnCustomers.setVisible(false);
+        btnMenus.setVisible(false);
+        btnPackages.setVisible(false);
+        btnSettings.setVisible(false);
+        btnSignout.setVisible(false);*/
     }
 
 
     public void handleClicks(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnCustomers) {
+
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
             System.out.println("ober");
@@ -67,9 +72,17 @@ public class Controller2 extends Controller implements Initializable {
                 e.printStackTrace();
             }
         }
-        if (actionEvent.getSource() == btnMenus) {
-           // pnlMenus.setStyle("-fx-background-color : #53639F");
-            //pnlMenus.toFront();
+        if (actionEvent.getSource() == btnPackages) {
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            System.out.println("ober");
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarLicencia.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (actionEvent.getSource() == btnOverview) {
             pnlOverview.setStyle("-fx-background-color : #02030A");
@@ -83,15 +96,47 @@ public class Controller2 extends Controller implements Initializable {
                 e.printStackTrace();
             }
         }
-        if(actionEvent.getSource()==btnOrders)
-        {
-         //   pnlOrders.setStyle("-fx-background-color : #464F67");
-           // pnlOrders.toFront();
+
+        if (actionEvent.getSource() == btnSettings) {
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            System.out.println("ober");
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarLocalMercado.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        if (actionEvent.getSource() == btnMenus) {
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            System.out.println("ober");
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarPropiedad.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @Override
     public void initialize() {
 
+    }
+
+
+    public void OnMouseEnteredIzq(MouseEvent mouseEvent) {
+        vbxMenuIzq.setPrefWidth(256);
+
+    }
+
+    public void OnMouseExitedIzq(MouseEvent mouseEvent) {
+        vbxMenuIzq.setPrefWidth(20);
     }
 }

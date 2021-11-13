@@ -16,5 +16,5 @@ public class FacturasDTO {
     private String medioDePago;
     private Long Monto_Pago;
     private Long Vuelto;
-    private boolean estado;
+    private String estado;
 }

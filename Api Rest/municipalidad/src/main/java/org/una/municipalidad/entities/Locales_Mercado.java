@@ -33,8 +33,8 @@ public class Locales_Mercado implements Serializable {
     @Column(name = "correo_local", length = 100)
     private String correoLocal;
 
-    @Column
-    private boolean estado;
+    @Column(name = "estado", length = 100)
+    private String estado;
 
     @Column(name = "Monto_Alquiler_Local")
     private Long Monto_Alquiler_Local;
@@ -59,7 +59,6 @@ public class Locales_Mercado implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        estado=true;
         fechaRegistrolocal = new Date();
         ultima_Actualizacionlocal = new Date();
     }

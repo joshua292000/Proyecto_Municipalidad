@@ -53,15 +53,16 @@ public class Licencias_Comerciales implements Serializable{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciacomercial")
     private List<Contribuyentes_Licencias_Comerciales> contribuyentes_licencias_comerciales = new ArrayList<>();
 
-    @Column
-    private boolean estado;
+
+    @Column(name = "estado", length = 100)
+    private String estado;
 
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
-        estado=true;
+
         fechaRegistrocomercio = new Date();
         ultima_Actualizacioncomercio = new Date();
     }

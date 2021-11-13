@@ -35,8 +35,8 @@ public class Facturas implements Serializable {
     @Column(name = "Vuelto")
     private Long Vuelto;
 
-    @Column
-    private boolean estado;
+    @Column(name = "estado", length = 100)
+    private String estado;
 
     private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,6 @@ public class Facturas implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        estado=true;
         fechaPago = new Date();
 
     }

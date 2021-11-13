@@ -59,8 +59,8 @@ public class Propiedades implements Serializable {
     @Column(name = "propiedad_zona", length = 100)
     private String propiedadZona;
 
-    @Column
-    private boolean Estado;
+    @Column(name = "estado", length = 100)
+    private String estado;
 
     @Column(name = "propiedad_fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
@@ -83,7 +83,6 @@ public class Propiedades implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        Estado=true;
         propiedad_fecha_Registro = new Date();
         propiedad_ultima_Actualizacion = new Date();
     }

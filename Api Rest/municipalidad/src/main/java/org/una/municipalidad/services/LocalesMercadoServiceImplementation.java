@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.FacturasDTO;
+import org.una.municipalidad.dto.LicenciasComercialesDTO;
 import org.una.municipalidad.dto.LocalesMercadoDTO;
 import org.una.municipalidad.entities.Contribuyentes;
 import org.una.municipalidad.entities.Facturas;
+import org.una.municipalidad.entities.Licencias_Comerciales;
 import org.una.municipalidad.entities.Locales_Mercado;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.LocalesMercadoRepository;
@@ -36,6 +38,11 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
         Optional<Locales_Mercado> locales_mercado = localesMercadoRepository.findByNombreLocal(nombreLocal);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(locales_mercado, LocalesMercadoDTO.class));
     }
+    private LocalesMercadoDTO getSavedLocalesMercadoDTO(LocalesMercadoDTO localesMercadoDTO) {
+        Locales_Mercado locales_mercado = MapperUtils.EntityFromDto(localesMercadoDTO, Locales_Mercado.class);
+        Locales_Mercado locales_mercadoCreated = localesMercadoRepository.save(locales_mercado );
+        return MapperUtils.DtoFromEntity(locales_mercadoCreated, LocalesMercadoDTO.class);
+    }
 
     @Override
     public Optional<LocalesMercadoDTO> create(LocalesMercadoDTO localesMercadoDTO) {
@@ -47,9 +54,5 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
         return Optional.ofNullable(getSavedLocalesMercadoDTO(localesMercadoDTO));
     }
 
-    private LocalesMercadoDTO getSavedLocalesMercadoDTO(LocalesMercadoDTO localesMercadoDTO) {
-        Locales_Mercado locales_mercado = MapperUtils.EntityFromDto(localesMercadoDTO, Locales_Mercado.class);
-        Locales_Mercado locales_mercadoCreated = localesMercadoRepository.save(locales_mercado );
-        return MapperUtils.DtoFromEntity(locales_mercadoCreated, LocalesMercadoDTO.class);
-    }
+
 }

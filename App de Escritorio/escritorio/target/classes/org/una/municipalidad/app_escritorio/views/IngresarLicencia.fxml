@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="769.0" spacing="80.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.IngresarLicenciaController">
+    <children>
+        <Pane fx:id="Panefondo" prefHeight="318.0" prefWidth="754.0">
+            <children>
+                <TextField fx:id="txtCodigo" layoutX="46.0" layoutY="145.0" prefHeight="39.0" prefWidth="294.0" promptText="Codigo del comercio" />
+                <TextField fx:id="txtCorreo" layoutX="41.0" layoutY="251.0" prefHeight="39.0" prefWidth="294.0" promptText="Correo del comercio" translateX="5.0" />
+                <TextField fx:id="txtDistrito" layoutX="46.0" layoutY="349.0" prefHeight="39.0" prefWidth="294.0" promptText="Distrito" />
+                <Button fx:id="btnInsertar" layoutX="175.0" layoutY="464.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="57.0" prefWidth="414.0" style="-fx-background-color: green;" text="Guardar Licencia" textFill="#f8f4f4">
+                    <font>
+                        <Font name="Elephant" size="27.0" />
+                    </font>
+                </Button>
+                <Label layoutX="146.0" layoutY="14.0" text="Ingresar Licencia Comercial">
+                    <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop color="#b92222" />
+                                <Stop color="WHITE" offset="1.0" />
+                            </stops>
+                        </LinearGradient>
+                    </textFill>
+                    <font>
+                        <Font name="Elephant" size="33.0" />
+                    </font>
+                </Label>
+            <TextField fx:id="txtNombre" layoutX="449.0" layoutY="251.0" prefHeight="39.0" prefWidth="284.0" promptText="Nombre del comercio" />
+            <TextField fx:id="txtTelefono" layoutX="444.0" layoutY="145.0" prefHeight="39.0" prefWidth="284.0" promptText="Telefono del comercio" />
+            <Label layoutX="48.0" layoutY="97.0" text="Codigo del comercio" textFill="#21ed69">
+               <font>
+                  <Font name="Elephant" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="48.0" layoutY="203.0" text="Correo del comercio" textFill="#21ed69">
+               <font>
+                  <Font name="Elephant" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="48.0" layoutY="309.0" text="Distrito" textFill="#21ed69">
+               <font>
+                  <Font name="Elephant" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="444.0" layoutY="97.0" text="Telefono del comercio" textFill="#21ed69">
+               <font>
+                  <Font name="Elephant" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="444.0" layoutY="203.0" text="Nombre del comercio" textFill="#21ed69">
+               <font>
+                  <Font name="Elephant" size="22.0" />
+               </font>
+            </Label>
+            </children>
+        </Pane>
+    </children>
+    <effect>
+        <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+    </effect>
+</HBox>

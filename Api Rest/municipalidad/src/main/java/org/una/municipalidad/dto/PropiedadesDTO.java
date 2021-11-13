@@ -23,7 +23,7 @@ public class PropiedadesDTO {
     private Long propiedadOtrosValores;
     private boolean PerteneceEstado;
     private String propiedadZona;
-    private boolean Estado;
+    private String estado;
     private Date propiedad_fecha_Registro;
     private Date propiedad_ultima_Actualizacion;
 }
