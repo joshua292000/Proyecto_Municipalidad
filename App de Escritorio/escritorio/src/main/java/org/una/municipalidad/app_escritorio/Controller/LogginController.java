@@ -35,7 +35,7 @@ public class LogginController extends Controller implements Initializable {
         if(login != null){
             System.out.println("el rol es " + AppContext.getInstance().get("roles"));
             if(AppContext.getInstance().get("roles").equals("ROLE_GESTOR")){
-                FlowController.getInstance().goViewInWindow("Home");
+                FlowController.getInstance().goViewInWindow("GerentesView");
 
             }else if(AppContext.getInstance().get("roles").equals("ROLE_GERENTE")){
                 //FlowController.getInstance().goViewInWindow("Principal");
@@ -44,7 +44,7 @@ public class LogginController extends Controller implements Initializable {
                 //FlowController.getInstance().goViewInWindow("Principal");
 
             }else if(AppContext.getInstance().get("roles").equals("ROLE_AUDITOR")){
-                //FlowController.getInstance().goViewInWindow("Principal");
+                FlowController.getInstance().goViewInWindow("AuditorView");
             }
             else{
                 System.out.println("No joda");

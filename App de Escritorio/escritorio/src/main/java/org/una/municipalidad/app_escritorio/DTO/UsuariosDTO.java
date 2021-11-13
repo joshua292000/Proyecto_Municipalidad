@@ -2,12 +2,14 @@ package org.una.municipalidad.app_escritorio.DTO;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class UsuariosDTO {
+public class UsuariosDTO{
     private Long id;
     private String nombreUsuario;
     private String claveEncriptado;

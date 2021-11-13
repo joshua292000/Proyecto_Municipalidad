@@ -74,8 +74,6 @@ public class ListadoViewController extends Controller implements Initializable {
     @FXML
     private TableColumn Col17;
 
-
-
     private ObservableList<CobrosDTO> options = FXCollections.observableArrayList();
     private ObservableList<ContribuyentesDTO> optionscont = FXCollections.observableArrayList();
     private ObservableList<Contribuyentes_Locales_MercadoDTO> optionscontLoc = FXCollections.observableArrayList();
@@ -172,16 +170,16 @@ public class ListadoViewController extends Controller implements Initializable {
                         optionsPro.add(new PropiedadesDTO(pro.getPropiedades_id(),pro.getPropiedadProvincia(),pro.getPropiedadCanton(),pro.getPropiedadDistrito(),pro.getPropiedadDireccion(),pro.getPropiedadGeolocalizacion(),pro.getPropiedadArea(),pro.getPropiedadPlano(),pro.getPropiedadAMetrosFrente(),pro.getPropiedadValorTerreno(),pro.getPropiedadValorConstruccion(),pro.getPropiedadOtrosValores(),pro.isPerteneceEstado(),pro.getPropiedadZona(),pro.isEstado(),pro.getPropiedad_fecha_Registro(),pro.getPropiedad_fecha_Registro()));
                     }
                     //Collection.sort(options);
-                    this.Tvdatos.setItems(optionscont);
+                    this.Tvdatos.setItems(optionsPro);
                 }
-                LlenarTablaContr();
+                LlenarTablaPro();
                 break;
             }
             case 8: {
-                List<ContribuyentesDTO> contri= ConsultasServiceGerente.obtenerTodoContribuyente();
-                if(contri!=null){
-                    for(ContribuyentesDTO contribu:contri){
-                        optionscont.add(new ContribuyentesDTO(contribu.getId(),contribu.getNombreContribuyente(),contribu.getApellidoContribuyente(),contribu.getCedulaContribuyente()));
+                List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocales();
+                if(local!=null){
+                    for(LocalesMercadoDTO loc:local){
+                        optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreComercio(),loc.getUbicacionLocal(),loc.getCorreoComercio(),loc.getTelefonoComercio(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.isEstado()));
                     }
                     //Collection.sort(options);
                     this.Tvdatos.setItems(optionscont);
@@ -223,6 +221,11 @@ public class ListadoViewController extends Controller implements Initializable {
         Col10.setText("tipocobros");
         Col11.setText("localesmercado");
         Col12.setText("propiedades");
+        Col13.setVisible(false);
+        Col14.setVisible(false);
+        Col15.setVisible(false);
+        Col16.setVisible(false);
+        Col17.setVisible(false);
         this.Tvdatos.setItems(options);
     }
     public void LlenarTablaContr(){
@@ -242,6 +245,11 @@ public class ListadoViewController extends Controller implements Initializable {
         Col10.setVisible(false);
         Col11.setVisible(false);
         Col12.setVisible(false);
+        Col13.setVisible(false);
+        Col14.setVisible(false);
+        Col15.setVisible(false);
+        Col16.setVisible(false);
+        Col17.setVisible(false);
         this.Tvdatos.setItems(optionscont);
     }
     public void LlenarTablaLic(){
@@ -266,24 +274,49 @@ public class ListadoViewController extends Controller implements Initializable {
         Col10.setVisible(false);
         Col11.setVisible(false);
         Col12.setVisible(false);
+        Col13.setVisible(false);
+        Col14.setVisible(false);
+        Col15.setVisible(false);
+        Col16.setVisible(false);
+        Col17.setVisible(false);
         this.Tvdatos.setItems(optionsLic);
     }
 
-    /*private Long propiedades_id;
-    private String propiedadProvincia;
-    private String propiedadCanton;
-    private String propiedadDistrito;
-    private String propiedadDireccion;
-    private String propiedadGeolocalizacion;
-    private Long propiedadArea;
-    private String propiedadPlano;
-    private Long propiedadAMetrosFrente;
-    private Long propiedadValorTerreno;
-    private Long propiedadValorConstruccion;
-    private Long propiedadOtrosValores;
-    private boolean PerteneceEstado;
-    private String propiedadZona;
-    private boolean Estado;
-    private Date propiedad_fecha_Registro;
-    private Date propiedad_ultima_Actualizacion;*/
+    public void LlenarTablaPro(){
+        this.Col1.setCellValueFactory(new PropertyValueFactory("propiedades_id"));
+        this.Col2.setCellValueFactory(new PropertyValueFactory("propiedadProvincia"));
+        this.Col3.setCellValueFactory(new PropertyValueFactory("propiedadCanton"));
+        this.Col4.setCellValueFactory(new PropertyValueFactory("propiedadDistrito"));
+        this.Col5.setCellValueFactory(new PropertyValueFactory("propiedadDireccion"));
+        this.Col6.setCellValueFactory(new PropertyValueFactory("propiedadGeolocalizacion"));
+        this.Col7.setCellValueFactory(new PropertyValueFactory("propiedadArea"));
+        this.Col8.setCellValueFactory(new PropertyValueFactory("propiedadPlano"));
+        this.Col9.setCellValueFactory(new PropertyValueFactory("propiedadAMetrosFrente"));
+        this.Col10.setCellValueFactory(new PropertyValueFactory("propiedadValorTerreno"));
+        this.Col11.setCellValueFactory(new PropertyValueFactory("propiedadValorConstruccion"));
+        this.Col12.setCellValueFactory(new PropertyValueFactory("propiedadOtrosValores"));
+        this.Col13.setCellValueFactory(new PropertyValueFactory("PerteneceEstado"));
+        this.Col14.setCellValueFactory(new PropertyValueFactory("propiedadZona"));
+        this.Col15.setCellValueFactory(new PropertyValueFactory("Estado"));
+        this.Col16.setCellValueFactory(new PropertyValueFactory("propiedad_fecha_Registro"));
+        this.Col17.setCellValueFactory(new PropertyValueFactory("propiedad_ultima_Actualizacion"));
+        Col1.setText("propiedades_id");
+        Col2.setText("propiedadProvincia");
+        Col3.setText("propiedadCanton");
+        Col4.setText("propiedadDistrito");
+        Col5.setText("propiedadDireccion");
+        Col6.setText("propiedadGeolocalizacion");
+        Col7.setText("propiedadArea");
+        Col8.setText("propiedadPlano");
+        Col9.setText("propiedadAMetrosFrente");
+        Col10.setText("propiedadValorTerreno");
+        Col11.setText("propiedadValorConstruccion");
+        Col12.setText("propiedadOtrosValores");
+        Col13.setText("PerteneceEstado");
+        Col14.setText("propiedadZona");
+        Col15.setText("Estado");
+        Col16.setText("propiedad_fecha_Registro");
+        Col17.setText("propiedad_ultima_Actualizacion");
+        this.Tvdatos.setItems(optionsPro);
+    }
 }

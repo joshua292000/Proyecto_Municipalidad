@@ -8,11 +8,12 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Builder
-public class BitacorasDTO {
+public class BitacorasDTO{
     private Long id;
     private String bitacoraTabla;
     private String bitacoraDescripcion;
     private String bitacoraUsuario;
     private Date bitacoraFecha;
     private UsuariosDTO usuario;
+
 }

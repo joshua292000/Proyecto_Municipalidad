@@ -42,9 +42,7 @@ public class ConsultasServiceGerente {
     }
     public static List<ContribuyentesDTO> obtenerTodoContribuyente() throws IOException, InterruptedException {
         List<ContribuyentesDTO> contribuyente = null;
-        System.out.print("Roll "+AppContext.getInstance().get("rol"));
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
-        System.out.print("Token "+token.getJwt());
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://localhost:8089/contribuyentes"))
@@ -63,9 +61,7 @@ public class ConsultasServiceGerente {
     }
     public static List<LicenciasComercialesDTO> obtenerTodoLicencias() throws IOException, InterruptedException {
         List<LicenciasComercialesDTO> LicenciasComerciales = null;
-        System.out.print("Roll "+AppContext.getInstance().get("rol"));
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
-        System.out.print("Token "+token.getJwt());
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://localhost:8089/licenciasComerciales"))
@@ -83,7 +79,7 @@ public class ConsultasServiceGerente {
         return LicenciasComerciales;
     }
 
-    /*public static List<LocalesMercadoDTO> obtenerTodoLocales() throws IOException, InterruptedException {
+    public static List<LocalesMercadoDTO> obtenerTodoLocales() throws IOException, InterruptedException {
         List<LocalesMercadoDTO> LocalesMercado = null;
         System.out.print("Roll "+AppContext.getInstance().get("rol"));
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
@@ -103,12 +99,10 @@ public class ConsultasServiceGerente {
             LocalesMercado = mapper.readValue(response.body(), new TypeReference<List<LocalesMercadoDTO>>() {});
         }
         return LocalesMercado;
-    }*/
+    }
     public static List<PropiedadesDTO> obtenerTodoPropiedades() throws IOException, InterruptedException {
         List<PropiedadesDTO> Propiedades = null;
-        System.out.print("Roll "+AppContext.getInstance().get("rol"));
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
-        System.out.print("Token "+token.getJwt());
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://localhost:8089/propiedades"))
