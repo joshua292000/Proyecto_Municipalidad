@@ -1,14 +1,12 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -36,6 +34,9 @@ public class Controller2 extends Controller implements Initializable {
     private Button btnSettings;
 
     @FXML
+    private Button btnActualizar;
+
+    @FXML
     private Button btnSignout;
 
 
@@ -48,6 +49,7 @@ public class Controller2 extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         vbxMenuIzq.setPrefWidth(20);
         /*btnOverview.setVisible(false);
         btnCustomers.setVisible(false);
@@ -60,7 +62,7 @@ public class Controller2 extends Controller implements Initializable {
 
     public void handleClicks(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnCustomers) {
-
+            pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
             System.out.println("ober");
@@ -73,6 +75,7 @@ public class Controller2 extends Controller implements Initializable {
             }
         }
         if (actionEvent.getSource() == btnPackages) {
+            pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
             System.out.println("ober");
@@ -85,6 +88,7 @@ public class Controller2 extends Controller implements Initializable {
             }
         }
         if (actionEvent.getSource() == btnOverview) {
+            pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
             System.out.println("ober");
@@ -98,6 +102,7 @@ public class Controller2 extends Controller implements Initializable {
         }
 
         if (actionEvent.getSource() == btnSettings) {
+            pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
             System.out.println("ober");
@@ -111,12 +116,27 @@ public class Controller2 extends Controller implements Initializable {
         }
 
         if (actionEvent.getSource() == btnMenus) {
+            pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
             System.out.println("ober");
             Node[] nodes = new Node[1];
             try {
                 nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarPropiedad.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (actionEvent.getSource() == btnActualizar) {
+            pnItems.getChildren().clear();
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            System.out.println("ober");
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/Actualizar.fxml"));
                 pnItems.getChildren().add(nodes[0]);
             } catch (IOException e) {
                 e.printStackTrace();

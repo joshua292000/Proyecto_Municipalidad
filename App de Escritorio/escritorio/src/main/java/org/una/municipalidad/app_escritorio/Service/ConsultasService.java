@@ -1,19 +1,5 @@
 package org.una.municipalidad.app_escritorio.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
-import org.una.municipalidad.app_escritorio.Util.AppContext;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.util.List;
-
 public class ConsultasService {
    /* private static final HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)

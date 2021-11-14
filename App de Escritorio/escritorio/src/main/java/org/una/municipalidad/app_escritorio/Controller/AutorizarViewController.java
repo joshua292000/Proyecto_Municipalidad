@@ -1,18 +1,14 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.fxml.Initializable;
-
-
 import javafx.fxml.FXML;
-import javafx.scene.control.Menu;
+import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 public class AutorizarViewController extends Controller implements Initializable {
     @FXML

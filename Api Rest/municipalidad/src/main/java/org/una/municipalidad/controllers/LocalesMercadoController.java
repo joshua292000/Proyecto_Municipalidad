@@ -6,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
 import org.una.municipalidad.dto.LocalesMercadoDTO;
-import org.una.municipalidad.entities.Locales_Mercado;
 import org.una.municipalidad.services.LocalesMercadoService;
-import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,12 +39,12 @@ public class LocalesMercadoController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/findByEstado/{Estado}")
-    @ApiOperation(value = "Obtiene un local del mercado a partir de su estado", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
-    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public ResponseEntity<?> findByEstado(String Estado) {
+    @GetMapping("/findLocales_MercadoByCedula/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de locales de mercado a partir de la cedula de un contribuyente", response = ContribuyentesDTO.class, tags = "LicenciasComerciales")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    public ResponseEntity<?> findLocales_MercadoByCedula(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
         try{
-            Optional<List<LocalesMercadoDTO>> result = localesMercadoService.findByEstado(Estado);
+            Optional<List<LocalesMercadoDTO>> result = localesMercadoService.findLocales_MercadoByCedula(cedulaContribuyente);
             return new ResponseEntity<>(result,HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,13 +64,14 @@ public class LocalesMercadoController {
         }
     }
 
-    @PutMapping("/")
+    @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza la informacion", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     @ResponseBody
     @PreAuthorize("hasRole('GESTOR')")
-    public ResponseEntity<?> update(@RequestBody LocalesMercadoDTO localesMercadoModified) {
-        Optional<LocalesMercadoDTO> LocalesMercadoUpdated =  localesMercadoService.update(localesMercadoModified);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id,@RequestBody LocalesMercadoDTO localesMercadoModified) {
+        Optional<LocalesMercadoDTO> LocalesMercadoUpdated =  localesMercadoService.update(localesMercadoModified, id);
         return new ResponseEntity<>(LocalesMercadoUpdated, HttpStatus.OK);
     }
+
 
 }

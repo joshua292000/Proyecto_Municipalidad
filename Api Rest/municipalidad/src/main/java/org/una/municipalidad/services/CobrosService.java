@@ -29,6 +29,8 @@ public interface CobrosService {
 
     public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyentePendientes(@Param("cedulaContribuyente") String cedulaContribuyente);
 
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyenteContaining(@Param("cedulaContribuyente")String cedulaContribuyente);
+
     public Optional<CobrosDTO> create(CobrosDTO cobrosDTO);
 
     public Optional<CobrosDTO> update(CobrosDTO cobrosDTO, Long id);

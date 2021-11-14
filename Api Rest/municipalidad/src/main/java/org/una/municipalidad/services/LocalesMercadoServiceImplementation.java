@@ -35,7 +35,6 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<LocalesMercadoDTO> findByNombreLocal(String nombreLocal) {
         Optional<Locales_Mercado> locales_mercado = localesMercadoRepository.findByNombreLocal(nombreLocal);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(locales_mercado, LocalesMercadoDTO.class));
@@ -43,10 +42,10 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<LocalesMercadoDTO>> findByEstado(String Estado) {
-        List<Locales_Mercado> Cobroslist = localesMercadoRepository.findByEstado(Estado);
-        List<LocalesMercadoDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,LocalesMercadoDTO.class);
-        return Optional.ofNullable(CobrosDtolist);
+    public Optional<List<LocalesMercadoDTO>> findLocales_MercadoByCedula(String cedulaContribuyente) {
+        List<Locales_Mercado> contribuyenteslist = localesMercadoRepository.findLocales_MercadoByCedula(cedulaContribuyente);
+        List<LocalesMercadoDTO> contribuyentesDTO = MapperUtils.DtoListFromEntityList(contribuyenteslist,LocalesMercadoDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
     }
 
     private LocalesMercadoDTO getSavedLocalesMercadoDTO(LocalesMercadoDTO localesMercadoDTO) {
@@ -61,7 +60,8 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
     }
 
     @Override
-    public Optional<LocalesMercadoDTO> update(LocalesMercadoDTO localesMercadoDTO) {
+    public Optional<LocalesMercadoDTO> update(LocalesMercadoDTO localesMercadoDTO, Long id) {
+        if (localesMercadoRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(getSavedLocalesMercadoDTO(localesMercadoDTO));
     }
 

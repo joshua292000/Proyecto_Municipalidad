@@ -3,25 +3,22 @@ package org.una.municipalidad.app_escritorio.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
-import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
 import org.una.municipalidad.app_escritorio.DTO.ContribuyentesDTO;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class IngresarContribuyenteController extends Controller implements Initializable {
     @FXML
@@ -134,8 +131,6 @@ public class IngresarContribuyenteController extends Controller implements Initi
         this.colNombre.setCellFactory(TextFieldTableCell.forTableColumn());
         this.colNombre.setOnEditCommit(
                 data->{
-                    System.out.println("Nuevo " + data.getNewValue());
-                    System.out.println("Nuevo " + data.getOldValue());
                     ContribuyentesDTO con = data.getRowValue();
                     con.setNombreContribuyente(data.getNewValue());
                     System.out.println(con);

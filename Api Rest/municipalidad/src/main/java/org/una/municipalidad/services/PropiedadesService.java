@@ -1,6 +1,8 @@
 package org.una.municipalidad.services;
 
 
+import org.springframework.data.repository.query.Param;
+import org.una.municipalidad.dto.LicenciasComercialesDTO;
 import org.una.municipalidad.dto.PropiedadesDTO;
 import org.una.municipalidad.entities.Propiedades;
 
@@ -17,6 +19,9 @@ public interface PropiedadesService {
     public Optional<PropiedadesDTO> findByPropiedadValorTerreno(long propiedadValorTerreno);
 
     public Optional<PropiedadesDTO> findByPropiedadValorConstruccion(long propiedadValorConstruccion);
+
+    public Optional<List<PropiedadesDTO>> findPropiedadesByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);
+
 
     public Optional<PropiedadesDTO> create(PropiedadesDTO propiedadesDTO);
 

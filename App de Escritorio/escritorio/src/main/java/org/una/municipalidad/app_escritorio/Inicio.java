@@ -1,11 +1,11 @@
 package org.una.municipalidad.app_escritorio;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
 
-public class Inicio extends Application{
+
+public class Inicio extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -14,4 +14,7 @@ public class Inicio extends Application{
         //FlowController.getInstance().goViewInWindow("GerentesView");
         //FlowController.getInstance().goMain();
     }
+
+
+
 }

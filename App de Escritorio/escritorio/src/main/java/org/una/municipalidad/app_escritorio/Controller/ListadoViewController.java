@@ -13,7 +13,8 @@ import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
 
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class ListadoViewController extends Controller implements Initializable {
 
@@ -179,7 +180,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocales();
                 if(local!=null){
                     for(LocalesMercadoDTO loc:local){
-                        optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreLocal(),loc.getUbicacionLocal(),loc.getCorreoLocal(),loc.getTelefonoLocal(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.getEstado()));
+                     //   optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreComercio(),loc.getUbicacionLocal(),loc.getCorreoComercio(),loc.getTelefonoComercio(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.isEstado()));
                     }
                     //Collection.sort(options);
                     this.Tvdatos.setItems(optionscont);

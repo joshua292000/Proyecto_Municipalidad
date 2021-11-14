@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <BorderPane fx:id="BorderPane" maxHeight="1.7976931348623157E308" prefHeight="682.0" prefWidth="1002.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AutorizarViewController">
    <center>
       <VBox prefHeight="647.0" prefWidth="1019.0" BorderPane.alignment="CENTER" />

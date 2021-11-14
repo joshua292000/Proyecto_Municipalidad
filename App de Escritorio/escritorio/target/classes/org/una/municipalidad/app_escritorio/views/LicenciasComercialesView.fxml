@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="576.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.LicenciasComercialesController">
+   <children>
+      <ScrollPane prefHeight="576.0" prefWidth="818.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="699.0" prefWidth="1303.0">
+               <children>
+                  <TableView fx:id="TviewLicenciaComercialLista" prefHeight="768.0" prefWidth="1274.0">
+                     <columns>
+                        <TableColumn fx:id="tvcId" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="tvcCodigo" prefWidth="167.0" text="Código del comercio" />
+                        <TableColumn fx:id="tvcCorreo" prefWidth="140.0" text="Correo del comercio" />
+                        <TableColumn fx:id="tvcDistritoComercio" minWidth="0.0" prefWidth="125.0" text="Distrito del comercio " />
+                        <TableColumn fx:id="tvcEstado" minWidth="0.0" prefWidth="72.0" text="Estado" />
+                        <TableColumn fx:id="tvcFechaRegistroComercio" minWidth="0.0" prefWidth="192.0" text="Fecha del registro del comercio " />
+                        <TableColumn fx:id="tvcNombreComercio" minWidth="0.0" prefWidth="151.0" text="Nombre del comercio " />
+                        <TableColumn fx:id="tvcTelefonoComercio" minWidth="0.0" prefWidth="158.0" text="Telefono del comercio" />
+                        <TableColumn fx:id="tvcIFechaUltimaActualizacion" minWidth="0.0" prefWidth="193.0" text="Fecha de última actualización" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

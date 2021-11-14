@@ -1,12 +1,13 @@
 package org.una.municipalidad.app_escritorio.Util;
 
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextInputControl;
+
 import java.text.DecimalFormat;
 import java.text.ParsePosition;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.regex.Pattern;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.control.TextInputControl;
 
 public class Formato {
 
