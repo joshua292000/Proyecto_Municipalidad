@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface LocalesMercadoRepository extends JpaRepository<Locales_Mercado, Long> {
     public Optional<Locales_Mercado> findByNombreLocal(String nombreLocal);
-
+    public List<Locales_Mercado> findByEstado(String Estado);
     @Query(value = "SELECT u FROM Locales_Mercado u LEFT JOIN u.contribuyentes_locales_mercados p JOIN p.contribuyente j WHERE " +
             "j.cedulaContribuyente=:cedulaContribuyente ")
     public List<Locales_Mercado> findLocales_MercadoByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);

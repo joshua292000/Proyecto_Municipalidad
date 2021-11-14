@@ -37,6 +37,14 @@ public class PropiedadesServiceImplementation implements PropiedadesService {
 
     @Override
     @Transactional(readOnly = true)
+    public Optional<List<PropiedadesDTO>> findByEstado(String Estado) {
+        List<Propiedades> Cobroslist = propiedadesRepository.findByEstado(Estado);
+        List<PropiedadesDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,PropiedadesDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<PropiedadesDTO> findByPropiedadValorTerreno(long propiedadValorTerreno) {
         Optional<Propiedades> propiedades = propiedadesRepository.findByPropiedadValorTerreno(propiedadValorTerreno);
         if (propiedades.isEmpty()) throw new NotFoundInformationException();

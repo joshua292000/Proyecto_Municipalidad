@@ -35,11 +35,19 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<LocalesMercadoDTO> findByNombreLocal(String nombreLocal) {
         Optional<Locales_Mercado> locales_mercado = localesMercadoRepository.findByNombreLocal(nombreLocal);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(locales_mercado, LocalesMercadoDTO.class));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<LocalesMercadoDTO>> findByEstado(String Estado) {
+        List<Locales_Mercado> Cobroslist = localesMercadoRepository.findByEstado(Estado);
+        List<LocalesMercadoDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,LocalesMercadoDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
+    }
     @Override
     @Transactional(readOnly = true)
     public Optional<List<LocalesMercadoDTO>> findLocales_MercadoByCedula(String cedulaContribuyente) {

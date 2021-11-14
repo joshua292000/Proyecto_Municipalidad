@@ -15,7 +15,7 @@ public interface LicenciasComercialesRepository extends JpaRepository<Licencias_
 
     public Optional<Licencias_Comerciales> findByCodigoComercio(String codigoComercio);
     public Optional<Licencias_Comerciales> findByNombreComercio(String nombreComercio);
-
+    public List<Licencias_Comerciales> findByEstado(String Estado);
     @Query(value = "SELECT u FROM Licencias_Comerciales u LEFT JOIN u.contribuyentes_licencias_comerciales p JOIN p.contribuyente j WHERE " +
             "j.cedulaContribuyente=:cedulaContribuyente ")
     public List<Licencias_Comerciales> findLicencias_ComercialesByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);

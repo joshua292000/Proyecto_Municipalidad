@@ -49,6 +49,17 @@ public class LicenciasComercialesController {
         Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByCodigoComercio(codigoComercio);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
     }
+    @GetMapping("/findByEstado/{Estado}")
+    @ApiOperation(value = "Obtiene una licencia comercial a partir estado", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
+    @PreAuthorize("hasRole('GERENTE')")
+    public ResponseEntity<?> findByEstado(String Estado) {
+        try{
+            Optional<List<LicenciasComercialesDTO>> result = licenciaComercialService.findByEstado(Estado);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/{nombreComercio}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su nombre", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")

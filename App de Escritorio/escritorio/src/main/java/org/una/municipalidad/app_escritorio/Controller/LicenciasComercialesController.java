@@ -34,7 +34,7 @@ public class LicenciasComercialesController  extends Controller implements Initi
 
         if (licenciacomercial != null) {
             for (LicenciasComercialesDTO licenciascomerciales : licenciacomercial) {
-                LicenciasComercialeslist.add(new LicenciasComercialesDTO(licenciascomerciales.getId(), licenciascomerciales.getNombreComercio(), licenciascomerciales.getTelefonoComercio(), licenciascomerciales.getCorreoComercio(), licenciascomerciales.getDistritoComercio(), licenciascomerciales.getFechaRegistrocomercio(), licenciascomerciales.getUltima_Actualizacioncomercio(), licenciascomerciales.getCodigoComercio(), licenciascomerciales.isEstado()));
+                //LicenciasComercialeslist.add(new LicenciasComercialesDTO(licenciascomerciales.getId(), licenciascomerciales.getNombreComercio(), licenciascomerciales.getTelefonoComercio(), licenciascomerciales.getCorreoComercio(), licenciascomerciales.getDistritoComercio(), licenciascomerciales.getFechaRegistrocomercio(), licenciascomerciales.getUltima_Actualizacioncomercio(), licenciascomerciales.getCodigoComercio(), licenciascomerciales.isEstado()));
             }
             this.TviewLicenciaComercialLista.setItems(LicenciasComercialeslist);
         }

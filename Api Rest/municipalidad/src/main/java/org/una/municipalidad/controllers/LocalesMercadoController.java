@@ -22,6 +22,18 @@ public class LocalesMercadoController {
     @Autowired
     private LocalesMercadoService localesMercadoService;
 
+    @GetMapping("/findByEstado/{Estado}")
+    @ApiOperation(value = "Obtiene un local del mercado a partir de su estado", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> findByEstado(String Estado) {
+        try{
+            Optional<List<LocalesMercadoDTO>> result = localesMercadoService.findByEstado(Estado);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtiene un local del mercado a partir de su id", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     @PreAuthorize("hasRole('GESTOR')")
