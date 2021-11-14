@@ -32,14 +32,15 @@ public class AuditorController extends Controller implements Initializable {
     }
 
     public void OnActionbtnTodasDeclaraciones(ActionEvent actionEvent) {
+        loadUI("DeclaracionesView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasLicenciasComerciales(ActionEvent actionEvent) {
+        loadUI("LicenciasComercialesView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasPropiedades(ActionEvent actionEvent) {
+        loadUI("PropiedadesView",BorderPaneFondo);
     }
-
-    public void OnActionbtnTodosRoles(ActionEvent actionEvent) {
-    }
+    
 }

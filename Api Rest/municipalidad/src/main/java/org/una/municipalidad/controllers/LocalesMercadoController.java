@@ -25,7 +25,7 @@ public class LocalesMercadoController {
     @GetMapping("/findByEstado/{Estado}")
     @ApiOperation(value = "Obtiene un local del mercado a partir de su estado", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public ResponseEntity<?> findByEstado(String Estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "Estado") String Estado) {
         try{
             Optional<List<LocalesMercadoDTO>> result = localesMercadoService.findByEstado(Estado);
             return new ResponseEntity<>(result,HttpStatus.OK);

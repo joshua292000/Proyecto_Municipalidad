@@ -42,13 +42,6 @@ public class MovimientosRealizadosController extends Controller implements Initi
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<BitacorasDTO> bitacora = ConsultasServiceAuditor.obtenerTodoMovimientos();
-        List<UsuariosDTO>usuario=ConsultasServiceAuditor.obtenerTodoUsuarios();
-        if(usuario!=null){
-            for(UsuariosDTO usuarios : usuario){
-                Usuarioslist.add(String.valueOf(new UsuariosDTO(usuarios.getId(),usuarios.getCedula(),usuarios.getNombreUsuario(),usuarios.getClaveEncriptado(),usuarios.isEstado(),usuarios.getRoles())));
-            }
-        }
-        //Usuarioslist.add(new UsuariosDTO())
         if (bitacora != null) {
             for (BitacorasDTO bitacoras : bitacora) {
                 MovimientosRealizadoslist.add(new BitacorasDTO(bitacoras.getId(), bitacoras.getBitacoraDescripcion(), bitacoras.getBitacoraTabla(),bitacoras.getBitacoraUsuario(), bitacoras.getBitacoraFecha(), bitacoras.getUsuario()));

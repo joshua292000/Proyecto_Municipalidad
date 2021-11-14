@@ -52,7 +52,7 @@ public class LicenciasComercialesController {
     @GetMapping("/findByEstado/{Estado}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir estado", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
     @PreAuthorize("hasRole('GERENTE')")
-    public ResponseEntity<?> findByEstado(String Estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "Estado") String Estado) {
         try{
             Optional<List<LicenciasComercialesDTO>> result = licenciaComercialService.findByEstado(Estado);
             return new ResponseEntity<>(result,HttpStatus.OK);

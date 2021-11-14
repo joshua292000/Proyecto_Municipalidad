@@ -51,27 +51,21 @@ public class AutorizarViewController extends Controller implements Initializable
     }
 
     public void OnActionMenuLocales(ActionEvent actionEvent) {
-        System.out.print("Hola Mundo");
         setHola(8);
-        //((VBox) BorderPane.getCenter()).getChildren().clear();
         loadUI("ListadoView",BorderPane);
     }
 
     public void OnActionMenuCobros(ActionEvent actionEvent) {
         setHola(1);
-        System.out.print("Hola Mundo");
-        //((VBox) BorderPane.getCenter()).getChildren().clear();
         loadUI("ListadoView",BorderPane);
     }
 
     public void OnActionMenuLicen(ActionEvent actionEvent) {
-        System.out.print("Hola Mundo");
         setHola(6);
         loadUI("ListadoView",BorderPane);
     }
 
     public void OnActionMenuPropiedades(ActionEvent actionEvent) {
-        System.out.print("Hola Mundo");
         setHola(7);
         loadUI("ListadoView",BorderPane);
     }

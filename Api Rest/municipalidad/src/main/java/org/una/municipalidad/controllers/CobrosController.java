@@ -47,10 +47,10 @@ public class CobrosController {
 
     }
 
-    @GetMapping("/findByEstado/{esdato}")
+    @GetMapping("/findByEstado/{Estado}")
     @ApiOperation(value = "Obtiene cobros a partir de su estado", response = CobrosDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('GERENTE')")
-    public ResponseEntity<?> findByEstado(String Estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "Estado") String Estado) {
         try{
             Optional<List<CobrosDTO>> result = cobrosService.findByEstado(Estado);
             return new ResponseEntity<>(result,HttpStatus.OK);
