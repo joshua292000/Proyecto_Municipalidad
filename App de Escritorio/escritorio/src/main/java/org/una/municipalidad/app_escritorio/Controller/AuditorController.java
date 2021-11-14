@@ -1,5 +1,6 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ public class AuditorController extends Controller implements Initializable {
 
     public BorderPane BorderPaneFondo;
     public VBox vboxFondo;
+    public JFXButton btnTodosUsuarios;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,14 +41,21 @@ public class AuditorController extends Controller implements Initializable {
     }
 
     public void OnActionbtnTodasDeclaraciones(ActionEvent actionEvent) {
+        loadUI("DeclaracionesView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasLicenciasComerciales(ActionEvent actionEvent) {
+        loadUI("LicenciasComercialesView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasPropiedades(ActionEvent actionEvent) {
+        loadUI("PropiedadesView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodosRoles(ActionEvent actionEvent) {
+
+    }
+
+    public void OnActionbtnTodosUsuarios(ActionEvent actionEvent) {
     }
 }

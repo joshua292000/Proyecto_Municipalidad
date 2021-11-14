@@ -28,34 +28,33 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Label fx:id="lblFiltrar" layoutX="19.0" layoutY="34.0" text="Filtrar la información según:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <JFXComboBox fx:id="cbxUsuarios" layoutX="63.0" layoutY="79.0" prefHeight="25.0" prefWidth="125.0" />
-        <Label fx:id="lblUsuario" layoutX="99.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Usuario:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <DatePicker fx:id="dtFechaDesde" layoutX="305.0" layoutY="79.0" />
-        <DatePicker fx:id="dtFechaHasta" layoutX="505.0" layoutY="79.0" />
-        <Label layoutX="338.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Desde:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <Label layoutX="557.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Hasta:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <Label fx:id="lblFecha" layoutX="452.0" layoutY="26.0" prefHeight="16.0" prefWidth="54.0" text="Fecha:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
+      <Label fx:id="lblFiltrar" layoutX="19.0" layoutY="34.0" text="Filtrar la información según:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbxUsuarios" layoutX="63.0" layoutY="79.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label fx:id="lblUsuario" layoutX="99.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Usuario:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dtFechaDesde" layoutX="305.0" layoutY="79.0" />
+      <DatePicker fx:id="dtFechaHasta" layoutX="505.0" layoutY="79.0" />
+      <Label layoutX="338.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Desde:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="557.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Hasta:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFecha" layoutX="452.0" layoutY="26.0" prefHeight="16.0" prefWidth="54.0" text="Fecha:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
-

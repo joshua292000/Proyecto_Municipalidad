@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="321.0" prefWidth="487.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.MovimientosRealizadosController">
+<AnchorPane prefHeight="576.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.MovimientosRealizadosController">
    <children>
-      <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="592.0">
+      <ScrollPane prefHeight="576.0" prefWidth="818.0">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="592.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="699.0" prefWidth="1303.0">
                <children>
-                  <TableView fx:id="tview_Movimientos" prefHeight="768.0" prefWidth="592.0">
+                  <TableView fx:id="tview_Movimientos" prefHeight="768.0" prefWidth="1274.0">
                     <columns>
                       <TableColumn fx:id="tvcId" prefWidth="72.0" text="Id" />
                       <TableColumn fx:id="tvcDescripción" prefWidth="126.0" text="Descripción" />
