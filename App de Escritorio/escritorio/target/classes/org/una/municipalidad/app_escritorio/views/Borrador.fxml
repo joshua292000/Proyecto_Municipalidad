@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="576.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.MovimientosRealizadosController">
+    <children>
+        <ScrollPane layoutY="135.0" prefHeight="441.0" prefWidth="831.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="612.0" prefWidth="838.0">
+                    <children>
+                        <TableView fx:id="tview_Movimientos" prefHeight="836.0" prefWidth="818.0">
+                            <columns>
+                                <TableColumn fx:id="tvcId" prefWidth="72.0" text="Id" />
+                                <TableColumn fx:id="tvcDescripción" prefWidth="126.0" text="Descripción" />
+                                <TableColumn fx:id="tvcFechaModificacion" prefWidth="153.0" text="Fecha de modificación" />
+                                <TableColumn fx:id="tvcTabla" prefWidth="148.0" text="Tabla" />
+                                <TableColumn fx:id="tvcNombreUsuario" prefWidth="138.0" text="Nombre Usuario " />
+                                <TableColumn fx:id="tvcIdUsuario" prefWidth="168.0" text="Id del Usuario" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+      <Label fx:id="lblFiltrar" layoutX="19.0" layoutY="34.0" text="Filtrar la información según:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbxUsuarios" layoutX="63.0" layoutY="79.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label fx:id="lblUsuario" layoutX="99.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Usuario:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dtFechaDesde" layoutX="305.0" layoutY="79.0" />
+      <DatePicker fx:id="dtFechaHasta" layoutX="505.0" layoutY="79.0" />
+      <Label layoutX="338.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Desde:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="557.0" layoutY="57.0" prefHeight="16.0" prefWidth="54.0" text="Hasta:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFecha" layoutX="452.0" layoutY="26.0" prefHeight="16.0" prefWidth="54.0" text="Fecha:">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
