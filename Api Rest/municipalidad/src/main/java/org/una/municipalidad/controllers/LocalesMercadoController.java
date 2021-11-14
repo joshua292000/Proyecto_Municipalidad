@@ -43,11 +43,11 @@ public class LocalesMercadoController {
 
     }
 
-    @GetMapping("/nombre/{term}")
+    @GetMapping("/findByNombreLocal/{nombreLocal}")
     @ApiOperation(value = "Obtiene un local del mercado a partir de su nombre", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     @PreAuthorize("hasRole('GESTOR')")
-    public ResponseEntity<?> findByNombreLocal(@PathVariable(value = "term") String term) {
-        Optional<LocalesMercadoDTO>result = localesMercadoService.findByNombreLocal(term);
+    public ResponseEntity<?> findByNombreLocal(@PathVariable(value = "nombreLocal") String nombreLocal) {
+        Optional<LocalesMercadoDTO>result = localesMercadoService.findByNombreLocal(nombreLocal);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

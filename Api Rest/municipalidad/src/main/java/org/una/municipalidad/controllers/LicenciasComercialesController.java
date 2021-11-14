@@ -61,7 +61,7 @@ public class LicenciasComercialesController {
         }
     }
 
-    @GetMapping("/{nombreComercio}")
+    @GetMapping("/findByNombreComercio/{nombreComercio}")
     @ApiOperation(value = "Obtiene una licencia comercial a partir de su nombre", response = LicenciasComercialesDTO.class, tags = "LicenciasComerciales")
     @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByNombreComercio(@PathVariable(value = "nombreComercio") String nombreComercio) {

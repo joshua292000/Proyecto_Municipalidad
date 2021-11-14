@@ -40,7 +40,7 @@ public class PropiedadesController {
         return new ResponseEntity<>(propiedadesFound, HttpStatus.OK);
     }
 
-    @GetMapping("/{codigoComercio}")
+    @GetMapping("/findByPropiedadValorTerreno/{propiedadValorTerreno}")
     @ApiOperation(value = "Obtiene una propiedad a partir de su valor de terreno", response = PropiedadesDTO.class, tags = "Propiedades")
     @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByPropiedadValorTerreno(@PathVariable(value = "propiedadValorTerreno") Long propiedadValorTerreno) {
@@ -48,7 +48,7 @@ public class PropiedadesController {
         return new ResponseEntity<>(propiedadesFound, HttpStatus.OK);
     }
 
-    @GetMapping("/{nombreComercio}")
+    @GetMapping("/findByPropiedadValorConstruccion/{propiedadValorConstruccion}")
     @ApiOperation(value = "Obtiene una propiedad a partir de su valor de construccion", response = PropiedadesDTO.class, tags = "Propiedades")
     @PreAuthorize("hasRole('GESTOR')")
     public ResponseEntity<?> findByPropiedadValorConstruccion(@PathVariable(value = "propiedadValorConstruccion") Long propiedadValorConstruccion) {
