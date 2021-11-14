@@ -70,15 +70,7 @@
             </VBox>
          </left>
          <center>
-<<<<<<< Updated upstream
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox prefHeight="768.0" prefWidth="592.0" />
-               </children>
-            </StackPane>
-=======
             <VBox fx:id="vboxFondo" prefHeight="576.0" prefWidth="818.0" BorderPane.alignment="CENTER" />
->>>>>>> Stashed changes
          </center>
       </BorderPane>
    </children>

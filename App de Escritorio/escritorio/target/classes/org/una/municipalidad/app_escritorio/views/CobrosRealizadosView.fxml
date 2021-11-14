@@ -7,43 +7,30 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="768.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.CobrosRealizadosController">
-   <children>
-<<<<<<< Updated upstream
-      <TableView fx:id="Tview_CobrosLista" layoutX="-20.0" prefHeight="400.0" prefWidth="620.0">
-        <columns>
-          <TableColumn fx:id="tbcId" prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="75.0" text="estado" />
-            <TableColumn prefWidth="150.0" text="Fecha de creación" />
-            <TableColumn minWidth="0.0" prefWidth="90.0" text="fecha pago" />
-            <TableColumn prefWidth="75.0" text="fecha de vencimiento" />
-            <TableColumn prefWidth="75.0" text="monto" />
-        </columns>
-      </TableView>
-=======
-      <ScrollPane prefHeight="768.0" prefWidth="592.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="592.0">
-               <children>
-                  <TableView fx:id="Tview_CobrosLista" prefHeight="768.0" prefWidth="1026.0">
-                    <columns>
-                      <TableColumn fx:id="tvcId" prefWidth="75.0" text="Id" />
-                      <TableColumn fx:id="tvcEstado" prefWidth="75.0" text="Estado" />
-                        <TableColumn fx:id="tvcFechaCreacion" prefWidth="150.0" text="Fecha de creación" />
-                        <TableColumn fx:id="tvcFechaPago" minWidth="0.0" prefWidth="90.0" text="Fecha pago" />
-                        <TableColumn fx:id="tvcFechaVencimiento" prefWidth="128.0" text="Fecha de vencimiento" />
-                        <TableColumn fx:id="tvcMonto" minWidth="0.0" prefWidth="67.0" text="Monto" />
-                        <TableColumn fx:id="tvcPeriodo" minWidth="0.0" prefWidth="67.0" text="Periodo" />
-                        <TableColumn fx:id="tvcIdFactura" minWidth="0.0" prefWidth="86.0" text="Id de factura" />
-                        <TableColumn fx:id="tvcIdLicenciaComercial" minWidth="0.0" prefWidth="164.0" text="Id de licencias comerciales" />
-                        <TableColumn fx:id="tvcIdLocalesMercado" minWidth="0.0" prefWidth="132.0" text="Id de locales mercado" />
-                        <TableColumn fx:id="tvcIdPropiedades" minWidth="0.0" prefWidth="112.0" text="Id de propiedades" />
-                        <TableColumn fx:id="tvcIdTipoCobros" minWidth="0.0" prefWidth="119.0" text="Id de tipo de cobro" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
->>>>>>> Stashed changes
-   </children>
+    <children>
+        <ScrollPane prefHeight="768.0" prefWidth="592.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="592.0">
+                    <children>
+                        <TableView fx:id="Tview_CobrosLista" prefHeight="768.0" prefWidth="1026.0">
+                            <columns>
+                                <TableColumn fx:id="tvcId" prefWidth="75.0" text="Id" />
+                                <TableColumn fx:id="tvcEstado" prefWidth="75.0" text="Estado" />
+                                <TableColumn fx:id="tvcFechaCreacion" prefWidth="150.0" text="Fecha de creación" />
+                                <TableColumn fx:id="tvcFechaPago" minWidth="0.0" prefWidth="90.0" text="Fecha pago" />
+                                <TableColumn fx:id="tvcFechaVencimiento" prefWidth="128.0" text="Fecha de vencimiento" />
+                                <TableColumn fx:id="tvcMonto" minWidth="0.0" prefWidth="67.0" text="Monto" />
+                                <TableColumn fx:id="tvcPeriodo" minWidth="0.0" prefWidth="67.0" text="Periodo" />
+                                <TableColumn fx:id="tvcIdFactura" minWidth="0.0" prefWidth="86.0" text="Id de factura" />
+                                <TableColumn fx:id="tvcIdLicenciaComercial" minWidth="0.0" prefWidth="164.0" text="Id de licencias comerciales" />
+                                <TableColumn fx:id="tvcIdLocalesMercado" minWidth="0.0" prefWidth="132.0" text="Id de locales mercado" />
+                                <TableColumn fx:id="tvcIdPropiedades" minWidth="0.0" prefWidth="112.0" text="Id de propiedades" />
+                                <TableColumn fx:id="tvcIdTipoCobros" minWidth="0.0" prefWidth="119.0" text="Id de tipo de cobro" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
 </AnchorPane>

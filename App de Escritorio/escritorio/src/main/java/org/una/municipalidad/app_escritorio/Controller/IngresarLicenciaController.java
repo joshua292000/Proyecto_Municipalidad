@@ -64,7 +64,7 @@ public class IngresarLicenciaController extends Controller implements Initializa
         Date fecha = new Date();
         Long telefono = Long.valueOf(txtTelefono.getText());
         boolean estado = true;
-        options.add(new LicenciasComercialesDTO(idd,txtNombre.getText(),telefono,txtCorreo.getText(),txtDistrito.getText(),fecha,fecha,txtCodigo.getText(),estado));
+        //options.add(new LicenciasComercialesDTO(idd,txtNombre.getText(),telefono,txtCorreo.getText(),txtDistrito.getText(),fecha,fecha,txtCodigo.getText(),estado));
         System.out.println("tiene " + options);
         for(int x=0;x<options.size();x++){
             LicenciasComercialesDTO licencia = ConsultasGestorService.CrearLicenciaComercial(options.get(x).getNombreComercio(),options.get(x).getTelefonoComercio(),options.get(x).getCorreoComercio(),options.get(x).getDistritoComercio(),fechaRegistro,fechaRegistro,options.get(x).getCodigoComercio(),estado);

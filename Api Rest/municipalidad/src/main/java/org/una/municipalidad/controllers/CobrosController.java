@@ -49,7 +49,7 @@ public class CobrosController {
 
     @GetMapping("/findByEstado/{esdato}")
     @ApiOperation(value = "Obtiene cobros a partir de su estado", response = CobrosDTO.class, tags = "Cobros")
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GERENTE')")
     public ResponseEntity<?> findByEstado(String Estado) {
         try{
             Optional<List<CobrosDTO>> result = cobrosService.findByEstado(Estado);
@@ -72,18 +72,6 @@ public class CobrosController {
     public ResponseEntity<?> findByCobrosMonto(@PathVariable(value = "cobrosMonto") Long cobrosMonto) {
         Optional<CobrosDTO> cobrosFound = cobrosService.findByCobrosMonto(cobrosMonto);
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
-    }
-
-    @GetMapping("/findbyCobrosporFecha/{startDate}/{endDate}")
-    @ApiOperation(value = "Obtiene cobros a partir de sus Fechas", response = CobrosDTO.class, tags = "Cobros")
-    @PreAuthorize("hasRole('GESTOR')")
-    public ResponseEntity<?> findbyCobrosporFecha(@PathVariable(value = "startDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
-        try{
-            Optional<List<CobrosDTO>> result = cobrosService.findbyCobrosporFecha(startDate,endDate);
-            return new ResponseEntity<>(result,HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @GetMapping("/findByCobrosBetweenFechaPago/{startDate}/{endDate}")

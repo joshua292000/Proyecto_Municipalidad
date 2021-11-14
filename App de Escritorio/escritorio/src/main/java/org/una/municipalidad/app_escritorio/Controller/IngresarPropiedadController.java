@@ -168,9 +168,9 @@ public class IngresarPropiedadController extends Controller implements Initializ
             long idd=8;
             LocalDate fechaRegistro = LocalDate.parse("2021-11-12");
             Date fecha = new Date();
-            options.add(new PropiedadesDTO(idd,propiedadProvincia,propiedadCanton,propiedadDistrito,propiedadDireccion,propiedadGeolocalizacion,propiedadArea,propiedadPlano,propiedadAMetrosFrente,propiedadValorTerreno,propiedadValorConstruccion,propiedadOtrosValores,PerteneceEstado,propiedadZona,Estado,fecha,fecha));
+            //options.add(new PropiedadesDTO(idd,propiedadProvincia,propiedadCanton,propiedadDistrito,propiedadDireccion,propiedadGeolocalizacion,propiedadArea,propiedadPlano,propiedadAMetrosFrente,propiedadValorTerreno,propiedadValorConstruccion,propiedadOtrosValores,PerteneceEstado,propiedadZona,Estado,fecha,fecha));
             for(int x=0;x<options.size();x++){
-                PropiedadesDTO propiedad = ConsultasGestorService.CrearPropiedad(options.get(x).getPropiedadProvincia(),options.get(x).getPropiedadCanton(),options.get(x).getPropiedadDistrito(),options.get(x).getPropiedadDireccion(),options.get(x).getPropiedadGeolocalizacion(),options.get(x).getPropiedadArea(),options.get(x).getPropiedadPlano(),options.get(x).getPropiedadAMetrosFrente(),options.get(x).getPropiedadValorTerreno(),options.get(x).getPropiedadValorConstruccion(),options.get(x).getPropiedadOtrosValores(),options.get(x).isPerteneceEstado(),options.get(x).getPropiedadZona(),options.get(x).isEstado(),fechaRegistro,fechaRegistro);
+                //PropiedadesDTO propiedad = ConsultasGestorService.CrearPropiedad(options.get(x).getPropiedadProvincia(),options.get(x).getPropiedadCanton(),options.get(x).getPropiedadDistrito(),options.get(x).getPropiedadDireccion(),options.get(x).getPropiedadGeolocalizacion(),options.get(x).getPropiedadArea(),options.get(x).getPropiedadPlano(),options.get(x).getPropiedadAMetrosFrente(),options.get(x).getPropiedadValorTerreno(),options.get(x).getPropiedadValorConstruccion(),options.get(x).getPropiedadOtrosValores(),options.get(x).isPerteneceEstado(),options.get(x).getPropiedadZona(),options.get(x).isEstado(),fechaRegistro,fechaRegistro);
             }
             JOptionPane.showMessageDialog(null,"Archivo guardado correctamente");
 

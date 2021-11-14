@@ -19,5 +19,5 @@ public class LicenciasComercialesDTO {
     private Date fechaRegistrocomercio;
     private Date ultima_Actualizacioncomercio;
     private String codigoComercio;
-    private boolean estado;
+    private String estado;
 }

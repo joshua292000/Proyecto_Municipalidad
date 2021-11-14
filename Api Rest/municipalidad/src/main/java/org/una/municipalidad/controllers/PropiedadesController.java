@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.LicenciasComercialesDTO;
 import org.una.municipalidad.dto.PropiedadesDTO;
+import org.una.municipalidad.entities.Propiedades;
 import org.una.municipalidad.services.PropiedadesService;
+import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +40,18 @@ public class PropiedadesController {
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<PropiedadesDTO> propiedadesFound = propiedadesService.findById(id);
         return new ResponseEntity<>(propiedadesFound, HttpStatus.OK);
+    }
+
+    @GetMapping("/findByEstado/{Estado}")
+    @ApiOperation(value = "Obtiene una propiedad a partir de su estado", response = PropiedadesDTO.class, tags = "Propiedades")
+    @PreAuthorize("hasRole('GERENTE') ")
+    public ResponseEntity<?> findByEstado(String Estado) {
+        try{
+            Optional<List<PropiedadesDTO>> result = propiedadesService.findByEstado(Estado);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{codigoComercio}")

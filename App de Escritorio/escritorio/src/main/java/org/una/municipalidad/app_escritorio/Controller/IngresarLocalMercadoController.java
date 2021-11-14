@@ -65,7 +65,7 @@ public class IngresarLocalMercadoController extends Controller implements Initia
         Long telefono = Long.valueOf(txtTelefono.getText());
         Long Monto = Long.valueOf(txtMonto.getText());
         boolean estado = true;
-        options.add(new LocalesMercadoDTO(idd,txtNombre.getText(),txtDistrito.getText(),txtCorreo.getText(),telefono,Monto,fecha,fecha,estado));
+       // options.add(new LocalesMercadoDTO(idd,txtNombre.getText(),txtDistrito.getText(),txtCorreo.getText(),telefono,Monto,fecha,fecha,estado));
         for(int x=0;x<options.size();x++){
             LocalesMercadoDTO licencia = ConsultasGestorService.CrearLocalMercado(options.get(x).getNombreLocal(),options.get(x).getUbicacionLocal(),options.get(x).getCorreoLocal(),options.get(x).getTelefonoLocal(),options.get(x).getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,estado);
         }

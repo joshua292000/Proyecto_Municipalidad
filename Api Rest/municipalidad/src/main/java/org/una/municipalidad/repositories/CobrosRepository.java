@@ -30,10 +30,9 @@ public interface CobrosRepository extends JpaRepository<Cobros, Long> {
             "c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.estado = Pendiente ")
     public List<Cobros> findCobrosByCedulaContribuyentePendientes(@Param("cedulaContribuyente") String cedulaContribuyente);
 
-    @Query(value = "SELECT u FROM Cobros u WHERE u.cobrosFechaCreacion >= :startDate AND u.cobrosFechaCreacion <= :endDate")
+    @Query(value = "SELECT u FROM Cobros u WHERE u.cobrosFechaCreacion >= :startDate AND u.cobrosFechaCreacion <= :endDate AND u.estado = 'Pendiente'")
     public List<Cobros> findByCobrosBetweenFechaPago(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
 
-    @Query(value = "SELECT u FROM Cobros u WHERE u.cobrosFechaCreacion BETWEEN :startDate AND :endDate")
-    public List<Cobros> findbyCobrosporFecha(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
+
 }
 

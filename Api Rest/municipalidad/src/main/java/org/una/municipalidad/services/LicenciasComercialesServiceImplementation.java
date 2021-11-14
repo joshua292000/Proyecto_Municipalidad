@@ -3,7 +3,9 @@ package org.una.municipalidad.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
+import org.una.municipalidad.entities.Cobros;
 import org.una.municipalidad.entities.Licencias_Comerciales;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.LicenciasComercialesRepository;
@@ -50,6 +52,14 @@ public class LicenciasComercialesServiceImplementation implements LicenciasComer
         if (licenciaComercial.isEmpty()) throw new NotFoundInformationException();
         LicenciasComercialesDTO licenciaComercialDTO = MapperUtils.DtoFromEntity(licenciaComercial.get(), LicenciasComercialesDTO.class);
         return Optional.ofNullable(licenciaComercialDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<LicenciasComercialesDTO>> findByEstado(String Estado) {
+        List<Licencias_Comerciales> Cobroslist = licenciacomercialRepository.findByEstado(Estado);
+        List<LicenciasComercialesDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,LicenciasComercialesDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
     }
 
     private LicenciasComercialesDTO getSavedLicenciaComercialDTO(LicenciasComercialesDTO licenciaComercialDTO) {

@@ -15,6 +15,7 @@ import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.LocalesMercadoRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,10 +35,20 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<LocalesMercadoDTO> findByNombreLocal(String nombreLocal) {
         Optional<Locales_Mercado> locales_mercado = localesMercadoRepository.findByNombreLocal(nombreLocal);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(locales_mercado, LocalesMercadoDTO.class));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<LocalesMercadoDTO>> findByEstado(String Estado) {
+        List<Locales_Mercado> Cobroslist = localesMercadoRepository.findByEstado(Estado);
+        List<LocalesMercadoDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,LocalesMercadoDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
+    }
+
     private LocalesMercadoDTO getSavedLocalesMercadoDTO(LocalesMercadoDTO localesMercadoDTO) {
         Locales_Mercado locales_mercado = MapperUtils.EntityFromDto(localesMercadoDTO, Locales_Mercado.class);
         Locales_Mercado locales_mercadoCreated = localesMercadoRepository.save(locales_mercado );

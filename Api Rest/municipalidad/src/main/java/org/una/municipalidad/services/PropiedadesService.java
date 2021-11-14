@@ -12,6 +12,8 @@ public interface PropiedadesService {
 
     public Optional<PropiedadesDTO> findById(Long propiedades_id);
 
+    public Optional<List<PropiedadesDTO>> findByEstado(String Estado);
+
     public Optional<PropiedadesDTO> findByPropiedadValorTerreno(long propiedadValorTerreno);
 
     public Optional<PropiedadesDTO> findByPropiedadValorConstruccion(long propiedadValorConstruccion);
