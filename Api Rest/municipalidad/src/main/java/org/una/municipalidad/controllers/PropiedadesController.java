@@ -33,7 +33,7 @@ public class PropiedadesController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Obtiene una licencia comercial a partir de su id", response = PropiedadesDTO.class, tags = "Propiedades")
+    @ApiOperation(value = "Obtiene una propiedad a partir de su id", response = PropiedadesDTO.class, tags = "Propiedades")
     @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<PropiedadesDTO> propiedadesFound = propiedadesService.findById(id);

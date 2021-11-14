@@ -78,4 +78,12 @@ public class GerenteViewController extends Controller implements Initializable {
         imgAutorizar.setTranslateX(15);
         imgConsultas.setTranslateX(15);
     }
+
+    public void OnActionbtnConsultas(ActionEvent actionEvent) {
+        loadUI("ConsultasView",BorderPane);
+        //loadUI("hola",BorderPane);
+    }
+
+    public void OnActionbtnCobros(ActionEvent actionEvent) {
+    }
 }

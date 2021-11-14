@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="576.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.PropiedadesController">
+   <children>
+      <ScrollPane prefHeight="576.0" prefWidth="818.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="2627.0">
+               <children>
+                  <TableView fx:id="TviewPropiedadesLista" prefHeight="768.0" prefWidth="2627.0">
+                     <columns>
+                        <TableColumn fx:id="tvcId" prefWidth="90.0" text="Id" />
+                        <TableColumn fx:id="tvcPerteneceEstado" prefWidth="151.0" text="Estado al que pertenece" />
+                        <TableColumn fx:id="tvcEstado" prefWidth="117.0" text="Estado" />
+                        <TableColumn fx:id="tvcPropiedadMetrosFrente" minWidth="0.0" prefWidth="221.0" text="Metros de frente de la propiedad" />
+                        <TableColumn fx:id="tvcAreaPropiedad" minWidth="0.0" prefWidth="125.0" text="Area de la propiedad" />
+                        <TableColumn fx:id="tvcDireccion" minWidth="0.0" prefWidth="268.0" text="Dirección de la propiedad" />
+                        <TableColumn fx:id="tvcDistrito" minWidth="0.0" prefWidth="168.0" text="Distrito al que pertenece" />
+                        <TableColumn fx:id="tvcCanton" minWidth="0.0" prefWidth="169.0" text="Cantón al que pertenece" />
+                        <TableColumn fx:id="tvcGeolocalizacion" minWidth="0.0" prefWidth="206.0" text="Geolocalización de la propiedad" />
+                        <TableColumn fx:id="tvcOtrosvalores" minWidth="0.0" prefWidth="142.0" text="Otros valores" />
+                        <TableColumn fx:id="tvcPlanoPropiedad" minWidth="0.0" prefWidth="145.0" text="Plano de la propiedad" />
+                        <TableColumn fx:id="tvcProvincia" minWidth="0.0" prefWidth="116.0" text="Provincia " />
+                        <TableColumn fx:id="tvcValorConstruccion" minWidth="0.0" prefWidth="169.0" text="Valor de la construcción " />
+                        <TableColumn fx:id="tvcValorterreno" minWidth="0.0" prefWidth="138.0" text="Valor del terreno " />
+                        <TableColumn fx:id="tvcZona" minWidth="0.0" prefWidth="92.0" text="Zona " />
+                        <TableColumn fx:id="tvcFechaRegistro" minWidth="0.0" prefWidth="129.0" text="Fecha del registro" />
+                        <TableColumn fx:id="tvcUltimaFecha" minWidth="0.0" prefWidth="180.0" text="Última fecha de actualización " />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

@@ -14,7 +14,8 @@ import java.util.Optional;
 public interface CobrosRepository extends JpaRepository<Cobros, Long> {
     public Optional<Cobros> findByCobrosPeriodo(String cobrosPeriodo);
     public Optional<Cobros> findByCobrosMonto(Long cobrosMonto);
-    public List<Cobros> findByCobrosFechaPagoBetween(Date startDate, Date endDate);
+
+    public List<Cobros> findByEstado(String Estado);
     public int pagado = 0;
 
     @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.licenciascomerciales e JOIN e.contribuyentes_licencias_comerciales c WHERE " +
@@ -29,10 +30,10 @@ public interface CobrosRepository extends JpaRepository<Cobros, Long> {
             "c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.estado = Pendiente ")
     public List<Cobros> findCobrosByCedulaContribuyentePendientes(@Param("cedulaContribuyente") String cedulaContribuyente);
 
-    @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.licenciascomerciales e JOIN e.contribuyentes_licencias_comerciales c WHERE " +
-            "c.contribuyente.cedulaContribuyente=:cedulaContribuyente")
-    public List<Cobros> findCobrosByCedulaContribuyenteContaining(@Param("cedulaContribuyente") String cedulaContribuyente);
+    @Query(value = "SELECT u FROM Cobros u WHERE u.cobrosFechaCreacion >= :startDate AND u.cobrosFechaCreacion <= :endDate")
+    public List<Cobros> findByCobrosBetweenFechaPago(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
 
-
+    @Query(value = "SELECT u FROM Cobros u WHERE u.cobrosFechaCreacion BETWEEN :startDate AND :endDate")
+    public List<Cobros> findbyCobrosporFecha(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
 }
 
