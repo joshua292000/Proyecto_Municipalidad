@@ -42,7 +42,7 @@ public class PropiedadesController  extends Controller implements Initializable 
 
         if (propiedad  != null) {
             for (PropiedadesDTO propiedades : propiedad) {
-                //Propiedadeslist.add(new PropiedadesDTO(propiedades.getPropiedades_id(),propiedades.getPropiedadProvincia(),propiedades.getPropiedadCanton(),propiedades.getPropiedadDistrito(),propiedades.getPropiedadDireccion(),propiedades.getPropiedadGeolocalizacion(),propiedades.getPropiedadArea(),propiedades.getPropiedadPlano(),propiedades.getPropiedadAMetrosFrente(),propiedades.getPropiedadValorTerreno(),propiedades.getPropiedadValorConstruccion(),propiedades.getPropiedadOtrosValores(),propiedades.isPerteneceEstado(),propiedades.getPropiedadZona(),propiedades.isEstado(),propiedades.getPropiedad_fecha_Registro(),propiedades.getPropiedad_fecha_Registro()));
+                Propiedadeslist.add(new PropiedadesDTO(propiedades.getPropiedades_id(),propiedades.getPropiedadProvincia(),propiedades.getPropiedadCanton(),propiedades.getPropiedadDistrito(),propiedades.getPropiedadDireccion(),propiedades.getPropiedadGeolocalizacion(),propiedades.getPropiedadArea(),propiedades.getPropiedadPlano(),propiedades.getPropiedadAMetrosFrente(),propiedades.getPropiedadValorTerreno(),propiedades.getPropiedadValorConstruccion(),propiedades.getPropiedadOtrosValores(),propiedades.isPerteneceEstado(),propiedades.getPropiedadZona(),propiedades.getEstado(),propiedades.getPropiedad_fecha_Registro(),propiedades.getPropiedad_fecha_Registro()));
             }
             this.TviewPropiedadesLista.setItems(Propiedadeslist);
         }
