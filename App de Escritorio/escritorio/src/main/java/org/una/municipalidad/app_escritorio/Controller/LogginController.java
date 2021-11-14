@@ -4,11 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
 import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,19 +37,32 @@ public class LogginController extends Controller implements Initializable {
         if(login != null){
             System.out.println("el rol es " + AppContext.getInstance().get("roles"));
             if(AppContext.getInstance().get("roles").equals("ROLE_GESTOR")){
+                ((Stage) btnIngresar.getScene().getWindow()).close();
+                txtCedula.clear();
+                txtContrasenia.clear();
                 FlowController.getInstance().goViewInWindow("Home");
 
+
             }else if(AppContext.getInstance().get("roles").equals("ROLE_GERENTE")){
+                ((Stage) btnIngresar.getScene().getWindow()).close();
+                txtCedula.clear();
+                txtContrasenia.clear();
                 FlowController.getInstance().goViewInWindow("GerentesView");
 
             }else if(AppContext.getInstance().get("roles").equals("ROLE_ADMINISTRADOR")){
+                ((Stage) btnIngresar.getScene().getWindow()).close();
+                txtCedula.clear();
+                txtContrasenia.clear();
                 //FlowController.getInstance().goViewInWindow("Principal");
 
             }else if(AppContext.getInstance().get("roles").equals("ROLE_AUDITOR")){
+                ((Stage) btnIngresar.getScene().getWindow()).close();
+                txtCedula.clear();
+                txtContrasenia.clear();
                 FlowController.getInstance().goViewInWindow("AuditorView");
             }
             else{
-                System.out.println("No joda");
+                JOptionPane.showMessageDialog(null, "Ese usuario no se encuentra ingresado");
             }
         }
     }

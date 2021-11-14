@@ -6,9 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
+import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,17 +50,17 @@ public class Controller2 extends Controller implements Initializable {
     @FXML
     private VBox vbxMenuIzq;
 
+    @FXML
+    private Label lblUsuario;
+
+    @FXML
+    private Label lblRol;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         vbxMenuIzq.setPrefWidth(20);
-        /*btnOverview.setVisible(false);
-        btnCustomers.setVisible(false);
-        btnMenus.setVisible(false);
-        btnPackages.setVisible(false);
-        btnSettings.setVisible(false);
-        btnSignout.setVisible(false);*/
+        lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
+        lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
     }
 
 
@@ -141,6 +145,12 @@ public class Controller2 extends Controller implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        if (actionEvent.getSource() ==   btnSignout) {
+            pnItems.getChildren().clear();
+            ((Stage) btnSignout.getScene().getWindow()).close();
+            FlowController.getInstance().goViewInWindow("Loggin");
         }
 
     }

@@ -1,6 +1,7 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,7 +35,7 @@ import javax.swing.*;
 public class ActualizarController extends Controller implements Initializable {
 
     @FXML
-    private TableView<LicenciasComercialesDTO> tablaLicencia;
+    private TableView tablaLicencia;
 
     @FXML
     private TableView<CobrosDTO> tablaCobros;
@@ -71,6 +72,9 @@ public class ActualizarController extends Controller implements Initializable {
 
     @FXML
     private TableColumn<LicenciasComercialesDTO, String> colEstadoC;
+
+    @FXML
+    private TableColumn<LicenciasComercialesDTO, Boolean> colActivo;
 
     @FXML
     private TableColumn<?, ?> col5I;
@@ -211,16 +215,16 @@ public class ActualizarController extends Controller implements Initializable {
     private ObservableList<LicenciasComercialesDTO> listaLicencia = FXCollections.observableArrayList();
     private ObservableList<LocalesMercadoDTO> listaLocales = FXCollections.observableArrayList();
     private ObservableList<PropiedadesDTO> listaPropiedades = FXCollections.observableArrayList();
-    private BooleanProperty _activo;
+   
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
         LlenarTablaLicencia();
         LlenarTablaLocal();
         LlenarTablaCobros();
         LlenarTablaPropiedad();
+
     }
 
     @Override
@@ -228,41 +232,45 @@ public class ActualizarController extends Controller implements Initializable {
 
     }
 
-    public final BooleanProperty activoProperty(){
-        return this._activo;
-    }
+   
 
     public void OnActionActualizar(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(Tipo=="Licencia") {
-
-            for (int x = 0; x < listaLicencia.size(); x++) {
-                LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(listaLicencia.get(x).getId(), listaLicencia.get(x).getNombreComercio(), listaLicencia.get(x).getTelefonoComercio(), listaLicencia.get(x).getCorreoComercio(), listaLicencia.get(x).getDistritoComercio(), fechaRegistro, fechaRegistro, listaLicencia.get(x).getCodigoComercio(), listaLicencia.get(x).getEstado());
+            List<LicenciasComercialesDTO> filaSeleccionada =  tablaLicencia.getSelectionModel().getSelectedItems();
+            if (filaSeleccionada.size() == 1) {
+                final LicenciasComercialesDTO licenciaSeleccionada = filaSeleccionada.get(0);
+                LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(licenciaSeleccionada.getId(), licenciaSeleccionada.getNombreComercio(), licenciaSeleccionada.getTelefonoComercio(), licenciaSeleccionada.getCorreoComercio(), licenciaSeleccionada.getDistritoComercio(), fechaRegistro, fechaRegistro, licenciaSeleccionada.getCodigoComercio(), licenciaSeleccionada.getEstado());
             }
-            JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
-            tablaLicencia.getItems().clear();
+            JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
         }
         else if(Tipo=="Local") {
-            for (int x = 0; x < listaLocales.size(); x++) {
-                LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(listaLocales.get(x).getId(),listaLocales.get(x).getNombreLocal(),listaLocales.get(x).getUbicacionLocal(),listaLocales.get(x).getCorreoLocal(),listaLocales.get(x).getTelefonoLocal(),listaLocales.get(x).getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,listaLocales.get(x).getEstado());
+            List<LocalesMercadoDTO> filaSeleccionada =  tablaLocales.getSelectionModel().getSelectedItems();
+            if (filaSeleccionada.size() == 1) {
+                final LocalesMercadoDTO localSeleccionado = filaSeleccionada.get(0);
+                LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(localSeleccionado.getId(),localSeleccionado.getNombreLocal(),localSeleccionado.getUbicacionLocal(),localSeleccionado.getCorreoLocal(),localSeleccionado.getTelefonoLocal(),localSeleccionado.getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,localSeleccionado.getEstado());
             }
-            JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
-            tablaLocales.getItems().clear();
+            JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
         }
         else if(Tipo=="Propiedad") {
-            for (int x = 0; x < listaPropiedades.size(); x++) {
-                PropiedadesDTO local = ConsultasGestorService.ActualizarPropiedad(listaPropiedades.get(x).getPropiedades_id(),listaPropiedades.get(x).getPropiedadProvincia(),listaPropiedades.get(x).getPropiedadCanton(),
-                        listaPropiedades.get(x).getPropiedadDistrito(),listaPropiedades.get(x).getPropiedadDireccion(),listaPropiedades.get(x).getPropiedadGeolocalizacion(),listaPropiedades.get(x).getPropiedadArea(),
-                        listaPropiedades.get(x).getPropiedadPlano(),listaPropiedades.get(x).getPropiedadAMetrosFrente(),listaPropiedades.get(x).getPropiedadValorTerreno(),listaPropiedades.get(x).getPropiedadValorConstruccion(),
-                        listaPropiedades.get(x).getPropiedadOtrosValores(),listaPropiedades.get(x).isPerteneceEstado(),listaPropiedades.get(x).getPropiedadZona(),listaPropiedades.get(x).getEstado(),fechaRegistro,fechaRegistro);
+            List<PropiedadesDTO> filaSeleccionada =  tablaPropiedades.getSelectionModel().getSelectedItems();
+            if (filaSeleccionada.size() == 1) {
+                final PropiedadesDTO propiedadSeleccionada = filaSeleccionada.get(0);
+                PropiedadesDTO local = ConsultasGestorService.ActualizarPropiedad(propiedadSeleccionada.getPropiedades_id(),propiedadSeleccionada.getPropiedadProvincia(),propiedadSeleccionada.getPropiedadCanton(),
+                        propiedadSeleccionada.getPropiedadDistrito(),propiedadSeleccionada.getPropiedadDireccion(),propiedadSeleccionada.getPropiedadGeolocalizacion(),propiedadSeleccionada.getPropiedadArea(),
+                        propiedadSeleccionada.getPropiedadPlano(),propiedadSeleccionada.getPropiedadAMetrosFrente(),propiedadSeleccionada.getPropiedadValorTerreno(),propiedadSeleccionada.getPropiedadValorConstruccion(),
+                        propiedadSeleccionada.getPropiedadOtrosValores(),propiedadSeleccionada.isPerteneceEstado(),propiedadSeleccionada.getPropiedadZona(),propiedadSeleccionada.getEstado(),fechaRegistro,fechaRegistro);
             }
-            JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
-            tablaPropiedades.getItems().clear();
+            JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
         }
     }
 
     public void OnActionBuscar(ActionEvent actionEvent) throws IOException, InterruptedException {
         btnActualizar.setDisable(false);
         btnEliminar.setDisable(false);
+        tablaLicencia.getItems().clear();
+        tablaLocales.getItems().clear();
+        tablaPropiedades.getItems().clear();
+        tablaCobros.getItems().clear();
         if(txtCedula.getLength()==0){
             JOptionPane.showMessageDialog(null,"El campo cedula se encuentra vacio, porfavor digite una cedula");
         }else{
@@ -273,6 +281,7 @@ public class ActualizarController extends Controller implements Initializable {
                         listaLicencia.add(new LicenciasComercialesDTO(licencias.getId(),licencias.getNombreComercio(),licencias.getTelefonoComercio(),licencias.getCorreoComercio(),licencias.getDistritoComercio(),licencias.getFechaRegistrocomercio(),licencias.getUltima_Actualizacioncomercio(),licencias.getCodigoComercio(),licencias.getEstado()));
                     }
                     this.tablaLicencia.setItems(listaLicencia);
+                    txtCedula.clear();
                 }
 
             }else if(Tipo=="Local"){
@@ -282,6 +291,7 @@ public class ActualizarController extends Controller implements Initializable {
                         listaLocales.add(new LocalesMercadoDTO(locales.getId(),locales.getNombreLocal(),locales.getUbicacionLocal(),locales.getCorreoLocal(),locales.getTelefonoLocal(),locales.getMonto_Alquiler_Local(),locales.getFechaRegistrolocal(),locales.getUltima_Actualizacionlocal(),locales.getEstado()));
                     }
                     this.tablaLocales.setItems(listaLocales);
+                    txtCedula.clear();
                 }
             }else if(Tipo=="Propiedad"){
                 List<PropiedadesDTO> propiedad= ConsultasGestorService.ObtenerPropiedad(txtCedula.getText());
@@ -294,6 +304,7 @@ public class ActualizarController extends Controller implements Initializable {
                                 propiedades.getPropiedad_ultima_Actualizacion()));
                     }
                     this.tablaPropiedades.setItems(listaPropiedades);
+                    txtCedula.clear();
                 }
             }else if(Tipo=="Cobros"){
                 List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro(txtCedula.getText());
@@ -302,6 +313,7 @@ public class ActualizarController extends Controller implements Initializable {
                         listaCobros.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
                     }
                     this.tablaCobros.setItems(listaCobros);
+                    txtCedula.clear();
                 }
             }
         }
@@ -309,48 +321,60 @@ public class ActualizarController extends Controller implements Initializable {
 
     public void OnActionEliminar(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(Tipo=="Licencia") {
-
-            for (int x = 0; x < listaLicencia.size(); x++) {
-                LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(listaLicencia.get(x).getId(), listaLicencia.get(x).getNombreComercio(), listaLicencia.get(x).getTelefonoComercio(), listaLicencia.get(x).getCorreoComercio(), listaLicencia.get(x).getDistritoComercio(), fechaRegistro, fechaRegistro, listaLicencia.get(x).getCodigoComercio(), SolicitarEliminar);
+            List<LicenciasComercialesDTO> filaSeleccionada =  tablaLicencia.getSelectionModel().getSelectedItems();
+            if (filaSeleccionada.size() == 1) {
+                final LicenciasComercialesDTO licenciaSeleccionada = filaSeleccionada.get(0);
+                LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(licenciaSeleccionada.getId(), licenciaSeleccionada.getNombreComercio(), licenciaSeleccionada.getTelefonoComercio(), licenciaSeleccionada.getCorreoComercio(),licenciaSeleccionada.getDistritoComercio(), fechaRegistro, fechaRegistro, licenciaSeleccionada.getCodigoComercio(), SolicitarEliminar);
             }
-            JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
-            tablaLicencia.getItems().clear();
+            JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar ");
         }
         else if(Tipo=="Local") {
-            for (int x = 0; x < listaLocales.size(); x++) {
-                LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(listaLocales.get(x).getId(),listaLocales.get(x).getNombreLocal(),listaLocales.get(x).getUbicacionLocal(),listaLocales.get(x).getCorreoLocal(),listaLocales.get(x).getTelefonoLocal(),listaLocales.get(x).getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,SolicitarEliminar);
+            List<LocalesMercadoDTO> filaSeleccionada =  tablaLocales.getSelectionModel().getSelectedItems();
+            if (filaSeleccionada.size() == 1) {
+                final LocalesMercadoDTO localSeleccionado = filaSeleccionada.get(0);
+                LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(localSeleccionado.getId(),localSeleccionado.getNombreLocal(),localSeleccionado.getUbicacionLocal(),localSeleccionado.getCorreoLocal(),localSeleccionado.getTelefonoLocal(),localSeleccionado.getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,SolicitarEliminar);
             }
-            JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
-            tablaLocales.getItems().clear();
+            JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+
         }
         else if(Tipo=="Propiedad") {
-            for (int x = 0; x < listaPropiedades.size(); x++) {
-                PropiedadesDTO local = ConsultasGestorService.ActualizarPropiedad(listaPropiedades.get(x).getPropiedades_id(),listaPropiedades.get(x).getPropiedadProvincia(),listaPropiedades.get(x).getPropiedadCanton(),
-                        listaPropiedades.get(x).getPropiedadDistrito(),listaPropiedades.get(x).getPropiedadDireccion(),listaPropiedades.get(x).getPropiedadGeolocalizacion(),listaPropiedades.get(x).getPropiedadArea(),
-                        listaPropiedades.get(x).getPropiedadPlano(),listaPropiedades.get(x).getPropiedadAMetrosFrente(),listaPropiedades.get(x).getPropiedadValorTerreno(),listaPropiedades.get(x).getPropiedadValorConstruccion(),
-                        listaPropiedades.get(x).getPropiedadOtrosValores(),listaPropiedades.get(x).isPerteneceEstado(),listaPropiedades.get(x).getPropiedadZona(),SolicitarEliminar,fechaRegistro,fechaRegistro);
+            List<PropiedadesDTO> filaSeleccionada =  tablaPropiedades.getSelectionModel().getSelectedItems();
+            if (filaSeleccionada.size() == 1) {
+                final PropiedadesDTO propiedadSeleccionada = filaSeleccionada.get(0);
+
+                PropiedadesDTO local = ConsultasGestorService.ActualizarPropiedad(propiedadSeleccionada.getPropiedades_id(), propiedadSeleccionada.getPropiedadProvincia(), propiedadSeleccionada.getPropiedadCanton(),
+                        propiedadSeleccionada.getPropiedadDistrito(), propiedadSeleccionada.getPropiedadDireccion(), propiedadSeleccionada.getPropiedadGeolocalizacion(), propiedadSeleccionada.getPropiedadArea(),
+                        propiedadSeleccionada.getPropiedadPlano(), propiedadSeleccionada.getPropiedadAMetrosFrente(), propiedadSeleccionada.getPropiedadValorTerreno(), propiedadSeleccionada.getPropiedadValorConstruccion(),
+                        propiedadSeleccionada.getPropiedadOtrosValores(), propiedadSeleccionada.isPerteneceEstado(), propiedadSeleccionada.getPropiedadZona(), SolicitarEliminar, fechaRegistro, fechaRegistro);
             }
-            JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
-            tablaPropiedades.getItems().clear();
+            JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+
         }
 
     }
 
     public void SeleccionCobros(Event event) {
         Tipo = "Cobros";
+        tablaCobros.getItems().clear();
     }
 
     public void SeleccionPropiedad(Event event) {
         Tipo = "Propiedad";
+        tablaPropiedades.getItems().clear();
     }
 
     public void SeleccionLocal(Event event) {
         Tipo = "Local";
+        tablaLocales.getItems().clear();
     }
 
     public void SeleccionLicencia(Event event) {
         Tipo = "Licencia";
+        tablaLicencia.getItems().clear();
     }
+
+
+    
 
     public void LlenarTablaLicencia(){
 

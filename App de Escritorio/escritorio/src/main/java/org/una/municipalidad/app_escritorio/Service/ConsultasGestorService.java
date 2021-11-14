@@ -576,4 +576,28 @@ public class ConsultasGestorService {
         Licencia = mapper.readValue(response.body(), new TypeReference<LicenciasComercialesDTO>() {});
         return Licencia;
     }*/
+
+    public static List<LicenciasComercialesDTO> ObtenerLicenciaNombre(String nombre) throws IOException, InterruptedException {
+
+        List<LicenciasComercialesDTO> licencia = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/licenciasComerciales/findLicencias_ComercialesByCedula/"+nombre+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status "+response.statusCode());
+
+        System.out.println("cuerpo "+response.body());
+        licencia = mapper.readValue(response.body(), new TypeReference<List<LicenciasComercialesDTO>>() {});
+
+        return licencia;
+
+    }
 }

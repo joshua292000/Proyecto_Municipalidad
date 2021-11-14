@@ -1,5 +1,6 @@
 package org.una.municipalidad.app_escritorio.DTO;
 
+import javafx.beans.property.BooleanProperty;
 import lombok.*;
 
 import java.util.Date;
@@ -20,4 +21,6 @@ public class LicenciasComercialesDTO {
     private Date ultima_Actualizacioncomercio;
     private String codigoComercio;
     private String estado;
+
+
 }

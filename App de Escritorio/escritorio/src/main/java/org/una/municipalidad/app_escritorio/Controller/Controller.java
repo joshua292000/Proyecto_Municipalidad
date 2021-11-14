@@ -1,4 +1,5 @@
 package org.una.municipalidad.app_escritorio.Controller;
+import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Control;
@@ -24,6 +25,7 @@ public abstract class Controller {
     public static void setHola(int hola) {
         Controller.hola = hola;
     }
+
 
 
     public String getAccion() {
@@ -57,6 +59,20 @@ public abstract class Controller {
         ((VBox) border.getCenter()).getChildren().clear();
         ((VBox) border.getCenter()).getChildren().add(root);
 
+    }
+
+    public static BooleanProperty _activo;
+
+    public final BooleanProperty activoProperty(){
+        return this._activo;
+    }
+
+    public final Boolean getActivo() {
+        return _activo.get();
+    }
+
+    public final void setActivo(Boolean activo) {
+        this._activo.set(activo);
     }
     public abstract void initialize();
 }

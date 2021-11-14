@@ -114,6 +114,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
+                <Label fx:id="lblRol" text="Rol" textFill="#e7e5e5" translateY="-320.0" />
             </children>
         </VBox>
         <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #02030A;" stylesheets="@../resources/style.css">
