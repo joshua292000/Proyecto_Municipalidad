@@ -498,7 +498,7 @@ public class ConsultasGestorService {
                 .append("\"propiedadZona\":\"" )
                 .append(propiedadZona)
                 .append("\",")
-                .append("\"Estado\":\"" )
+                .append("\"estado\":\"" )
                 .append(estado)
                 .append("\",")
                 .append("\"propiedad_fecha_Registro\":\"" )
