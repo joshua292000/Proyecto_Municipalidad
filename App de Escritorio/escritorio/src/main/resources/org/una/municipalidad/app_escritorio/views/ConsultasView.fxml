@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,6 +8,45 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ConsultasViewController">
-
+<AnchorPane prefHeight="682.0" prefWidth="1002.0" snapToPixel="false" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ConsultasViewController">
+   <children>
+      <BorderPane prefHeight="647.0" prefWidth="1002.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox prefHeight="5.0" prefWidth="1002.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </top>
+         <left>
+            <VBox prefHeight="200.0" prefWidth="5.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="5.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <VBox prefHeight="5.0" prefWidth="100.0" style="-fx-background-color: #02030A;" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <VBox prefHeight="682.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TabPane prefHeight="546.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Untitled Tab 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                      <Tab text="Untitled Tab 2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
 </AnchorPane>

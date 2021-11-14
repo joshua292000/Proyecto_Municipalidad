@@ -179,7 +179,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocales();
                 if(local!=null){
                     for(LocalesMercadoDTO loc:local){
-                        optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreComercio(),loc.getUbicacionLocal(),loc.getCorreoComercio(),loc.getTelefonoComercio(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.isEstado()));
+                        optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreLocal(),loc.getUbicacionLocal(),loc.getCorreoLocal(),loc.getTelefonoLocal(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.isEstado()));
                     }
                     //Collection.sort(options);
                     this.Tvdatos.setItems(optionscont);

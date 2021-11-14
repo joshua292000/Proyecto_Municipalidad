@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.entities.Cobros;
 import org.una.municipalidad.services.CobrosService;
+import org.una.municipalidad.utils.MapperUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -46,6 +47,17 @@ public class CobrosController {
 
     }
 
+    @GetMapping("/findByEstado/{esdato}")
+    @ApiOperation(value = "Obtiene cobros a partir de su estado", response = CobrosDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
+    public ResponseEntity<?> findByEstado(String Estado) {
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findByEstado(Estado);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @GetMapping("/findBycobrosPeriodo/{cobrosPeriodo}")
     @ApiOperation(value = "Obtiene el periodo de un cobro", response = CobrosDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
@@ -62,12 +74,24 @@ public class CobrosController {
         return new ResponseEntity<>(cobrosFound, HttpStatus.OK);
     }
 
-    @GetMapping("/findByCobrosFechaPagoBetween/{startDate}/{endDate}")
-    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
-    public ResponseEntity<?> findByCobrosFechaPagoBetween(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-yy")Date endDate){
+    @GetMapping("/findbyCobrosporFecha/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene cobros a partir de sus Fechas", response = CobrosDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR')")
+    public ResponseEntity<?> findbyCobrosporFecha(@PathVariable(value = "startDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         try{
-            Optional<List<CobrosDTO>> result = cobrosService.findByCobrosFechaPagoBetween(startDate,endDate);
+            Optional<List<CobrosDTO>> result = cobrosService.findbyCobrosporFecha(startDate,endDate);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/findByCobrosBetweenFechaPago/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> findByCobrosBetweenFechaPago(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findByCobrosBetweenFechaPago(startDate,endDate);
             return new ResponseEntity<>(result,HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);

@@ -11,7 +11,10 @@
 
 <BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1154.0" style="-fx-background-color: #02030A;" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.GerenteViewController">
     <center>
-        <VBox prefHeight="682.0" prefWidth="991.0" BorderPane.alignment="CENTER" />
+        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="991.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></VBox>
     </center>
     <top>
         <HBox prefHeight="16.0" prefWidth="600.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
@@ -52,7 +55,7 @@
                         <Image url="@../resources/org.rdsp.consultaregistraduria.jpg" />
                      </image>
                   </ImageView>
-                      <JFXButton fx:id="btnConsultas" prefHeight="52.0" prefWidth="94.0" text="Consultas" />
+                      <JFXButton fx:id="btnConsultas" onAction="#OnActionbtnConsultas" prefHeight="52.0" prefWidth="94.0" text="Consultas" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
