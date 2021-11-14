@@ -19,5 +19,5 @@ public class LocalesMercadoDTO {
     private Long Monto_Alquiler_Local;
     private Date fechaRegistrolocal;
     private Date ultima_Actualizacionlocal;
-    private boolean estado;
+    private String estado;
 }

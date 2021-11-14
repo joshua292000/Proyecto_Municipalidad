@@ -15,6 +15,7 @@ import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.LocalesMercadoRepository;
 import org.una.municipalidad.utils.MapperUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +39,15 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
         Optional<Locales_Mercado> locales_mercado = localesMercadoRepository.findByNombreLocal(nombreLocal);
         return Optional.ofNullable(MapperUtils.DtoFromEntity(locales_mercado, LocalesMercadoDTO.class));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<LocalesMercadoDTO>> findLocales_MercadoByCedula(String cedulaContribuyente) {
+        List<Locales_Mercado> contribuyenteslist = localesMercadoRepository.findLocales_MercadoByCedula(cedulaContribuyente);
+        List<LocalesMercadoDTO> contribuyentesDTO = MapperUtils.DtoListFromEntityList(contribuyenteslist,LocalesMercadoDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
+    }
+
     private LocalesMercadoDTO getSavedLocalesMercadoDTO(LocalesMercadoDTO localesMercadoDTO) {
         Locales_Mercado locales_mercado = MapperUtils.EntityFromDto(localesMercadoDTO, Locales_Mercado.class);
         Locales_Mercado locales_mercadoCreated = localesMercadoRepository.save(locales_mercado );
@@ -50,7 +60,8 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
     }
 
     @Override
-    public Optional<LocalesMercadoDTO> update(LocalesMercadoDTO localesMercadoDTO) {
+    public Optional<LocalesMercadoDTO> update(LocalesMercadoDTO localesMercadoDTO, Long id) {
+        if (localesMercadoRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(getSavedLocalesMercadoDTO(localesMercadoDTO));
     }
 

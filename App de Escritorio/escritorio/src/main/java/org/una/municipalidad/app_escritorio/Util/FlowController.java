@@ -1,21 +1,22 @@
 package org.una.municipalidad.app_escritorio.Util;
 
-import javafx.scene.layout.StackPane;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.una.municipalidad.app_escritorio.Controller.Controller;
 import org.una.municipalidad.app_escritorio.Inicio;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 
 public class FlowController {

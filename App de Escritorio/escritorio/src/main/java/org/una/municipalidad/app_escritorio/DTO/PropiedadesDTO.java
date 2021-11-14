@@ -1,6 +1,7 @@
 package org.una.municipalidad.app_escritorio.DTO;
 
 import lombok.*;
+
 import java.util.Date;
 
 @Data
@@ -23,7 +24,7 @@ public class PropiedadesDTO {
     private Long propiedadOtrosValores;
     private boolean PerteneceEstado;
     private String propiedadZona;
-    private boolean Estado;
+    private String Estado;
     private Date propiedad_fecha_Registro;
     private Date propiedad_ultima_Actualizacion;
 }

@@ -19,6 +19,5 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
 
     public Optional<Usuarios> findByCedula(String cedula);
 
-    //@Query("select u from Usuario u where UPPER(u.nombreCompleto) like CONCAT('%',UPPER(:nombreCompleto),'%')\"")
-    //public Usuario findNombreCompletoWithLikeSQL(@Param("nombreCompleto")String nombreCompleto);
+
 }

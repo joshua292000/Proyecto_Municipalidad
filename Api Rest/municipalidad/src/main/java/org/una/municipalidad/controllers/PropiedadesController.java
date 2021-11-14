@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.ContribuyentesDTO;
+import org.una.municipalidad.dto.LocalesMercadoDTO;
 import org.una.municipalidad.dto.PropiedadesDTO;
 import org.una.municipalidad.services.PropiedadesService;
 
@@ -52,6 +54,18 @@ public class PropiedadesController {
     public ResponseEntity<?> findByPropiedadValorConstruccion(@PathVariable(value = "propiedadValorConstruccion") Long propiedadValorConstruccion) {
         Optional<PropiedadesDTO> propiedadesFound = propiedadesService.findByPropiedadValorConstruccion(propiedadValorConstruccion);
         return new ResponseEntity<>(propiedadesFound, HttpStatus.OK);
+    }
+
+    @GetMapping("/findPropiedadesByCedula/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de las propiedades a partir de la cedula de un contribuyente", response = ContribuyentesDTO.class, tags = "LicenciasComerciales")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    public ResponseEntity<?> findPropiedadesByCedula(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
+        try{
+            Optional<List<PropiedadesDTO>> result = propiedadesService.findPropiedadesByCedula(cedulaContribuyente);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)

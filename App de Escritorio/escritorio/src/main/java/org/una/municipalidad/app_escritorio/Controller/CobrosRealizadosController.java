@@ -39,7 +39,7 @@ public class CobrosRealizadosController extends Controller implements Initializa
 
         if (cobro != null) {
             for (CobrosDTO cobros : cobro) {
-                cobrosRealizadoslist.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.isEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomerciales(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
+                cobrosRealizadoslist.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomerciales(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
             }
             this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
         }

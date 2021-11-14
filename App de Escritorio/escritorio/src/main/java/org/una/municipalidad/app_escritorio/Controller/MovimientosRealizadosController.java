@@ -8,12 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
 import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
-import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceAuditor;
-
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import java.net.URL;
 import java.util.List;

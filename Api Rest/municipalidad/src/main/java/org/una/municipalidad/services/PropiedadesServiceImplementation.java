@@ -3,7 +3,9 @@ package org.una.municipalidad.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.LocalesMercadoDTO;
 import org.una.municipalidad.dto.PropiedadesDTO;
+import org.una.municipalidad.entities.Locales_Mercado;
 import org.una.municipalidad.entities.Propiedades;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.PropiedadesRepository;
@@ -49,6 +51,14 @@ public class PropiedadesServiceImplementation implements PropiedadesService {
         if (propiedades.isEmpty()) throw new NotFoundInformationException();
         PropiedadesDTO propiedadesDTO = MapperUtils.DtoFromEntity(propiedades.get(), PropiedadesDTO.class);
         return Optional.ofNullable(propiedadesDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<PropiedadesDTO>> findPropiedadesByCedula(String cedulaContribuyente) {
+        List<Propiedades> contribuyenteslist = propiedadesRepository.findPropiedadesByCedula(cedulaContribuyente);
+        List<PropiedadesDTO> contribuyentesDTO = MapperUtils.DtoListFromEntityList(contribuyenteslist,PropiedadesDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
     }
 
     private PropiedadesDTO getSavedPropiedadesDTO(PropiedadesDTO propiedadesDTO) {

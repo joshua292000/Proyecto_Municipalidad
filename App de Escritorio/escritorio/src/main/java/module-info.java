@@ -12,6 +12,9 @@ module org.una.municipalidad.app_escritorio {
     requires com.fasterxml.jackson.databind;
     requires jasperreports;
     requires java.desktop;
+    requires jxbrowser;
+    requires jxbrowser.swing;
+
 
     opens org.una.municipalidad.app_escritorio to javafx.fxml;
     opens org.una.municipalidad.app_escritorio.Controller to javafx.fxml;

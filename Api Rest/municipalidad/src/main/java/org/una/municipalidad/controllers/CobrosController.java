@@ -97,6 +97,18 @@ public class CobrosController {
         }
     }
 
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    @GetMapping("/findCobrosByCedulaContribuyenteContaining/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    public ResponseEntity<?> findCobrosByCedulaContribuyenteContaining(@PathVariable (value ="cedulaContribuyente") String cedula){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyenteContaining(cedula);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT')")
     @GetMapping("/findCobrosByCedulaContribuyentePendientes/{cedulaContribuyente}")
     @ApiOperation(value = "Obtiene una lista de cobros pendientes", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")

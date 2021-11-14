@@ -1,6 +1,7 @@
 package org.una.municipalidad.app_escritorio.DTO;
 
 import lombok.*;
+
 import java.util.Date;
 
 @Data
@@ -14,7 +15,7 @@ public class CobrosDTO {
     private Long cobrosMonto;
     private Date cobrosFechaCreacion;
     private Date cobrosFechaVencimiento;
-    private boolean Estado;
+    private String Estado;
     private Date cobrosFechaPago;
     private LicenciasComercialesDTO licenciacomerciales;
     private FacturasDTO facturas;

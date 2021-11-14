@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.text.*?>
 <AnchorPane prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AuditorController">
    <children>
       <BorderPane fx:id="BorderPaneFondo" prefHeight="576.0" prefWidth="1050.0">
@@ -70,15 +66,7 @@
             </VBox>
          </left>
          <center>
-<<<<<<< Updated upstream
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox prefHeight="768.0" prefWidth="592.0" />
-               </children>
-            </StackPane>
-=======
             <VBox fx:id="vboxFondo" prefHeight="576.0" prefWidth="818.0" BorderPane.alignment="CENTER" />
->>>>>>> Stashed changes
          </center>
       </BorderPane>
    </children>

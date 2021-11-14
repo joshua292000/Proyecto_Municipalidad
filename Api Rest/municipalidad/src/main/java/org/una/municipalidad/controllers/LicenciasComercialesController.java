@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.una.municipalidad.dto.ContribuyentesDTO;
+import org.una.municipalidad.dto.Contribuyentes_Licencias_ComercialesDTO;
 import org.una.municipalidad.dto.DeclaracionesDTO;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
 import org.una.municipalidad.services.LicenciasComercialesService;
@@ -54,6 +56,18 @@ public class LicenciasComercialesController {
     public ResponseEntity<?> findByNombreComercio(@PathVariable(value = "nombreComercio") String nombreComercio) {
         Optional<LicenciasComercialesDTO> licenciaComercialFound = licenciaComercialService.findByNombreComercio(nombreComercio);
         return new ResponseEntity<>(licenciaComercialFound, HttpStatus.OK);
+    }
+
+    @GetMapping("/findLicencias_ComercialesByCedula/{cedulaContribuyente}")
+    @ApiOperation(value = "Obtiene una lista de licencias comerciales a partir de la cedula de un contribuyente", response = ContribuyentesDTO.class, tags = "LicenciasComerciales")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    public ResponseEntity<?> findLicencias_ComercialesByCedula(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
+        try{
+            Optional<List<LicenciasComercialesDTO>> result = licenciaComercialService.findLicencias_ComercialesByCedula(cedulaContribuyente);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)

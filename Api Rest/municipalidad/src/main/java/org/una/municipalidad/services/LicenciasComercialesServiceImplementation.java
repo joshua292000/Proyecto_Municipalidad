@@ -3,7 +3,9 @@ package org.una.municipalidad.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.municipalidad.dto.Contribuyentes_Licencias_ComercialesDTO;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
+import org.una.municipalidad.entities.Contribuyentes_Licencias_Comerciales;
 import org.una.municipalidad.entities.Licencias_Comerciales;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.LicenciasComercialesRepository;
@@ -50,6 +52,14 @@ public class LicenciasComercialesServiceImplementation implements LicenciasComer
         if (licenciaComercial.isEmpty()) throw new NotFoundInformationException();
         LicenciasComercialesDTO licenciaComercialDTO = MapperUtils.DtoFromEntity(licenciaComercial.get(), LicenciasComercialesDTO.class);
         return Optional.ofNullable(licenciaComercialDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<LicenciasComercialesDTO>> findLicencias_ComercialesByCedula(String cedulaContribuyente) {
+        List<Licencias_Comerciales> contribuyenteslist = licenciacomercialRepository.findLicencias_ComercialesByCedula(cedulaContribuyente);
+        List<LicenciasComercialesDTO> contribuyentesDTO = MapperUtils.DtoListFromEntityList(contribuyenteslist,LicenciasComercialesDTO.class);
+        return Optional.ofNullable(contribuyentesDTO);
     }
 
     private LicenciasComercialesDTO getSavedLicenciaComercialDTO(LicenciasComercialesDTO licenciaComercialDTO) {
