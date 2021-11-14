@@ -13,6 +13,7 @@ import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -87,12 +88,9 @@ public class ListadoViewController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        System.out.print("Hola Joshua Rico");
-
         switch (Controller.getHola()){
             case 1: {
-                System.out.print("Hola Joss");
-                List<CobrosDTO> cobro= ConsultasServiceGerente.obtenerTodoCobro();
+                List<CobrosDTO> cobro= ConsultasServiceGerente.obtenerTodoCobroXEsatado("Pendiente");
                 if(cobro!=null){
                     for(CobrosDTO cobros:cobro){
                         options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
@@ -100,7 +98,7 @@ public class ListadoViewController extends Controller implements Initializable {
                     //Collection.sort(options);
                     this.Tvdatos.setItems(options);
                 }
-                System.out.print(cobro);
+                //System.out.print(cobro);
                 LlenarTabla();
                 break;
             }
@@ -153,7 +151,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 break;
             }
             case 6: {
-                List<LicenciasComercialesDTO> Licecias= ConsultasServiceGerente.obtenerTodoLicencias();
+                List<LicenciasComercialesDTO> Licecias= ConsultasServiceGerente.obtenerTodoLicenciasxEstado("Pendiente");
                 if(Licecias!=null){
                     for(LicenciasComercialesDTO lic:Licecias){
                         optionsLic.add(new LicenciasComercialesDTO(lic.getId(),lic.getNombreComercio(),lic.getTelefonoComercio(),lic.getCorreoComercio(),lic.getDistritoComercio(),lic.getFechaRegistrocomercio(),lic.getUltima_Actualizacioncomercio(),lic.getCodigoComercio(),lic.getEstado()));
@@ -165,7 +163,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 break;
             }
             case 7: {
-                List<PropiedadesDTO> propiedad= ConsultasServiceGerente.obtenerTodoPropiedades();
+                List<PropiedadesDTO> propiedad= ConsultasServiceGerente.obtenerTodoPropiedadesxEstado("Pendiente");
                 if(propiedad!=null){
                     for(PropiedadesDTO pro:propiedad){
                         optionsPro.add(new PropiedadesDTO(pro.getPropiedades_id(),pro.getPropiedadProvincia(),pro.getPropiedadCanton(),pro.getPropiedadDistrito(),pro.getPropiedadDireccion(),pro.getPropiedadGeolocalizacion(),pro.getPropiedadArea(),pro.getPropiedadPlano(),pro.getPropiedadAMetrosFrente(),pro.getPropiedadValorTerreno(),pro.getPropiedadValorConstruccion(),pro.getPropiedadOtrosValores(),pro.isPerteneceEstado(),pro.getPropiedadZona(),pro.getEstado(),pro.getPropiedad_fecha_Registro(),pro.getPropiedad_fecha_Registro()));
@@ -177,15 +175,15 @@ public class ListadoViewController extends Controller implements Initializable {
                 break;
             }
             case 8: {
-                List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocales();
+                List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocalesxEstado("Pendiente");
                 if(local!=null){
                     for(LocalesMercadoDTO loc:local){
                         optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreLocal(),loc.getUbicacionLocal(),loc.getCorreoLocal(),loc.getTelefonoLocal(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.getEstado()));
                     }
                     //Collection.sort(options);
-                    this.Tvdatos.setItems(optionscont);
+                    this.Tvdatos.setItems(optionsLoc);
                 }
-                LlenarTablaContr();
+                LlenarTablaLoc();
                 break;
             }
         }
@@ -319,5 +317,35 @@ public class ListadoViewController extends Controller implements Initializable {
         Col16.setText("propiedad_fecha_Registro");
         Col17.setText("propiedad_ultima_Actualizacion");
         this.Tvdatos.setItems(optionsPro);
+    }
+
+    public void LlenarTablaLoc(){
+        this.Col1.setCellValueFactory(new PropertyValueFactory("id"));
+        this.Col2.setCellValueFactory(new PropertyValueFactory("nombreLocal"));
+        this.Col3.setCellValueFactory(new PropertyValueFactory("ubicacionLocal"));
+        this.Col4.setCellValueFactory(new PropertyValueFactory("correoLocal"));
+        this.Col5.setCellValueFactory(new PropertyValueFactory("telefonoLocal"));
+        this.Col6.setCellValueFactory(new PropertyValueFactory("Monto_Alquiler_Local"));
+        this.Col7.setCellValueFactory(new PropertyValueFactory("fechaRegistrolocal"));
+        this.Col8.setCellValueFactory(new PropertyValueFactory("ultima_Actualizacionlocal"));
+        this.Col9.setCellValueFactory(new PropertyValueFactory("estado"));
+        Col1.setText("id");
+        Col2.setText("nombreLocal");
+        Col3.setText("ubicacionLocal");
+        Col4.setText("correoLocal");
+        Col5.setText("telefonoLocal");
+        Col6.setText("Monto_Alquiler_Local");
+        Col7.setText("fechaRegistrolocal");
+        Col8.setText("ultima_Actualizacionlocal");
+        Col9.setText("estado");
+        Col10.setVisible(false);
+        Col11.setVisible(false);
+        Col12.setVisible(false);
+        Col13.setVisible(false);
+        Col14.setVisible(false);
+        Col15.setVisible(false);
+        Col16.setVisible(false);
+        Col17.setVisible(false);
+        this.Tvdatos.setItems(optionsLoc);
     }
 }
