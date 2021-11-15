@@ -1,6 +1,7 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 public class LogginController extends Controller implements Initializable {
 
     public JFXTextField txtCedula;
-    public JFXTextField txtContrasenia;
+    public JFXPasswordField txtContrasenia;
     public JFXButton btnIngresar;
 
     @Override

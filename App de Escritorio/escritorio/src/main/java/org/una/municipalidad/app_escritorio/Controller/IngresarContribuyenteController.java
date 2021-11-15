@@ -82,10 +82,7 @@ public class IngresarContribuyenteController extends Controller implements Initi
         }else{
             ContribuyentesDTO contribuyente = ConsultasGestorService.ObtenerContribuyente(txtCedula.getText());
             if(contribuyente!=null){
-               // for(ContribuyentesDTO contribuyentes:contribuyente){
                     options.add(new ContribuyentesDTO(contribuyente.getId(),contribuyente.getNombreContribuyente(),contribuyente.getApellidoContribuyente(),contribuyente.getCedulaContribuyente()));
-
-               // }
                 this.TablaContribuyente.setItems(options);
             }
         }
@@ -108,10 +105,6 @@ public class IngresarContribuyenteController extends Controller implements Initi
     }
 
 
-    @FXML
-    void OnActionCancelar(ActionEvent event) {
-
-    }
 
     @FXML
     void OnActionGuardar(ActionEvent event) throws IOException, InterruptedException {
