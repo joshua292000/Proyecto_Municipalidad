@@ -1,6 +1,7 @@
 package org.una.municipalidad.entities;
 
 import lombok.*;
+import org.springframework.data.jpa.repository.query.Procedure;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -56,7 +57,7 @@ public class Cobros {
 
     @ManyToOne
     @JoinColumn(name="licencias_comerciales_id")
-    private Licencias_Comerciales licenciascomerciales;
+    private Licencias_Comerciales licenciacomercial;
 
     @ManyToOne
     @JoinColumn(name="propiedades_id")
@@ -64,7 +65,11 @@ public class Cobros {
 
     private static final long serialVersionUID = 1L;
 
-    @PrePersist
+    /*@Procedure
+    "CREATE DEFINER=`Kevin`@`localhost` PROCEDURE `Cobrosmasivos`(IN `FechaInicio` DATE,IN `FechaFin` DATE)"+
+            "LANGUAGE SQL NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER COMMENT '' BEGIN "+
+            "UPDATE cobros SET estado = 'Pagado' WHERE cobros_fecha_creacion Between FechaInicio AND FechaFin AND estado='Pendiente'; END "
+    */@PrePersist
     public void prePersist() {
         cobrosFechaCreacion = new Date();
         cobrosFechaVencimiento = new Date();

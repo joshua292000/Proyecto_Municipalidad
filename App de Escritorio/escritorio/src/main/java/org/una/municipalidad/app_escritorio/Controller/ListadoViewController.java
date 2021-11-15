@@ -1,5 +1,6 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,11 +10,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -84,6 +90,8 @@ public class ListadoViewController extends Controller implements Initializable {
     private ObservableList<LocalesMercadoDTO> optionsLoc = FXCollections.observableArrayList();
     private ObservableList<LicenciasComercialesDTO> optionsLic = FXCollections.observableArrayList();
     private ObservableList<PropiedadesDTO> optionsPro = FXCollections.observableArrayList();
+    private String  ArrayCobro[] ={"id","cobrosPeriodo","cobrosMonto","cobrosFechaCreacion","cobrosFechaVencimiento","Estado","cobrosFechaPago",
+            "licenciacomerciales","facturas","tipocobros","localesmercado","propiedades"};
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,15 +99,17 @@ public class ListadoViewController extends Controller implements Initializable {
         switch (Controller.getHola()){
             case 1: {
                 List<CobrosDTO> cobro= ConsultasServiceGerente.obtenerTodoCobroXEsatado("Pendiente");
+               // ListaAExcel.main(cobro);
                 if(cobro!=null){
                     for(CobrosDTO cobros:cobro){
-                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomercial(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
                     }
                     //Collection.sort(options);
                     this.Tvdatos.setItems(options);
                 }
                 //System.out.print(cobro);
                 LlenarTabla();
+                criarPlanilha(Tvdatos);
                 break;
             }
             case 2: {
@@ -188,6 +198,7 @@ public class ListadoViewController extends Controller implements Initializable {
             }
         }
 
+    System.out.println("tamaño"+ Tvdatos.getItems().get(1).toString());
     }
 
     @Override
@@ -195,6 +206,45 @@ public class ListadoViewController extends Controller implements Initializable {
 
     }
 
+    public String[] StringCobros(ObservableList<CobrosDTO> lista,int tamaño){
+        String arreglo[]= new String[12];
+        arreglo[0]=lista.get(tamaño).getId().toString();
+        arreglo[1]=(lista.get(tamaño).getCobrosPeriodo()==null)? " " : lista.get(tamaño).getCobrosPeriodo().toString();
+        arreglo[2]=(lista.get(tamaño).getCobrosMonto()==null)? " " : lista.get(tamaño).getCobrosMonto().toString();
+        arreglo[3]=(lista.get(tamaño).getCobrosFechaCreacion()==null)? " " : lista.get(tamaño).getCobrosFechaCreacion().toString();
+        arreglo[4]=(lista.get(tamaño).getCobrosFechaVencimiento()==null)? " " : lista.get(tamaño).getCobrosFechaVencimiento().toString();
+        arreglo[5]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
+        arreglo[6]=(lista.get(tamaño).getCobrosFechaPago()==null)? " " : lista.get(tamaño).getCobrosFechaPago().toString();
+        arreglo[7]=(lista.get(tamaño).getLicenciacomercial()==null)? " " : lista.get(tamaño).getLicenciacomercial().getId().toString();
+        arreglo[8]=(lista.get(tamaño).getFacturas()==null)? " " : lista.get(tamaño).getFacturas().getId().toString();
+        arreglo[9]=(lista.get(tamaño).getTipocobros()==null)? " " : lista.get(tamaño).getTipocobros().getId().toString();
+        arreglo[10]=(lista.get(tamaño).getLocalesmercado()==null)? " " : lista.get(tamaño).getLocalesmercado().getId().toString();
+        arreglo[11]=(lista.get(tamaño).getPropiedades()==null)? " " : lista.get(tamaño).getPropiedades().getPropiedades_id().toString();
+        return arreglo;
+    }
+
+    public String[] StringPropiedades(ObservableList<PropiedadesDTO> lista,int tamaño){
+        String arreglo[]= new String[12];
+        arreglo[0]=lista.get(tamaño).getPropiedades_id().toString();
+        arreglo[1]=(lista.get(tamaño).getPropiedadProvincia()==null)? " " : lista.get(tamaño).getPropiedadProvincia().toString();
+        arreglo[2]=(lista.get(tamaño).getPropiedadCanton()==null)? " " : lista.get(tamaño).getPropiedadCanton().toString();
+        arreglo[3]=(lista.get(tamaño).getPropiedadDistrito()==null)? " " : lista.get(tamaño).getPropiedadDistrito().toString();
+        arreglo[4]=(lista.get(tamaño).getPropiedadDireccion()==null)? " " : lista.get(tamaño).getPropiedadDireccion().toString();
+        arreglo[5]=(lista.get(tamaño).getPropiedadGeolocalizacion()==null)? " " : lista.get(tamaño).getPropiedadGeolocalizacion().toString();
+        arreglo[6]=(lista.get(tamaño).getPropiedadArea()==null)? " " : lista.get(tamaño).getPropiedadArea().toString();
+        arreglo[7]=(lista.get(tamaño).getPropiedadPlano()==null)? " " : lista.get(tamaño).getPropiedadPlano();
+        arreglo[8]=(lista.get(tamaño).getPropiedadAMetrosFrente()==null)? " " : lista.get(tamaño).getPropiedadAMetrosFrente().toString();
+        arreglo[9]=(lista.get(tamaño).getPropiedadValorTerreno()==null)? " " : lista.get(tamaño).getPropiedadValorTerreno().toString();
+        arreglo[10]=(lista.get(tamaño).getPropiedadValorConstruccion()==null)? " " : lista.get(tamaño).getPropiedadValorConstruccion().toString();
+        arreglo[11]=(lista.get(tamaño).getPropiedadOtrosValores()==null)? " " : lista.get(tamaño).getPropiedadOtrosValores().toString();
+       // arreglo[11]=(lista.get(tamaño).isPerteneceEstado()==null)? " " : lista.get(tamaño).isPerteneceEstado();
+        arreglo[11]=(lista.get(tamaño).getPropiedadZona()==null)? " " : lista.get(tamaño).getPropiedadZona().toString();
+        arreglo[11]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
+        arreglo[11]=(lista.get(tamaño).getPropiedad_fecha_Registro()==null)? " " : lista.get(tamaño).getPropiedad_fecha_Registro().toString();
+        arreglo[11]=(lista.get(tamaño).getPropiedad_ultima_Actualizacion()==null)? " " : lista.get(tamaño).getPropiedad_ultima_Actualizacion().toString();
+        return arreglo;
+
+    }
     public void LlenarTabla(){
         this.Col1.setCellValueFactory(new PropertyValueFactory("id"));
         this.Col2.setCellValueFactory(new PropertyValueFactory("cobrosPeriodo"));
@@ -203,7 +253,7 @@ public class ListadoViewController extends Controller implements Initializable {
         this.Col5.setCellValueFactory(new PropertyValueFactory("cobrosFechaVencimiento"));
         this.Col6.setCellValueFactory(new PropertyValueFactory("Estado"));
         this.Col7.setCellValueFactory(new PropertyValueFactory("cobrosFechaPago"));
-        this.Col8.setCellValueFactory(new PropertyValueFactory("licenciacomerciales"));
+        this.Col8.setCellValueFactory(new PropertyValueFactory("licenciacomercial"));
         this.Col9.setCellValueFactory(new PropertyValueFactory("facturas"));
         this.Col10.setCellValueFactory(new PropertyValueFactory("tipocobros"));
         this.Col11.setCellValueFactory(new PropertyValueFactory("localesmercado"));
@@ -215,7 +265,7 @@ public class ListadoViewController extends Controller implements Initializable {
         Col5.setText("cobrosFechaVencimiento");
         Col6.setText("Estado");
         Col7.setText("cobrosFechaPago");
-        Col8.setText("licenciacomerciales");
+        Col8.setText("licenciacomercial");
         Col9.setText("facturas");
         Col10.setText("tipocobros");
         Col11.setText("localesmercado");
@@ -347,5 +397,47 @@ public class ListadoViewController extends Controller implements Initializable {
         Col16.setVisible(false);
         Col17.setVisible(false);
         this.Tvdatos.setItems(optionsLoc);
+    }
+
+    public void criarPlanilha(TableView tabAuditoriaVolumes) {
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("sample");
+
+        HSSFRow row = null;
+        for (int i = 0; i <= tabAuditoriaVolumes.getItems().size(); i++) {
+            row = spreadsheet.createRow(i);
+        //System.out.print("\n Fila "+options.get(2).+ "\n");
+            //row.createCell(0).setCellValue(tabAuditoriaVolumes.getItems().get(i).toString());
+            //row.createCell(0).setCellValue("hola, mundo, albin, feo , kevin, guapo");
+            for (int j = 0; j < tabAuditoriaVolumes.getColumns().size(); j++) {
+                if(j<12){
+                    if(i==0){
+                        row.createCell(j).setCellValue(ArrayCobro[j]);
+                        //row.createCell(j).setCellValue(StringCobros(options,i)[j]);
+                    }else{
+                        row.createCell(j).setCellValue(StringCobros(options,i-1)[j]);
+                    }
+                }
+
+
+            }
+        }
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream("workbook2.xls",true);
+            try {
+                workbook.write(fileOut);
+                fileOut.close();
+                Platform.exit();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

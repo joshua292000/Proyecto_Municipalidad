@@ -74,5 +74,7 @@ public abstract class Controller {
     public final void setActivo(Boolean activo) {
         this._activo.set(activo);
     }
+
+
     public abstract void initialize();
 }
