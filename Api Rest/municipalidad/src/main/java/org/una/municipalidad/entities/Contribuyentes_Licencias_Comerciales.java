@@ -20,7 +20,7 @@ public class Contribuyentes_Licencias_Comerciales implements Serializable{
     private Long id;
 
     @Column(name = "porcentaje_licencia")
-    private Long porcentajeLicencia;
+    private double porcentajeLicencia;
 
     @ManyToOne
     @JoinColumn(name="contribuyente_id")

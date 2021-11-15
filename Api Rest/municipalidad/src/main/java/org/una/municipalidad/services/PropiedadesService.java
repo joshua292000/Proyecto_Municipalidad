@@ -22,6 +22,7 @@ public interface PropiedadesService {
 
     public Optional<List<PropiedadesDTO>> findPropiedadesByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);
 
+    public void EliminarPropiedades();
 
     public Optional<PropiedadesDTO> create(PropiedadesDTO propiedadesDTO);
 

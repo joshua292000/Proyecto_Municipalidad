@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.ContribuyentesDTO;
 import org.una.municipalidad.dto.LicenciasComercialesDTO;
@@ -53,7 +54,7 @@ public class LocalesMercadoController {
 
     @GetMapping("/findLocales_MercadoByCedula/{cedulaContribuyente}")
     @ApiOperation(value = "Obtiene una lista de locales de mercado a partir de la cedula de un contribuyente", response = ContribuyentesDTO.class, tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT') or hasRole('GERENTE')")
     public ResponseEntity<?> findLocales_MercadoByCedula(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
         try{
             Optional<List<LocalesMercadoDTO>> result = localesMercadoService.findLocales_MercadoByCedula(cedulaContribuyente);
@@ -61,6 +62,19 @@ public class LocalesMercadoController {
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/EliminarLocales")
+    @ApiOperation(value = "Precedimiento almacenado", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> EliminarLocales() {
+        try{
+            localesMercadoService.EliminarLocales();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @ResponseStatus(HttpStatus.OK)

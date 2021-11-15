@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 public class Contribuyentes_Locales_MercadoDTO {
     private Long id;
-    private Long porcentajeLocales;
+    private Double porcentajeLocales;
     private ContribuyentesDTO contribuyente;
     private LocalesMercadoDTO localesmercado;
 }

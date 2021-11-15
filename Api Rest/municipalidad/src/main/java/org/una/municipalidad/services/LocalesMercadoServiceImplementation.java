@@ -50,6 +50,13 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
         List<LocalesMercadoDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,LocalesMercadoDTO.class);
         return Optional.ofNullable(CobrosDtolist);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void EliminarLocales() {
+        localesMercadoRepository.EliminarLocales();
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<LocalesMercadoDTO>> findLocales_MercadoByCedula(String cedulaContribuyente) {

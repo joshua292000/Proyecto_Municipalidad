@@ -14,8 +14,6 @@ public class AutorizarViewController extends Controller implements Initializable
     @FXML
     private MenuItem MenuLicen;
 
-    @FXML
-    private MenuItem MenuContriPropiedad;
 
     @FXML
     private BorderPane BorderPane;
@@ -23,11 +21,6 @@ public class AutorizarViewController extends Controller implements Initializable
     @FXML
     private MenuItem MenuLocales;
 
-    @FXML
-    private MenuItem MenuContriLocal;
-
-    @FXML
-    private MenuItem MenuContriLicencia;
 
     @FXML
     private MenuItem MenuPropiedades;
@@ -35,8 +28,6 @@ public class AutorizarViewController extends Controller implements Initializable
     @FXML
     private MenuBar MenuBar;
 
-    @FXML
-    private MenuItem MenuContri;
 
     @FXML
     private MenuItem MenuCobros;
@@ -51,7 +42,7 @@ public class AutorizarViewController extends Controller implements Initializable
     }
 
     public void OnActionMenuLocales(ActionEvent actionEvent) {
-        setHola(8);
+        setHola(4);
         loadUI("ListadoView",BorderPane);
     }
 
@@ -61,31 +52,13 @@ public class AutorizarViewController extends Controller implements Initializable
     }
 
     public void OnActionMenuLicen(ActionEvent actionEvent) {
-        setHola(6);
-        loadUI("ListadoView",BorderPane);
-    }
-
-    public void OnActionMenuPropiedades(ActionEvent actionEvent) {
-        setHola(7);
-        loadUI("ListadoView",BorderPane);
-    }
-    public void OnActionMenuContri(ActionEvent actionEvent) {
         setHola(2);
         loadUI("ListadoView",BorderPane);
     }
 
-    public void OnActionMenuContriLocal(ActionEvent actionEvent) {
+    public void OnActionMenuPropiedades(ActionEvent actionEvent) {
         setHola(3);
         loadUI("ListadoView",BorderPane);
     }
 
-    public void OnActionMenuContriPropiedad(ActionEvent actionEvent) {
-        setHola(4);
-        loadUI("ListadoView",BorderPane);
-    }
-
-    public void OnActionMenuContriLicencia(ActionEvent actionEvent) {
-        setHola(5);
-        loadUI("ListadoView",BorderPane);
-    }
 }

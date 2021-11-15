@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class Mensaje {
 
-    public void show(AlertType tipo, String titulo, String mensaje) {
+    public static void show(AlertType tipo, String titulo, String mensaje) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
         alert.setHeaderText(null);

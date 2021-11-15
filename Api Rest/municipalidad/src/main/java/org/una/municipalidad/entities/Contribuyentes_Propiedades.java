@@ -17,7 +17,7 @@ public class Contribuyentes_Propiedades {
     private Long id;
 
     @Column(name = "porcentaje_propiedad")
-    private Long porcentajePropiedad;
+    private double porcentajePropiedad;
 
     @ManyToOne
     @JoinColumn(name="contribuyente_id")

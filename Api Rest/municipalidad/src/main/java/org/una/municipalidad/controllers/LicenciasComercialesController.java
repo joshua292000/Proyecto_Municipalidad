@@ -3,14 +3,12 @@ package org.una.municipalidad.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.una.municipalidad.dto.ContribuyentesDTO;
-import org.una.municipalidad.dto.Contribuyentes_Licencias_ComercialesDTO;
-import org.una.municipalidad.dto.DeclaracionesDTO;
-import org.una.municipalidad.dto.LicenciasComercialesDTO;
+import org.una.municipalidad.dto.*;
 import org.una.municipalidad.services.LicenciasComercialesService;
 
 import java.util.Date;
@@ -71,11 +69,22 @@ public class LicenciasComercialesController {
 
     @GetMapping("/findLicencias_ComercialesByCedula/{cedulaContribuyente}")
     @ApiOperation(value = "Obtiene una lista de licencias comerciales a partir de la cedula de un contribuyente", response = ContribuyentesDTO.class, tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT') or hasRole('GERENTE')")
     public ResponseEntity<?> findLicencias_ComercialesByCedula(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
         try{
             Optional<List<LicenciasComercialesDTO>> result = licenciaComercialService.findLicencias_ComercialesByCedula(cedulaContribuyente);
             return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/EliminarLicencia")
+    @ApiOperation(value = "Precedimiento almacenado de eliminar", response = LicenciasComercialesDTO.class, responseContainer = "LicenciasComercialesDTO" , tags = "LicenciasComerciales")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> cobrosmasivos() {
+        try{
+            licenciaComercialService.EliminarLicencia();
+            return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }

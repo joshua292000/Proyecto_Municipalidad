@@ -84,6 +84,7 @@ public class GerenteViewController extends Controller implements Initializable {
         //loadUI("hola",BorderPane);
     }
 
-    public void OnActionbtnCobros(ActionEvent actionEvent) {
+    public void OnActionBtnCobros(ActionEvent actionEvent) {
+        loadUI("CobrosMasivosview",BorderPane);
     }
 }

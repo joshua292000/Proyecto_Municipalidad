@@ -26,6 +26,12 @@ import java.util.ResourceBundle;
 public class ListadoViewController extends Controller implements Initializable {
 
     @FXML
+    private JFXButton btnEliminar;
+
+    @FXML
+    private JFXButton btnImprime;
+
+    @FXML
     private ScrollPane ScPane;
 
     @FXML
@@ -82,6 +88,10 @@ public class ListadoViewController extends Controller implements Initializable {
     @FXML
     private TableColumn Col17;
 
+
+    @FXML
+    private JFXButton btnGenerar;
+
     private ObservableList<CobrosDTO> options = FXCollections.observableArrayList();
     private ObservableList<ContribuyentesDTO> optionscont = FXCollections.observableArrayList();
     private ObservableList<Contribuyentes_Locales_MercadoDTO> optionscontLoc = FXCollections.observableArrayList();
@@ -90,78 +100,46 @@ public class ListadoViewController extends Controller implements Initializable {
     private ObservableList<LocalesMercadoDTO> optionsLoc = FXCollections.observableArrayList();
     private ObservableList<LicenciasComercialesDTO> optionsLic = FXCollections.observableArrayList();
     private ObservableList<PropiedadesDTO> optionsPro = FXCollections.observableArrayList();
+    private ObservableList<ParametrosDTO> optionspar = FXCollections.observableArrayList();
     private String  ArrayCobro[] ={"id","cobrosPeriodo","cobrosMonto","cobrosFechaCreacion","cobrosFechaVencimiento","Estado","cobrosFechaPago",
             "licenciacomerciales","facturas","tipocobros","localesmercado","propiedades"};
+
+    private String  ArrayPropiedad[] ={"propiedades_id","propiedadProvincia","propiedadCanton","propiedadDistrito","propiedadDireccion","propiedadGeolocalizacion","propiedadArea",
+            "propiedadPlano","propiedadAMetrosFrente","propiedadValorTerreno","propiedadValorConstruccion","propiedadOtrosValores","PerteneceEstado","propiedadZona","Estado","propiedad_fecha_Registro","propiedad_ultima_Actualizacion"};
+
+    private String  ArrayLicencias[] ={"id","nombreComercio","telefonoComercio","correoComercio","distritoComercio","fechaRegistrocomercio","ultima_Actualizacioncomercio",
+            "codigoComercio","estado"};
+
+    private String  ArrayLocales[] ={"id","nombreLocal", "ubicacionLocal" ,"correoLocal", "telefonoLocal", "Monto_Alquiler_Local",
+        "fechaRegistrolocal", "ultima_Actualizacionlocal" ,"estado"};
+
+    private String  ArrayParametros[] ={ "id","llaveParametro","valorParametro"};
+    public int Consulta=0;
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        btnGenerar.setVisible(false);
+        btnEliminar.setVisible(false);
+        btnImprime.setVisible(false);
         switch (Controller.getHola()){
             case 1: {
-                List<CobrosDTO> cobro= ConsultasServiceGerente.obtenerTodoCobroXEsatado("Pendiente");
-               // ListaAExcel.main(cobro);
-                if(cobro!=null){
-                    for(CobrosDTO cobros:cobro){
-                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                Consulta=1;
+                List<CobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoCobroXEsatado("Eliminando");
+                if (cobro != null) {
+                    for (CobrosDTO cobros : cobro) {
+                        options.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomercial(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
                     }
                     //Collection.sort(options);
                     this.Tvdatos.setItems(options);
                 }
                 //System.out.print(cobro);
                 LlenarTabla();
-                criarPlanilha(Tvdatos);
+                btnEliminar.setVisible(true);
                 break;
             }
             case 2: {
-                List<ContribuyentesDTO> contri= ConsultasServiceGerente.obtenerTodoContribuyente();
-                if(contri!=null){
-                    for(ContribuyentesDTO contribu:contri){
-                        optionscont.add(new ContribuyentesDTO(contribu.getId(),contribu.getNombreContribuyente(),contribu.getApellidoContribuyente(),contribu.getCedulaContribuyente()));
-                    }
-                    //Collection.sort(options);
-                    this.Tvdatos.setItems(optionscont);
-                }
-                LlenarTablaContr();
-                break;
-            }
-            case 3: {
-              /*  List<Contribuyentes_Locales_MercadoDTO> contriLoc= ConsultasServiceGerente.obtenerTodoContribuyente();
-                if(contriLoc!=null){
-                    for(Contribuyentes_Locales_MercadoDTO contribuLoc:contriLoc){
-                        optionscontLoc.add(new Contribuyentes_Locales_MercadoDTO());
-                    }
-                    //Collection.sort(options);
-                    this.Tvdatos.setItems(optionscontLoc);
-                }
-                LlenarTablaContr();*/
-                break;
-            }
-            case 4: {
-                /*List<ContribuyentesDTO> contri= ConsultasServiceGerente.obtenerTodoContribuyente();
-                if(contri!=null){
-                    for(ContribuyentesDTO contribu:contri){
-                        optionscont.add(new ContribuyentesDTO(contribu.getId(),contribu.getNombreContribuyente(),contribu.getApellidoContribuyente(),contribu.getCedulaContribuyente()));
-                    }
-                    //Collection.sort(options);
-                    this.Tvdatos.setItems(optionscont);
-                }
-                LlenarTablaContr();
-                break;*/
-            }
-            case 5: {
-               /* List<ContribuyentesDTO> contri= ConsultasServiceGerente.obtenerTodoContribuyente();
-                if(contri!=null){
-                    for(ContribuyentesDTO contribu:contri){
-                        optionscont.add(new ContribuyentesDTO(contribu.getId(),contribu.getNombreContribuyente(),contribu.getApellidoContribuyente(),contribu.getCedulaContribuyente()));
-                    }
-                    //Collection.sort(options);
-                    this.Tvdatos.setItems(optionscont);
-                }
-                LlenarTablaContr();*/
-                break;
-            }
-            case 6: {
-                List<LicenciasComercialesDTO> Licecias= ConsultasServiceGerente.obtenerTodoLicenciasxEstado("Pendiente");
+                Consulta=2;
+                List<LicenciasComercialesDTO> Licecias= ConsultasServiceGerente.obtenerTodoLicenciasxEstado("Eliminando");
                 if(Licecias!=null){
                     for(LicenciasComercialesDTO lic:Licecias){
                         optionsLic.add(new LicenciasComercialesDTO(lic.getId(),lic.getNombreComercio(),lic.getTelefonoComercio(),lic.getCorreoComercio(),lic.getDistritoComercio(),lic.getFechaRegistrocomercio(),lic.getUltima_Actualizacioncomercio(),lic.getCodigoComercio(),lic.getEstado()));
@@ -170,10 +148,12 @@ public class ListadoViewController extends Controller implements Initializable {
                     this.Tvdatos.setItems(optionsLic);
                 }
                 LlenarTablaLic();
+                btnEliminar.setVisible(true);
                 break;
             }
-            case 7: {
-                List<PropiedadesDTO> propiedad= ConsultasServiceGerente.obtenerTodoPropiedadesxEstado("Pendiente");
+            case 3: {
+                Consulta=3;
+                List<PropiedadesDTO> propiedad= ConsultasServiceGerente.obtenerTodoPropiedadesxEstado("Eliminando");
                 if(propiedad!=null){
                     for(PropiedadesDTO pro:propiedad){
                         optionsPro.add(new PropiedadesDTO(pro.getPropiedades_id(),pro.getPropiedadProvincia(),pro.getPropiedadCanton(),pro.getPropiedadDistrito(),pro.getPropiedadDireccion(),pro.getPropiedadGeolocalizacion(),pro.getPropiedadArea(),pro.getPropiedadPlano(),pro.getPropiedadAMetrosFrente(),pro.getPropiedadValorTerreno(),pro.getPropiedadValorConstruccion(),pro.getPropiedadOtrosValores(),pro.isPerteneceEstado(),pro.getPropiedadZona(),pro.getEstado(),pro.getPropiedad_fecha_Registro(),pro.getPropiedad_fecha_Registro()));
@@ -182,10 +162,12 @@ public class ListadoViewController extends Controller implements Initializable {
                     this.Tvdatos.setItems(optionsPro);
                 }
                 LlenarTablaPro();
+                btnEliminar.setVisible(true);
                 break;
             }
-            case 8: {
-                List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocalesxEstado("Pendiente");
+            case 4: {
+                Consulta=4;
+                List<LocalesMercadoDTO> local= ConsultasServiceGerente.obtenerTodoLocalesxEstado("Eliminando");
                 if(local!=null){
                     for(LocalesMercadoDTO loc:local){
                         optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreLocal(),loc.getUbicacionLocal(),loc.getCorreoLocal(),loc.getTelefonoLocal(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.getEstado()));
@@ -194,11 +176,89 @@ public class ListadoViewController extends Controller implements Initializable {
                     this.Tvdatos.setItems(optionsLoc);
                 }
                 LlenarTablaLoc();
+                btnEliminar.setVisible(true);
+                break;
+            }
+
+            case 5: {
+                List<CobrosDTO> cobro= ConsultasServiceGerente.obtenerTodoCobroXFechas(LocalDate.parse(getParametro()),LocalDate.parse(getParametro2()));
+                if(cobro!=null){
+                    for(CobrosDTO cobros:cobro){
+                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomercial(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                    }
+                    this.Tvdatos.setItems(options);
+                }
+                LlenarTabla();
+                btnGenerar.setVisible(true);
+                break;
+            }
+
+            case 6: {
+                List<PropiedadesDTO> propiedad= ConsultasGestorService.ObtenerPropiedad(getParametro());
+                if(propiedad!=null){
+                    for(PropiedadesDTO pro:propiedad){
+                        optionsPro.add(new PropiedadesDTO(pro.getPropiedades_id(),pro.getPropiedadProvincia(),pro.getPropiedadCanton(),pro.getPropiedadDistrito(),pro.getPropiedadDireccion(),pro.getPropiedadGeolocalizacion(),pro.getPropiedadArea(),pro.getPropiedadPlano(),pro.getPropiedadAMetrosFrente(),pro.getPropiedadValorTerreno(),pro.getPropiedadValorConstruccion(),pro.getPropiedadOtrosValores(),pro.isPerteneceEstado(),pro.getPropiedadZona(),pro.getEstado(),pro.getPropiedad_fecha_Registro(),pro.getPropiedad_fecha_Registro()));
+                    }
+                    //Collection.sort(options);
+                    this.Tvdatos.setItems(optionsPro);
+                }
+                LlenarTablaPro();
+                btnGenerar.setVisible(true);
+                break;
+            }
+
+            case 7: {
+                List<LicenciasComercialesDTO> Licecias= ConsultasGestorService.ObtenerLicencia(getParametro());
+                if(Licecias!=null){
+                    for(LicenciasComercialesDTO lic:Licecias){
+                        optionsLic.add(new LicenciasComercialesDTO(lic.getId(),lic.getNombreComercio(),lic.getTelefonoComercio(),lic.getCorreoComercio(),lic.getDistritoComercio(),lic.getFechaRegistrocomercio(),lic.getUltima_Actualizacioncomercio(),lic.getCodigoComercio(),lic.getEstado()));
+                    }
+                    //Collection.sort(options);
+                    this.Tvdatos.setItems(optionsLic);
+                }
+                LlenarTablaLic();
+                btnGenerar.setVisible(true);
+                break;
+            }
+
+            case 8: {
+                List<LocalesMercadoDTO> local= ConsultasGestorService.ObtenerLocal(getParametro());
+                if(local!=null){
+                    for(LocalesMercadoDTO loc:local){
+                        optionsLoc.add(new LocalesMercadoDTO(loc.getId(),loc.getNombreLocal(),loc.getUbicacionLocal(),loc.getCorreoLocal(),loc.getTelefonoLocal(),loc.getMonto_Alquiler_Local(),loc.getFechaRegistrolocal(),loc.getUltima_Actualizacionlocal(),loc.getEstado()));
+                    }
+                    this.Tvdatos.setItems(optionsLoc);
+                }
+                LlenarTablaLoc();
+                btnGenerar.setVisible(true);
+                break;
+            }
+
+            case 9: {
+                List<ParametrosDTO> Para= ConsultasServiceGerente.obtenerTodoParametros();
+                if(Para!=null){
+                    for(ParametrosDTO par:Para){
+                        optionspar.add(new ParametrosDTO(par.getId(),par.getLlaveParametro(),par.getValorParametro()));
+                    }
+                    this.Tvdatos.setItems(optionspar);
+                }
+                LlenarTablaPar();
+                btnGenerar.setVisible(true);
+                break;
+            }
+            case 10: {
+                List<CobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoCobroXEsatado("Pendiente");
+                if (cobro != null) {
+                    for (CobrosDTO cobros : cobro) {
+                        options.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomercial(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
+                    }
+                    this.Tvdatos.setItems(options);
+                }
+                LlenarTabla();
                 break;
             }
         }
 
-    System.out.println("tamaño"+ Tvdatos.getItems().get(1).toString());
     }
 
     @Override
@@ -215,7 +275,7 @@ public class ListadoViewController extends Controller implements Initializable {
         arreglo[4]=(lista.get(tamaño).getCobrosFechaVencimiento()==null)? " " : lista.get(tamaño).getCobrosFechaVencimiento().toString();
         arreglo[5]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
         arreglo[6]=(lista.get(tamaño).getCobrosFechaPago()==null)? " " : lista.get(tamaño).getCobrosFechaPago().toString();
-        arreglo[7]=(lista.get(tamaño).getLicenciascomerciales()==null)? " " : lista.get(tamaño).getLicenciascomerciales().getId().toString();
+        arreglo[7]=(lista.get(tamaño).getLicenciacomercial()==null)? " " : lista.get(tamaño).getLicenciacomercial().getId().toString();
         arreglo[8]=(lista.get(tamaño).getFacturas()==null)? " " : lista.get(tamaño).getFacturas().getId().toString();
         arreglo[9]=(lista.get(tamaño).getTipocobros()==null)? " " : lista.get(tamaño).getTipocobros().getId().toString();
         arreglo[10]=(lista.get(tamaño).getLocalesmercado()==null)? " " : lista.get(tamaño).getLocalesmercado().getId().toString();
@@ -237,13 +297,50 @@ public class ListadoViewController extends Controller implements Initializable {
         arreglo[9]=(lista.get(tamaño).getPropiedadValorTerreno()==null)? " " : lista.get(tamaño).getPropiedadValorTerreno().toString();
         arreglo[10]=(lista.get(tamaño).getPropiedadValorConstruccion()==null)? " " : lista.get(tamaño).getPropiedadValorConstruccion().toString();
         arreglo[11]=(lista.get(tamaño).getPropiedadOtrosValores()==null)? " " : lista.get(tamaño).getPropiedadOtrosValores().toString();
-       // arreglo[11]=(lista.get(tamaño).isPerteneceEstado()==null)? " " : lista.get(tamaño).isPerteneceEstado();
-        arreglo[11]=(lista.get(tamaño).getPropiedadZona()==null)? " " : lista.get(tamaño).getPropiedadZona().toString();
-        arreglo[11]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
-        arreglo[11]=(lista.get(tamaño).getPropiedad_fecha_Registro()==null)? " " : lista.get(tamaño).getPropiedad_fecha_Registro().toString();
-        arreglo[11]=(lista.get(tamaño).getPropiedad_ultima_Actualizacion()==null)? " " : lista.get(tamaño).getPropiedad_ultima_Actualizacion().toString();
+        arreglo[12]= String.valueOf((lista.get(tamaño).isPerteneceEstado()));
+        arreglo[13]=(lista.get(tamaño).getPropiedadZona()==null)? " " : lista.get(tamaño).getPropiedadZona().toString();
+        arreglo[14]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
+        arreglo[15]=(lista.get(tamaño).getPropiedad_fecha_Registro()==null)? " " : lista.get(tamaño).getPropiedad_fecha_Registro().toString();
+        arreglo[16]=(lista.get(tamaño).getPropiedad_ultima_Actualizacion()==null)? " " : lista.get(tamaño).getPropiedad_ultima_Actualizacion().toString();
         return arreglo;
 
+    }
+
+    public String[] StringLocales(ObservableList<LocalesMercadoDTO> lista,int tamaño){
+        String arreglo[]= new String[9];
+        arreglo[0]=lista.get(tamaño).getId().toString();
+        arreglo[1]=(lista.get(tamaño).getNombreLocal()==null)? " " : lista.get(tamaño).getNombreLocal().toString();
+        arreglo[2]=(lista.get(tamaño).getUbicacionLocal()==null)? " " : lista.get(tamaño).getUbicacionLocal().toString();
+        arreglo[3]=(lista.get(tamaño).getCorreoLocal()==null)? " " : lista.get(tamaño).getCorreoLocal().toString();
+        arreglo[4]=(lista.get(tamaño).getTelefonoLocal()==null)? " " : lista.get(tamaño).getTelefonoLocal().toString();
+        arreglo[5]=(lista.get(tamaño).getMonto_Alquiler_Local()==null)? " " : lista.get(tamaño).getEstado().toString();
+        arreglo[6]=(lista.get(tamaño).getFechaRegistrolocal()==null)? " " : lista.get(tamaño).getFechaRegistrolocal().toString();
+        arreglo[7]=(lista.get(tamaño).getUltima_Actualizacionlocal()==null)? " " : lista.get(tamaño).getUltima_Actualizacionlocal().toString();
+        arreglo[8]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
+
+        return arreglo;
+    }
+    public String[] StringLicencias(ObservableList<LicenciasComercialesDTO> lista,int tamaño){
+        String arreglo[]= new String[9];
+        arreglo[0]=lista.get(tamaño).getId().toString();
+        arreglo[1]=(lista.get(tamaño).getNombreComercio()==null)? " " : lista.get(tamaño).getNombreComercio().toString();
+        arreglo[2]=(lista.get(tamaño).getTelefonoComercio()==null)? " " : lista.get(tamaño).getTelefonoComercio().toString();
+        arreglo[3]=(lista.get(tamaño).getCorreoComercio()==null)? " " : lista.get(tamaño).getCorreoComercio().toString();
+        arreglo[4]=(lista.get(tamaño).getDistritoComercio()==null)? " " : lista.get(tamaño).getFechaRegistrocomercio().toString();
+        arreglo[5]=(lista.get(tamaño).getFechaRegistrocomercio()==null)? " " : lista.get(tamaño).getEstado().toString();
+        arreglo[6]=(lista.get(tamaño).getUltima_Actualizacioncomercio()==null)? " " : lista.get(tamaño).getUltima_Actualizacioncomercio().toString();
+        arreglo[7]=(lista.get(tamaño).getCodigoComercio()==null)? " " : lista.get(tamaño).getCodigoComercio().toString();
+        arreglo[8]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
+
+        return arreglo;
+    }
+    public String[] StringParametros(ObservableList<ParametrosDTO> lista,int tamaño){
+        String arreglo[]= new String[3];
+        arreglo[0]=lista.get(tamaño).getId().toString();
+        arreglo[1]=(lista.get(tamaño).getLlaveParametro()==null)? " " : lista.get(tamaño).getLlaveParametro().toString();
+        arreglo[2]=(lista.get(tamaño).getValorParametro()==null)? " " : lista.get(tamaño).getValorParametro().toString();
+
+        return arreglo;
     }
     public void LlenarTabla(){
         this.Col1.setCellValueFactory(new PropertyValueFactory("id"));
@@ -277,15 +374,14 @@ public class ListadoViewController extends Controller implements Initializable {
         Col17.setVisible(false);
         this.Tvdatos.setItems(options);
     }
-    public void LlenarTablaContr(){
+    public void LlenarTablaPar(){
         this.Col1.setCellValueFactory(new PropertyValueFactory("id"));
-        this.Col2.setCellValueFactory(new PropertyValueFactory("nombreContribuyente"));
-        this.Col3.setCellValueFactory(new PropertyValueFactory("apellidoContribuyente"));
-        this.Col4.setCellValueFactory(new PropertyValueFactory("cedulaContribuyente"));
+        this.Col2.setCellValueFactory(new PropertyValueFactory("llaveParametro"));
+        this.Col3.setCellValueFactory(new PropertyValueFactory("valorParametro"));
         Col1.setText("id");
-        Col2.setText("nombreContribuyente");
-        Col3.setText("apellidoContribuyente");
-        Col4.setText("cedulaContribuyente");
+        Col2.setText("llaveParametro");
+        Col3.setText("valorParametro");
+        Col4.setVisible(false);
         Col5.setVisible(false);
         Col6.setVisible(false);
         Col7.setVisible(false);
@@ -299,7 +395,7 @@ public class ListadoViewController extends Controller implements Initializable {
         Col15.setVisible(false);
         Col16.setVisible(false);
         Col17.setVisible(false);
-        this.Tvdatos.setItems(optionscont);
+        this.Tvdatos.setItems(optionspar);
     }
     public void LlenarTablaLic(){
         this.Col1.setCellValueFactory(new PropertyValueFactory("id"));
@@ -399,7 +495,7 @@ public class ListadoViewController extends Controller implements Initializable {
         this.Tvdatos.setItems(optionsLoc);
     }
 
-    public void criarPlanilha(TableView tabAuditoriaVolumes) {
+    public void criarPlanilha(TableView tabAuditoriaVolumes, String array[], int tamaño,String Nombre) {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet spreadsheet = workbook.createSheet("sample");
@@ -407,16 +503,27 @@ public class ListadoViewController extends Controller implements Initializable {
         HSSFRow row = null;
         for (int i = 0; i <= tabAuditoriaVolumes.getItems().size(); i++) {
             row = spreadsheet.createRow(i);
-        //System.out.print("\n Fila "+options.get(2).+ "\n");
-            //row.createCell(0).setCellValue(tabAuditoriaVolumes.getItems().get(i).toString());
-            //row.createCell(0).setCellValue("hola, mundo, albin, feo , kevin, guapo");
             for (int j = 0; j < tabAuditoriaVolumes.getColumns().size(); j++) {
-                if(j<12){
+                if(j<tamaño){
                     if(i==0){
-                        row.createCell(j).setCellValue(ArrayCobro[j]);
-                        //row.createCell(j).setCellValue(StringCobros(options,i)[j]);
+                            row.createCell(j).setCellValue(array[j]);
                     }else{
-                        row.createCell(j).setCellValue(StringCobros(options,i-1)[j]);
+                        if(getHola()==5){
+                            row.createCell(j).setCellValue(StringCobros(options,i-1)[j]);
+                        }
+                        if(getHola()==6){
+                            row.createCell(j).setCellValue(StringPropiedades(optionsPro,i-1)[j]);
+                        }
+                        if(getHola()==7){
+                            row.createCell(j).setCellValue(StringLicencias(optionsLic,i-1)[j]);
+                        }
+                        if(getHola()==8){
+                            row.createCell(j).setCellValue(StringLocales(optionsLoc,i-1)[j]);
+                        }
+                        if(getHola()==9){
+                            row.createCell(j).setCellValue(StringParametros(optionspar,i-1)[j]);
+                        }
+
                     }
                 }
 
@@ -425,11 +532,11 @@ public class ListadoViewController extends Controller implements Initializable {
         }
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("workbook2.xls",true);
+            FileOutputStream fileOut = new FileOutputStream(Nombre+".xls",true);
             try {
                 workbook.write(fileOut);
                 fileOut.close();
-                Platform.exit();
+                //Platform.exit();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -439,5 +546,47 @@ public class ListadoViewController extends Controller implements Initializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void OnActionBtnGenerar(ActionEvent actionEvent) {
+        if(getHola()==5){
+            criarPlanilha(Tvdatos,ArrayCobro,ArrayCobro.length,"Cobros");
+        }
+        if(getHola()==6){
+            criarPlanilha(Tvdatos,ArrayPropiedad,ArrayPropiedad.length,"Propiedades");
+        }
+        if(getHola()==7){
+            criarPlanilha(Tvdatos,ArrayLicencias,ArrayLicencias.length,"Licencias");
+        }
+        if(getHola()==8){
+            criarPlanilha(Tvdatos,ArrayLicencias,ArrayCobro.length,"Locales");
+        }
+        if(getHola()==9){
+            criarPlanilha(Tvdatos,ArrayParametros,ArrayParametros.length,"Parametros");
+        }
+    }
+
+    public void OnActionBtnImprime(ActionEvent actionEvent) {
+    }
+
+    public void OnActionBtnEliminar(ActionEvent actionEvent) throws IOException, InterruptedException {
+        switch (Consulta){
+            case 1:
+                //Cobros
+                ConsultasServiceGerente.EliminarTodoCobrosxEstado();
+                break;
+            case 2:
+                //Liscencias
+                ConsultasServiceGerente.EliminarTodoLicenciasxEstado();
+                break;
+            case 3:
+                ConsultasServiceGerente.EliminarTodoPropiedadesxEstado();
+                break;
+            case 4:
+                //Locales
+                ConsultasServiceGerente.EliminarTodoLocalesxEstado();
+                break;
+        }
+
     }
 }

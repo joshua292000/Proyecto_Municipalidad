@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.una.municipalidad.entities.Contribuyentes_Licencias_Comerciales;
 import org.una.municipalidad.entities.Licencias_Comerciales;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,6 @@ public interface LicenciasComercialesRepository extends JpaRepository<Licencias_
             "j.cedulaContribuyente=:cedulaContribuyente ")
     public List<Licencias_Comerciales> findLicencias_ComercialesByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);
 
+    @Query(value= "{CALL EliminarLicencia()}", nativeQuery = true)
+    public void EliminarLicencia();
 }

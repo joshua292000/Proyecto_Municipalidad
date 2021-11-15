@@ -20,4 +20,6 @@ public interface PropiedadesRepository extends JpaRepository<Propiedades, Long> 
             "j.cedulaContribuyente=:cedulaContribuyente ")
     public List<Propiedades> findPropiedadesByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);
 
+    @Query(value= "{CALL EliminarPropiedades()}", nativeQuery = true)
+    public void EliminarPropiedades();
 }

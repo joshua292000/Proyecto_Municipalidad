@@ -18,4 +18,6 @@ public interface LocalesMercadoRepository extends JpaRepository<Locales_Mercado,
             "j.cedulaContribuyente=:cedulaContribuyente ")
     public List<Locales_Mercado> findLocales_MercadoByCedula(@Param("cedulaContribuyente") String cedulaContribuyente);
 
+    @Query(value= "{CALL EliminarLocales()}", nativeQuery = true)
+    public void EliminarLocales();
 }

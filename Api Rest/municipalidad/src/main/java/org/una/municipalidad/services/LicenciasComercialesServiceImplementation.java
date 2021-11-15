@@ -64,6 +64,12 @@ public class LicenciasComercialesServiceImplementation implements LicenciasComer
 
     @Override
     @Transactional(readOnly = true)
+    public void EliminarLicencia() {
+        licenciacomercialRepository.EliminarLicencia();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<List<LicenciasComercialesDTO>> findLicencias_ComercialesByCedula(String cedulaContribuyente) {
         List<Licencias_Comerciales> contribuyenteslist = licenciacomercialRepository.findLicencias_ComercialesByCedula(cedulaContribuyente);
         List<LicenciasComercialesDTO> contribuyentesDTO = MapperUtils.DtoListFromEntityList(contribuyenteslist,LicenciasComercialesDTO.class);

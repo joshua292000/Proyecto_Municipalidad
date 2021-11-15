@@ -20,7 +20,7 @@ public class Contribuyentes_Locales_Mercado implements Serializable {
     private Long id;
 
     @Column(name = "porcentaje_locales")
-    private Long porcentajeLocales;
+    private Double porcentajeLocales;
 
     @ManyToOne
     @JoinColumn(name="contribuyente_id")

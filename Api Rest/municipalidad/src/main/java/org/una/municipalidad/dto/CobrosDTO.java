@@ -13,7 +13,7 @@ import java.util.Date;
 public class CobrosDTO {
     private Long id;
     private String cobrosPeriodo;
-    private Long cobrosMonto;
+    private double cobrosMonto;
     private Date cobrosFechaCreacion;
     private Date cobrosFechaVencimiento;
     private String estado;

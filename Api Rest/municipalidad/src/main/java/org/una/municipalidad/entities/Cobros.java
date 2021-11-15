@@ -22,7 +22,7 @@ public class Cobros {
     private String cobrosPeriodo;
 
     @Column(name = "cobros_monto")
-    private Long cobrosMonto;
+    private double cobrosMonto;
 
     @Column(name = "cobros_fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

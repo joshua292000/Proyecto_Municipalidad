@@ -2,8 +2,10 @@ package org.una.municipalidad.app_escritorio.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.Alert;
 import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
+import org.una.municipalidad.app_escritorio.Util.Mensaje;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,9 +13,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ConsultasServiceGerente {
+
     private static final HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
@@ -47,6 +51,23 @@ public class ConsultasServiceGerente {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://localhost:8089/cobros/findByEstado/"+parametro+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        System.out.print("cobro "+cobro);
+        return cobro;
+    }
+
+    public static List<CobrosDTO> obtenerTodoCobroXFechas(LocalDate inicio, LocalDate fin) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findByCobrosBetweenFechaPago/"+inicio+"/"+fin))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -199,5 +220,154 @@ public class ConsultasServiceGerente {
         }
         System.out.print("Propiedades "+Propiedades);
         return Propiedades;
+    }
+
+    public static PropiedadesDTO EliminarTodoPropiedadesxEstado() throws IOException, InterruptedException {
+        PropiedadesDTO Propiedades = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/propiedades/EliminarPropiedades"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            Propiedades=null;
+        }
+        return Propiedades;
+    }
+
+    public static CobrosDTO EliminarTodoCobrosxEstado() throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/cobrosmasivos"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            cobro=null;
+        }
+        return cobro;
+    }
+
+    public static LocalesMercadoDTO EliminarTodoLocalesxEstado() throws IOException, InterruptedException {
+        LocalesMercadoDTO local = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/localesmercado/EliminarLocales"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            local=null;
+        }
+        return local;
+    }
+
+    public static LicenciasComercialesDTO EliminarTodoLicenciasxEstado() throws IOException, InterruptedException {
+        LicenciasComercialesDTO Lice = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/licenciasComerciales/EliminarLicencia"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            Lice=null;
+        }
+        return Lice;
+    }
+    public static List<ParametrosDTO> obtenerTodoParametros() throws IOException, InterruptedException {
+        List<ParametrosDTO> para = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/parametros"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        para = mapper.readValue(response.body(), new TypeReference<List<ParametrosDTO>>() {});
+        System.out.print("cobro "+para);
+        return para;
+    }
+
+    public static CobrosDTO CrearCobrosMasivosxpropiedad() throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivoPropiedades"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            cobro=null;
+        }
+        return cobro;
+    }
+
+    public static CobrosDTO CrearCobrosMasivosxLocal() throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivosLocales"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            cobro=null;
+        }
+        return cobro;
+    }
+
+    public static CobrosDTO CrearCobrosMasivosxLicencias() throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivoLicencias"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 500){
+            Mensaje.show(Alert.AlertType.ERROR,"","No se generaron cobros");
+            cobro=null;
+        }
+        return cobro;
     }
 }
