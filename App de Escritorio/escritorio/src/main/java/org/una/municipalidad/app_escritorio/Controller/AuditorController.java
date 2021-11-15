@@ -28,6 +28,7 @@ public class AuditorController extends Controller implements Initializable {
     }
 
     public void OnActionbtnMovimientosRealizados(ActionEvent actionEvent) {
+        System.out.println("Holi");
         loadUI("MovimientosRealizadosView",BorderPaneFondo);
     }
 
@@ -42,5 +43,5 @@ public class AuditorController extends Controller implements Initializable {
     public void OnActionbtnTodasPropiedades(ActionEvent actionEvent) {
         loadUI("PropiedadesView",BorderPaneFondo);
     }
-    
+
 }

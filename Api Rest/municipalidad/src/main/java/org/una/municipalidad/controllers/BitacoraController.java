@@ -3,13 +3,16 @@ package org.una.municipalidad.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.BitacorasDTO;
+import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.services.BitacorasService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @RestController
@@ -52,6 +55,19 @@ public class BitacoraController {
         Optional<BitacorasDTO> bitacoraFound = bitacoraService.findByBitacoraDescripcion(bitacoraDescripcion);
         return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
     }
+
+
+    @GetMapping("/findByIdBetweenFecha/{idUsuario}/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de movimientos realizados de acuerdo al id de un usuario y dos fechas dadas", response = BitacorasDTO.class, responseContainer = "BitacorasDTO", tags = "Bitacora")
+    public ResponseEntity<?> findByIdBetweenFecha(@PathVariable(value = "idUsuario") Long id, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+        try {
+            Optional<List<BitacorasDTO>> result = bitacoraService.findByIdBetweenFecha(id,startDate,endDate);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")

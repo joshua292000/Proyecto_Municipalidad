@@ -1,6 +1,7 @@
 package org.una.municipalidad.services;
 
 
+import org.springframework.data.repository.query.Param;
 import org.una.municipalidad.dto.BitacorasDTO;
 import org.una.municipalidad.entities.BitacoraCambios;
 
@@ -17,6 +18,8 @@ public interface BitacorasService {
 
     public Optional<BitacorasDTO> findByBitacoraDescripcion(String bitacoraDescripcion);
 
+    public Optional<List<BitacorasDTO>> findByIdBetweenFecha(@Param("idUsuario")Long id, @Param("startDate") Date startDate,
+                                                                @Param("endDate")Date endDate);
     public Optional<BitacorasDTO> create(BitacorasDTO bitacorasDTO);
 
     public Optional<BitacorasDTO> update(BitacorasDTO bitacorasDTO, Long id);
