@@ -18,6 +18,25 @@ public abstract class Controller {
     private Stage stage;
     private String accion;
     private static int hola;
+    private static String Parametro;
+    private static String Parametro2;
+
+    public static String getParametro2() {
+        return Parametro2;
+    }
+
+    public static void setParametro2(String parametro2) {
+        Parametro2 = parametro2;
+    }
+
+    public static String getParametro() {
+        return Parametro;
+    }
+
+    public static void setParametro(String parametro) {
+        Parametro = parametro;
+    }
+
     public static int getHola() {
         return hola;
     }

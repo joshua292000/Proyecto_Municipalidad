@@ -104,10 +104,28 @@ public class CobrosServiceImplementation implements CobrosService {
     }
 
     @Override
-    public void cobrosmasivos(@Param("startDate")Date startDate, @Param("endDate")Date endDate) {
-        cobrosRepository.cobrosmasivos(startDate,endDate);
+    @Transactional(readOnly = true)
+    public void cobrosmasivos() {
+        cobrosRepository.cobrosmasivos();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public void CobrosMasivoPropiedades() {
+        cobrosRepository.CobrosMasivoPropiedades();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void CobrosMasivosLocales() {
+        cobrosRepository.CobrosMasivosLocales();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void CobrosMasivoLicencias() {
+        cobrosRepository.CobrosMasivoLicencias();
+    }
 
     private CobrosDTO getSavedCobrosDTO(CobrosDTO cobrosDTO) {
         Cobros cobros = MapperUtils.EntityFromDto(cobrosDTO, Cobros.class);

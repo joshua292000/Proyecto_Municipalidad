@@ -69,6 +69,12 @@ public class PropiedadesServiceImplementation implements PropiedadesService {
         return Optional.ofNullable(contribuyentesDTO);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public void EliminarPropiedades() {
+        propiedadesRepository.EliminarPropiedades();
+    }
+
     private PropiedadesDTO getSavedPropiedadesDTO(PropiedadesDTO propiedadesDTO) {
         Propiedades propiedades = MapperUtils.EntityFromDto(propiedadesDTO, Propiedades.class);
         Propiedades propiedadesCreated = propiedadesRepository.save(propiedades);

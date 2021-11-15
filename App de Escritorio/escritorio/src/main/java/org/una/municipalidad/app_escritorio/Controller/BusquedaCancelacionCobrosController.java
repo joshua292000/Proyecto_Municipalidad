@@ -3,24 +3,22 @@ package org.una.municipalidad.app_escritorio.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import org.una.municipalidad.app_escritorio.DTO.*;
+import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
-import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class BusquedaCancelacionCobrosController extends Controller implements Initializable {
 
@@ -93,7 +91,7 @@ public class BusquedaCancelacionCobrosController extends Controller implements I
             List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro(txtCedula.getText());
             if(cobro!=null){
                 for(CobrosDTO cobros:cobro){
-                    options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                    options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomercial(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
                 }
                 this.tablacobros.setItems(options);
             }

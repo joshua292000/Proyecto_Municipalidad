@@ -20,6 +20,8 @@ public interface LicenciasComercialesService {
 
     public Optional<List<LicenciasComercialesDTO>> findByEstado(String Estado);
 
+    public void EliminarLicencia();
+
     public Optional<LicenciasComercialesDTO> create(LicenciasComercialesDTO licenciacomercialDTO);
 
     public Optional<LicenciasComercialesDTO> update(LicenciasComercialesDTO licenciacomercialDTO, Long id);

@@ -37,8 +37,17 @@ public interface CobrosRepository extends JpaRepository<Cobros, Long> {
             "c.contribuyente.cedulaContribuyente=:cedulaContribuyente")
     public List<Cobros> findCobrosByCedulaContribuyenteContaining(@Param("cedulaContribuyente") String cedulaContribuyente);
 
-   @Query(value= "{CALL Cobrosmasivos(:startDate,:endDate)}", nativeQuery = true)
-    public void cobrosmasivos(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
+   @Query(value= "{CALL Cobrosmasivos()}", nativeQuery = true)
+    public void cobrosmasivos();
+
+    @Query(value= "{CALL CobrosMasivoPropiedades()}", nativeQuery = true)
+    public void CobrosMasivoPropiedades();
+
+    @Query(value= "{CALL CobrosMasivosLocales()}", nativeQuery = true)
+    public void CobrosMasivosLocales();
+
+   @Query(value= "{CALL CobrosMasivoLicencias()}", nativeQuery = true)
+    public void CobrosMasivoLicencias();
 
 }
 

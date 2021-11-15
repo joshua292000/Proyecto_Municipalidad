@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.entities.Cobros;
@@ -109,11 +110,50 @@ public class CobrosController {
         }
     }
 
-    @GetMapping("/cobrosmasivos/{startDate}/{endDate}")
+    @GetMapping("/cobrosmasivos")
     @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public void cobrosmasivos(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate) {
-        cobrosService.cobrosmasivos(startDate,endDate);
+    public void cobrosmasivos() {
+        cobrosService.cobrosmasivos();
+    }
+
+    @GetMapping("/CobrosMasivoPropiedades")
+    @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> CobrosMasivoPropiedades() {
+        try{
+            cobrosService.CobrosMasivoPropiedades();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping("/CobrosMasivosLocales")
+    @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> CobrosMasivosLocales() {
+        try{
+            cobrosService.CobrosMasivosLocales();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping("/CobrosMasivoLicencias")
+    @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public ResponseEntity<?> CobrosMasivoLicencias() {
+        try{
+            cobrosService.CobrosMasivoLicencias();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
     @GetMapping("/findCobrosByCedulaContribuyenteContaining/{cedulaContribuyente}")

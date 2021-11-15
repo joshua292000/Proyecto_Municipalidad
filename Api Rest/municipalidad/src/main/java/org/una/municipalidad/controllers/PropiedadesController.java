@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.municipalidad.dto.ContribuyentesDTO;
@@ -58,7 +59,7 @@ public class PropiedadesController {
 
     @GetMapping("/findPropiedadesByCedula/{cedulaContribuyente}")
     @ApiOperation(value = "Obtiene una lista de las propiedades a partir de la cedula de un contribuyente", response = ContribuyentesDTO.class, tags = "LicenciasComerciales")
-    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT') or hasRole('GERENTE')")
     public ResponseEntity<?> findPropiedadesByCedula(@PathVariable(value = "cedulaContribuyente")String cedulaContribuyente) {
         try{
             Optional<List<PropiedadesDTO>> result = propiedadesService.findPropiedadesByCedula(cedulaContribuyente);
@@ -67,6 +68,20 @@ public class PropiedadesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Async
+    @PostMapping("/EliminarPropiedades")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR')")
+    public ResponseEntity<?> EliminarPropiedades() {
+        try{
+            propiedadesService.EliminarPropiedades();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 
     @GetMapping("/findByEstado/{Estado}")
     @ApiOperation(value = "Obtiene una propiedad a partir de su estado", response = PropiedadesDTO.class, tags = "Propiedades")
