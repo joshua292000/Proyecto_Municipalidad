@@ -28,7 +28,7 @@ public class Contribuyentes_Licencias_Comerciales implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="licencia_id")
-    private Licencias_Comerciales licenciacomercial;
+    private Licencias_Comerciales licenciascomerciales;
 
     private static final long serialVersionUID = 1L;
 }

@@ -18,7 +18,7 @@ public class CobrosDTO {
     private Date cobrosFechaVencimiento;
     private String estado;
     private Date cobrosFechaPago;
-    private LicenciasComercialesDTO licenciacomerciales;
+    private LicenciasComercialesDTO licenciascomerciales;
     private FacturasDTO facturas;
     private TipoCobrosDTO tipocobros;
     private LocalesMercadoDTO localesmercado;

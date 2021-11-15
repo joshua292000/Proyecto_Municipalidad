@@ -16,18 +16,18 @@ public interface CobrosRepository extends JpaRepository<Cobros, Long> {
     public Optional<Cobros> findByCobrosMonto(Long cobrosMonto);
 
     public List<Cobros> findByEstado(String Estado);
-    public int pagado = 0;
+    public String Pagado = "Pagado";
+
+    @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.licenciascomerciales e JOIN e.contribuyentes_licencias_comerciales c JOIN c.contribuyente j WHERE " +
+            "j.cedulaContribuyente=:cedulaContribuyente AND u.estado=:Estadito")
+    public List<Cobros> findCobrosByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente, @Param("Estadito") String Estadito);
 
     @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.licenciascomerciales e JOIN e.contribuyentes_licencias_comerciales c WHERE " +
-            "c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.estado = Pagado ")
-    public List<Cobros> findCobrosByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente);
+            "  c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.cobrosFechaCreacion >= :startDate AND u.cobrosFechaVencimiento <= :endDate AND u.estado=:Estadito ")
+    public List<Cobros> findByCobrosBetweenCedulaContribuyenteAndFecha(@Param("cedulaContribuyente")String cedulaContribuyente, @Param("startDate")Date startDate, @Param("endDate")Date endDate, @Param("Estadito") String Estadito);
 
     @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.licenciascomerciales e JOIN e.contribuyentes_licencias_comerciales c WHERE " +
-            "  c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.cobrosFechaCreacion >= :startDate AND u.cobrosFechaVencimiento <= :endDate AND u.estado = Pagado ")
-    public List<Cobros> findByCobrosBetweenCedulaContribuyenteAndFecha(@Param("cedulaContribuyente")String cedulaContribuyente, @Param("startDate")Date startDate, @Param("endDate")Date endDate);
-
-    @Query(value = "SELECT u FROM Cobros u LEFT JOIN u.licenciascomerciales e JOIN e.contribuyentes_licencias_comerciales c WHERE " +
-            "c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.estado = Pendiente ")
+            "c.contribuyente.cedulaContribuyente=:cedulaContribuyente AND u.estado=:Pendiente ")
     public List<Cobros> findCobrosByCedulaContribuyentePendientes(@Param("cedulaContribuyente") String cedulaContribuyente);
 
     @Query(value = "SELECT u FROM Cobros u WHERE u.cobrosFechaCreacion >= :startDate AND u.cobrosFechaCreacion <= :endDate AND u.estado = 'Pendiente'")
