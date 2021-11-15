@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="1147.0" spacing="80.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AutorizarRolesController">
+    <children>
+        <Pane prefHeight="540.0" prefWidth="1147.0">
+            <children>
+                <Button fx:id="btnBuscar" layoutX="67.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionBuscar" prefHeight="39.0" prefWidth="275.0" style="-fx-background-color: green;" text="Buscar" textFill="WHITE">
+                    <font>
+                        <Font name="Elephant" size="18.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="txtNombre" layoutX="25.0" layoutY="415.0" promptText="Nombre " />
+                <TextField fx:id="txtClave" layoutX="289.0" layoutY="415.0" promptText="Clave" translateX="5.0" />
+                <TextField fx:id="txtCedula" layoutX="572.0" layoutY="415.0" promptText="Cedula" />
+                <Button fx:id="btnInsertar" layoutX="766.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="39.0" prefWidth="284.0" style="-fx-background-color: green;" text="Insertar" textFill="#f8f4f4">
+                    <font>
+                        <Font name="Elephant" size="18.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="TablaUsuario" layoutX="25.0" layoutY="57.0" prefHeight="330.0" prefWidth="1099.0">
+                    <columns>
+                        <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="colNombre" prefWidth="193.0" text="Nombre" />
+                        <TableColumn fx:id="colClave" prefWidth="249.0" text="Clave" />
+                        <TableColumn fx:id="colCedula" prefWidth="197.0" text="Cedula" />
+                  <TableColumn fx:id="colEstado" prefWidth="197.0" text="Estado" />
+                  <TableColumn fx:id="colRol" prefWidth="197.0" text="Rol" />
+                    </columns>
+                </TableView>
+                <Label layoutX="191.0" text="Autorizaciones de roles">
+                    <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop color="#b92222" />
+                                <Stop color="WHITE" offset="1.0" />
+                            </stops>
+                        </LinearGradient>
+                    </textFill>
+                    <font>
+                        <Font name="Elephant" size="33.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnGuardar" layoutX="417.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionGuardar" prefHeight="39.0" prefWidth="284.0" style="-fx-background-color: green;" text="Guardar" textFill="#f5efef">
+                    <font>
+                        <Font name="Elephant" size="18.0" />
+                    </font>
+                </Button>
+            <ComboBox fx:id="cbxRoles" layoutX="863.0" layoutY="415.0" prefHeight="39.0" prefWidth="224.0" />
+            </children>
+        </Pane>
+    </children>
+    <effect>
+        <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+    </effect>
+</HBox>

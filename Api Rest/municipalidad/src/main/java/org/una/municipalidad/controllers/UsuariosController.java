@@ -46,21 +46,23 @@ public class UsuariosController {
     }
 
 
-    @GetMapping("/cedula/{term}")
+    @GetMapping("/findByCedulaAproximate/{cedula}")
     @ApiOperation(value = "Obtiene una lista de las cedulas", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
-    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
-        Optional<List<UsuariosDTO>> result = usuarioService.findByCedulaAproximate(term);
+    @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR') or hasRole('ADMINISTRADOR')")
+    public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<UsuariosDTO>> result = usuarioService.findByCedulaAproximate(cedula);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/nombre/{term}")
+    @GetMapping("/findByNombreUsuarioAproximateIgnoreCase/{term}")
     @ApiOperation(value = "Obtiene una lista de los nombres de los usuarios", response = UsuariosDTO.class, responseContainer = "List", tags = "Usuarios")
     @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
     public ResponseEntity<?> findByNombreUsuarioAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         Optional<List<UsuariosDTO>> result = usuarioService.findByNombreUsuarioAproximateIgnoreCase(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+
 
 
     @ResponseStatus(HttpStatus.OK)

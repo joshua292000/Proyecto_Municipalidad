@@ -59,7 +59,7 @@ public class ParametrosController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> create(@RequestBody ParametrosDTO parametrosDTO) {
         try {
             Optional<ParametrosDTO> parametrosCreated = parametrosService.create(parametrosDTO);

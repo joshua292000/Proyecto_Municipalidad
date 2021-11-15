@@ -20,4 +20,6 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
     public Optional<Usuarios> findByCedula(String cedula);
 
 
+
+
 }

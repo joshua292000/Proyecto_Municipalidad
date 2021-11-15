@@ -3,6 +3,7 @@ package org.una.municipalidad.services;
 import org.una.municipalidad.dto.AuthenticationRequest;
 import org.una.municipalidad.dto.AuthenticationResponse;
 import org.una.municipalidad.dto.UsuariosDTO;
+import org.una.municipalidad.entities.Usuarios;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,5 +33,7 @@ public interface UsuariosService {
     //public String login(AuthenticationRequest authenticationRequest);
 
     public Optional<UsuariosDTO> findByCedula(String cedula);
+
+
 
 }

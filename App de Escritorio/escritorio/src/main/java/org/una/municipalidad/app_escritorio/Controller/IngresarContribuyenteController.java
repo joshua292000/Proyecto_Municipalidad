@@ -108,7 +108,6 @@ public class IngresarContribuyenteController extends Controller implements Initi
 
     @FXML
     void OnActionGuardar(ActionEvent event) throws IOException, InterruptedException {
-
         long idd=8;
         for(int x=0;x<options.size();x++){
             ContribuyentesDTO contribuyente = ConsultasGestorService.CrearContribuyente(options.get(x).getApellidoContribuyente(),options.get(x).getCedulaContribuyente(),options.get(x).getNombreContribuyente());

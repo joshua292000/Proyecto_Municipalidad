@@ -54,7 +54,7 @@ public class LogginController extends Controller implements Initializable {
                 ((Stage) btnIngresar.getScene().getWindow()).close();
                 txtCedula.clear();
                 txtContrasenia.clear();
-                //FlowController.getInstance().goViewInWindow("Principal");
+                FlowController.getInstance().goViewInWindow("HomeAdmin");
 
             }else if(AppContext.getInstance().get("roles").equals("ROLE_AUDITOR")){
                 ((Stage) btnIngresar.getScene().getWindow()).close();

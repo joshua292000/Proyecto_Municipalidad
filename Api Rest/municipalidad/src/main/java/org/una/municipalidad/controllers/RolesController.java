@@ -41,7 +41,7 @@ public class RolesController {
 
     }
 
-    @GetMapping("/nombre/{term}")
+    @GetMapping("/findByNombreRolAproximateIgnoreCase/{term}")
     @ApiOperation(value = "Obtiene una lista de los nombres de los roles", response = RolesDTO.class, responseContainer = "List", tags = "Roles")
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     public ResponseEntity<?> findByNombreRolAproximateIgnoreCase(@PathVariable(value = "term") String term) {

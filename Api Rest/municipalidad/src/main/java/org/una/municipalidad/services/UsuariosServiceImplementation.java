@@ -98,6 +98,7 @@ public class UsuariosServiceImplementation implements UsuariosService, UserDetai
         return Optional.ofNullable(usuarioDTO);
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuariosDTO> findById(Long id) {
