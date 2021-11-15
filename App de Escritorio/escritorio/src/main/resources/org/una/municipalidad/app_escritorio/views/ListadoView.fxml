@@ -12,47 +12,48 @@
     <children>
         <AnchorPane prefHeight="639.0" prefWidth="999.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                      <ScrollPane fx:id="ScPane" prefHeight="637.0" prefWidth="1019.0" VBox.vgrow="SOMETIMES">
-                          <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1960.0">
-                                  <children>
-                                      <TableView fx:id="Tvdatos" prefHeight="585.0" prefWidth="2000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                          <columns>
-                                              <TableColumn fx:id="Col1" prefWidth="115.0" text="C1" />
-                                              <TableColumn fx:id="Col2" prefWidth="115.0" text="C2" />
-                                              <TableColumn fx:id="Col3" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col4" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col5" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col6" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col7" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col8" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col9" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col10" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col11" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col12" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col13" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col14" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col15" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col16" prefWidth="115.0" text="Column X" />
-                                              <TableColumn fx:id="Col17" prefWidth="115.0" text="fin" />
-                                          </columns>
-                                      </TableView>
-                                  </children>
-                              </AnchorPane>
-                          </content>
-                      </ScrollPane>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #05071F;">
-                     <children>
-                        <JFXButton fx:id="btnGenerar" onAction="#OnActionBtnGenerar" text="Generar reporte" />
-                        <JFXButton fx:id="btnImprime" onAction="#OnActionBtnImprime" text="Imprimir" />
-                        <JFXButton fx:id="btnEliminar" onAction="#OnActionBtnEliminar" text="Eliminar" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ScrollPane fx:id="ScPane" prefHeight="637.0" prefWidth="1019.0" VBox.vgrow="SOMETIMES">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1960.0">
+                                    <children>
+                                        <TableView fx:id="Tvdatos" prefHeight="585.0" prefWidth="2000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                                <TableColumn fx:id="Col1" prefWidth="115.0" text="C1" />
+                                                <TableColumn fx:id="Col2" prefWidth="115.0" text="C2" />
+                                                <TableColumn fx:id="Col3" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col4" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col5" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col6" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col7" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col8" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col9" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col10" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col11" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col12" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col13" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col14" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col15" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col16" prefWidth="115.0" text="Column X" />
+                                                <TableColumn fx:id="Col17" prefWidth="115.0" text="fin" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #05071F;">
+                            <children>
+                                <JFXButton fx:id="btnGenerar" onAction="#OnActionBtnGenerar" text="Generar reporte" />
+                                <JFXButton fx:id="btnImprime" onAction="#OnActionBtnImprime" text="Imprimir" />
+                                <JFXButton fx:id="btnEliminar" onAction="#OnActionBtnEliminar" text="Eliminar" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
             </children>
         </AnchorPane>
     </children>
 </AnchorPane>
+

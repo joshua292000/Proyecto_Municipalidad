@@ -1,8 +1,9 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
-import javafx.application.Platform;
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -14,12 +15,14 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.una.municipalidad.app_escritorio.DTO.*;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -111,7 +114,7 @@ public class ListadoViewController extends Controller implements Initializable {
             "codigoComercio","estado"};
 
     private String  ArrayLocales[] ={"id","nombreLocal", "ubicacionLocal" ,"correoLocal", "telefonoLocal", "Monto_Alquiler_Local",
-        "fechaRegistrolocal", "ultima_Actualizacionlocal" ,"estado"};
+            "fechaRegistrolocal", "ultima_Actualizacionlocal" ,"estado"};
 
     private String  ArrayParametros[] ={ "id","llaveParametro","valorParametro"};
     public int Consulta=0;
@@ -127,7 +130,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 List<CobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoCobroXEsatado("Eliminando");
                 if (cobro != null) {
                     for (CobrosDTO cobros : cobro) {
-                        options.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomercial(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
+                        options.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciascomerciales(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
                     }
                     //Collection.sort(options);
                     this.Tvdatos.setItems(options);
@@ -184,7 +187,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 List<CobrosDTO> cobro= ConsultasServiceGerente.obtenerTodoCobroXFechas(LocalDate.parse(getParametro()),LocalDate.parse(getParametro2()));
                 if(cobro!=null){
                     for(CobrosDTO cobros:cobro){
-                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomercial(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
                     }
                     this.Tvdatos.setItems(options);
                 }
@@ -250,7 +253,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 List<CobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoCobroXEsatado("Pendiente");
                 if (cobro != null) {
                     for (CobrosDTO cobros : cobro) {
-                        options.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomercial(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
+                        options.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciascomerciales(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
                     }
                     this.Tvdatos.setItems(options);
                 }
@@ -275,7 +278,7 @@ public class ListadoViewController extends Controller implements Initializable {
         arreglo[4]=(lista.get(tamaño).getCobrosFechaVencimiento()==null)? " " : lista.get(tamaño).getCobrosFechaVencimiento().toString();
         arreglo[5]=(lista.get(tamaño).getEstado()==null)? " " : lista.get(tamaño).getEstado().toString();
         arreglo[6]=(lista.get(tamaño).getCobrosFechaPago()==null)? " " : lista.get(tamaño).getCobrosFechaPago().toString();
-        arreglo[7]=(lista.get(tamaño).getLicenciacomercial()==null)? " " : lista.get(tamaño).getLicenciacomercial().getId().toString();
+        arreglo[7]=(lista.get(tamaño).getLicenciascomerciales()==null)? " " : lista.get(tamaño).getLicenciascomerciales().getId().toString();
         arreglo[8]=(lista.get(tamaño).getFacturas()==null)? " " : lista.get(tamaño).getFacturas().getId().toString();
         arreglo[9]=(lista.get(tamaño).getTipocobros()==null)? " " : lista.get(tamaño).getTipocobros().getId().toString();
         arreglo[10]=(lista.get(tamaño).getLocalesmercado()==null)? " " : lista.get(tamaño).getLocalesmercado().getId().toString();
@@ -506,7 +509,7 @@ public class ListadoViewController extends Controller implements Initializable {
             for (int j = 0; j < tabAuditoriaVolumes.getColumns().size(); j++) {
                 if(j<tamaño){
                     if(i==0){
-                            row.createCell(j).setCellValue(array[j]);
+                        row.createCell(j).setCellValue(array[j]);
                     }else{
                         if(getHola()==5){
                             row.createCell(j).setCellValue(StringCobros(options,i-1)[j]);
@@ -590,3 +593,4 @@ public class ListadoViewController extends Controller implements Initializable {
 
     }
 }
+
