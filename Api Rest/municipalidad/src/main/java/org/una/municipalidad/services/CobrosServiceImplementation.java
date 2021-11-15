@@ -89,6 +89,15 @@ public class CobrosServiceImplementation implements CobrosService {
 
     @Override
     @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findByEstadoBetweenFecha(@Param("Estadito")String estado, @Param("startDate")Date startDate, @Param("endDate")Date endDate) {
+        List<Cobros> cobroList = cobrosRepository.findByEstadoBetweenFecha(estado,startDate,endDate);
+        List<CobrosDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList,CobrosDTO.class);
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyentePendientes(String cedulaContribuyente) {
         List<Cobros> cobroCanceladoList = cobrosRepository.findCobrosByCedulaContribuyentePendientes(cedulaContribuyente);
         List<CobrosDTO> cobroCanceladoDTOList = MapperUtils.DtoListFromEntityList(cobroCanceladoList,CobrosDTO.class);

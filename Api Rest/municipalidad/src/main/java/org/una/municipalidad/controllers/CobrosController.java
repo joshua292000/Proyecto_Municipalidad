@@ -97,6 +97,18 @@ public class CobrosController {
         }
     }
 
+    @PreAuthorize("hasRole('AUDITOR')")
+    @GetMapping("/findByEstadoBetweenFecha/{Estadito}/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado y dos fechas dadas", response = CobrosDTO.class, responseContainer = "CobrosDTO", tags = "Cobros")
+    public ResponseEntity<?>findByEstadoBetweenFecha(@PathVariable(value = "Estadito") String estado, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+        try {
+            Optional<List<CobrosDTO>> result = cobrosService.findByEstadoBetweenFecha(estado,startDate,endDate);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT') or hasRole('GESTOR')")
     @GetMapping("/findCobrosByCedulaContribuyente/{cedulaContribuyente}/{Estadito}")
     @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")

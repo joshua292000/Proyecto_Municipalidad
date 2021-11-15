@@ -2,10 +2,7 @@ package org.una.municipalidad.app_escritorio.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
-import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
-import org.una.municipalidad.app_escritorio.DTO.DeclaracionesDTO;
-import org.una.municipalidad.app_escritorio.DTO.UsuariosDTO;
+import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.io.IOException;
@@ -119,6 +116,36 @@ public class ConsultasServiceAuditor {
         return movimientos;
 
     }
+
+    public static List<CobrosDTO>ObtenerCobrosEstadoFecha(String estado, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
+
+        List<CobrosDTO> cobros = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findByEstadoBetweenFecha/"+estado+"/"+startDate+"/"+endDate))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.println("status "+response.statusCode());
+
+
+        System.out.println("cuerpo "+response.body());
+
+        cobros = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+
+
+        return cobros;
+
+    }
+
 
     public static BitacorasDTO ObtenerMovimientoUsuario(Long id) throws IOException, InterruptedException {
 
