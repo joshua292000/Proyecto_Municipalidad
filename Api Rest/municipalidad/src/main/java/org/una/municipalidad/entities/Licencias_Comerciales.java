@@ -47,7 +47,7 @@ public class Licencias_Comerciales implements Serializable{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciacomercial")
     private List<Declaraciones> declaraciones = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciacomercial")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")
     private List<Cobros> cobros = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "licenciascomerciales")

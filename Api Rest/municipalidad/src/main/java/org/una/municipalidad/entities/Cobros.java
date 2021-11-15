@@ -57,7 +57,7 @@ public class Cobros {
 
     @ManyToOne
     @JoinColumn(name="licencias_comerciales_id")
-    private Licencias_Comerciales licenciacomercial;
+    private Licencias_Comerciales licenciascomerciales;
 
     @ManyToOne
     @JoinColumn(name="propiedades_id")

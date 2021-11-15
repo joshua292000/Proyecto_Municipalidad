@@ -104,6 +104,7 @@ public class CobrosServiceImplementation implements CobrosService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void cobrosmasivos(@Param("startDate")Date startDate, @Param("endDate")Date endDate) {
         cobrosRepository.cobrosmasivos(startDate,endDate);
     }
