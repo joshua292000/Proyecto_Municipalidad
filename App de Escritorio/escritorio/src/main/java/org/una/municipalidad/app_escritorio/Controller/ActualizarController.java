@@ -211,7 +211,7 @@ public class ActualizarController extends Controller implements Initializable {
     private ObservableList<LicenciasComercialesDTO> listaLicencia = FXCollections.observableArrayList();
     private ObservableList<LocalesMercadoDTO> listaLocales = FXCollections.observableArrayList();
     private ObservableList<PropiedadesDTO> listaPropiedades = FXCollections.observableArrayList();
-   
+    private String Estado = "Pagado";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -303,7 +303,7 @@ public class ActualizarController extends Controller implements Initializable {
                     txtCedula.clear();
                 }
             }else if(Tipo=="Cobros"){
-                List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro(txtCedula.getText());
+                List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro(txtCedula.getText(),Estado );
                 if(cobro!=null){
                     for(CobrosDTO cobros:cobro){
                         listaCobros.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomercial(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));

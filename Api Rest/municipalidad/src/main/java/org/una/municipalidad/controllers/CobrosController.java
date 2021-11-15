@@ -109,6 +109,30 @@ public class CobrosController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT') or hasRole('GESTOR')")
+    @GetMapping("/findCobrosByCedulaContribuyente2/{cedulaContribuyente}/{Estadito}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    public ResponseEntity<?> findCobrosByCedulaContribuyente2(@PathVariable (value ="cedulaContribuyente") String cedula, @PathVariable (value ="Estadito") String Estadito){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyente2(cedula,Estadito);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('BOT') or hasRole('GESTOR')")
+    @GetMapping("/findCobrosByCedulaContribuyente3/{cedulaContribuyente}/{Estadito}")
+    @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    public ResponseEntity<?> findCobrosByCedulaContribuyente3(@PathVariable (value ="cedulaContribuyente") String cedula, @PathVariable (value ="Estadito") String Estadito){
+        try{
+            Optional<List<CobrosDTO>> result = cobrosService.findCobrosByCedulaContribuyente3(cedula,Estadito);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/cobrosmasivos/{startDate}/{endDate}")
     @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")

@@ -322,12 +322,12 @@ public class ConsultasGestorService {
 
     }
 
-    public static List<CobrosDTO> obtenerCobro(String cedula) throws IOException, InterruptedException {
+    public static List<CobrosDTO> obtenerCobro(String cedula, String estado) throws IOException, InterruptedException {
         List<CobrosDTO> cobro = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyentePendientes/"+cedula+"/"))
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyentePendientes/"+cedula+"/"+estado+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -788,5 +788,65 @@ public class ConsultasGestorService {
 
         return localM;
 
+    }
+
+    public static List<CobrosDTO> obtenerCobro2(String cedula, String estado) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyente/"+cedula+"/"+estado+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
+            cobro=null;
+        }else{
+            cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        }
+        return cobro;
+    }
+
+    public static List<CobrosDTO> obtenerCobro3(String cedula, String estado) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyente2/"+cedula+"/"+estado+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
+            cobro=null;
+        }else{
+            cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        }
+        return cobro;
+    }
+
+    public static List<CobrosDTO> obtenerCobro4(String cedula, String estado) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyente3/"+cedula+"/"+estado+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
+            cobro=null;
+        }else{
+            cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        }
+        return cobro;
     }
 }
