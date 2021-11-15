@@ -14,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ConsultasServiceAuditor {
@@ -29,7 +30,7 @@ public class ConsultasServiceAuditor {
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/cobros"))
+                .uri(URI.create("http://localhost:8089/bitacora"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -64,23 +65,86 @@ public class ConsultasServiceAuditor {
         return declaracion;
     }
 
-    public static List<UsuariosDTO> obtenerTodoUsuarios() throws IOException, InterruptedException {
-        List<UsuariosDTO> usuario = null;
+    public static List<UsuariosDTO> usuarioCBX() throws IOException, InterruptedException {
+
+        List<UsuariosDTO> usuarios = null;
+
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/usuario"))
+                .uri(URI.create("http://localhost:8089/usuarios"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
-            usuario=null;
-        }else{
-            usuario = mapper.readValue(response.body(), new TypeReference<List<UsuariosDTO>>() {});
-        }
-        return usuario;
+
+
+        System.out.println("status " + response.statusCode());
+
+        System.out.println("cuerpo " + response.body());
+
+        usuarios = mapper.readValue(response.body(), new TypeReference<List<UsuariosDTO>>() {
+        });
+
+        return usuarios;
     }
-}
+    public static List<BitacorasDTO>ObtenerMovimientoUsuarioFecha(int id, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
+
+        List<BitacorasDTO> movimientos = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/bitacora/findByIdBetweenFecha/"+id+"/"+startDate+"/"+endDate))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.println("status "+response.statusCode());
+
+
+        System.out.println("cuerpo "+response.body());
+
+        movimientos = mapper.readValue(response.body(), new TypeReference<List<BitacorasDTO>>() {});
+
+
+        return movimientos;
+
+    }
+    public static List<BitacorasDTO>ObtenerMovimientoUsuario(int id) throws IOException, InterruptedException {
+
+        List<BitacorasDTO> movimientos = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/bitacora/findById/"+id))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.println("status "+response.statusCode());
+
+
+        System.out.println("cuerpo "+response.body());
+
+        movimientos = mapper.readValue(response.body(), new TypeReference<List<BitacorasDTO>>() {});
+
+
+        return movimientos;
+
+    }
+    }

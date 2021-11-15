@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
@@ -7,6 +11,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.*?>
+
 <HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="769.0" spacing="80.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.IngresarContribuyenteController">
     <children>
         <Pane prefHeight="318.0" prefWidth="754.0">
@@ -20,11 +25,6 @@
             <TextField fx:id="txtApellido" layoutX="265.0" layoutY="415.0" promptText="Apellidos" translateX="5.0" />
             <TextField fx:id="txtCedula" layoutX="516.0" layoutY="415.0" promptText="Cedula" />
             <Button fx:id="btnInsertar" layoutX="576.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Insertar" textFill="#f8f4f4">
-               <font>
-                  <Font name="Elephant" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnCancelar" layoutX="242.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionCancelar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Cancelar" textFill="#f5efef">
                <font>
                   <Font name="Elephant" size="18.0" />
                </font>
@@ -50,7 +50,7 @@
                   <Font name="Elephant" size="33.0" />
                </font>
             </Label>
-            <Button fx:id="btnGuardar" layoutX="408.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionGuardar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Guardar" textFill="#f5efef">
+            <Button fx:id="btnGuardar" layoutX="313.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionGuardar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Guardar" textFill="#f5efef">
                <font>
                   <Font name="Elephant" size="18.0" />
                </font>

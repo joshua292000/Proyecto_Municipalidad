@@ -13,6 +13,8 @@ module org.una.municipalidad.app_escritorio {
     requires jasperreports;
     requires java.desktop;
     requires poi;
+    requires jxbrowser;
+    requires jxbrowser.swing;
     //requires jxbrowser;
     //requires jxbrowser.swing;
 

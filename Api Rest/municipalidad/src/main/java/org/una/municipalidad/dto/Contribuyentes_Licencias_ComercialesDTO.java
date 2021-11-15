@@ -10,7 +10,8 @@ import org.una.municipalidad.entities.Licencias_Comerciales;
 @ToString
 @Builder
 public class Contribuyentes_Licencias_ComercialesDTO {
+    private Long id;
     private Long porcentajeLicencia;
     private ContribuyentesDTO contribuyente;
-    private Contribuyentes_Licencias_ComercialesDTO licenciacomercial;
+    private LicenciasComercialesDTO licenciacomercial;
 }

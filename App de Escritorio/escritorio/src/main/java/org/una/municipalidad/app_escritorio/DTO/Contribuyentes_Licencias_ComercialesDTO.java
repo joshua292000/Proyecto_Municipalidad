@@ -9,7 +9,8 @@ import lombok.*;
 @ToString
 @Builder
 public class Contribuyentes_Licencias_ComercialesDTO {
+    private Long id;
     private Long porcentajeLicencia;
     private ContribuyentesDTO contribuyente;
-    private Contribuyentes_Licencias_ComercialesDTO licenciacomercial;
+    private LicenciasComercialesDTO licenciacomercial;
 }
