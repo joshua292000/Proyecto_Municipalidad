@@ -10,8 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
 import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
+import org.una.municipalidad.app_escritorio.DTO.UsuariosDTO;
+import org.una.municipalidad.app_escritorio.Service.ConsultasServiceAuditor;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,17 +41,8 @@ public class CobrosRealizadosController extends Controller implements Initializa
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        IniciarDatos();
 
-        List<CobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoCobro();
-
-        if (cobro != null) {
-            for (CobrosDTO cobros : cobro) {
-                cobrosRealizadoslist.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomercial(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
-            }
-            this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
-        }
-        System.out.print(cobro);
-        LlenarTabla();
     }
 
     @Override
@@ -72,7 +66,24 @@ public class CobrosRealizadosController extends Controller implements Initializa
         this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
     }
 
+
+
+
+    @SneakyThrows
+    public void IniciarDatos(){
+        List<CobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoCobro();
+
+        if (cobro != null) {
+            for (CobrosDTO cobros : cobro) {
+                cobrosRealizadoslist.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciacomerciales(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
+            }
+            this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
+        }
+        System.out.print(cobro);
+        LlenarTabla();
+    }
     public void OnActionbtnVisualizarInformacionsinfiltros(ActionEvent actionEvent) {
+
     }
 
     public void OnActionbtnVisualizarInformacion(ActionEvent actionEvent) {

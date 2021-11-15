@@ -68,6 +68,25 @@ public class BitacoraController {
         }
     }
 
+    @GetMapping("/findByBitacoraCambiosBetweenFecha/{startDate}/{endDate}")
+    @ApiOperation(value = "Obtiene una lista de cambios en base a las fechas", response = BitacorasDTO.class, responseContainer = "BitacorasDTO" , tags = "Bitacora")
+    @PreAuthorize("hasRole('AUDITOR')")
+    public ResponseEntity<?> findByBitacoraCambiosBetweenFecha(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate){
+        try{
+            Optional<List<BitacorasDTO>> result = bitacoraService.findByBitacoraCambiosBetweenFecha(startDate,endDate);
+            return new ResponseEntity<>(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/findByIdUsuario/{id}")
+    @ApiOperation(value = "Obtiene una bitacora a partir del id de un usuario", response = BitacorasDTO.class, tags = "Bitacora")
+    @PreAuthorize("hasRole('AUDITOR')")
+    public ResponseEntity<?> findByIdUsuario(@PathVariable(value = "id") Long id) {
+        Optional<BitacorasDTO> bitacoraFound = bitacoraService.findByIdUsuario(id);
+        return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
@@ -81,6 +100,7 @@ public class BitacoraController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = BitacorasDTO.class, tags = "Bitacora")

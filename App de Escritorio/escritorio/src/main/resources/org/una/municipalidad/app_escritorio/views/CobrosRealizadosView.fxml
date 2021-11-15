@@ -41,12 +41,6 @@
                 <Font name="Times New Roman" size="14.0" />
             </font>
         </Label>
-        <JFXComboBox fx:id="cbxTipoCobro" layoutX="64.0" layoutY="128.0" prefHeight="25.0" prefWidth="125.0" />
-        <Label fx:id="lblTipoCobro" layoutX="84.0" layoutY="104.0" prefHeight="16.0" prefWidth="85.0" text="Tipo de cobro:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
         <DatePicker fx:id="dtFechaDesde" layoutX="251.0" layoutY="128.0" />
         <DatePicker fx:id="dtFechaHasta" layoutX="479.0" layoutY="128.0" />
         <Label fx:id="lblDesde" layoutX="311.0" layoutY="96.0" prefHeight="16.0" prefWidth="54.0" text="Desde:">
@@ -74,13 +68,13 @@
                 <Font name="Times New Roman" size="12.0" />
             </font>
         </JFXButton>
-        <JFXRadioButton fx:id="rbPagados" layoutX="338.0" layoutY="41.0" onAction="#OnActionrbPagados" text="Pagados">
+        <JFXRadioButton fx:id="rbPagados" layoutX="36.0" layoutY="132.0" onAction="#OnActionrbPagados" text="Pagados">
             <toggleGroup>
                 <ToggleGroup fx:id="Estado" />
             </toggleGroup>
         </JFXRadioButton>
-        <JFXRadioButton fx:id="rbSinPagar" layoutX="479.0" layoutY="41.0" onAction="#OnActionrbSinPagar" text="Sin Pagar" toggleGroup="$Estado" />
-        <Label fx:id="lblEstado" layoutX="375.0" layoutY="19.0" prefHeight="16.0" prefWidth="125.0" text="Por estado del cobro:">
+        <JFXRadioButton fx:id="rbSinPagar" layoutX="127.0" layoutY="132.0" onAction="#OnActionrbSinPagar" text="Sin Pagar" toggleGroup="$Estado" />
+        <Label fx:id="lblEstado" layoutX="64.0" layoutY="79.0" prefHeight="16.0" prefWidth="125.0" text="Por estado del cobro:">
             <font>
                 <Font name="Times New Roman" size="14.0" />
             </font>

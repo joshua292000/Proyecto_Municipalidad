@@ -16,5 +16,5 @@ public class BitacorasDTO {
     private String bitacoraDescripcion;
     private String bitacoraUsuario;
     private Date bitacoraFecha;
-    private Usuarios usuario;
+    private UsuariosDTO usuario;
 }
