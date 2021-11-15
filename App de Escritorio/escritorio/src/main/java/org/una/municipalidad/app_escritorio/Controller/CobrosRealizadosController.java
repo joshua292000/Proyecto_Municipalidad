@@ -1,7 +1,9 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,6 +31,8 @@ public class CobrosRealizadosController extends Controller implements Initializa
     public TableColumn tvcIdPropiedades;
     public TableColumn tvcIdTipoCobros;
     public TableView Tview_CobrosLista;
+    public JFXRadioButton rbSinPagar;
+    public JFXRadioButton rbPagados;
     private ObservableList<CobrosDTO> cobrosRealizadoslist = FXCollections.observableArrayList();
 
     @SneakyThrows
@@ -66,5 +70,17 @@ public class CobrosRealizadosController extends Controller implements Initializa
         this.tvcIdPropiedades.setCellValueFactory(new PropertyValueFactory("propiedades"));
         this.tvcIdTipoCobros.setCellValueFactory(new PropertyValueFactory("tipocobros"));
         this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
+    }
+
+    public void OnActionbtnVisualizarInformacionsinfiltros(ActionEvent actionEvent) {
+    }
+
+    public void OnActionbtnVisualizarInformacion(ActionEvent actionEvent) {
+    }
+
+    public void OnActionrbSinPagar(ActionEvent actionEvent) {
+    }
+
+    public void OnActionrbPagados(ActionEvent actionEvent) {
     }
 }

@@ -91,7 +91,7 @@ public class ConsultasServiceAuditor {
 
         return usuarios;
     }
-    public static List<BitacorasDTO>ObtenerMovimientoUsuario(int id, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
+    public static List<BitacorasDTO>ObtenerMovimientoUsuarioFecha(int id, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
 
         List<BitacorasDTO> movimientos = null;
 
@@ -100,6 +100,34 @@ public class ConsultasServiceAuditor {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://localhost:8089/bitacora/findByIdBetweenFecha/"+id+"/"+startDate+"/"+endDate))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.println("status "+response.statusCode());
+
+
+        System.out.println("cuerpo "+response.body());
+
+        movimientos = mapper.readValue(response.body(), new TypeReference<List<BitacorasDTO>>() {});
+
+
+        return movimientos;
+
+    }
+    public static List<BitacorasDTO>ObtenerMovimientoUsuario(int id) throws IOException, InterruptedException {
+
+        List<BitacorasDTO> movimientos = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/bitacora/findById/"+id))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
