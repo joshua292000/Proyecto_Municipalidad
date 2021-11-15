@@ -12,6 +12,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class ConsultasGestorService {
@@ -96,9 +97,6 @@ public class ConsultasGestorService {
                 .append("\",")
                 .append("\"distritoComercio\":\"" )
                 .append(distrito)
-                .append("\",")
-                .append("\"telefonoComercio\":\"" )
-                .append(Telefono)
                 .append("\",")
                 .append("\"fechaRegistrocomercio\":\"" )
                 .append(registro)
@@ -577,15 +575,15 @@ public class ConsultasGestorService {
         return Licencia;
     }*/
 
-    public static List<LicenciasComercialesDTO> ObtenerLicenciaNombre(String nombre) throws IOException, InterruptedException {
+    public static LicenciasComercialesDTO ObtenerLicenciaNombre(String nombre) throws IOException, InterruptedException {
 
-        List<LicenciasComercialesDTO> licencia = null;
+        LicenciasComercialesDTO licencia = null;
 
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/licenciasComerciales/findLicencias_ComercialesByCedula/"+nombre+"/"))
+                .uri(URI.create("http://localhost:8089/licenciasComerciales/findByNombreComercio/"+nombre+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -595,9 +593,200 @@ public class ConsultasGestorService {
         System.out.println("status "+response.statusCode());
 
         System.out.println("cuerpo "+response.body());
-        licencia = mapper.readValue(response.body(), new TypeReference<List<LicenciasComercialesDTO>>() {});
+        licencia = mapper.readValue(response.body(), new TypeReference<LicenciasComercialesDTO>() {});
 
         return licencia;
+
+    }
+
+    public static LocalesMercadoDTO ObtenerNombreLocal(String nombre) throws IOException, InterruptedException {
+
+        LocalesMercadoDTO local = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/localesmercado/findByNombreLocal/"+nombre+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        local = mapper.readValue(response.body(), new TypeReference<LocalesMercadoDTO> () {});
+
+        return local;
+
+    }
+
+    public static PropiedadesDTO ObtenerIdPropiedad(Long Id) throws IOException, InterruptedException {
+
+        PropiedadesDTO propiedad = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/propiedades/"+Id+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        propiedad = mapper.readValue(response.body(), new TypeReference<PropiedadesDTO>() {});
+
+        return propiedad;
+
+    }
+
+    public static Contribuyentes_Licencias_ComercialesDTO CrearLicenciaComercialXContribuyente(Long porcentaje, ContribuyentesDTO contribuyente, LicenciasComercialesDTO licencia) throws IOException, InterruptedException {
+        Date fecha = new Date();
+        LocalDate fechaRegistro = LocalDate.parse("2021-11-12");
+        Contribuyentes_Licencias_ComercialesDTO Licencia;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"porcentajeLicencia\":\"" )
+                .append(porcentaje)
+                .append("\",")
+                .append("\"contribuyente\":{" )
+                .append("\"id\":\"" )
+                .append(contribuyente.getId())
+                .append("\",")
+                .append("\"nombreContribuyente\":\"" )
+                .append(contribuyente.getNombreContribuyente())
+                .append("\",")
+                .append("\"apellidoContribuyente\":\"" )
+                .append(contribuyente.getApellidoContribuyente())
+                .append("\",")
+                .append("\"cedulaContribuyente\":\"" )
+                .append(contribuyente.getCedulaContribuyente())
+                .append("\"},")
+                .append("\"licenciacomercial\":{" )
+                .append("\"id\":\"" )
+                .append(licencia.getId())
+                .append("\",")
+                .append("\"nombreComercio\":\"" )
+                .append(licencia.getNombreComercio())
+                .append("\",")
+                .append("\"telefonoComercio\":\"" )
+                .append(licencia.getTelefonoComercio())
+                .append("\",")
+                .append("\"correoComercio\":\"" )
+                .append(licencia.getCorreoComercio())
+                .append("\",")
+                .append("\"distritoComercio\":\"" )
+                .append(licencia.getDistritoComercio())
+                .append("\",")
+                .append("\"fechaRegistrocomercio\":\"" )
+                .append(fechaRegistro)
+                .append("\",")
+                .append("\"ultima_Actualizacioncomercio\":\"" )
+                .append(fechaRegistro)
+                .append("\",")
+                .append("\"codigoComercio\":\"" )
+                .append(licencia.getCodigoComercio())
+                .append("\",")
+                .append("\"estado\":\"" )
+                .append(licencia.getEstado())
+                .append("\"}")
+                .append("}").toString();
+        System.out.println("jsonprove f"+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/contribuyentes_licencias_comerciales/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status f "+response.statusCode());
+
+        // print response body
+        System.out.println("cuerpo f "+response.body());
+        Licencia = mapper.readValue(response.body(), new TypeReference<Contribuyentes_Licencias_ComercialesDTO>() {});
+        return Licencia;
+
+    }
+
+    public static Contribuyentes_PropiedadesDTO CrearPropiedadXContribuyente(Long porcentaje, ContribuyentesDTO contribuyente, PropiedadesDTO propiedades) throws IOException, InterruptedException {
+
+        Contribuyentes_PropiedadesDTO propiedad = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"porcentajePropiedad\":\"" )
+                .append(porcentaje)
+                .append("\",")
+                .append("\"contribuyente\":{" )
+                .append("\"id\":\"" )
+                .append(contribuyente.getId())
+                .append("\"},")
+                .append("\"propiedades\":{" )
+                .append("\"propiedades_id\":\"" )
+                .append(propiedades.getPropiedades_id())
+                .append("\"}")
+                .append("}").toString();
+        System.out.println("jsonprove "+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/contribuyentes_propiedades/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status "+response.statusCode());
+
+        System.out.println("cuerpo "+response.body());
+        propiedad = mapper.readValue(response.body(), new TypeReference<Contribuyentes_PropiedadesDTO>() {});
+
+        return propiedad;
+
+    }
+
+    public static Contribuyentes_Locales_MercadoDTO CrearLocalXContribuyente(Long porcentaje, ContribuyentesDTO contribuyente, LocalesMercadoDTO local) throws IOException, InterruptedException {
+
+        Contribuyentes_Locales_MercadoDTO localM = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"porcentajeLocales\":\"" )
+                .append(porcentaje)
+                .append("\",")
+                .append("\"contribuyente\":{" )
+                .append("\"id\":\"" )
+                .append(contribuyente.getId())
+                .append("\"},")
+                .append("\"localesmercado\":{" )
+                .append("\"id\":\"" )
+                .append(local.getId())
+                .append("\"}")
+                .append("}").toString();
+        System.out.println("jsonprove "+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/contribuyentes_Locales_Mercado/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status "+response.statusCode());
+
+        System.out.println("cuerpo "+response.body());
+        localM = mapper.readValue(response.body(), new TypeReference<Contribuyentes_Locales_MercadoDTO>() {});
+
+        return localM;
 
     }
 }

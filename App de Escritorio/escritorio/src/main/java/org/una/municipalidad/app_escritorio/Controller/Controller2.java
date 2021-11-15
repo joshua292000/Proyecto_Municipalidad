@@ -41,8 +41,10 @@ public class Controller2 extends Controller implements Initializable {
     private Button btnActualizar;
 
     @FXML
-    private Button btnSignout;
+    private Button btnCerrarSesion;
 
+    @FXML
+    private Button btnContri;
 
     @FXML
     private Pane pnlOverview;
@@ -147,9 +149,24 @@ public class Controller2 extends Controller implements Initializable {
             }
         }
 
-        if (actionEvent.getSource() ==   btnSignout) {
+        if (actionEvent.getSource() == btnContri) {
             pnItems.getChildren().clear();
-            ((Stage) btnSignout.getScene().getWindow()).close();
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            System.out.println("ober");
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/ContribuyenteXImpuesto.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        if (actionEvent.getSource() ==   btnCerrarSesion) {
+            pnItems.getChildren().clear();
+            ((Stage) btnCerrarSesion.getScene().getWindow()).close();
             FlowController.getInstance().goViewInWindow("Loggin");
         }
 

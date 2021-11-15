@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ContribuyenteXImpuestoController">
+   <children>
+      <Pane prefHeight="540.0" prefWidth="771.0">
+         <children>
+            <TabPane prefHeight="540.0" prefWidth="769.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Licencia Comercial">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #02030A;">
+                           <children>
+                              <TextField fx:id="txtPorcentaje" layoutX="200.0" layoutY="84.0" prefHeight="39.0" prefWidth="370.0" promptText="Porcentaje" />
+                              <TextField fx:id="txtContribuyente" layoutX="201.0" layoutY="191.0" prefHeight="39.0" prefWidth="369.0" promptText="Cedula del contribuyente" />
+                              <TextField fx:id="txtLicencia" layoutX="201.0" layoutY="303.0" prefHeight="39.0" prefWidth="367.0" promptText="Nombre de la licencia" />
+                              <Button fx:id="btnGuardar" layoutX="186.0" layoutY="408.0" mnemonicParsing="false" onAction="#OnActionGuardarLicencia" prefHeight="61.0" prefWidth="400.0" style="-fx-background-color: green;" text="Guardar Licencia" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="31.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="286.0" layoutY="25.0" text="Porcentaje" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="162.0" layoutY="129.0" text="Cedula del contribuyente" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="191.0" layoutY="238.0" text="Nombre de la licencia" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Local de Mercado">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #02030A;">
+                           <children>
+                              <TextField fx:id="txtPorcentajeL" layoutX="183.0" layoutY="87.0" prefHeight="39.0" prefWidth="370.0" promptText="Porcentaje" />
+                              <Label layoutX="269.0" layoutY="29.0" text="Porcentaje" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtContribuyenteL" layoutX="183.0" layoutY="192.0" prefHeight="39.0" prefWidth="370.0" promptText="Cedula del Contribuyente" />
+                              <TextField fx:id="txtNombreL" layoutX="184.0" layoutY="296.0" prefHeight="39.0" prefWidth="370.0" promptText="Nombre del local" />
+                              <Label layoutX="145.0" layoutY="135.0" text="Cedula del contribuyente" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="217.0" layoutY="239.0" text="Nombre del local" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnGuardarL" layoutX="175.0" layoutY="396.0" mnemonicParsing="false" onAction="#OnActionGuardarLocal" prefHeight="61.0" prefWidth="400.0" style="-fx-background-color: green;" text="Guardar Local" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="31.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Propiedad">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #02030A;">
+                           <children>
+                              <TextField fx:id="txtPorcentajeP" layoutX="176.0" layoutY="93.0" prefHeight="39.0" prefWidth="370.0" promptText="Porcentaje" />
+                              <Label layoutX="252.0" layoutY="25.0" text="Porcentaje" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="147.0" layoutY="156.0" text="Cedula del contribuyente" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtCedulaP" layoutX="176.0" layoutY="225.0" prefHeight="39.0" prefWidth="370.0" promptText="Cedula del contribuyente" />
+                              <TextField fx:id="txtId" layoutX="176.0" layoutY="354.0" prefHeight="39.0" prefWidth="370.0" promptText="Id de la propiedad" />
+                              <Label layoutX="189.0" layoutY="286.0" text="Id de la propiedad" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnGuardarP" layoutX="161.0" layoutY="411.0" mnemonicParsing="false" onAction="#OnActionGuardarPropiedad" prefHeight="61.0" prefWidth="400.0" style="-fx-background-color: green;" text="Guardar Propieadad" textFill="WHITE">
+                                 <font>
+                                    <Font name="Elephant" size="31.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</HBox>
