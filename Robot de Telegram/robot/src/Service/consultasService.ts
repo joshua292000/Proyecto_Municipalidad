@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { Telegraf} from 'telegraf';
-import { parametros } from './Parametros';
-import { Usuario } from './usuario';
-import { Cobros, Contribuyentes } from './Cobros';
+import { parametros } from '../DTO/usuarioDTO';
+import { Usuario } from '../DTO/usuarioDTO';
+import { Cobros, Contribuyentes } from '../DTO/cobrosDTO';
 
 export class consultas_service{
 
-    Horario(token: string, parametro: string, bot: Telegraf,chat:number){
+    Horario(token: string, parametro: string, bot: Telegraf,chat:number,estado:string){
       
         axios.get('http://localhost:8089/parametros/findByLlaveParametro/'+parametro, 
         {headers: {
@@ -15,14 +15,13 @@ export class consultas_service{
             var param = response.data as parametros;
             console.log('data tiene: ' + response.data)
             bot.telegram.sendMessage(chat,param.valorParametro);
-            //console.log('Entro aqui');
         })
         .catch(err => {
             console.log('Entro al error' + parametro);
             console.log(err, err.response);
         });
     }
-    Formula(token: string, parametro: string, bot: Telegraf,chat:number){
+    Formula(token: string, parametro: string, bot: Telegraf,chat:number,estado:string){
         axios.get('http://localhost:8089/parametros/findByLlaveParametro/'+parametro, {headers: {    
           Authorization: 'bearer ' + token,
         }}).then(response => {
@@ -34,7 +33,7 @@ export class consultas_service{
         });
   
     }
-    Telefono(token: string, parametro: string, bot: Telegraf,chat:number){
+    Telefono(token: string, parametro: string, bot: Telegraf,chat:number,estado:string){
       axios.get('http://localhost:8089/parametros/findByLlaveParametro/'+parametro, {headers: {    
         Authorization: 'bearer ' + token,
       }}).then(response => {
@@ -46,8 +45,8 @@ export class consultas_service{
       });
   }
 
-  Cobrospagados(token: string, parametro: string, bot: Telegraf,chat:number){
-    axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyente/'+parametro, {headers: {    
+  Cobrospagados(token: string, parametro: string, bot: Telegraf,chat:number,estado:string){
+    axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyente/'+parametro+"/"+estado, {headers: {    
       Authorization: 'bearer ' + token,
     }}).then(response => {
       var Cobros = response.data as Array<Cobros>
@@ -67,8 +66,8 @@ export class consultas_service{
     });
 }
 
-ListaCobros(token: string, parametro: string, bot: Telegraf,chat:number){
-  axios.get('http://localhost:8089/cobros/findByCobrosBetweenCedulaContribuyenteAndFecha/'+parametro, {headers: {    
+ListaCobros(token: string, parametro: string, bot: Telegraf,chat:number,estado:string){
+  axios.get('http://localhost:8089/cobros/findByCobrosBetweenCedulaContribuyenteAndFecha/'+parametro+"/"+estado, {headers: {    
     Authorization: 'bearer ' + token,
   }}).then(response => {
     var Cobros = response.data as Array<Cobros>
@@ -87,8 +86,8 @@ ListaCobros(token: string, parametro: string, bot: Telegraf,chat:number){
   });
 }
 
-CobrosPendientes(token: string, parametro: string, bot: Telegraf,chat:number){
-  axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyentePendientes/'+parametro, {headers: {    
+CobrosPendientes(token: string, parametro: string, bot: Telegraf,chat:number, estado:string){
+  axios.get('http://localhost:8089/cobros/findCobrosByCedulaContribuyente/'+parametro+"/"+estado, {headers: {    
     Authorization: 'bearer ' + token,
   }}).then(response => {
     var suma = 0;
@@ -106,7 +105,7 @@ CobrosPendientes(token: string, parametro: string, bot: Telegraf,chat:number){
   });
 }
 
-Impuestos(token: string, parametro: string, bot: Telegraf,chat:number){
+Impuestos(token: string, parametro: string, bot: Telegraf,chat:number, estado:string){
   axios.get('http://localhost:8089/contribuyentes/findByCedulaContribuyente/'+parametro, {headers: {    
     Authorization: 'bearer ' + token,
   }}).then(response => {
