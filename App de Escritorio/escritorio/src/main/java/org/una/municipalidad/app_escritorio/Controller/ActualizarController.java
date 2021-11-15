@@ -354,6 +354,7 @@ public class ActualizarController extends Controller implements Initializable {
                 LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(licenciaSeleccionada.getId(), licenciaSeleccionada.getNombreComercio(), licenciaSeleccionada.getTelefonoComercio(), licenciaSeleccionada.getCorreoComercio(),licenciaSeleccionada.getDistritoComercio(), fechaRegistro, fechaRegistro, licenciaSeleccionada.getCodigoComercio(), SolicitarEliminar);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar ");
+            tablaLicencia.getItems().clear();
         }
         else if(Tipo=="Local") {
             List<LocalesMercadoDTO> filaSeleccionada =  tablaLocales.getSelectionModel().getSelectedItems();
@@ -362,7 +363,7 @@ public class ActualizarController extends Controller implements Initializable {
                 LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(localSeleccionado.getId(),localSeleccionado.getNombreLocal(),localSeleccionado.getUbicacionLocal(),localSeleccionado.getCorreoLocal(),localSeleccionado.getTelefonoLocal(),localSeleccionado.getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,SolicitarEliminar);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
-
+            tablaLocales.getItems().clear();
         }
         else if(Tipo=="Propiedad") {
             List<PropiedadesDTO> filaSeleccionada =  tablaPropiedades.getSelectionModel().getSelectedItems();
@@ -375,6 +376,7 @@ public class ActualizarController extends Controller implements Initializable {
                         propiedadSeleccionada.getPropiedadOtrosValores(), propiedadSeleccionada.isPerteneceEstado(), propiedadSeleccionada.getPropiedadZona(), SolicitarEliminar, fechaRegistro, fechaRegistro);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+            tablaPropiedades.getItems().clear();
         }
         else if(Tipo=="Cobros") {
             if(TipoImpuesto == "Licencia Comercial"){
@@ -407,6 +409,7 @@ public class ActualizarController extends Controller implements Initializable {
                 JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
 
             }
+            tablaCobros.getItems().clear();
            }
 
     }
