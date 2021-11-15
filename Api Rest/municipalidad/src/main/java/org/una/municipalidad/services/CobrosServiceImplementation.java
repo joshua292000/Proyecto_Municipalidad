@@ -103,6 +103,11 @@ public class CobrosServiceImplementation implements CobrosService {
         return Optional.ofNullable(CobrosDtolist);
     }
 
+    @Override
+    public void cobrosmasivos(@Param("startDate")Date startDate, @Param("endDate")Date endDate) {
+        cobrosRepository.cobrosmasivos(startDate,endDate);
+    }
+
 
     private CobrosDTO getSavedCobrosDTO(CobrosDTO cobrosDTO) {
         Cobros cobros = MapperUtils.EntityFromDto(cobrosDTO, Cobros.class);

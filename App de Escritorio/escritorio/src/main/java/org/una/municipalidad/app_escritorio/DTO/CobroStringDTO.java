@@ -14,7 +14,7 @@ public class CobroStringDTO {
     private String cobrosFechaVencimiento;
     private boolean Estado;
     private String cobrosFechaPago;
-    private String licenciacomerciales;
+    private String licenciacomercial;
     private String facturas;
     private String tipocobros;
     private String localesmercado;

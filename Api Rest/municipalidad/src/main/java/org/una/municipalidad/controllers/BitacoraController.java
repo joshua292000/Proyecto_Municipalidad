@@ -32,7 +32,7 @@ public class BitacoraController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/findById/{id}")
     @ApiOperation(value = "Obtiene una bitacora a partir de su id", response = BitacorasDTO.class, tags = "Bitacora")
     @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -40,7 +40,7 @@ public class BitacoraController {
         return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
     }
 
-    @GetMapping("/{codigoComercio}")
+    @GetMapping("/findByBitacoraTabla/{bitacoraTabla}")
     @ApiOperation(value = "Obtiene una tabla de la bitacora", response = BitacorasDTO.class, tags = "Bitacora")
     @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findByBitacoraTabla(@PathVariable(value = "bitacoraTabla") String bitacoraTabla) {
@@ -48,7 +48,7 @@ public class BitacoraController {
         return new ResponseEntity<>(bitacoraFound, HttpStatus.OK);
     }
 
-    @GetMapping("/{nombreComercio}")
+    @GetMapping("/findByBitacoraDescripcion/{bitacoraDescripcion}")
     @ApiOperation(value = "Obtiene una descripcion de la bitacora", response = BitacorasDTO.class, tags = "Bitacora")
     @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findByBitacoraDescripcion(@PathVariable(value = "bitacoraDescripcion") String bitacoraDescripcion) {

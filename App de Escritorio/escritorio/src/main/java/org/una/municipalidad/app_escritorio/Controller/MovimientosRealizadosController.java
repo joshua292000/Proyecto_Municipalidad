@@ -107,18 +107,42 @@ public class MovimientosRealizadosController extends Controller implements Initi
             numero=Integer.parseInt(ids);
             System.out.println("res "+numero);
 
-            List<BitacorasDTO> bitacora = ConsultasServiceAuditor.ObtenerMovimientoUsuario(numero,dtFechaDesde.getValue(),dtFechaHasta.getValue());
+            List<BitacorasDTO> bitacora = ConsultasServiceAuditor.ObtenerMovimientoUsuarioFecha(numero,dtFechaDesde.getValue(),dtFechaHasta.getValue());
             if(bitacora!=null){
                 for(BitacorasDTO bitacoras:bitacora){
                     MovimientosRealizadoslist.add( new  BitacorasDTO(bitacoras.getId(), bitacoras.getBitacoraDescripcion(), bitacoras.getBitacoraTabla(),bitacoras.getBitacoraUsuario(), bitacoras.getBitacoraFecha(), bitacoras.getUsuario()));
                 }
-                AppContext.getInstance().delete("reporte");
-                AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
+              //  AppContext.getInstance().delete("reporte");
+               // AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
                 this.tview_Movimientos.setItems(MovimientosRealizadoslist);
             }
             System.out.print(bitacora);
             LlenarTabla();
 
+        }else{
+            if(id!=null&&dtFechaDesde.getValue()==null&&dtFechaHasta.getValue()==null){
+                char [] split = id.toCharArray();
+                for(int x=0;x<split.length;x++){
+                    if(Character.isDigit(split[x])){
+                        ids+=split[x];
+                    }
+                }
+                numero=Integer.parseInt(ids);
+                System.out.println("res "+numero);
+
+                List<BitacorasDTO> bitacora = ConsultasServiceAuditor.ObtenerMovimientoUsuario(numero);
+                if(bitacora!=null){
+                    for(BitacorasDTO bitacoras:bitacora){
+                        MovimientosRealizadoslist.add( new  BitacorasDTO(bitacoras.getId(), bitacoras.getBitacoraDescripcion(), bitacoras.getBitacoraTabla(),bitacoras.getBitacoraUsuario(), bitacoras.getBitacoraFecha(), bitacoras.getUsuario()));
+                    }
+                  //  AppContext.getInstance().delete("reporte");
+                    //AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
+                    this.tview_Movimientos.setItems(MovimientosRealizadoslist);
+                }
+                System.out.print(bitacora);
+                LlenarTabla();
+
+            }
         }
 
     }

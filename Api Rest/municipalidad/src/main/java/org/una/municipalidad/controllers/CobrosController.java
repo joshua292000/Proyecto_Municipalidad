@@ -109,7 +109,13 @@ public class CobrosController {
         }
     }
 
-    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT') or hasRole('GESTOR')")
+    @GetMapping("/cobrosmasivos/{startDate}/{endDate}")
+    @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    public void cobrosmasivos(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate) {
+        cobrosService.cobrosmasivos(startDate,endDate);
+    }
+    @PreAuthorize("hasRole('GESTOR') or hasRole('BOT')")
     @GetMapping("/findCobrosByCedulaContribuyenteContaining/{cedulaContribuyente}")
     @ApiOperation(value = "Obtiene una lista de cobros pagados", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
     public ResponseEntity<?> findCobrosByCedulaContribuyenteContaining(@PathVariable (value ="cedulaContribuyente") String cedula){
