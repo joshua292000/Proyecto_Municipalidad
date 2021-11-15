@@ -43,7 +43,7 @@ public class MovimientosRealizadosController extends Controller implements Initi
     public JFXComboBox cbxUsuarios =new JFXComboBox(Usuarioslist);
     String id="";
     String ids="";
-    int numero=0;
+    Long numero;
    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,7 +90,7 @@ public class MovimientosRealizadosController extends Controller implements Initi
 
     @SneakyThrows
     public void OnActionbtnVisualizarInformacion(ActionEvent actionEvent) {
-       numero=0;
+       numero= Long.valueOf(0);
        id="";
        ids="";
         for ( int i = 0; i<tview_Movimientos.getItems().size(); i++) {
@@ -104,7 +104,7 @@ public class MovimientosRealizadosController extends Controller implements Initi
                     ids+=split[x];
                 }
             }
-            numero=Integer.parseInt(ids);
+            numero= Long.valueOf(ids);
             System.out.println("res "+numero);
 
             List<BitacorasDTO> bitacora = ConsultasServiceAuditor.ObtenerMovimientoUsuarioFecha(numero,dtFechaDesde.getValue(),dtFechaHasta.getValue());
@@ -119,30 +119,27 @@ public class MovimientosRealizadosController extends Controller implements Initi
             System.out.print(bitacora);
             LlenarTabla();
 
-        }else{
-            if(id!=null&&dtFechaDesde.getValue()==null&&dtFechaHasta.getValue()==null){
-                char [] split = id.toCharArray();
-                for(int x=0;x<split.length;x++){
-                    if(Character.isDigit(split[x])){
-                        ids+=split[x];
-                    }
+        }
+        if(id!=null&&dtFechaDesde.getValue()==null&&dtFechaHasta.getValue()==null){
+            char [] split = id.toCharArray();
+            for(int x=0;x<split.length;x++){
+                if(Character.isDigit(split[x])){
+                    ids+=split[x];
                 }
-                numero=Integer.parseInt(ids);
-                System.out.println("res "+numero);
-
-                List<BitacorasDTO> bitacora = ConsultasServiceAuditor.ObtenerMovimientoUsuario(numero);
-                if(bitacora!=null){
-                    for(BitacorasDTO bitacoras:bitacora){
-                        MovimientosRealizadoslist.add( new  BitacorasDTO(bitacoras.getId(), bitacoras.getBitacoraDescripcion(), bitacoras.getBitacoraTabla(),bitacoras.getBitacoraUsuario(), bitacoras.getBitacoraFecha(), bitacoras.getUsuario()));
-                    }
-                  //  AppContext.getInstance().delete("reporte");
-                    //AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
-                    this.tview_Movimientos.setItems(MovimientosRealizadoslist);
-                }
-                System.out.print(bitacora);
-                LlenarTabla();
-
             }
+            numero= Long.valueOf(ids);
+            System.out.println("res "+numero);
+
+            BitacorasDTO bitacora = ConsultasServiceAuditor.ObtenerMovimientoUsuario(numero);
+            if(bitacora!=null){
+                    MovimientosRealizadoslist.add( new  BitacorasDTO(bitacora.getId(), bitacora.getBitacoraDescripcion(), bitacora.getBitacoraTabla(),bitacora.getBitacoraUsuario(), bitacora.getBitacoraFecha(), bitacora.getUsuario()));
+
+                //  AppContext.getInstance().delete("reporte");
+                //AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
+                this.tview_Movimientos.setItems(MovimientosRealizadoslist);
+            }
+            System.out.print(bitacora);
+            LlenarTabla();
         }
 
     }

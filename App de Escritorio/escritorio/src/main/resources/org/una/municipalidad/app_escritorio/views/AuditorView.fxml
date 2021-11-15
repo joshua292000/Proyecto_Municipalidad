@@ -1,62 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <AnchorPane prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.AuditorController">
     <children>
         <BorderPane fx:id="BorderPaneFondo" prefHeight="576.0" prefWidth="1050.0">
             <left>
-                <VBox prefHeight="768.0" prefWidth="155.0" style="-fx-background-color: #bdcfe0;" BorderPane.alignment="CENTER">
+                <VBox prefHeight="768.0" prefWidth="256.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
                     <children>
-                        <ImageView fx:id="imgPerfil" fitHeight="100.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" translateX="26.0"  translateY="4.0">
+                        <ImageView fx:id="imgPerfil" fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" translateX="94.0" translateY="16.0">
                             <image>
-                                <Image url="@../resources/avatar-default-icon.png" />
+                                <Image url="@../resources/User_Avatar_2.png" />
                             </image>
                         </ImageView>
-                        <Label fx:id="lblUsuario" text="Usuario auditor" translateX="20.0" translateY="8.0">
-                            <font>
-                                <Font name="Times New Roman" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblListas" text="Listas de información:" translateX="12.0" translateY="20.0">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
-                        </Label>
-                        <JFXButton fx:id="btnListaCobros" buttonType="RAISED" onAction="#OnActionbtnListaCobros" prefHeight="33.0" prefWidth="140.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text="Cobros Realizados" translateX="3.0" translateY="40.0">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
+                        <Label fx:id="lblUsuario" text="Usuario " textFill="#e7e5e5" translateX="102.0" translateY="32.0" />
+                  <Label fx:id="lblRol" prefHeight="18.0" prefWidth="118.0" text="Rol" textAlignment="CENTER" textFill="#e7e5e5" translateX="100.0" translateY="39.0" />
+                        <Label fx:id="lblListas" text="Listas de información:" textFill="#e7e5e5" translateX="63.0" translateY="50.0" />
+                        <JFXButton fx:id="btnListaCobros" buttonType="RAISED" onAction="#OnActionbtnListaCobros" prefHeight="43.0" prefWidth="249.0" ripplerFill="#bdcfe0" text="Cobros Realizados" textFill="#e7e5e5" translateX="3.0" translateY="64.0">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
+                           <image>
+                              <Image url="@../resources/ca2d7c1591af7a505b460781059698cf.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="btnMovimientosRealizados" buttonType="RAISED" onAction="#OnActionbtnMovimientosRealizados" prefHeight="42.0" prefWidth="141.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text="Movimientos&#10; realizados" textAlignment="CENTER" translateX="3.0" translateY="80.0">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
+                        <JFXButton fx:id="btnMovimientosRealizados" buttonType="RAISED" onAction="#OnActionbtnMovimientosRealizados" prefHeight="42.0" prefWidth="252.0" ripplerFill="#bdcfe0" text="Movimientos realizados" textAlignment="CENTER" textFill="#e7e5e5" translateX="3.0" translateY="102.0">
+                     <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" translateX="-20.0">
+                           <image>
+                              <Image url="@../resources/2654602.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="btnTodasDeclaraciones" buttonType="RAISED" onAction="#OnActionbtnTodasDeclaraciones" prefHeight="44.0" prefWidth="141.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text="Todas las &#10;declaraciones" textAlignment="CENTER" translateX="4.0" translateY="116.0">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
+                        <JFXButton fx:id="btnTodasDeclaraciones" buttonType="RAISED" onAction="#OnActionbtnTodasDeclaraciones" prefHeight="44.0" prefWidth="253.0" ripplerFill="#bdcfe0" text="Todas las declaraciones" textAlignment="CENTER" textFill="#e7e5e5" translateX="4.0" translateY="144.0">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
+                           <image>
+                              <Image url="@../resources/declaracion.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="btnTodasLicenciasComerciales" buttonType="RAISED" layoutX="10.0" layoutY="240.0" onAction="#OnActionbtnTodasLicenciasComerciales" prefHeight="48.0" prefWidth="149.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text=" Todas las &#10;Licencias Comerciales" textAlignment="CENTER" translateX="2.0" translateY="148.0">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
+                        <JFXButton fx:id="btnTodasLicenciasComerciales" buttonType="RAISED" layoutX="10.0" layoutY="240.0" onAction="#OnActionbtnTodasLicenciasComerciales" prefHeight="48.0" prefWidth="253.0" ripplerFill="#bdcfe0" text=" Todas las &#10;Licencias Comerciales" textAlignment="CENTER" textFill="#e7e5e5" translateX="2.0" translateY="176.0">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/1728431.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="btnTodasPropiedades" buttonType="RAISED" layoutX="10.0" layoutY="293.0" onAction="#OnActionbtnTodasPropiedades" prefHeight="45.0" prefWidth="149.0" ripplerFill="#bdcfe0" style="-fx-background-color: #1680f1;" text="Todas las &#10;propiedades" textAlignment="CENTER" translateX="2.0" translateY="180.0">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
+                        <JFXButton fx:id="btnTodasPropiedades" buttonType="RAISED" layoutX="10.0" layoutY="293.0" onAction="#OnActionbtnTodasPropiedades" prefHeight="45.0" prefWidth="252.0" ripplerFill="#bdcfe0" text="Todas las &#10;propiedades" textAlignment="CENTER" textFill="#e7e5e5" translateX="2.0" translateY="200.0">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
+                           <image>
+                              <Image url="@../resources/8e95838e75a899b8b51493417f25726c-icono-de-.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                         </JFXButton>
                     </children>
                 </VBox>
             </left>
             <center>
-                <VBox fx:id="vboxFondo" prefHeight="576.0" prefWidth="818.0" BorderPane.alignment="CENTER" />
+                <VBox fx:id="vboxFondo" prefHeight="592.0" prefWidth="1050.0" BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
     </children>

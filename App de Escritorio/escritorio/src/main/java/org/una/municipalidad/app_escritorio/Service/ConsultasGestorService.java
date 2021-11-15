@@ -322,12 +322,12 @@ public class ConsultasGestorService {
 
     }
 
-    public static List<CobrosDTO> obtenerCobro(String cedula) throws IOException, InterruptedException {
+    public static List<CobrosDTO> obtenerCobro(String cedula, String estado) throws IOException, InterruptedException {
         List<CobrosDTO> cobro = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyentePendientes/"+cedula+"/"))
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyentePendientes/"+cedula+"/"+estado+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -522,46 +522,51 @@ public class ConsultasGestorService {
         return propiedad;
     }
 
-    /*public static CobrosDTO ActualizarCobro(Long Id, String Nombre, Long Telefono, String correo, String distrito, LocalDate registro, LocalDate actualizacion, String codigo, String estado) throws IOException, InterruptedException {
-        LicenciasComercialesDTO Licencia = null;
+    public static CobrosDTO ActualizarCobro(Long Id, String cobrosPeriodo, Long cobrosMonto, LocalDate cobrosFechaCreacion, LocalDate cobrosFechaVencimiento, String estado, LocalDate cobrosFechaPago, LicenciasComercialesDTO licencia, FacturasDTO facturas,TipoCobrosDTO tipocobros,LocalesMercadoDTO localesmercado,PropiedadesDTO propiedades) throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         String json = new StringBuilder()
                 .append("{")
                 .append("\"id\":\"" )
                 .append(Id)
                 .append("\",")
-                .append("\"nombreComercio\":\"" )
-                .append(Nombre)
+                .append("\"cobrosPeriodo\":\"" )
+                .append(cobrosPeriodo)
                 .append("\",")
-                .append("\"telefonoComercio\":\"" )
-                .append(Telefono)
+                .append("\"cobrosMonto\":\"" )
+                .append(cobrosMonto)
                 .append("\",")
-                .append("\"correoComercio\":\"" )
-                .append(correo)
+                .append("\"cobrosFechaCreacion\":\"" )
+                .append(cobrosFechaCreacion)
                 .append("\",")
-                .append("\"distritoComercio\":\"" )
-                .append(distrito)
-                .append("\",")
-                .append("\"telefonoComercio\":\"" )
-                .append(Telefono)
-                .append("\",")
-                .append("\"fechaRegistrocomercio\":\"" )
-                .append(registro)
-                .append("\",")
-                .append("\"ultima_Actualizacioncomercio\":\"" )
-                .append(actualizacion)
-                .append("\",")
-                .append("\"codigoComercio\":\"" )
-                .append(codigo)
+                .append("\"cobrosFechaVencimiento\":\"" )
+                .append(cobrosFechaVencimiento)
                 .append("\",")
                 .append("\"estado\":\"" )
                 .append(estado)
-                .append("\"")
+                .append("\",")
+                .append("\"cobrosFechaPago\":\"" )
+                .append(cobrosFechaPago)
+                .append("\",")
+                .append("\"licenciascomerciales\":null," )
+                //.append("\"")
+                .append("\"facturas\":null," )
+                //.append("\",")
+                .append("\"tipocobros\":{" )
+                .append("\"id\":\"" )
+                .append(tipocobros.getId())
+                .append("\"},")
+                .append("\"localesmercado\":null," )
+                //.append("\",")
+                .append("\"propiedades\":{" )
+                .append("\"propiedades_id\":\"" )
+                .append(propiedades.getPropiedades_id())
+                .append("\"}")
                 .append("}").toString();
         System.out.println("jsonprove "+json+"\n");
         HttpRequest request = HttpRequest.newBuilder()
                 .PUT(HttpRequest.BodyPublishers.ofString(json))
-                .uri(URI.create("http://localhost:8089/licenciasComerciales/"+Id+"/"))
+                .uri(URI.create("http://localhost:8089/cobros/"+Id+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -571,9 +576,120 @@ public class ConsultasGestorService {
         System.out.println("status "+response.statusCode());
 
         System.out.println("cuerpo "+response.body());
-        Licencia = mapper.readValue(response.body(), new TypeReference<LicenciasComercialesDTO>() {});
-        return Licencia;
-    }*/
+        cobro = mapper.readValue(response.body(), new TypeReference<CobrosDTO>() {});
+        return cobro;
+    }
+
+    public static CobrosDTO ActualizarCobroLicencia(Long Id, String cobrosPeriodo, Long cobrosMonto, LocalDate cobrosFechaCreacion, LocalDate cobrosFechaVencimiento, String estado, LocalDate cobrosFechaPago, LicenciasComercialesDTO licencia, FacturasDTO facturas,TipoCobrosDTO tipocobros,LocalesMercadoDTO localesmercado,PropiedadesDTO propiedades) throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"id\":\"" )
+                .append(Id)
+                .append("\",")
+                .append("\"cobrosPeriodo\":\"" )
+                .append(cobrosPeriodo)
+                .append("\",")
+                .append("\"cobrosMonto\":\"" )
+                .append(cobrosMonto)
+                .append("\",")
+                .append("\"cobrosFechaCreacion\":\"" )
+                .append(cobrosFechaCreacion)
+                .append("\",")
+                .append("\"cobrosFechaVencimiento\":\"" )
+                .append(cobrosFechaVencimiento)
+                .append("\",")
+                .append("\"estado\":\"" )
+                .append(estado)
+                .append("\",")
+                .append("\"cobrosFechaPago\":\"" )
+                .append(cobrosFechaPago)
+                .append("\",")
+                .append("\"licenciascomerciales\":{" )
+                .append("\"id\":\"" )
+                .append(licencia.getId())
+                .append("\"},")
+                .append("\"facturas\":null," )
+                //.append("\",")
+                .append("\"tipocobros\":{" )
+                .append("\"id\":\"" )
+                .append(tipocobros.getId())
+                .append("\"},")
+                .append("\"localesmercado\":null," )
+                //.append("\",")
+                .append("\"propiedades\":null}" )
+                //.append("\"}")
+                .append("}").toString();
+        System.out.println("jsonprove "+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .PUT(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/cobros/"+Id+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        cobro = mapper.readValue(response.body(), new TypeReference<CobrosDTO>() {});
+        return cobro;
+    }
+
+    public static CobrosDTO ActualizarCobroMercado(Long Id, String cobrosPeriodo, Long cobrosMonto, LocalDate cobrosFechaCreacion, LocalDate cobrosFechaVencimiento, String estado, LocalDate cobrosFechaPago, LicenciasComercialesDTO licencia, FacturasDTO facturas,TipoCobrosDTO tipocobros,LocalesMercadoDTO localesmercado,PropiedadesDTO propiedades) throws IOException, InterruptedException {
+        CobrosDTO cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"id\":\"" )
+                .append(Id)
+                .append("\",")
+                .append("\"cobrosPeriodo\":\"" )
+                .append(cobrosPeriodo)
+                .append("\",")
+                .append("\"cobrosMonto\":\"" )
+                .append(cobrosMonto)
+                .append("\",")
+                .append("\"cobrosFechaCreacion\":\"" )
+                .append(cobrosFechaCreacion)
+                .append("\",")
+                .append("\"cobrosFechaVencimiento\":\"" )
+                .append(cobrosFechaVencimiento)
+                .append("\",")
+                .append("\"estado\":\"" )
+                .append(estado)
+                .append("\",")
+                .append("\"cobrosFechaPago\":\"" )
+                .append(cobrosFechaPago)
+                .append("\",")
+                .append("\"licenciascomerciales\":null," )
+                .append("\"facturas\":null," )
+                //.append("\",")
+                .append("\"tipocobros\":{" )
+                .append("\"id\":\"" )
+                .append(tipocobros.getId())
+                .append("\"},")
+                .append("\"localesmercado\":{" )
+                .append("\"id\":\"" )
+                .append(localesmercado.getId())
+                .append("\"},")
+                .append("\"propiedades\":null}" )
+                //.append("\"}")
+                .append("}").toString();
+        System.out.println("jsonprove "+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .PUT(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/cobros/"+Id+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        cobro = mapper.readValue(response.body(), new TypeReference<CobrosDTO>() {});
+        return cobro;
+    }
 
     public static LicenciasComercialesDTO ObtenerLicenciaNombre(String nombre) throws IOException, InterruptedException {
 
@@ -666,7 +782,7 @@ public class ConsultasGestorService {
                 .append("\"cedulaContribuyente\":\"" )
                 .append(contribuyente.getCedulaContribuyente())
                 .append("\"},")
-                .append("\"licenciacomercial\":{" )
+                .append("\"licenciascomerciales\":{" )
                 .append("\"id\":\"" )
                 .append(licencia.getId())
                 .append("\",")
@@ -788,5 +904,68 @@ public class ConsultasGestorService {
 
         return localM;
 
+    }
+
+    public static List<CobrosDTO> obtenerCobro2(String cedula, String estado) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyente/"+cedula+"/"+estado+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status "+response.statusCode());
+
+        System.out.println("cuerpo "+response.body());
+        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
+            cobro=null;
+        }else{
+            cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        }
+        return cobro;
+    }
+
+    public static List<CobrosDTO> obtenerCobro3(String cedula, String estado) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyente2/"+cedula+"/"+estado+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
+            cobro=null;
+        }else{
+            cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        }
+        return cobro;
+    }
+
+    public static List<CobrosDTO> obtenerCobro4(String cedula, String estado) throws IOException, InterruptedException {
+        List<CobrosDTO> cobro = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findCobrosByCedulaContribuyente3/"+cedula+"/"+estado+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.body().equals("No se encontro información en su solicitud, revise su petición")){
+            cobro=null;
+        }else{
+            cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+        }
+        return cobro;
     }
 }

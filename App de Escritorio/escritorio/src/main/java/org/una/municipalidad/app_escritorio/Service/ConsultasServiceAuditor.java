@@ -2,10 +2,7 @@ package org.una.municipalidad.app_escritorio.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
-import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
-import org.una.municipalidad.app_escritorio.DTO.DeclaracionesDTO;
-import org.una.municipalidad.app_escritorio.DTO.UsuariosDTO;
+import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.io.IOException;
@@ -91,7 +88,7 @@ public class ConsultasServiceAuditor {
 
         return usuarios;
     }
-    public static List<BitacorasDTO>ObtenerMovimientoUsuarioFecha(int id, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
+    public static List<BitacorasDTO>ObtenerMovimientoUsuarioFecha(Long id, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
 
         List<BitacorasDTO> movimientos = null;
 
@@ -119,7 +116,66 @@ public class ConsultasServiceAuditor {
         return movimientos;
 
     }
-    public static List<BitacorasDTO>ObtenerMovimientoUsuario(int id) throws IOException, InterruptedException {
+
+    public static List<CobrosDTO>ObtenerCobrosEstadoFecha(String estado, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
+
+        List<CobrosDTO> cobros = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/cobros/findByEstadoBetweenFecha/"+estado+"/"+startDate+"/"+endDate))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.println("status "+response.statusCode());
+
+
+        System.out.println("cuerpo "+response.body());
+
+        cobros = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
+
+
+        return cobros;
+
+    }
+
+
+    public static BitacorasDTO ObtenerMovimientoUsuario(Long id) throws IOException, InterruptedException {
+
+        BitacorasDTO movimientos = null;
+
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/bitacora/findByIdUsuario/"+id+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.println("status "+response.statusCode());
+
+
+        System.out.println("cuerpo "+response.body());
+
+        movimientos = mapper.readValue(response.body(), new TypeReference<BitacorasDTO>() {});
+
+
+        return movimientos;
+
+    }
+    public static List<BitacorasDTO>ObtenerMovimientoFecha(LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
 
         List<BitacorasDTO> movimientos = null;
 
@@ -127,7 +183,7 @@ public class ConsultasServiceAuditor {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/bitacora/findById/"+id))
+                .uri(URI.create("http://localhost:8089/bitacora/findByBitacoraCambiosBetweenFecha/"+startDate+"/"+endDate))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())

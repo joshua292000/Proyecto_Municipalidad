@@ -72,8 +72,16 @@ public class CobrosServiceImplementation implements CobrosService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente) {
-        List<Cobros> Cobroslist = cobrosRepository.findCobrosByCedulaContribuyente(cedulaContribuyente);
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyente(@Param("cedulaContribuyente") String cedulaContribuyente, @Param("Estadito") String Estadito) {
+        List<Cobros> Cobroslist = cobrosRepository.findCobrosByCedulaContribuyente(cedulaContribuyente, Estadito);
+        List<CobrosDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,CobrosDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyente2(@Param("cedulaContribuyente") String cedulaContribuyente, @Param("Estadito") String Estadito) {
+        List<Cobros> Cobroslist = cobrosRepository.findCobrosByCedulaContribuyente2(cedulaContribuyente, Estadito);
         List<CobrosDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,CobrosDTO.class);
         return Optional.ofNullable(CobrosDtolist);
     }
@@ -81,11 +89,29 @@ public class CobrosServiceImplementation implements CobrosService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CobrosDTO>> findByCobrosBetweenCedulaContribuyenteAndFecha(@Param("cedulaContribuyente")String cedulaContribuyente,@Param("startDate") Date startDate,@Param("endDate") Date endDate) {
-        List<Cobros> cobroCanceladoList = cobrosRepository.findByCobrosBetweenCedulaContribuyenteAndFecha(cedulaContribuyente,startDate,endDate);
+    public Optional<List<CobrosDTO>> findCobrosByCedulaContribuyente3(@Param("cedulaContribuyente") String cedulaContribuyente, @Param("Estadito") String Estadito) {
+        List<Cobros> Cobroslist = cobrosRepository.findCobrosByCedulaContribuyente3(cedulaContribuyente, Estadito);
+        List<CobrosDTO> CobrosDtolist = MapperUtils.DtoListFromEntityList(Cobroslist,CobrosDTO.class);
+        return Optional.ofNullable(CobrosDtolist);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findByCobrosBetweenCedulaContribuyenteAndFecha(@Param("cedulaContribuyente")String cedulaContribuyente,@Param("startDate") Date startDate,@Param("endDate") Date endDate, @Param("Estadito") String Estadito) {
+        List<Cobros> cobroCanceladoList = cobrosRepository.findByCobrosBetweenCedulaContribuyenteAndFecha(cedulaContribuyente,startDate,endDate,Estadito);
         List<CobrosDTO> cobroCanceladoDTOList = MapperUtils.DtoListFromEntityList(cobroCanceladoList,CobrosDTO.class);
         return Optional.ofNullable(cobroCanceladoDTOList);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobrosDTO>> findByEstadoBetweenFecha(@Param("Estadito")String estado, @Param("startDate")Date startDate, @Param("endDate")Date endDate) {
+        List<Cobros> cobroList = cobrosRepository.findByEstadoBetweenFecha(estado,startDate,endDate);
+        List<CobrosDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList,CobrosDTO.class);
+        return Optional.ofNullable(cobroDTOList);
+    }
+
 
     @Override
     @Transactional(readOnly = true)

@@ -20,6 +20,10 @@ public interface BitacorasService {
 
     public Optional<List<BitacorasDTO>> findByIdBetweenFecha(@Param("idUsuario")Long id, @Param("startDate") Date startDate,
                                                                 @Param("endDate")Date endDate);
+    public Optional<List<BitacorasDTO>>findByBitacoraCambiosBetweenFecha(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
+
+    public Optional<BitacorasDTO> findByIdUsuario(@Param("idUsuario")Long id);
+
     public Optional<BitacorasDTO> create(BitacorasDTO bitacorasDTO);
 
     public Optional<BitacorasDTO> update(BitacorasDTO bitacorasDTO, Long id);

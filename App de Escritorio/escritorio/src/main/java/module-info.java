@@ -15,10 +15,6 @@ module org.una.municipalidad.app_escritorio {
     requires poi;
     requires jxbrowser;
     requires jxbrowser.swing;
-    // requires jxbrowser;
-    //requires jxbrowser.swing;
-    //requires jxbrowser;
-    //requires jxbrowser.swing;
 
 
     opens org.una.municipalidad.app_escritorio to javafx.fxml;

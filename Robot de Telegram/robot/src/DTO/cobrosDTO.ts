@@ -14,8 +14,6 @@ export interface Contribuyentes{
     cedulaContribuyente: string;
     nombreContribuyente: string;
     contribuyentes_licencias_comerciales: Contribuyentes_Licencias_Comerciales;
-    //LocalesMercado:LocalesMercado;
-   // Propiedad:Propiedades;
 }
 
 export interface TipoCobros{

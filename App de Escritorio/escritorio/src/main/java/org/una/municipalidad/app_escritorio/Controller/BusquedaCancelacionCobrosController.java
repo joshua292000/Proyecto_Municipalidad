@@ -3,22 +3,21 @@ package org.una.municipalidad.app_escritorio.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
-import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import org.una.municipalidad.app_escritorio.DTO.*;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
+
+import javax.swing.*;
 
 public class BusquedaCancelacionCobrosController extends Controller implements Initializable {
 
@@ -70,11 +69,24 @@ public class BusquedaCancelacionCobrosController extends Controller implements I
     @FXML
     private TextField txtCedula;
 
+    private ObservableList<String> tipo = FXCollections.observableArrayList();
+
+    @FXML
+    private ComboBox cbxTipo = new ComboBox(tipo);
+
+    private String Estado = "Pendiente";
+    private String Tipo;
+
     private ObservableList<CobrosDTO> options = FXCollections.observableArrayList();
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        tipo.add("Licencia Comercial");
+        tipo.add("Local de Mercado");
+        tipo.add("Propiedades");
+        cbxTipo.setItems(tipo);
         LlenarTabla();
     }
 
@@ -85,16 +97,41 @@ public class BusquedaCancelacionCobrosController extends Controller implements I
 
     @FXML
     void OnActionBuscar(ActionEvent event) throws IOException, InterruptedException {
+        Tipo = cbxTipo.getValue().toString();
+
         if(txtCedula.getLength()==0){
             JOptionPane.showMessageDialog(null,"El campo cedula se encuentra vacio, porfavor digite una cedula");
         }else{
-            List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro(txtCedula.getText());
-            if(cobro!=null){
-                for(CobrosDTO cobros:cobro){
-                    options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciacomercial(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+            if(Tipo == "Licencia Comercial"){
+                List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro2(txtCedula.getText(),Estado);
+                if(cobro!=null){
+                    for(CobrosDTO cobros:cobro){
+                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                    }
+                    this.tablacobros.setItems(options);
                 }
-                this.tablacobros.setItems(options);
             }
+
+            else if(Tipo == "Local de Mercado"){
+                List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro3(txtCedula.getText(),Estado);
+                if(cobro!=null){
+                    for(CobrosDTO cobros:cobro){
+                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                    }
+                    this.tablacobros.setItems(options);
+                }
+            }
+
+            else if(Tipo == "Propiedades"){
+                List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro4(txtCedula.getText(),Estado);
+                if(cobro!=null){
+                    for(CobrosDTO cobros:cobro){
+                        options.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                    }
+                    this.tablacobros.setItems(options);
+                }
+            }
+
         }
     }
 
@@ -106,7 +143,7 @@ public class BusquedaCancelacionCobrosController extends Controller implements I
         this.Col5.setCellValueFactory(new PropertyValueFactory("cobrosFechaVencimiento"));
         this.Col6.setCellValueFactory(new PropertyValueFactory("Estado"));
         this.Col7.setCellValueFactory(new PropertyValueFactory("cobrosFechaPago"));
-        this.Col8.setCellValueFactory(new PropertyValueFactory("licenciacomerciales"));
+        this.Col8.setCellValueFactory(new PropertyValueFactory("licenciascomerciales"));
         this.Col9.setCellValueFactory(new PropertyValueFactory("facturas"));
         this.Col10.setCellValueFactory(new PropertyValueFactory("tipocobros"));
         this.Col11.setCellValueFactory(new PropertyValueFactory("localesmercado"));
@@ -118,7 +155,7 @@ public class BusquedaCancelacionCobrosController extends Controller implements I
         Col5.setText("cobrosFechaVencimiento");
         Col6.setText("Estado");
         Col7.setText("cobrosFechaPago");
-        Col8.setText("licenciacomerciales");
+        Col8.setText("licenciascomerciales");
         Col9.setText("facturas");
         Col10.setText("tipocobros");
         Col11.setText("localesmercado");
@@ -126,3 +163,4 @@ public class BusquedaCancelacionCobrosController extends Controller implements I
         this.tablacobros.setItems(options);
     }
 }
+

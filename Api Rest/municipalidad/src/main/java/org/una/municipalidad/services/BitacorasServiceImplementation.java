@@ -5,7 +5,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.municipalidad.dto.BitacorasDTO;
+import org.una.municipalidad.dto.CobrosDTO;
 import org.una.municipalidad.entities.BitacoraCambios;
+import org.una.municipalidad.entities.Cobros;
 import org.una.municipalidad.exceptions.NotFoundInformationException;
 import org.una.municipalidad.repositories.BitacoraRepository;
 import org.una.municipalidad.utils.MapperUtils;
@@ -60,6 +62,22 @@ public class BitacorasServiceImplementation implements BitacorasService{
         List<BitacorasDTO> bitacorasDTOList = MapperUtils.DtoListFromEntityList(bitacoraCambiosList,BitacorasDTO.class);
         return Optional.ofNullable(bitacorasDTOList);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<BitacorasDTO>> findByBitacoraCambiosBetweenFecha(Date startDate, Date endDate) {
+        List<BitacoraCambios> Bitacoralist = bitacoraRepository.findByBitacoraCambiosBetweenFecha(startDate,endDate);
+        List<BitacorasDTO> BitacorasDTOlist = MapperUtils.DtoListFromEntityList(Bitacoralist,BitacorasDTO.class);
+        return Optional.ofNullable(BitacorasDTOlist);
+    }
+
+    @Override
+    public Optional<BitacorasDTO> findByIdUsuario(Long id) {
+        Optional<BitacoraCambios> bitacoraCambios = bitacoraRepository.findByIdUsuario(id);
+        if (bitacoraCambios.isEmpty()) throw new NotFoundInformationException();
+        BitacorasDTO bitacorasDTO = MapperUtils.DtoFromEntity(bitacoraCambios.get(), BitacorasDTO.class);
+        return Optional.ofNullable(bitacorasDTO);
     }
 
     private BitacorasDTO getSavedBitacorasDTO(BitacorasDTO bitacorasDTO) {

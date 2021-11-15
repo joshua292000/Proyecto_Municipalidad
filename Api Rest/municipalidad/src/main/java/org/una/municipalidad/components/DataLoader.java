@@ -120,6 +120,12 @@ public class DataLoader implements ApplicationRunner {
                     .build();
             parametroService.create(formula3);
 
+            ParametrosDTO telefono = ParametrosDTO.builder()
+                    .llaveParametro("Telefono")
+                    .valorParametro("2220-6600")
+                    .build();
+            parametroService.create(telefono);
+
            ContribuyentesDTO contribuyente1 = ContribuyentesDTO.builder()
                    .apellidoContribuyente("Santamaría Sánchez")
                    .cedulaContribuyente("197683604")
