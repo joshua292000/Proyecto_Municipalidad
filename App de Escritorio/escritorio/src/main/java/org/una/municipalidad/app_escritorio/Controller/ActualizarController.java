@@ -6,10 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
@@ -204,6 +201,11 @@ public class ActualizarController extends Controller implements Initializable {
     @FXML
     private TableColumn<LocalesMercadoDTO, String> colUbicacionM;
 
+    private ObservableList<String> tipo = FXCollections.observableArrayList();
+
+    @FXML
+    private ComboBox cbxTipo = new ComboBox(tipo);
+
     private String Tipo;
     private String SolicitarEliminar = "Eliminando";
     private LocalDate fechaRegistro = LocalDate.parse("2021-11-12");
@@ -212,9 +214,13 @@ public class ActualizarController extends Controller implements Initializable {
     private ObservableList<LocalesMercadoDTO> listaLocales = FXCollections.observableArrayList();
     private ObservableList<PropiedadesDTO> listaPropiedades = FXCollections.observableArrayList();
     private String Estado = "Pagado";
-
+    private String TipoImpuesto;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        tipo.add("Licencia Comercial");
+        tipo.add("Local de Mercado");
+        tipo.add("Propiedades");
+        cbxTipo.setItems(tipo);
 
         LlenarTablaLicencia();
         LlenarTablaLocal();
@@ -261,6 +267,7 @@ public class ActualizarController extends Controller implements Initializable {
     }
 
     public void OnActionBuscar(ActionEvent actionEvent) throws IOException, InterruptedException {
+        TipoImpuesto = cbxTipo.getValue().toString();
         btnActualizar.setDisable(false);
         btnEliminar.setDisable(false);
         tablaLicencia.getItems().clear();
@@ -303,14 +310,38 @@ public class ActualizarController extends Controller implements Initializable {
                     txtCedula.clear();
                 }
             }else if(Tipo=="Cobros"){
-                List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro(txtCedula.getText(),Estado );
-                if(cobro!=null){
-                    for(CobrosDTO cobros:cobro){
-                        listaCobros.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                btnActualizar.setDisable(true);
+                if(TipoImpuesto == "Licencia Comercial"){
+                    List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro2(txtCedula.getText(),Estado );
+                    if(cobro!=null){
+                        for(CobrosDTO cobros:cobro){
+                            listaCobros.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                        }
+                        this.tablaCobros.setItems(listaCobros);
+                        txtCedula.clear();
                     }
-                    this.tablaCobros.setItems(listaCobros);
-                    txtCedula.clear();
+
+                }else if(TipoImpuesto == "Local de Mercado"){
+                    List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro3(txtCedula.getText(),Estado );
+                    if(cobro!=null){
+                        for(CobrosDTO cobros:cobro){
+                            listaCobros.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                        }
+                        this.tablaCobros.setItems(listaCobros);
+                        txtCedula.clear();
+                    }
+
+                }else if(TipoImpuesto == "Propiedades"){
+                    List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro4(txtCedula.getText(),Estado );
+                    if(cobro!=null){
+                        for(CobrosDTO cobros:cobro){
+                            listaCobros.add(new CobrosDTO(cobros.getId(),cobros.getCobrosPeriodo(),cobros.getCobrosMonto(),cobros.getCobrosFechaCreacion(),cobros.getCobrosFechaVencimiento(),cobros.getEstado(),cobros.getCobrosFechaPago(),cobros.getLicenciascomerciales(),cobros.getFacturas(),cobros.getTipocobros(),cobros.getLocalesmercado(),cobros.getPropiedades()));
+                        }
+                        this.tablaCobros.setItems(listaCobros);
+                        txtCedula.clear();
+                    }
                 }
+
             }
         }
     }
@@ -344,8 +375,39 @@ public class ActualizarController extends Controller implements Initializable {
                         propiedadSeleccionada.getPropiedadOtrosValores(), propiedadSeleccionada.isPerteneceEstado(), propiedadSeleccionada.getPropiedadZona(), SolicitarEliminar, fechaRegistro, fechaRegistro);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
-
         }
+        else if(Tipo=="Cobros") {
+            if(TipoImpuesto == "Licencia Comercial"){
+                List<CobrosDTO> filaSeleccionada =  tablaCobros.getSelectionModel().getSelectedItems();
+                if (filaSeleccionada.size() == 1) {
+                    final CobrosDTO cobroSeleccionado = filaSeleccionada.get(0);
+
+                    CobrosDTO cobro = ConsultasGestorService.ActualizarCobroLicencia(cobroSeleccionado.getId(),cobroSeleccionado.getCobrosPeriodo(),cobroSeleccionado.getCobrosMonto(),fechaRegistro,fechaRegistro,SolicitarEliminar,fechaRegistro,cobroSeleccionado.getLicenciascomerciales(),cobroSeleccionado.getFacturas(),cobroSeleccionado.getTipocobros(),cobroSeleccionado.getLocalesmercado(),cobroSeleccionado.getPropiedades());
+                }
+                JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+
+
+            }else if(TipoImpuesto == "Local de Mercado"){
+                List<CobrosDTO> filaSeleccionada =  tablaCobros.getSelectionModel().getSelectedItems();
+                if (filaSeleccionada.size() == 1) {
+                    final CobrosDTO cobroSeleccionado = filaSeleccionada.get(0);
+
+                    CobrosDTO cobro = ConsultasGestorService.ActualizarCobroMercado(cobroSeleccionado.getId(),cobroSeleccionado.getCobrosPeriodo(),cobroSeleccionado.getCobrosMonto(),fechaRegistro,fechaRegistro,SolicitarEliminar,fechaRegistro,cobroSeleccionado.getLicenciascomerciales(),cobroSeleccionado.getFacturas(),cobroSeleccionado.getTipocobros(),cobroSeleccionado.getLocalesmercado(),cobroSeleccionado.getPropiedades());
+                }
+                JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+
+
+            }else if(TipoImpuesto == "Propiedades"){
+                List<CobrosDTO> filaSeleccionada =  tablaCobros.getSelectionModel().getSelectedItems();
+                if (filaSeleccionada.size() == 1) {
+                    final CobrosDTO cobroSeleccionado = filaSeleccionada.get(0);
+
+                    CobrosDTO cobro = ConsultasGestorService.ActualizarCobro(cobroSeleccionado.getId(),cobroSeleccionado.getCobrosPeriodo(),cobroSeleccionado.getCobrosMonto(),fechaRegistro,fechaRegistro,SolicitarEliminar,fechaRegistro,cobroSeleccionado.getLicenciascomerciales(),cobroSeleccionado.getFacturas(),cobroSeleccionado.getTipocobros(),cobroSeleccionado.getLocalesmercado(),cobroSeleccionado.getPropiedades());
+                }
+                JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+
+            }
+           }
 
     }
 
@@ -667,7 +729,7 @@ public class ActualizarController extends Controller implements Initializable {
                 }
         );
         this.col7I.setCellValueFactory(new PropertyValueFactory("cobrosFechaPago"));
-        this.col8I.setCellValueFactory(new PropertyValueFactory("licenciacomerciales"));
+        this.col8I.setCellValueFactory(new PropertyValueFactory("licenciascomerciales"));
         this.col9I.setCellValueFactory(new PropertyValueFactory("facturas"));
         this.col10I.setCellValueFactory(new PropertyValueFactory("tipocobros"));
         this.col11I.setCellValueFactory(new PropertyValueFactory("localesmercado"));

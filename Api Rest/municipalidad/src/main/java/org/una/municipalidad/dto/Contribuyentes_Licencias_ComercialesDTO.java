@@ -13,5 +13,5 @@ public class Contribuyentes_Licencias_ComercialesDTO {
     private Long id;
     private Long porcentajeLicencia;
     private ContribuyentesDTO contribuyente;
-    private LicenciasComercialesDTO licenciacomercial;
+    private LicenciasComercialesDTO licenciascomerciales;
 }
