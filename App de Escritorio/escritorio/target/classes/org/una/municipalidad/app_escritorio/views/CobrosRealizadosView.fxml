@@ -58,12 +58,12 @@
                 <Font name="Times New Roman" size="14.0" />
             </font>
         </Label>
-        <JFXButton fx:id="btnVisualizarInformacion" buttonType="RAISED" layoutX="676.0" layoutY="130.0" onAction="#OnActionbtnVisualizarInformacion" ripplerFill="#b9dddc" style="-fx-background-color: #24d0ca;" text="Ver Información con filtros">
+        <JFXButton fx:id="btnVisualizarInformacion" buttonType="RAISED" layoutX="676.0" layoutY="130.0" onAction="#OnActionbtnVisualizarInformacion" ripplerFill="#b9dddc" style="-fx-background-color: #05071F;" text="Ver Información con filtros"  textFill="#e7e5e5">
             <font>
                 <Font name="Times New Roman" size="12.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="btnVisualizarInformacionsinfiltros" buttonType="RAISED" layoutX="643.0" layoutY="27.0" onAction="#OnActionbtnVisualizarInformacionsinfiltros" prefHeight="44.0" prefWidth="161.0" ripplerFill="#b9dddc" style="-fx-background-color: #24d0ca;" text="Ver toda la información &#10;sin filtros" textAlignment="CENTER">
+        <JFXButton fx:id="btnVisualizarInformacionsinfiltros" buttonType="RAISED" layoutX="643.0" layoutY="27.0" onAction="#OnActionbtnVisualizarInformacionsinfiltros" prefHeight="44.0" prefWidth="161.0" ripplerFill="#b9dddc" style="-fx-background-color: #05071F;" text="Ver toda la información &#10;sin filtros" textAlignment="CENTER"  textFill="#e7e5e5">
             <font>
                 <Font name="Times New Roman" size="12.0" />
             </font>
