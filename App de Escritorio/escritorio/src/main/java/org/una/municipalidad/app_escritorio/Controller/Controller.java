@@ -164,7 +164,7 @@ public abstract class Controller {
 
         return arreglo;
     }
-    public void criarPlanilha(TableView tabAuditoriaVolumes, String array[], int tamaño, String Nombre, ObservableList hola) throws IOException {
+    public void CrearReporte(TableView tabAuditoriaVolumes, String array[], int tamaño, String Nombre, ObservableList hola) throws IOException {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet spreadsheet = workbook.createSheet("sample");

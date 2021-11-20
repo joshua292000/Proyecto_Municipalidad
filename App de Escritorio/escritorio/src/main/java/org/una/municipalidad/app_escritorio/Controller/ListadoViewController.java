@@ -418,19 +418,19 @@ public class ListadoViewController extends Controller implements Initializable {
 
     public void OnActionBtnGenerar(ActionEvent actionEvent) throws IOException {
         if(getHola()==5){
-            criarPlanilha(Tvdatos,ArrayCobro,ArrayCobro.length,"Cobros",options);
+            CrearReporte(Tvdatos,ArrayCobro,ArrayCobro.length,"Cobros",options);
         }
         if(getHola()==6){
-            criarPlanilha(Tvdatos,ArrayPropiedad,ArrayPropiedad.length,"Propiedades",optionsPro);
+            CrearReporte(Tvdatos,ArrayPropiedad,ArrayPropiedad.length,"Propiedades",optionsPro);
         }
         if(getHola()==7){
-            criarPlanilha(Tvdatos,ArrayLicencias,ArrayLicencias.length,"Licencias",optionsLic);
+            CrearReporte(Tvdatos,ArrayLicencias,ArrayLicencias.length,"Licencias",optionsLic);
         }
         if(getHola()==8){
-            criarPlanilha(Tvdatos,ArrayLocales,ArrayLocales.length,"Locales",optionsLoc);
+            CrearReporte(Tvdatos,ArrayLocales,ArrayLocales.length,"Locales",optionsLoc);
         }
         if(getHola()==9){
-            criarPlanilha(Tvdatos,ArrayParametros,ArrayParametros.length,"Parametros",optionspar);
+            CrearReporte(Tvdatos,ArrayParametros,ArrayParametros.length,"Parametros",optionspar);
         }
     }
 
@@ -444,7 +444,7 @@ public class ListadoViewController extends Controller implements Initializable {
                 ConsultasServiceGerente.EliminarTodoCobrosxEstado();
                 break;
             case 2:
-                //Liscencias
+                //Licencias
                 ConsultasServiceGerente.EliminarTodoLicenciasxEstado();
                 break;
             case 3:
