@@ -145,7 +145,7 @@ public class ConsultasServiceGerente {
         System.out.print("Token "+token.getJwt());
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/licenciasComerciales"))
+                .uri(URI.create("http://localhost:8089/localesmercado"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())

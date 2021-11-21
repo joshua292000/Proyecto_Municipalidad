@@ -23,6 +23,14 @@ public class LocalesMercadoController {
     @Autowired
     private LocalesMercadoService localesMercadoService;
 
+    @GetMapping()
+    @ApiOperation(value = "Obtiene una lista de todos los locales de mercado", response = LocalesMercadoDTO.class, responseContainer = "List", tags = "LocalesMercado")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE') or hasRole('AUDITOR')")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<LocalesMercadoDTO>> result = localesMercadoService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
     @GetMapping("/findByEstado/{Estado}")
     @ApiOperation(value = "Obtiene un local del mercado a partir de su estado", response = LocalesMercadoDTO.class, tags = "LocalesMercado")

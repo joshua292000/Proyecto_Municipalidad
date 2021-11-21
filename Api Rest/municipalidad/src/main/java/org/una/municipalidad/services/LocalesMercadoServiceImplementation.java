@@ -36,6 +36,14 @@ public class LocalesMercadoServiceImplementation implements LocalesMercadoServic
 
     @Override
     @Transactional(readOnly = true)
+    public Optional<List<LocalesMercadoDTO>> findAll() {
+        List<LocalesMercadoDTO> localesmercadoDTOList = MapperUtils.DtoListFromEntityList(localesMercadoRepository.findAll(), LocalesMercadoDTO.class);
+        if (localesmercadoDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(localesmercadoDTOList);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<LocalesMercadoDTO> findByNombreLocal(String nombreLocal) {
         Optional<Locales_Mercado> locales_mercado = localesMercadoRepository.findByNombreLocal(nombreLocal);
         if(locales_mercado.isEmpty()) throw new NotFoundInformationException();

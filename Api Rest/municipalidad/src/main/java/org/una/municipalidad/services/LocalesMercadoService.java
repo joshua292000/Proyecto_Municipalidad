@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface LocalesMercadoService {
     public Optional<LocalesMercadoDTO> findById(Long id);
+    public Optional<List<LocalesMercadoDTO>> findAll();
     public Optional<LocalesMercadoDTO> findByNombreLocal(String nombreLocal);
     public Optional<List<LocalesMercadoDTO>> findByEstado(String Estado);
     public void EliminarLocales();
