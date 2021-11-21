@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="778.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ContribuyenteXLocalController">
+   <children>
+      <TextField fx:id="txtPorcentajeL" layoutX="198.0" layoutY="87.0" prefHeight="39.0" prefWidth="370.0" promptText="Porcentaje" />
+      <Label layoutX="277.0" layoutY="26.0" text="Porcentaje" textFill="#3fa5d9">
+         <font>
+            <Font name="Elephant" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtContribuyenteL" layoutX="204.0" layoutY="218.0" prefHeight="39.0" prefWidth="370.0" promptText="Cedula del Contribuyente" />
+      <TextField fx:id="txtNombreL" layoutX="204.0" layoutY="350.0" prefHeight="39.0" prefWidth="370.0" promptText="Nombre del local" />
+      <Label layoutX="166.0" layoutY="149.0" text="Cedula del contribuyente" textFill="#3fa5d9">
+         <font>
+            <Font name="Elephant" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="232.0" layoutY="272.0" text="Nombre del local" textFill="#3fa5d9">
+         <font>
+            <Font name="Elephant" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnGuardarL" layoutX="183.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnActionGuardarLocal" prefHeight="61.0" prefWidth="400.0" style="-fx-background-color: #28abda;" text="Guardar Local">
+         <font>
+            <Font name="Elephant" size="31.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -10,10 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.una.municipalidad.app_escritorio.DTO.LicenciasComercialesDTO;
 import org.una.municipalidad.app_escritorio.DTO.LocalesMercadoDTO;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -77,6 +79,9 @@ public class IngresarLocalMercadoController extends Controller implements Initia
                 LocalesMercadoDTO licencia = ConsultasGestorService.CrearLocalMercado(options.get(x).getNombreLocal(), options.get(x).getUbicacionLocal(), options.get(x).getCorreoLocal(), options.get(x).getTelefonoLocal(), options.get(x).getMonto_Alquiler_Local(), fechaRegistro, fechaRegistro, estado);
             }
             JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
+            Controller.setImpuesto(2);
+            ((Stage) btnInsertar.getScene().getWindow()).close();
+            FlowController.getInstance().goViewInWindow("Home");
         }
     }
 

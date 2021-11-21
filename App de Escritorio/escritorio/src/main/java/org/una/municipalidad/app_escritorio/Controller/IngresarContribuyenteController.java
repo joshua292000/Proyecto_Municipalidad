@@ -77,6 +77,8 @@ public class IngresarContribuyenteController extends Controller implements Initi
     @FXML
     void OnActionBuscar(ActionEvent event) throws IOException, InterruptedException {
         TablaContribuyente.getItems().clear();
+        btnGuardar.setDisable(true);
+        btnInsertar.setDisable(true);
         if(txtCedula.getText().length()==0){
             JOptionPane.showMessageDialog(null,"Es necesario escribrir una cedula");
         }else{

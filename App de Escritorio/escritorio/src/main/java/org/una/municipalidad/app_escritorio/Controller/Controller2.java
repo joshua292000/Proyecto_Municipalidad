@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -47,7 +48,7 @@ public class Controller2 extends Controller implements Initializable {
     private Button btnContri;
 
     @FXML
-    private Pane pnlOverview;
+    private BorderPane BorderPaneGestor;
 
     @FXML
     private VBox vbxMenuIzq;
@@ -60,112 +61,45 @@ public class Controller2 extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vbxMenuIzq.setPrefWidth(20);
+        //vbxMenuIzq.setPrefWidth(20);
         lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
         lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
+
     }
 
 
     public void handleClicks(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnCustomers) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarContribuyente.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //pnItems.getChildren().clear();
+            loadUI("IngresarContribuyente",BorderPaneGestor);
         }
         if (actionEvent.getSource() == btnPackages) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarLicencia.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+           // pnItems.getChildren().clear();
+            loadUI("IngresarLicencia",BorderPaneGestor);
+
         }
         if (actionEvent.getSource() == btnOverview) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/Item.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+           // pnItems.getChildren().clear();
+            loadUI("Item",BorderPaneGestor);
         }
 
         if (actionEvent.getSource() == btnSettings) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarLocalMercado.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //pnItems.getChildren().clear();
+            loadUI("IngresarLocalMercado",BorderPaneGestor);
         }
 
         if (actionEvent.getSource() == btnMenus) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/IngresarPropiedad.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //pnItems.getChildren().clear();
+            loadUI("IngresarPropiedad",BorderPaneGestor);
         }
 
         if (actionEvent.getSource() == btnActualizar) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/Actualizar.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //pnItems.getChildren().clear();
+            loadUI("Actualizar",BorderPaneGestor);
         }
-
-        if (actionEvent.getSource() == btnContri) {
-            pnItems.getChildren().clear();
-            pnlOverview.setStyle("-fx-background-color : #02030A");
-            pnlOverview.toFront();
-            System.out.println("ober");
-            Node[] nodes = new Node[1];
-            try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/ContribuyenteXImpuesto.fxml"));
-                pnItems.getChildren().add(nodes[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
 
         if (actionEvent.getSource() ==   btnCerrarSesion) {
-            pnItems.getChildren().clear();
+           // pnItems.getChildren().clear();
             ((Stage) btnCerrarSesion.getScene().getWindow()).close();
             FlowController.getInstance().goViewInWindow("Loggin");
         }
@@ -174,16 +108,25 @@ public class Controller2 extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-
+        if(Controller.getImpuesto()==1){
+            System.out.println("entre");
+            loadUI("ContribuyenteXLicencia",BorderPaneGestor);
+        }else if(Controller.getImpuesto()==2){
+            System.out.println("entre");
+            loadUI("ContribuyenteXLocal",BorderPaneGestor);
+        }else if(Controller.getImpuesto()==3){
+            System.out.println("entre");
+            loadUI("ContribuyenteXPropiedad",BorderPaneGestor);
+        }
     }
 
 
     public void OnMouseEnteredIzq(MouseEvent mouseEvent) {
-        vbxMenuIzq.setPrefWidth(256);
+        //vbxMenuIzq.setPrefWidth(256);
 
     }
 
     public void OnMouseExitedIzq(MouseEvent mouseEvent) {
-        vbxMenuIzq.setPrefWidth(20);
+        //vbxMenuIzq.setPrefWidth(20);
     }
 }

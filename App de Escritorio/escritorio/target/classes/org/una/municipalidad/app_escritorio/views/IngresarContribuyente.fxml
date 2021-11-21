@@ -12,53 +12,51 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.*?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="769.0" spacing="80.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.IngresarContribuyenteController">
-    <children>
-        <Pane prefHeight="318.0" prefWidth="754.0">
-            <children>
-                <Button fx:id="btnBuscar" layoutX="67.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionBuscar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Buscar" textFill="WHITE">
-                    <font>
-                        <Font name="Elephant" size="18.0" />
-                    </font>
-                </Button>
-            <TextField fx:id="txtNombre" layoutX="25.0" layoutY="415.0" promptText="Nombre " />
-            <TextField fx:id="txtApellido" layoutX="265.0" layoutY="415.0" promptText="Apellidos" translateX="5.0" />
-            <TextField fx:id="txtCedula" layoutX="516.0" layoutY="415.0" promptText="Cedula" />
-            <Button fx:id="btnInsertar" layoutX="576.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Insertar" textFill="#f8f4f4">
+<AnchorPane maxHeight="544.0" maxWidth="931.0" prefHeight="544.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.IngresarContribuyenteController">
+   <children>
+      <Pane prefHeight="544.0" prefWidth="778.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btnBuscar" layoutX="33.0" layoutY="132.0" mnemonicParsing="false" onAction="#OnActionBuscar" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #28abda;" text="Buscar">
                <font>
-                  <Font name="Elephant" size="18.0" />
+                  <Font name="Elephant" size="23.0" />
                </font>
             </Button>
-            <TableView fx:id="TablaContribuyente" layoutX="25.0" layoutY="57.0" prefHeight="330.0" prefWidth="715.0">
-              <columns>
-                <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
-                <TableColumn fx:id="colNombre" prefWidth="193.0" text="Nombre" />
-                  <TableColumn fx:id="colApellidos" prefWidth="249.0" text="Apellidos" />
-                  <TableColumn fx:id="colCedula" prefWidth="197.0" text="Cedula" />
-              </columns>
+            <TextField fx:id="txtNombre" layoutX="528.0" layoutY="73.0" prefHeight="39.0" prefWidth="234.0" promptText="Nombre " />
+            <TextField fx:id="txtApellido" layoutX="271.0" layoutY="73.0" prefHeight="39.0" prefWidth="226.0" promptText="Apellidos" translateX="5.0" />
+            <TextField fx:id="txtCedula" layoutX="20.0" layoutY="73.0" prefHeight="39.0" prefWidth="226.0" promptText="Cedula" />
+            <Button fx:id="btnInsertar" layoutX="292.0" layoutY="132.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="39.0" prefWidth="200.0" style="-fx-background-color: #28abda;" text="Insertar">
+               <font>
+                  <Font name="Elephant" size="23.0" />
+               </font>
+            </Button>
+            <TableView fx:id="TablaContribuyente" layoutX="20.0" layoutY="196.0" prefHeight="330.0" prefWidth="743.0">
+               <columns>
+                  <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
+                  <TableColumn fx:id="colNombre" prefWidth="219.0" text="Nombre" />
+                  <TableColumn fx:id="colApellidos" prefWidth="223.0" text="Apellidos" />
+                  <TableColumn fx:id="colCedula" prefWidth="225.0" text="Cedula" />
+               </columns>
             </TableView>
-            <Label layoutX="275.0" layoutY="7.0" text="Contribuyentes">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="#b92222" />
-                        <Stop color="WHITE" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
+            <Label layoutX="276.0" layoutY="14.0" text="Contribuyentes">
                <font>
                   <Font name="Elephant" size="33.0" />
                </font>
+               <textFill>
+                  <LinearGradient endX="0.6108374384236454" endY="1.0">
+                     <stops>
+                        <Stop color="#232cb8" />
+                        <Stop color="#232cb8" offset="0.00625" />
+                        <Stop color="#28abda" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
             </Label>
-            <Button fx:id="btnGuardar" layoutX="313.0" layoutY="478.0" mnemonicParsing="false" onAction="#OnActionGuardar" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Guardar" textFill="#f5efef">
+            <Button fx:id="btnGuardar" layoutX="545.0" layoutY="132.0" mnemonicParsing="false" onAction="#OnActionGuardar" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #28abda;" text="Guardar">
                <font>
-                  <Font name="Elephant" size="18.0" />
+                  <Font name="Elephant" size="23.0" />
                </font>
             </Button>
-            </children>
-        </Pane>
-    </children>
-    <effect>
-        <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
-    </effect>
-</HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

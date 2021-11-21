@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="778.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ContribuyenteXPropiedadController">
+   <children>
+      <TextField fx:id="txtPorcentajeP" layoutX="191.0" layoutY="94.0" prefHeight="39.0" prefWidth="370.0" promptText="Porcentaje" />
+      <Label layoutX="272.0" layoutY="24.0" text="Porcentaje" textFill="#3fa5d9">
+         <font>
+            <Font name="Elephant" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="147.0" layoutY="156.0" text="Cedula del contribuyente" textFill="#3fa5d9">
+         <font>
+            <Font name="Elephant" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCedulaP" layoutX="186.0" layoutY="227.0" prefHeight="39.0" prefWidth="370.0" promptText="Cedula del contribuyente" />
+      <TextField fx:id="txtId" layoutX="186.0" layoutY="352.0" prefHeight="39.0" prefWidth="370.0" promptText="Id de la propiedad" />
+      <Label layoutX="209.0" layoutY="285.0" text="Id de la propiedad" textFill="#3fa5d9">
+         <font>
+            <Font name="Elephant" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnGuardarP" layoutX="171.0" layoutY="425.0" mnemonicParsing="false" onAction="#OnActionGuardarPropiedad" prefHeight="61.0" prefWidth="400.0" style="-fx-background-color: #28abda;" text="Guardar Propieadad">
+         <font>
+            <Font name="Elephant" size="31.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

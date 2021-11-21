@@ -16,10 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.una.municipalidad.app_escritorio.DTO.LocalesMercadoDTO;
 import org.una.municipalidad.app_escritorio.DTO.PropiedadesDTO;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -133,7 +135,7 @@ public class IngresarPropiedadController extends Controller implements Initializ
                     PerteneceEstado = false;
                 }
 
-                btnGeo.setVisible(true);
+                //btnGeo.setVisible(true);
                 lbl5.setText("Geolocalizacion");
                 txtDistrito.clear();
                 txtDistrito.setPromptText("Geolocalizacion");
@@ -164,7 +166,7 @@ public class IngresarPropiedadController extends Controller implements Initializ
             if(txtfrente.getLength()==0 || txtDireccion.getLength()==0 || txtCanton.getLength()==0 || txtDistrito.getLength()==0 || txtArea.getLength()==0){
                 JOptionPane.showMessageDialog(null,"Existen campos vacios, porfavor ingrese todos todos los datos");
             }else {
-                btnGeo.setVisible(false);
+
                 propiedadGeolocalizacion = txtDistrito.getText();
                 propiedadOtrosValores = Long.valueOf(txtArea.getText());
                 propiedadPlano = txtCanton.getText();
@@ -202,40 +204,16 @@ public class IngresarPropiedadController extends Controller implements Initializ
                     PropiedadesDTO propiedad = ConsultasGestorService.CrearPropiedad(options.get(x).getPropiedadProvincia(), options.get(x).getPropiedadCanton(), options.get(x).getPropiedadDistrito(), options.get(x).getPropiedadDireccion(), options.get(x).getPropiedadGeolocalizacion(), options.get(x).getPropiedadArea(), options.get(x).getPropiedadPlano(), options.get(x).getPropiedadAMetrosFrente(), options.get(x).getPropiedadValorTerreno(), options.get(x).getPropiedadValorConstruccion(), options.get(x).getPropiedadOtrosValores(), options.get(x).isPerteneceEstado(), options.get(x).getPropiedadZona(), Estado, fechaRegistro, fechaRegistro);
                 }
                 JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
+                Controller.setImpuesto(3);
                 Contador = 0;
+                ((Stage) btnInsertar.getScene().getWindow()).close();
+                FlowController.getInstance().goViewInWindow("Home");
             }
         }
     }
 
     public void OnActionGeo(ActionEvent actionEvent) {
-        Engine engine = Engine.newInstance(
-                EngineOptions.newBuilder(HARDWARE_ACCELERATED)
-                        .licenseKey("1BNDHFSC1G0VRGZOEPHZ46KY4YI29ZAOX46IAP1ZC709GIV167OH49YFGSWZVYLM86Q30G")
-                        .build());
-        Browser browser = engine.newBrowser();
-
-        SwingUtilities.invokeLater(() -> {
-            BrowserView view = BrowserView.newInstance(browser);
-
-            JFrame frame = new JFrame("Mapita");
-            frame.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    engine.close();
-                }
-            });
-            frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            JTextField addressBar = new JTextField("http://maps.google.com");
-            addressBar.addActionListener(e ->
-                    browser.navigation().loadUrl(addressBar.getText()));
-            frame.add(addressBar, BorderLayout.NORTH);
-            frame.add(view, BorderLayout.CENTER);
-            frame.setSize(800, 500);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-
-            browser.navigation().loadUrl(addressBar.getText());
-        });
+        FlowController.getInstance().goViewInWindow("Geocalizacion");
     }
 
     public static void integerTextField(TextField textField) {

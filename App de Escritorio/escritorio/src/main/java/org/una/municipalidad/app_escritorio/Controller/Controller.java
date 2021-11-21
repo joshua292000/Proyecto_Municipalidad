@@ -18,6 +18,7 @@ public abstract class Controller {
     private Stage stage;
     private String accion;
     private static int hola;
+    private static int Impuesto;
     private static String Parametro;
     private static String Parametro2;
 
@@ -43,6 +44,14 @@ public abstract class Controller {
 
     public static void setHola(int hola) {
         Controller.hola = hola;
+    }
+
+    public static int getImpuesto() {
+        return Impuesto;
+    }
+
+    public static void setImpuesto(int Impuesto) {
+        Controller.Impuesto = Impuesto;
     }
 
 

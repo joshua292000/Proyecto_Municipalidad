@@ -19,7 +19,7 @@
                 <TextField fx:id="txtCanton" layoutX="40.0" layoutY="349.0" prefHeight="39.0" prefWidth="294.0" promptText="Canton" />
                 <TextField fx:id="txtfrente" layoutX="35.0" layoutY="145.0" prefHeight="39.0" prefWidth="294.0" promptText="Metros del frente" translateX="5.0" />
                 <TextField fx:id="txtArea" layoutX="40.0" layoutY="251.0" prefHeight="39.0" prefWidth="294.0" promptText="Area de la propiedad" />
-                <Button fx:id="btnInsertar" layoutX="175.0" layoutY="468.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="42.0" prefWidth="414.0" style="-fx-background-color: green;" text="Siguiente" textFill="#f8f4f4">
+                <Button fx:id="btnInsertar" layoutX="175.0" layoutY="468.0" mnemonicParsing="false" onAction="#OnActionInsertar" prefHeight="42.0" prefWidth="414.0" style="-fx-background-color: #28abda;" text="Siguiente">
                     <font>
                         <Font name="Elephant" size="27.0" />
                     </font>
@@ -28,8 +28,8 @@
                     <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                             <stops>
-                                <Stop color="#b92222" />
-                                <Stop color="WHITE" offset="1.0" />
+                                <Stop color="#232cb8" />
+                                <Stop color="#28abda" offset="1.0" />
                             </stops>
                         </LinearGradient>
                     </textFill>
@@ -39,32 +39,32 @@
                 </Label>
                 <TextField fx:id="txtDistrito" layoutX="449.0" layoutY="251.0" prefHeight="39.0" prefWidth="284.0" promptText="Distrito" />
                 <TextField fx:id="txtDireccion" layoutX="444.0" layoutY="145.0" prefHeight="39.0" prefWidth="284.0" promptText="Direccion de la propiedad" />
-                <Label fx:id="lbl3" layoutX="42.0" layoutY="309.0" text="Canton" textFill="#21ed69">
+                <Label fx:id="lbl3" layoutX="42.0" layoutY="309.0" text="Canton" textFill="#28abda">
                     <font>
                         <Font name="Elephant" size="22.0" />
                     </font>
                 </Label>
-                <Label fx:id="lbl1" layoutX="40.0" layoutY="97.0" text="Metros del frente" textFill="#21ed69">
+                <Label fx:id="lbl1" layoutX="40.0" layoutY="97.0" text="Metros del frente" textFill="#28abda">
                     <font>
                         <Font name="Elephant" size="22.0" />
                     </font>
                 </Label>
-                <Label fx:id="lbl2" layoutX="40.0" layoutY="203.0" text="Area de la propiedad" textFill="#21ed69">
+                <Label fx:id="lbl2" layoutX="40.0" layoutY="203.0" text="Area de la propiedad" textFill="#28abda">
                     <font>
                         <Font name="Elephant" size="22.0" />
                     </font>
                 </Label>
-                <Label fx:id="lbl4" layoutX="444.0" layoutY="97.0" text="Direccion de la propiedad" textFill="#21ed69">
+                <Label fx:id="lbl4" layoutX="444.0" layoutY="97.0" text="Direccion de la propiedad" textFill="#28abda">
                     <font>
                         <Font name="Elephant" size="22.0" />
                     </font>
                 </Label>
-                <Label fx:id="lbl5" layoutX="444.0" layoutY="203.0" text="Distrito" textFill="#21ed69">
+                <Label fx:id="lbl5" layoutX="444.0" layoutY="203.0" text="Distrito" textFill="#28abda">
                     <font>
                         <Font name="Elephant" size="22.0" />
                     </font>
                 </Label>
-            <Label fx:id="lbl6" layoutX="451.0" layoutY="309.0" text="Pertenece al estado" textFill="#21ed69">
+            <Label fx:id="lbl6" layoutX="451.0" layoutY="309.0" text="Pertenece al estado" textFill="#28abda">
                <font>
                   <Font name="Elephant" size="22.0" />
                </font>

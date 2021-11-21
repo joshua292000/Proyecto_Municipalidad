@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.util.converter.BooleanStringConverter;
 import javafx.util.converter.LongStringConverter;
 import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
 import org.una.municipalidad.app_escritorio.DTO.LicenciasComercialesDTO;
@@ -52,7 +53,7 @@ public class ActualizarController extends Controller implements Initializable {
     private TableColumn<PropiedadesDTO, String> col14;
 
     @FXML
-    private TableColumn<PropiedadesDTO, String> col13;
+    private TableColumn<PropiedadesDTO, Boolean> col13;
 
     @FXML
     private TableColumn<PropiedadesDTO, Long> col12;
@@ -206,7 +207,7 @@ public class ActualizarController extends Controller implements Initializable {
     @FXML
     private ComboBox cbxTipo = new ComboBox(tipo);
 
-    private String Tipo;
+    private String TipoIm1;
     private String SolicitarEliminar = "Eliminando";
     private LocalDate fechaRegistro = LocalDate.parse("2021-11-12");
     private ObservableList<CobrosDTO> listaCobros = FXCollections.observableArrayList();
@@ -221,7 +222,7 @@ public class ActualizarController extends Controller implements Initializable {
         tipo.add("Local de Mercado");
         tipo.add("Propiedades");
         cbxTipo.setItems(tipo);
-
+        cbxTipo.setVisible(false);
         LlenarTablaLicencia();
         LlenarTablaLocal();
         LlenarTablaCobros();
@@ -237,7 +238,7 @@ public class ActualizarController extends Controller implements Initializable {
    
 
     public void OnActionActualizar(ActionEvent actionEvent) throws IOException, InterruptedException {
-        if(Tipo=="Licencia") {
+        if(TipoIm1=="Licencia") {
             List<LicenciasComercialesDTO> filaSeleccionada =  tablaLicencia.getSelectionModel().getSelectedItems();
             if (filaSeleccionada.size() == 1) {
                 final LicenciasComercialesDTO licenciaSeleccionada = filaSeleccionada.get(0);
@@ -245,7 +246,7 @@ public class ActualizarController extends Controller implements Initializable {
             }
             JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
         }
-        else if(Tipo=="Local") {
+        else if(TipoIm1=="Local") {
             List<LocalesMercadoDTO> filaSeleccionada =  tablaLocales.getSelectionModel().getSelectedItems();
             if (filaSeleccionada.size() == 1) {
                 final LocalesMercadoDTO localSeleccionado = filaSeleccionada.get(0);
@@ -253,7 +254,7 @@ public class ActualizarController extends Controller implements Initializable {
             }
             JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
         }
-        else if(Tipo=="Propiedad") {
+        else if(TipoIm1=="Propiedad") {
             List<PropiedadesDTO> filaSeleccionada =  tablaPropiedades.getSelectionModel().getSelectedItems();
             if (filaSeleccionada.size() == 1) {
                 final PropiedadesDTO propiedadSeleccionada = filaSeleccionada.get(0);
@@ -267,7 +268,7 @@ public class ActualizarController extends Controller implements Initializable {
     }
 
     public void OnActionBuscar(ActionEvent actionEvent) throws IOException, InterruptedException {
-        TipoImpuesto = cbxTipo.getValue().toString();
+
         btnActualizar.setDisable(false);
         btnEliminar.setDisable(false);
         tablaLicencia.getItems().clear();
@@ -277,7 +278,7 @@ public class ActualizarController extends Controller implements Initializable {
         if(txtCedula.getLength()==0){
             JOptionPane.showMessageDialog(null,"El campo cedula se encuentra vacio, porfavor digite una cedula");
         }else{
-            if(Tipo=="Licencia"){
+            if(TipoIm1=="Licencia"){
                 List<LicenciasComercialesDTO> licencia= ConsultasGestorService.ObtenerLicencia(txtCedula.getText());
                 if(licencia!=null){
                     for(LicenciasComercialesDTO licencias:licencia){
@@ -287,7 +288,7 @@ public class ActualizarController extends Controller implements Initializable {
                     txtCedula.clear();
                 }
 
-            }else if(Tipo=="Local"){
+            }else if(TipoIm1=="Local"){
                 List<LocalesMercadoDTO> local= ConsultasGestorService.ObtenerLocal(txtCedula.getText());
                 if(local!=null){
                     for(LocalesMercadoDTO locales:local){
@@ -296,7 +297,7 @@ public class ActualizarController extends Controller implements Initializable {
                     this.tablaLocales.setItems(listaLocales);
                     txtCedula.clear();
                 }
-            }else if(Tipo=="Propiedad"){
+            }else if(TipoIm1=="Propiedad"){
                 List<PropiedadesDTO> propiedad= ConsultasGestorService.ObtenerPropiedad(txtCedula.getText());
                 if(propiedad!=null){
                     for(PropiedadesDTO propiedades:propiedad){
@@ -309,7 +310,8 @@ public class ActualizarController extends Controller implements Initializable {
                     this.tablaPropiedades.setItems(listaPropiedades);
                     txtCedula.clear();
                 }
-            }else if(Tipo=="Cobros"){
+            }else if(TipoIm1=="Cobros"){
+                TipoImpuesto = cbxTipo.getValue().toString();
                 btnActualizar.setDisable(true);
                 if(TipoImpuesto == "Licencia Comercial"){
                     List<CobrosDTO> cobro= ConsultasGestorService.obtenerCobro2(txtCedula.getText(),Estado );
@@ -347,7 +349,7 @@ public class ActualizarController extends Controller implements Initializable {
     }
 
     public void OnActionEliminar(ActionEvent actionEvent) throws IOException, InterruptedException {
-        if(Tipo=="Licencia") {
+        if(TipoIm1=="Licencia") {
             List<LicenciasComercialesDTO> filaSeleccionada =  tablaLicencia.getSelectionModel().getSelectedItems();
             if (filaSeleccionada.size() == 1) {
                 final LicenciasComercialesDTO licenciaSeleccionada = filaSeleccionada.get(0);
@@ -356,7 +358,7 @@ public class ActualizarController extends Controller implements Initializable {
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar ");
             tablaLicencia.getItems().clear();
         }
-        else if(Tipo=="Local") {
+        else if(TipoIm1=="Local") {
             List<LocalesMercadoDTO> filaSeleccionada =  tablaLocales.getSelectionModel().getSelectedItems();
             if (filaSeleccionada.size() == 1) {
                 final LocalesMercadoDTO localSeleccionado = filaSeleccionada.get(0);
@@ -365,7 +367,7 @@ public class ActualizarController extends Controller implements Initializable {
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
             tablaLocales.getItems().clear();
         }
-        else if(Tipo=="Propiedad") {
+        else if(TipoIm1=="Propiedad") {
             List<PropiedadesDTO> filaSeleccionada =  tablaPropiedades.getSelectionModel().getSelectedItems();
             if (filaSeleccionada.size() == 1) {
                 final PropiedadesDTO propiedadSeleccionada = filaSeleccionada.get(0);
@@ -378,7 +380,7 @@ public class ActualizarController extends Controller implements Initializable {
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
             tablaPropiedades.getItems().clear();
         }
-        else if(Tipo=="Cobros") {
+        else if(TipoIm1=="Cobros") {
             if(TipoImpuesto == "Licencia Comercial"){
                 List<CobrosDTO> filaSeleccionada =  tablaCobros.getSelectionModel().getSelectedItems();
                 if (filaSeleccionada.size() == 1) {
@@ -415,27 +417,26 @@ public class ActualizarController extends Controller implements Initializable {
     }
 
     public void SeleccionCobros(Event event) {
-        Tipo = "Cobros";
+        TipoIm1 = "Cobros";
         tablaCobros.getItems().clear();
+        cbxTipo.setVisible(true);
     }
 
     public void SeleccionPropiedad(Event event) {
-        Tipo = "Propiedad";
+        TipoIm1 = "Propiedad";
         tablaPropiedades.getItems().clear();
     }
 
     public void SeleccionLocal(Event event) {
-        Tipo = "Local";
+        TipoIm1 = "Local";
         tablaLocales.getItems().clear();
     }
 
     public void SeleccionLicencia(Event event) {
-        Tipo = "Licencia";
+        TipoIm1 = "Licencia";
         tablaLicencia.getItems().clear();
     }
 
-
-    
 
     public void LlenarTablaLicencia(){
 
@@ -503,7 +504,7 @@ public class ActualizarController extends Controller implements Initializable {
     }
 
     public void LlenarTablaLocal(){
-        tablaLicencia.setEditable(true);
+        tablaLocales.setEditable(true);
         this.colIdM.setCellValueFactory(new PropertyValueFactory("id"));
 
         this.colNombreM.setCellValueFactory(new PropertyValueFactory("nombreLocal"));
@@ -567,7 +568,7 @@ public class ActualizarController extends Controller implements Initializable {
     }
 
     public void LlenarTablaPropiedad(){
-        tablaLicencia.setEditable(true);
+        tablaPropiedades.setEditable(true);
         this.col1.setCellValueFactory(new PropertyValueFactory("propiedades_id"));
 
         this.col2.setCellValueFactory(new PropertyValueFactory("propiedadProvincia"));
@@ -670,11 +671,11 @@ public class ActualizarController extends Controller implements Initializable {
                 }
         );
         this.col13.setCellValueFactory(new PropertyValueFactory("PerteneceEstado"));
-        this.col13.setCellFactory(TextFieldTableCell.forTableColumn());
+        this.col13.setCellFactory(TextFieldTableCell.<PropiedadesDTO, Boolean>forTableColumn(new BooleanStringConverter()));
         this.col13.setOnEditCommit(
                 data->{
                     PropiedadesDTO con = data.getRowValue();
-                    con.setPerteneceEstado(Boolean.parseBoolean(data.getNewValue()));
+                    con.setPerteneceEstado(Boolean.valueOf(data.getNewValue()));
                     System.out.println(con);
                 }
         );

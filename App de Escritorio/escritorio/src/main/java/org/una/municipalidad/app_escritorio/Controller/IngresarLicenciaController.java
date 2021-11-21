@@ -18,10 +18,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.una.municipalidad.app_escritorio.DTO.ContribuyentesDTO;
 import org.una.municipalidad.app_escritorio.DTO.LicenciasComercialesDTO;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
+import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import javax.swing.*;
 
@@ -78,6 +81,9 @@ public class IngresarLicenciaController extends Controller implements Initializa
 
             }
             JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
+            Controller.setImpuesto(1);
+            ((Stage) btnInsertar.getScene().getWindow()).close();
+            FlowController.getInstance().goViewInWindow("Home");
         }
     }
 
