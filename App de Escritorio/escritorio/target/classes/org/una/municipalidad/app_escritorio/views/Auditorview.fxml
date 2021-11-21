@@ -42,7 +42,7 @@
                         </ImageView>
                      </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="btnTodasDeclaraciones" buttonType="RAISED" onAction="#OnActionbtnTodasDeclaraciones" prefHeight="44.0" prefWidth="253.0" ripplerFill="#bdcfe0" text="Todos los locales de mercado" textAlignment="CENTER" textFill="#e7e5e5" translateX="4.0" translateY="144.0">
+                        <JFXButton fx:id="btnTodosLocalesMercado" buttonType="RAISED" onAction="#OnActionbtnTodosLocalesMercado" prefHeight="44.0" prefWidth="253.0" ripplerFill="#bdcfe0" text="Todos los locales de mercado" textAlignment="CENTER" textFill="#e7e5e5" translateX="4.0" translateY="144.0">
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                            <image>

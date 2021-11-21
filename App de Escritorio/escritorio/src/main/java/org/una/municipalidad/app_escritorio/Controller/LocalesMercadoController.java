@@ -28,6 +28,8 @@ public class LocalesMercadoController extends Controller implements Initializabl
     public TableColumn tvcFechaRegistro;
     public TableView Tview_LocalesMercadoLista;
     private ObservableList<LocalesMercadoDTO> LocalesMercadolist = FXCollections.observableArrayList();
+    private String  ArrayLocales[] ={"id","nombreLocal", "ubicacionLocal" ,"correoLocal", "telefonoLocal", "Monto_Alquiler_Local",
+            "fechaRegistrolocal", "ultima_Actualizacionlocal" ,"estado"};
 
     @SneakyThrows
     @Override
@@ -61,8 +63,10 @@ public class LocalesMercadoController extends Controller implements Initializabl
         this.Tview_LocalesMercadoLista.setItems(LocalesMercadolist);
     }
 
-
+@SneakyThrows
     public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
-        LlenarTabla();
+        if(getHola()==12) {
+            CrearReporte(Tview_LocalesMercadoLista, ArrayLocales, ArrayLocales.length, "Locales", LocalesMercadolist);
+        }
     }
 }

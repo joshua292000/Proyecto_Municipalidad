@@ -38,7 +38,7 @@ public class AuditorController extends Controller implements Initializable {
         loadUI("MovimientosRealizadosView",BorderPaneFondo);
     }
 
-    public void OnActionbtnTodasDeclaraciones(ActionEvent actionEvent) {
+    public void OnActionbtnTodosLocalesMercado(ActionEvent actionEvent) {
         setHola(12);
         loadUI("LocalesMercadoView",BorderPaneFondo);
     }

@@ -173,6 +173,20 @@ public abstract class Controller {
 
         return arreglo;
     }
+
+    public String[] StringBitacoras(ObservableList<BitacorasDTO> lista, int tamaño){
+        String arreglo[]= new String[9];
+        arreglo[0]=lista.get(tamaño).getId().toString();
+        arreglo[1]=(lista.get(tamaño).getBitacoraDescripcion()==null)? " " : lista.get(tamaño).getBitacoraDescripcion().toString();
+        arreglo[2]=(lista.get(tamaño).getBitacoraFecha()==null)? " " : lista.get(tamaño).getBitacoraFecha().toString();
+        arreglo[3]=(lista.get(tamaño).getBitacoraTabla()==null)? " " : lista.get(tamaño).getBitacoraTabla().toString();
+        arreglo[4]=(lista.get(tamaño).getBitacoraUsuario()==null)? " " : lista.get(tamaño).getBitacoraUsuario().toString();
+        arreglo[5]=(lista.get(tamaño).getUsuario()==null)? " " : lista.get(tamaño).getUsuario().toString();
+
+        return arreglo;
+    }
+
+
     public void CrearReporte(TableView tabAuditoriaVolumes, String array[], int tamaño, String Nombre, ObservableList hola) throws IOException {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -202,19 +216,19 @@ public abstract class Controller {
                             row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
                         }
                         if(getHola()==10){
-                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                            row.createCell(j).setCellValue(StringCobros(hola,i-1)[j]);
                         }
                         if(getHola()==11){
-                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                            row.createCell(j).setCellValue(StringBitacoras(hola,i-1)[j]);
                         }
                         if(getHola()==12){
-                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                            row.createCell(j).setCellValue(StringLocales(hola,i-1)[j]);
                         }
                         if(getHola()==13){
-                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                            row.createCell(j).setCellValue(StringLicencias(hola,i-1)[j]);
                         }
                         if(getHola()==14){
-                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                            row.createCell(j).setCellValue(StringPropiedades(hola,i-1)[j]);
                         }
 
                     }

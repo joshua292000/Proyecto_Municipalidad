@@ -35,6 +35,8 @@ public class PropiedadesController  extends Controller implements Initializable 
     public TableColumn tvcFechaRegistro;
     public TableColumn tvcUltimaFecha;
     private ObservableList<PropiedadesDTO> Propiedadeslist = FXCollections.observableArrayList();
+    private String  ArrayPropiedad[] ={"propiedades_id","propiedadProvincia","propiedadCanton","propiedadDistrito","propiedadDireccion","propiedadGeolocalizacion","propiedadArea",
+            "propiedadPlano","propiedadAMetrosFrente","propiedadValorTerreno","propiedadValorConstruccion","propiedadOtrosValores","PerteneceEstado","propiedadZona","Estado","propiedad_fecha_Registro","propiedad_ultima_Actualizacion"};
 
     @SneakyThrows
     @Override
@@ -77,7 +79,10 @@ public class PropiedadesController  extends Controller implements Initializable 
         this.TviewPropiedadesLista.setItems(Propiedadeslist);
     }
 
+    @SneakyThrows
     public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
-        
+        if(getHola()==14){
+            CrearReporte(TviewPropiedadesLista,ArrayPropiedad,ArrayPropiedad.length,"Propiedades",Propiedadeslist);
+        }
     }
 }

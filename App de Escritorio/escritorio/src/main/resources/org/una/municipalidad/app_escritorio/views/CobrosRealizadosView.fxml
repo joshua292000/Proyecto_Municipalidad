@@ -79,7 +79,7 @@
                 <Font name="Times New Roman" size="14.0" />
             </font>
         </Label>
-        <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="676.0" layoutY="24.0" onAction="#OnActionbtnGenerarReporte" prefHeight="25.0" prefWidth="149.0" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte" textAlignment="CENTER">
+        <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="670.0" layoutY="5.0" onAction="#OnActionbtnGenerarReporte" prefHeight="44.0" prefWidth="161.0" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte" textAlignment="CENTER">
             <font>
                 <Font name="Times New Roman" size="12.0" />
             </font>

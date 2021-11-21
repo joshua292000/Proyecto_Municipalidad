@@ -8,13 +8,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="576.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.LocalesMercadoController">
+<AnchorPane prefHeight="576.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.LocalesMercadoController">
     <children>
-        <ScrollPane layoutY="97.0" prefHeight="479.0" prefWidth="660.0">
+        <ScrollPane layoutY="97.0" prefHeight="478.0" prefWidth="831.0">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="632.0" prefWidth="1219.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="699.0" prefWidth="1303.0">
                     <children>
-                        <TableView fx:id="Tview_LocalesMercadoLista" prefHeight="576.0" prefWidth="1618.0">
+                        <TableView fx:id="Tview_LocalesMercadoLista" prefHeight="768.0" prefWidth="1274.0">
                             <columns>
                                 <TableColumn fx:id="tvcId" prefWidth="65.0" text="Id" />
                         <TableColumn fx:id="tvcNombreLocal" minWidth="0.0" prefWidth="200.0" text="Nombre del local " />
@@ -31,12 +31,12 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-      <Label layoutX="37.0" layoutY="40.0" text="Información de todos los locales de mercado">
+      <Label layoutX="105.0" layoutY="40.0" text="Información de todos los locales de mercado">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="453.0" layoutY="36.0" onAction="#OnActionbtnGenerarReporte" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte">
+      <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="592.0" layoutY="35.0" onAction="#OnActionbtnGenerarReporte" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>

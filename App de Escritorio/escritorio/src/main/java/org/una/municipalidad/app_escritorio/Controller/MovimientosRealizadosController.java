@@ -44,6 +44,8 @@ public class MovimientosRealizadosController extends Controller implements Initi
     String id="";
     String ids="";
     Long numero;
+    private String  ArrayMovimientos[] ={"id","bitacoraDescripcion","bitacoraFecha","bitacoraTabla","bitacoraUsuario","usuario"};
+
    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,5 +147,12 @@ public class MovimientosRealizadosController extends Controller implements Initi
             tview_Movimientos.getItems().clear();
         }
         DatosInicio();
+    }
+
+@SneakyThrows
+    public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
+        if(getHola()==11) {
+            CrearReporte(tview_Movimientos, ArrayMovimientos, ArrayMovimientos.length, "Bitacoras", MovimientosRealizadoslist);
+        }
     }
 }

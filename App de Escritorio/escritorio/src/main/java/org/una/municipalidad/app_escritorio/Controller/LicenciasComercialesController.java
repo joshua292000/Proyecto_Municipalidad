@@ -2,6 +2,7 @@ package org.una.municipalidad.app_escritorio.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +27,8 @@ public class LicenciasComercialesController  extends Controller implements Initi
     public TableColumn tvcTelefonoComercio;
     public TableColumn tvcIFechaUltimaActualizacion;
     private ObservableList<LicenciasComercialesDTO> LicenciasComercialeslist = FXCollections.observableArrayList();
+    private String  ArrayLicencias[] ={"id","nombreComercio","telefonoComercio","correoComercio","distritoComercio","fechaRegistrocomercio","ultima_Actualizacioncomercio",
+            "codigoComercio","estado"};
 
     @SneakyThrows
     @Override
@@ -58,5 +61,11 @@ public class LicenciasComercialesController  extends Controller implements Initi
         this.tvcTelefonoComercio.setCellValueFactory(new PropertyValueFactory("telefonoComercio"));
         this.tvcIFechaUltimaActualizacion.setCellValueFactory(new PropertyValueFactory("ultima_Actualizacioncomercio"));
         this.TviewLicenciaComercialLista.setItems(LicenciasComercialeslist);
+    }
+    @SneakyThrows
+    public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
+        if(getHola()==13){
+            CrearReporte(TviewLicenciaComercialLista,ArrayLicencias,ArrayLicencias.length,"Licencias",LicenciasComercialeslist);
+        }
     }
 }

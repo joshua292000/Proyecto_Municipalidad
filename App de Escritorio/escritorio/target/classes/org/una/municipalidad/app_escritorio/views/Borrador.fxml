@@ -1,88 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.text.Font?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="576.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.CobrosRealizadosController">
+<AnchorPane prefHeight="576.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.LicenciasComercialesController">
     <children>
-        <ScrollPane layoutY="171.0" prefHeight="405.0" prefWidth="831.0">
+        <ScrollPane layoutY="78.0" prefHeight="498.0" prefWidth="818.0">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="699.0" prefWidth="1303.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="2627.0">
                     <children>
-                        <TableView fx:id="Tview_CobrosLista" layoutX="-1.0" layoutY="-1.0" prefHeight="768.0" prefWidth="1274.0">
+                        <TableView fx:id="TviewLicenciaComercialLista" prefHeight="768.0" prefWidth="2627.0">
                             <columns>
                                 <TableColumn fx:id="tvcId" prefWidth="75.0" text="Id" />
-                                <TableColumn fx:id="tvcEstado" prefWidth="75.0" text="Estado" />
-                                <TableColumn fx:id="tvcFechaCreacion" prefWidth="150.0" text="Fecha de creación" />
-                                <TableColumn fx:id="tvcFechaPago" minWidth="0.0" prefWidth="90.0" text="Fecha pago" />
-                                <TableColumn fx:id="tvcFechaVencimiento" prefWidth="128.0" text="Fecha de vencimiento" />
-                                <TableColumn fx:id="tvcMonto" minWidth="0.0" prefWidth="67.0" text="Monto" />
-                                <TableColumn fx:id="tvcPeriodo" minWidth="0.0" prefWidth="67.0" text="Periodo" />
-                                <TableColumn fx:id="tvcIdFactura" minWidth="0.0" prefWidth="86.0" text="Id de factura" />
-                                <TableColumn fx:id="tvcIdLicenciaComercial" minWidth="0.0" prefWidth="164.0" text="Id de licencias comerciales" />
-                                <TableColumn fx:id="tvcIdLocalesMercado" minWidth="0.0" prefWidth="132.0" text="Id de locales mercado" />
-                                <TableColumn fx:id="tvcIdPropiedades" minWidth="0.0" prefWidth="112.0" text="Id de propiedades" />
-                                <TableColumn fx:id="tvcIdTipoCobros" minWidth="0.0" prefWidth="119.0" text="Id de tipo de cobro" />
+                                <TableColumn fx:id="tvcCodigo" prefWidth="167.0" text="Código del comercio" />
+                                <TableColumn fx:id="tvcCorreo" prefWidth="140.0" text="Correo del comercio" />
+                                <TableColumn fx:id="tvcDistritoComercio" minWidth="0.0" prefWidth="125.0" text="Distrito del comercio " />
+                                <TableColumn fx:id="tvcEstado" minWidth="0.0" prefWidth="72.0" text="Estado" />
+                                <TableColumn fx:id="tvcFechaRegistroComercio" minWidth="0.0" prefWidth="192.0" text="Fecha del registro del comercio " />
+                                <TableColumn fx:id="tvcNombreComercio" minWidth="0.0" prefWidth="151.0" text="Nombre del comercio " />
+                                <TableColumn fx:id="tvcTelefonoComercio" minWidth="0.0" prefWidth="158.0" text="Telefono del comercio" />
+                                <TableColumn fx:id="tvcIFechaUltimaActualizacion" minWidth="0.0" prefWidth="193.0" text="Fecha de última actualización" />
                             </columns>
                         </TableView>
                     </children>
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Label fx:id="lblFiltrar" layoutX="28.0" layoutY="41.0" text="Filtrar la información según:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <DatePicker fx:id="dtFechaDesde" layoutX="251.0" layoutY="128.0" />
-        <DatePicker fx:id="dtFechaHasta" layoutX="479.0" layoutY="128.0" />
-        <Label fx:id="lblDesde" layoutX="311.0" layoutY="96.0" prefHeight="16.0" prefWidth="54.0" text="Desde:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <Label fx:id="lblHasta" layoutX="539.0" layoutY="93.0" prefHeight="16.0" prefWidth="54.0" text="Hasta:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <Label fx:id="lblFecha" layoutX="421.0" layoutY="79.0" prefHeight="16.0" prefWidth="70.0" text="Por fecha:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-        <JFXButton fx:id="btnVisualizarInformacion" buttonType="RAISED" layoutX="676.0" layoutY="130.0" onAction="#OnActionbtnVisualizarInformacion" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Ver Información con filtros">
-            <font>
-                <Font name="Times New Roman" size="12.0" />
-            </font>
-        </JFXButton>
-        <JFXButton fx:id="btnVisualizarInformacionsinfiltros" buttonType="RAISED" layoutX="670.0" layoutY="65.0" onAction="#OnActionbtnVisualizarInformacionsinfiltros" prefHeight="44.0" prefWidth="161.0" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Ver toda la información &#10;sin filtros" textAlignment="CENTER">
-            <font>
-                <Font name="Times New Roman" size="12.0" />
-            </font>
-        </JFXButton>
-        <JFXRadioButton fx:id="rbPagados" layoutX="36.0" layoutY="132.0" onAction="#OnActionrbPagados" text="Pagados">
-            <toggleGroup>
-                <ToggleGroup fx:id="Estado" />
-            </toggleGroup>
-        </JFXRadioButton>
-        <JFXRadioButton fx:id="rbSinPagar" layoutX="127.0" layoutY="132.0" onAction="#OnActionrbSinPagar" text="Sin Pagar" toggleGroup="$Estado" />
-        <Label fx:id="lblEstado" layoutX="64.0" layoutY="79.0" prefHeight="16.0" prefWidth="125.0" text="Por estado del cobro:">
-            <font>
-                <Font name="Times New Roman" size="14.0" />
-            </font>
-        </Label>
-      <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="676.0" layoutY="24.0" onAction="#OnActionbtnGenerarReporte" prefHeight="25.0" prefWidth="149.0" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte" textAlignment="CENTER">
+      <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="662.0" layoutY="29.0" onAction="#OnActionbtnGenerarReporte" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte">
          <font>
-            <Font name="Times New Roman" size="12.0" />
+            <Font name="Times New Roman" size="14.0" />
          </font>
       </JFXButton>
+      <Label layoutX="116.0" layoutY="39.0" text="Información de todas las licencias comerciales">
+         <font>
+            <Font name="Times New Roman" size="15.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

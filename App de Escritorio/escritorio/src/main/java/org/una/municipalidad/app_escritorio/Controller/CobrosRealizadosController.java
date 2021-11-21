@@ -42,7 +42,8 @@ public class CobrosRealizadosController extends Controller implements Initializa
     public DatePicker dtFechaHasta;
     String estado;
     private ObservableList<CobrosDTO> cobrosRealizadoslist = FXCollections.observableArrayList();
-
+    private String  ArrayCobro[] ={"id","cobrosPeriodo","cobrosMonto","cobrosFechaCreacion","cobrosFechaVencimiento","Estado","cobrosFechaPago",
+            "licenciacomerciales","facturas","tipocobros","localesmercado","propiedades"};
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,6 +65,7 @@ public class CobrosRealizadosController extends Controller implements Initializa
             }
             this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
         }
+
         System.out.print(cobro);
         LlenarTabla();
 
@@ -86,6 +88,9 @@ public class CobrosRealizadosController extends Controller implements Initializa
     }
 
     public void OnActionbtnVisualizarInformacionsinfiltros(ActionEvent actionEvent) {
+        for ( int i = 0; i< Tview_CobrosLista.getItems().size(); i++) {
+            Tview_CobrosLista.getItems().clear();
+        }
         IniciarDatos();
 
     }
@@ -113,7 +118,10 @@ public class CobrosRealizadosController extends Controller implements Initializa
         estado="Pagado";
     }
 
+    @SneakyThrows
     public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
-
+        if(getHola()==10) {
+            CrearReporte(Tview_CobrosLista, ArrayCobro, ArrayCobro.length, "Cobros", cobrosRealizadoslist);
+        }
     }
 }
