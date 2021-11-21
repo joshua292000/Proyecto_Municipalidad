@@ -89,7 +89,7 @@ public class ConsultasViewController extends Controller implements Initializable
     public void OnActionBtnReporte(ActionEvent actionEvent) {
     }
 
-    public void OnActioncbConsultas(ActionEvent actionEvent) {
+    public void OnActioncbConsultas(ActionEvent actionEvent)  {
         if(cbConsultas.getValue()!=null){
             if(cbConsultas.getValue().equals("Consulta por un cobro entre dos fechas")){
                 tfFechaInicio.setPromptText("Fecha Inicio (yyyy-MM-dd)");

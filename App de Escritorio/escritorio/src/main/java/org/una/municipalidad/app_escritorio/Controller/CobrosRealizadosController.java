@@ -114,4 +114,7 @@ public class CobrosRealizadosController extends Controller implements Initializa
     public void OnActionrbPagados(ActionEvent actionEvent) {
         estado="Pagado";
     }
+
+    public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
+    }
 }
