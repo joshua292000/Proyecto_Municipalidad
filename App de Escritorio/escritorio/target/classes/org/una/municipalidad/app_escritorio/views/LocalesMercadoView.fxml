@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="576.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.LocalesMercadoController">
+    <children>
+        <ScrollPane layoutY="97.0" prefHeight="479.0" prefWidth="660.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="632.0" prefWidth="1219.0">
+                    <children>
+                        <TableView fx:id="Tview_LocalesMercadoLista" prefHeight="576.0" prefWidth="1618.0">
+                            <columns>
+                                <TableColumn fx:id="tvcId" prefWidth="65.0" text="Id" />
+                        <TableColumn fx:id="tvcNombreLocal" minWidth="0.0" prefWidth="200.0" text="Nombre del local " />
+                        <TableColumn fx:id="tvcTelefonoLocal" minWidth="0.0" prefWidth="156.0" text="Teléfono del local" />
+                        <TableColumn fx:id="tvcUbicacionLocal" minWidth="0.0" prefWidth="227.0" text="Ubicación del local" />
+                                <TableColumn fx:id="tvcCorreoLocal" prefWidth="229.0" text="Correo del local" />
+                                <TableColumn fx:id="tvcMontoAlquiler" prefWidth="197.0" text="Monto del alquiler del local" />
+                                <TableColumn fx:id="tvcEstado" minWidth="0.0" prefWidth="163.0" text="Estado" />
+                        <TableColumn fx:id="tvcFechaRegistro" minWidth="0.0" prefWidth="196.0" text="Fecha de registro " />
+                        <TableColumn fx:id="tvcUltimaActualizacion" minWidth="0.0" prefWidth="183.0" text="Última actualización" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+      <Label layoutX="37.0" layoutY="40.0" text="Información de todos los locales de mercado">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="453.0" layoutY="36.0" onAction="#OnActionbtnGenerarReporte" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar reporte">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </JFXButton>
+    </children>
+</AnchorPane>

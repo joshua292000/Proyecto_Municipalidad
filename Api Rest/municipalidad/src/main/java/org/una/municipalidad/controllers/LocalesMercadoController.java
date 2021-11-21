@@ -23,6 +23,7 @@ public class LocalesMercadoController {
     @Autowired
     private LocalesMercadoService localesMercadoService;
 
+
     @GetMapping("/findByEstado/{Estado}")
     @ApiOperation(value = "Obtiene un local del mercado a partir de su estado", response = LocalesMercadoDTO.class, tags = "LocalesMercado")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")

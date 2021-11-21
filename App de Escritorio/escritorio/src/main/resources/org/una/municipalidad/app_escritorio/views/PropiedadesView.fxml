@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,7 +10,7 @@
 
 <AnchorPane prefHeight="576.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.PropiedadesController">
    <children>
-      <ScrollPane prefHeight="576.0" prefWidth="818.0">
+      <ScrollPane layoutY="78.0" prefHeight="498.0" prefWidth="818.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="2627.0">
                <children>
@@ -37,5 +39,15 @@
             </AnchorPane>
          </content>
       </ScrollPane>
+      <Label layoutX="106.0" layoutY="29.0" text="Información de todas las propiedades">
+         <font>
+            <Font name="Times New Roman" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnGenerarReporte" buttonType="RAISED" layoutX="600.0" layoutY="22.0" onAction="#OnActionbtnGenerarReporte" prefHeight="32.0" prefWidth="118.0" ripplerFill="#b9dddc" style="-fx-background-color: #28abda;" text="Generar Reporte ">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

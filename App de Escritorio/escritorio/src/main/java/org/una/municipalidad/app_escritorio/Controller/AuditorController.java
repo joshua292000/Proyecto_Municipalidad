@@ -29,23 +29,27 @@ public class AuditorController extends Controller implements Initializable {
     }
 
     public void OnActionbtnListaCobros(ActionEvent actionEvent) {
+        setHola(10);
         loadUI("CobrosRealizadosView",BorderPaneFondo);
     }
 
     public void OnActionbtnMovimientosRealizados(ActionEvent actionEvent) {
-        System.out.println("Holi");
+        setHola(11);
         loadUI("MovimientosRealizadosView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasDeclaraciones(ActionEvent actionEvent) {
-        loadUI("DeclaracionesView",BorderPaneFondo);
+        setHola(12);
+        loadUI("LocalesMercadoView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasLicenciasComerciales(ActionEvent actionEvent) {
+        setHola(13);
         loadUI("LicenciasComercialesView",BorderPaneFondo);
     }
 
     public void OnActionbtnTodasPropiedades(ActionEvent actionEvent) {
+        setHola(14);
         loadUI("PropiedadesView",BorderPaneFondo);
     }
 

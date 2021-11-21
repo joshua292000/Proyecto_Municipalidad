@@ -112,8 +112,6 @@ public class MovimientosRealizadosController extends Controller implements Initi
                 for(BitacorasDTO bitacoras:bitacora){
                     MovimientosRealizadoslist.add( new  BitacorasDTO(bitacoras.getId(), bitacoras.getBitacoraDescripcion(), bitacoras.getBitacoraTabla(),bitacoras.getBitacoraUsuario(), bitacoras.getBitacoraFecha(), bitacoras.getUsuario()));
                 }
-              //  AppContext.getInstance().delete("reporte");
-               // AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
                 this.tview_Movimientos.setItems(MovimientosRealizadoslist);
             }
             System.out.print(bitacora);
@@ -134,8 +132,6 @@ public class MovimientosRealizadosController extends Controller implements Initi
             if(bitacora!=null){
                     MovimientosRealizadoslist.add( new  BitacorasDTO(bitacora.getId(), bitacora.getBitacoraDescripcion(), bitacora.getBitacoraTabla(),bitacora.getBitacoraUsuario(), bitacora.getBitacoraFecha(), bitacora.getUsuario()));
 
-                //  AppContext.getInstance().delete("reporte");
-                //AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
                 this.tview_Movimientos.setItems(MovimientosRealizadoslist);
             }
             System.out.print(bitacora);

@@ -100,8 +100,6 @@ public class CobrosRealizadosController extends Controller implements Initializa
             for(CobrosDTO cobros:cobro){
                 cobrosRealizadoslist.add(new CobrosDTO(cobros.getId(), cobros.getCobrosPeriodo(), cobros.getCobrosMonto(), cobros.getCobrosFechaCreacion(), cobros.getCobrosFechaVencimiento(), cobros.getEstado(), cobros.getCobrosFechaPago(), cobros.getLicenciascomerciales(), cobros.getFacturas(), cobros.getTipocobros(), cobros.getLocalesmercado(), cobros.getPropiedades()));
             }
-            //  AppContext.getInstance().delete("reporte");
-            // AppContext.getInstance().set("reporte", MovimientosRealizadoslist);
             this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
         }
 
@@ -116,5 +114,6 @@ public class CobrosRealizadosController extends Controller implements Initializa
     }
 
     public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
+
     }
 }

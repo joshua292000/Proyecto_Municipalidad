@@ -201,6 +201,21 @@ public abstract class Controller {
                         if(getHola()==9){
                             row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
                         }
+                        if(getHola()==10){
+                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                        }
+                        if(getHola()==11){
+                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                        }
+                        if(getHola()==12){
+                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                        }
+                        if(getHola()==13){
+                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                        }
+                        if(getHola()==14){
+                            row.createCell(j).setCellValue(StringParametros(hola,i-1)[j]);
+                        }
 
                     }
                 }
