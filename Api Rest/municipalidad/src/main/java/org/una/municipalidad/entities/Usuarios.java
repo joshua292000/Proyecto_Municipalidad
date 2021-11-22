@@ -32,7 +32,7 @@ public class Usuarios implements Serializable{
     @JoinColumn(name="roles_id")
     private Roles roles;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarios")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     @Builder.Default
     private List<BitacoraCambios> bitacoraCambios = new ArrayList<>();
 

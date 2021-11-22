@@ -968,4 +968,45 @@ public class ConsultasGestorService {
         }
         return cobro;
     }
+
+    public static BitacorasDTO CrearRegistro(String bitacoraTabla, String bitacoraDescripcion, String bitacoraUsuario, LocalDate bitacoraFecha, Long usuarioId) throws IOException, InterruptedException {
+
+        BitacorasDTO bitacora = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"bitacoraTabla\":\"" )
+                .append(bitacoraTabla)
+                .append("\",")
+                .append("\"bitacoraDescripcion\":\"" )
+                .append(bitacoraDescripcion)
+                .append("\",")
+                .append("\"bitacoraUsuario\":\"" )
+                .append(bitacoraUsuario)
+                .append("\",")
+                .append("\"bitacoraFecha\":\"" )
+                .append(bitacoraFecha)
+                .append("\",")
+                .append("\"usuario\":{" )
+                .append("\"id\":\"" )
+                .append(usuarioId)
+                .append("\"}")
+                .append("}").toString();
+        System.out.println("jsonprove "+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/bitacora/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status "+response.statusCode());
+
+        bitacora = mapper.readValue(response.body(), new TypeReference<BitacorasDTO>() {});
+
+        return bitacora;
+
+    }
 }

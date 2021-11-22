@@ -15,14 +15,14 @@ import java.util.Optional;
 public interface BitacoraRepository extends JpaRepository<BitacoraCambios, Long> {
     public Optional<BitacoraCambios> findByBitacoraTabla(String bitacoraTabla);
     public Optional<BitacoraCambios> findByBitacoraDescripcion(String bitacoraDescripcion);
-    @Query(value = "SELECT u FROM BitacoraCambios u JOIN u.usuarios  c WHERE " +
+    @Query(value = "SELECT u FROM BitacoraCambios u JOIN u.usuario  c WHERE " +
             "  c.id=:idUsuario AND u.bitacoraFecha >= :startDate AND u.bitacoraFecha <= :endDate")
     public List<BitacoraCambios> findByIdBetweenFecha(@Param("idUsuario")Long id, @Param("startDate") Date startDate,
                                                                           @Param("endDate")Date endDate);
     @Query(value = "SELECT u FROM BitacoraCambios u WHERE u.bitacoraFecha >= :startDate AND u.bitacoraFecha <= :endDate")
     public List<BitacoraCambios> findByBitacoraCambiosBetweenFecha(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
 
-    @Query(value = "SELECT u FROM BitacoraCambios u JOIN u.usuarios  c WHERE " +
+    @Query(value = "SELECT u FROM BitacoraCambios u JOIN u.usuario  c WHERE " +
             "  c.id=:idUsuario")
     public Optional<BitacoraCambios> findByIdUsuario(@Param("idUsuario")Long id);
 }

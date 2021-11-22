@@ -18,9 +18,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.LocalesMercadoDTO;
 import org.una.municipalidad.app_escritorio.DTO.PropiedadesDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import javax.swing.*;
@@ -204,6 +207,7 @@ public class IngresarPropiedadController extends Controller implements Initializ
                     PropiedadesDTO propiedad = ConsultasGestorService.CrearPropiedad(options.get(x).getPropiedadProvincia(), options.get(x).getPropiedadCanton(), options.get(x).getPropiedadDistrito(), options.get(x).getPropiedadDireccion(), options.get(x).getPropiedadGeolocalizacion(), options.get(x).getPropiedadArea(), options.get(x).getPropiedadPlano(), options.get(x).getPropiedadAMetrosFrente(), options.get(x).getPropiedadValorTerreno(), options.get(x).getPropiedadValorConstruccion(), options.get(x).getPropiedadOtrosValores(), options.get(x).isPerteneceEstado(), options.get(x).getPropiedadZona(), Estado, fechaRegistro, fechaRegistro);
                 }
                 JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
+                BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("propiedades", "Guardar una propiedad", AppContext.getInstance().get("usuario").toString(),fechaRegistro, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
                 Controller.setImpuesto(3);
                 Contador = 0;
                 ((Stage) btnInsertar.getScene().getWindow()).close();

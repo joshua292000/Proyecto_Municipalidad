@@ -1,7 +1,10 @@
 package org.una.municipalidad.app_escritorio.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.una.municipalidad.app_escritorio.DTO.AuthenticationResponse;
+import org.una.municipalidad.app_escritorio.DTO.ContribuyentesDTO;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import javax.swing.*;
@@ -19,7 +22,7 @@ public class AutenticacionService {
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-
+    public static ObservableList<AuthenticationResponse> datos = FXCollections.observableArrayList();
     private static ObjectMapper mapper = new ObjectMapper();
 
     public static AuthenticationResponse Autenticacion(String cedula, String password) throws IOException, InterruptedException {
@@ -52,7 +55,9 @@ public class AutenticacionService {
             AuthenticationResponse authenticationResponse = mapper.readValue(response.body(), AuthenticationResponse.class);
             AppContext.getInstance().set("roles", authenticationResponse.getRolDTO().getNombreRol());
             AppContext.getInstance().set("usuario", authenticationResponse.getUsuarioDTO().getNombreUsuario());
+            AppContext.getInstance().set("cedula", authenticationResponse.getUsuarioDTO().getCedula());
             AppContext.getInstance().set("rol", authenticationResponse);
+            datos.add(authenticationResponse);
             return authenticationResponse;
         }
         return null;

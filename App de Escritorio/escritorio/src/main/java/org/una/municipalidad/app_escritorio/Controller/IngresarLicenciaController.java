@@ -20,8 +20,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.ContribuyentesDTO;
 import org.una.municipalidad.app_escritorio.DTO.LicenciasComercialesDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
@@ -81,6 +83,7 @@ public class IngresarLicenciaController extends Controller implements Initializa
 
             }
             JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("licencias_comerciales", "Guardar una licencia", AppContext.getInstance().get("usuario").toString(),fechaRegistro, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             Controller.setImpuesto(1);
             ((Stage) btnInsertar.getScene().getWindow()).close();
             FlowController.getInstance().goViewInWindow("Home");

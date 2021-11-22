@@ -7,12 +7,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.Contribuyentes_Licencias_ComercialesDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ContribuyenteXLicenciaController extends Controller implements Initializable {
@@ -34,7 +38,7 @@ public class ContribuyenteXLicenciaController extends Controller implements Init
     private String cedula;
     private String nombre;
     private Long idp = Long.valueOf(0);
-
+    LocalDate bitacoraFecha = LocalDate.parse("2021-11-12");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -60,6 +64,7 @@ public class ContribuyenteXLicenciaController extends Controller implements Init
             }else{
                 Contribuyentes_Licencias_ComercialesDTO conXImp = ConsultasGestorService.CrearLicenciaComercialXContribuyente(porcentaje,ConsultasGestorService.ObtenerContribuyente(cedula),ConsultasGestorService.ObtenerLicenciaNombre(sacarNombre(nombre)));
                 JOptionPane.showMessageDialog(null, "Guardado exitoso");
+                BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("contribuyentes_licencias_comerciales", "Guardar una licencia con un contribuyente", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
                 txtPorcentaje.clear();
                 txtContribuyente.clear();
                 txtLicencia.clear();

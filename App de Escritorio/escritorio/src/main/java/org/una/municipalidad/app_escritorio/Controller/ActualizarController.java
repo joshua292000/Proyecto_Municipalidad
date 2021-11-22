@@ -13,11 +13,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.BooleanStringConverter;
 import javafx.util.converter.LongStringConverter;
-import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
-import org.una.municipalidad.app_escritorio.DTO.LicenciasComercialesDTO;
-import org.una.municipalidad.app_escritorio.DTO.LocalesMercadoDTO;
-import org.una.municipalidad.app_escritorio.DTO.PropiedadesDTO;
+import org.una.municipalidad.app_escritorio.DTO.*;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -216,6 +215,7 @@ public class ActualizarController extends Controller implements Initializable {
     private ObservableList<PropiedadesDTO> listaPropiedades = FXCollections.observableArrayList();
     private String Estado = "Pagado";
     private String TipoImpuesto;
+    LocalDate bitacoraFecha = LocalDate.parse("2021-11-12");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tipo.add("Licencia Comercial");
@@ -245,6 +245,7 @@ public class ActualizarController extends Controller implements Initializable {
                 LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(licenciaSeleccionada.getId(), licenciaSeleccionada.getNombreComercio(), licenciaSeleccionada.getTelefonoComercio(), licenciaSeleccionada.getCorreoComercio(), licenciaSeleccionada.getDistritoComercio(), fechaRegistro, fechaRegistro, licenciaSeleccionada.getCodigoComercio(), licenciaSeleccionada.getEstado());
             }
             JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("licencias_comerciales", "Actualizacion de una licencia", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         }
         else if(TipoIm1=="Local") {
             List<LocalesMercadoDTO> filaSeleccionada =  tablaLocales.getSelectionModel().getSelectedItems();
@@ -253,6 +254,8 @@ public class ActualizarController extends Controller implements Initializable {
                 LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(localSeleccionado.getId(),localSeleccionado.getNombreLocal(),localSeleccionado.getUbicacionLocal(),localSeleccionado.getCorreoLocal(),localSeleccionado.getTelefonoLocal(),localSeleccionado.getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,localSeleccionado.getEstado());
             }
             JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("locales_mercado", "Actualizacion de un local de mercado", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+
         }
         else if(TipoIm1=="Propiedad") {
             List<PropiedadesDTO> filaSeleccionada =  tablaPropiedades.getSelectionModel().getSelectedItems();
@@ -264,6 +267,8 @@ public class ActualizarController extends Controller implements Initializable {
                         propiedadSeleccionada.getPropiedadOtrosValores(),propiedadSeleccionada.isPerteneceEstado(),propiedadSeleccionada.getPropiedadZona(),propiedadSeleccionada.getEstado(),fechaRegistro,fechaRegistro);
             }
             JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("propiedades", "Actualizacion de una propiedad", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+
         }
     }
 
@@ -285,6 +290,8 @@ public class ActualizarController extends Controller implements Initializable {
                         listaLicencia.add(new LicenciasComercialesDTO(licencias.getId(),licencias.getNombreComercio(),licencias.getTelefonoComercio(),licencias.getCorreoComercio(),licencias.getDistritoComercio(),licencias.getFechaRegistrocomercio(),licencias.getUltima_Actualizacioncomercio(),licencias.getCodigoComercio(),licencias.getEstado()));
                     }
                     this.tablaLicencia.setItems(listaLicencia);
+                    BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("licencias_comerciales", "Busqueda de una licencia", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+
                     txtCedula.clear();
                 }
 
@@ -295,6 +302,8 @@ public class ActualizarController extends Controller implements Initializable {
                         listaLocales.add(new LocalesMercadoDTO(locales.getId(),locales.getNombreLocal(),locales.getUbicacionLocal(),locales.getCorreoLocal(),locales.getTelefonoLocal(),locales.getMonto_Alquiler_Local(),locales.getFechaRegistrolocal(),locales.getUltima_Actualizacionlocal(),locales.getEstado()));
                     }
                     this.tablaLocales.setItems(listaLocales);
+                    BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("locales_mercado", "Busqueda de un local de mercado", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+
                     txtCedula.clear();
                 }
             }else if(TipoIm1=="Propiedad"){
@@ -308,6 +317,8 @@ public class ActualizarController extends Controller implements Initializable {
                                 propiedades.getPropiedad_ultima_Actualizacion()));
                     }
                     this.tablaPropiedades.setItems(listaPropiedades);
+                    BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("propiedades", "Busqueda de una propiedad", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+
                     txtCedula.clear();
                 }
             }else if(TipoIm1=="Cobros"){
@@ -343,7 +354,7 @@ public class ActualizarController extends Controller implements Initializable {
                         txtCedula.clear();
                     }
                 }
-
+                BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("cobros", "Busqueda de un cobro", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             }
         }
     }
@@ -356,6 +367,7 @@ public class ActualizarController extends Controller implements Initializable {
                 LicenciasComercialesDTO licencia = ConsultasGestorService.ActualizarLicenciaComercial(licenciaSeleccionada.getId(), licenciaSeleccionada.getNombreComercio(), licenciaSeleccionada.getTelefonoComercio(), licenciaSeleccionada.getCorreoComercio(),licenciaSeleccionada.getDistritoComercio(), fechaRegistro, fechaRegistro, licenciaSeleccionada.getCodigoComercio(), SolicitarEliminar);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar ");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("licencias_comerciales", "Licencia enviada a eliminar", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             tablaLicencia.getItems().clear();
         }
         else if(TipoIm1=="Local") {
@@ -365,6 +377,7 @@ public class ActualizarController extends Controller implements Initializable {
                 LocalesMercadoDTO local = ConsultasGestorService.ActualizarLocalMercado(localSeleccionado.getId(),localSeleccionado.getNombreLocal(),localSeleccionado.getUbicacionLocal(),localSeleccionado.getCorreoLocal(),localSeleccionado.getTelefonoLocal(),localSeleccionado.getMonto_Alquiler_Local(),fechaRegistro,fechaRegistro,SolicitarEliminar);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("locales_mercado", "Local enviado a eliminar", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             tablaLocales.getItems().clear();
         }
         else if(TipoIm1=="Propiedad") {
@@ -378,6 +391,7 @@ public class ActualizarController extends Controller implements Initializable {
                         propiedadSeleccionada.getPropiedadOtrosValores(), propiedadSeleccionada.isPerteneceEstado(), propiedadSeleccionada.getPropiedadZona(), SolicitarEliminar, fechaRegistro, fechaRegistro);
             }
             JOptionPane.showMessageDialog(null, "Archivo enviado correctamente a eliminar");
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("propiedades", "propiedad enviada a eliminar", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             tablaPropiedades.getItems().clear();
         }
         else if(TipoIm1=="Cobros") {
@@ -412,7 +426,8 @@ public class ActualizarController extends Controller implements Initializable {
 
             }
             tablaCobros.getItems().clear();
-           }
+            BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("cobros", "cobro enviado a eliminar", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+        }
 
     }
 

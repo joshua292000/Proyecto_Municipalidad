@@ -12,12 +12,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.ContribuyentesDTO;
+import org.una.municipalidad.app_escritorio.DTO.UsuariosDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class IngresarContribuyenteController extends Controller implements Initializable {
@@ -63,6 +69,7 @@ public class IngresarContribuyenteController extends Controller implements Initi
     private ObservableList<ContribuyentesDTO> options = FXCollections.observableArrayList();
     private ObservableList<String> options2 = FXCollections.observableArrayList();
     String[] opcionemss1 = {"OK"};
+    LocalDate bitacoraFecha = LocalDate.parse("2021-11-12");
     private int j = 0;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,6 +93,7 @@ public class IngresarContribuyenteController extends Controller implements Initi
             if(contribuyente!=null){
                     options.add(new ContribuyentesDTO(contribuyente.getId(),contribuyente.getNombreContribuyente(),contribuyente.getApellidoContribuyente(),contribuyente.getCedulaContribuyente()));
                 this.TablaContribuyente.setItems(options);
+                BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Contribuyente", "Buscar un contribuyente", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             }
         }
         txtCedula.clear();
@@ -115,6 +123,7 @@ public class IngresarContribuyenteController extends Controller implements Initi
             ContribuyentesDTO contribuyente = ConsultasGestorService.CrearContribuyente(options.get(x).getApellidoContribuyente(),options.get(x).getCedulaContribuyente(),options.get(x).getNombreContribuyente());
         }
         JOptionPane.showMessageDialog(null,"Archivo guardado correctamente");
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Contribuyente", "Guardar un contribuyente", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         TablaContribuyente.getItems().clear();
     }
     public void LlenarTabla() {

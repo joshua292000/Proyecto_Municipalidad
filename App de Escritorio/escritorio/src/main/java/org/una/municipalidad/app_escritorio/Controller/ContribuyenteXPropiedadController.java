@@ -5,12 +5,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.Contribuyentes_PropiedadesDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ContribuyenteXPropiedadController extends Controller implements Initializable {
@@ -31,7 +35,7 @@ public class ContribuyenteXPropiedadController extends Controller implements Ini
     private String cedula;
     private String nombre;
     private Long idp = Long.valueOf(0);
-
+    LocalDate bitacoraFecha = LocalDate.parse("2021-11-12");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -57,6 +61,7 @@ public class ContribuyenteXPropiedadController extends Controller implements Ini
             }else{
                 Contribuyentes_PropiedadesDTO conXImp = ConsultasGestorService.CrearPropiedadXContribuyente(porcentaje,ConsultasGestorService.ObtenerContribuyente(cedula),ConsultasGestorService.ObtenerIdPropiedad(idp));
                 JOptionPane.showMessageDialog(null, "Guardado exitoso");
+                BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("contribuyentes_propiedades", "Guardar una propiedad con un contribuyente", AppContext.getInstance().get("usuario").toString(),bitacoraFecha, AutenticacionService.datos.get(0).getUsuarioDTO().getId());
                 txtPorcentajeP.clear();
                 txtCedulaP.clear();
                 txtId.clear();
