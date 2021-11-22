@@ -13,8 +13,11 @@ import lombok.SneakyThrows;
 import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
 import org.una.municipalidad.app_escritorio.DTO.UsuariosDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceAuditor;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.io.IOException;
 import java.net.URL;
@@ -65,7 +68,7 @@ public class CobrosRealizadosController extends Controller implements Initializa
             }
             this.Tview_CobrosLista.setItems(cobrosRealizadoslist);
         }
-
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Cobros", "Se visualizó la información de la tabla cobros", AppContext.getInstance().get("usuario").toString(),Controller.getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         System.out.print(cobro);
         LlenarTabla();
 

@@ -24,7 +24,7 @@ public class BitacoraController {
     private BitacorasService bitacoraService;
 
     @GetMapping()
-    @ApiOperation(value = "Obtiene una lista de todas las Licencias Comerciales.", response = BitacorasDTO.class, responseContainer = "List", tags = "Bitacora")
+    @ApiOperation(value = "Obtiene una lista de todos los movimientos.", response = BitacorasDTO.class, responseContainer = "List", tags = "Bitacora")
     @PreAuthorize("hasRole('GERENTE') or hasRole('AUDITOR')")
     public @ResponseBody
     ResponseEntity<?> findAll() {
@@ -59,6 +59,7 @@ public class BitacoraController {
 
     @GetMapping("/findByIdBetweenFecha/{idUsuario}/{startDate}/{endDate}")
     @ApiOperation(value = "Obtiene una lista de movimientos realizados de acuerdo al id de un usuario y dos fechas dadas", response = BitacorasDTO.class, responseContainer = "BitacorasDTO", tags = "Bitacora")
+    @PreAuthorize("hasRole('AUDITOR')")
     public ResponseEntity<?> findByIdBetweenFecha(@PathVariable(value = "idUsuario") Long id, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         try {
             Optional<List<BitacorasDTO>> result = bitacoraService.findByIdBetweenFecha(id,startDate,endDate);
@@ -91,7 +92,7 @@ public class BitacoraController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE') or hasRole('AUDITOR') or hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> create(@RequestBody BitacorasDTO bitacoraDTO) {
         try {
             Optional<BitacorasDTO> bitacoraCreated = bitacoraService.create(bitacoraDTO);
@@ -105,7 +106,7 @@ public class BitacoraController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = BitacorasDTO.class, tags = "Bitacora")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE') or hasRole('AUDITOR') or hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BitacorasDTO bitacoraModified) {
         Optional<BitacorasDTO> bitacoraUpdated = bitacoraService.update(bitacoraModified, id);
         return new ResponseEntity<>(bitacoraUpdated, HttpStatus.OK);
