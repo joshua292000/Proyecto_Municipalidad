@@ -7,6 +7,7 @@ import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.Mensaje;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -59,6 +60,12 @@ public class ConsultasServiceGerente {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
         System.out.print("cobro "+cobro);
+        System.out.print("cobro "+cobro.size());
+        if(cobro.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+        }else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         return cobro;
     }
 
@@ -76,6 +83,11 @@ public class ConsultasServiceGerente {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         cobro = mapper.readValue(response.body(), new TypeReference<List<CobrosDTO>>() {});
         System.out.print("cobro "+cobro);
+        if(cobro.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros entre estas fechas "+ inicio+" y "+fin);
+        }else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         return cobro;
     }
     public static List<ContribuyentesDTO> obtenerTodoContribuyente() throws IOException, InterruptedException {
@@ -134,6 +146,11 @@ public class ConsultasServiceGerente {
         }else{
             LicenciasComerciales = mapper.readValue(response.body(), new TypeReference<List<LicenciasComercialesDTO>>() {});
         }
+        if(LicenciasComerciales.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+        }else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         System.out.print("LicenciasComerciales "+LicenciasComerciales);
         return LicenciasComerciales;
     }
@@ -178,6 +195,11 @@ public class ConsultasServiceGerente {
             LocalesMercado = mapper.readValue(response.body(), new TypeReference<List<LocalesMercadoDTO>>() {});
         }
         System.out.print("LocalesMercado "+LocalesMercado);
+        if(LocalesMercado.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+        }else{
+            JOptionPane.showMessageDialog(null,"Registro localizado con éxito");
+        }
         return LocalesMercado;
     }
 
@@ -219,6 +241,11 @@ public class ConsultasServiceGerente {
             Propiedades = mapper.readValue(response.body(), new TypeReference<List<PropiedadesDTO>>() {});
         }
         System.out.print("Propiedades "+Propiedades);
+        if(Propiedades.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+        }else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         return Propiedades;
     }
 
@@ -311,6 +338,12 @@ public class ConsultasServiceGerente {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         para = mapper.readValue(response.body(), new TypeReference<List<ParametrosDTO>>() {});
         System.out.print("cobro "+para);
+        if(para.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         return para;
     }
 

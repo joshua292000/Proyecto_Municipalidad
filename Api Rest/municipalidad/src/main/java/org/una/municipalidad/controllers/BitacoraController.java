@@ -91,7 +91,7 @@ public class BitacoraController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
     public ResponseEntity<?> create(@RequestBody BitacorasDTO bitacoraDTO) {
         try {
             Optional<BitacorasDTO> bitacoraCreated = bitacoraService.create(bitacoraDTO);

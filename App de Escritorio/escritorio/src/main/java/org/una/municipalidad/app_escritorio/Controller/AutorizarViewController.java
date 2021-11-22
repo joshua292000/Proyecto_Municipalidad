@@ -7,6 +7,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +34,7 @@ public class AutorizarViewController extends Controller implements Initializable
     private MenuItem MenuCobros;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        JOptionPane.showMessageDialog(null,"Por favor escoge alguna de las opciones que se muestran en el siguiente menú");
     }
 
     @Override

@@ -14,10 +14,15 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.una.municipalidad.app_escritorio.DTO.*;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +35,15 @@ public abstract class Controller {
     private static String Parametro;
     private static String Parametro2;
 
+    public static LocalDate getBitacoraFecha() {
+        return bitacoraFecha;
+    }
+
+    public static void setBitacoraFecha(LocalDate bitacoraFecha) {
+        Controller.bitacoraFecha = bitacoraFecha;
+    }
+
+    private static LocalDate bitacoraFecha = LocalDate.parse("2021-11-12");
     public static String getParametro2() {
         return Parametro2;
     }
@@ -187,7 +201,7 @@ public abstract class Controller {
     }
 
 
-    public void CrearReporte(TableView tabAuditoriaVolumes, String array[], int tamaño, String Nombre, ObservableList hola) throws IOException {
+    public void CrearReporte(TableView tabAuditoriaVolumes, String array[], int tamaño, String Nombre, ObservableList hola) throws IOException, InterruptedException {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet spreadsheet = workbook.createSheet("sample");
@@ -253,6 +267,9 @@ public abstract class Controller {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        JOptionPane.showMessageDialog(null,"Reporte creado exitosamente");
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro(Nombre, "Creación de reporte en la tabla "+Nombre, AppContext.getInstance().get("usuario").toString(),getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+
         Runtime.getRuntime().exec("cmd /c start "+Nombre+".xls");
     }
     public static BooleanProperty _activo;

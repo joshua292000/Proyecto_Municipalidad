@@ -56,6 +56,7 @@ public class GerenteViewController extends Controller implements Initializable {
 
 
     public void OnActionBtnAutorizar(ActionEvent actionEvent) {
+
         loadUI("AutorizarView",BorderPane);
     }
 
@@ -81,7 +82,6 @@ public class GerenteViewController extends Controller implements Initializable {
 
     public void OnActionbtnConsultas(ActionEvent actionEvent) {
         loadUI("ConsultasView",BorderPane);
-        //loadUI("hola",BorderPane);
     }
 
     public void OnActionBtnCobros(ActionEvent actionEvent) {

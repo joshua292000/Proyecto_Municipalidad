@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ConsultasViewController">
+<AnchorPane prefHeight="682.0" prefWidth="1002.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ConsultasViewController">
    <children>
-      <AnchorPane prefHeight="682.0" prefWidth="1002.0" snapToPixel="false" style="-fx-background-color: #05071F;" stylesheets="@../resources/style.css">
+      <AnchorPane prefHeight="682.0" prefWidth="1002.0" snapToPixel="false" style="-fx-background-color: #05071F;" stylesheets="@../resources/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
               <BorderPane prefHeight="647.0" prefWidth="1002.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <top>
@@ -37,7 +36,7 @@
                                       <ComboBox fx:id="cbConsultas" onAction="#OnActioncbConsultas" prefWidth="150.0" promptText="Consultas" />
                                       <JFXTextField fx:id="tfFechaInicio" focusColor="WHITE" labelFloat="true" promptText="Fecha Inicio" style="-fx-background-color: #B0E0E6;" />
                                       <JFXTextField fx:id="tfFechaFin" focusColor="#eeeeee" labelFloat="true" promptText="Fecha Fin" style="-fx-background-color: #B0E0E6;" />
-                                      <Button fx:id="btnConsulta" mnemonicParsing="false" onAction="#OnActionBtnConsulta" prefHeight="31.0" prefWidth="144.0" text="Realizar Consulta" />
+                              <JFXButton fx:id="btnConsulta" onAction="#OnActionBtnConsulta" style="-fx-background-color: #28abda;" text="Realizar Consulta" />
                                   </children>
                                   <padding>
                                       <Insets left="50.0" />

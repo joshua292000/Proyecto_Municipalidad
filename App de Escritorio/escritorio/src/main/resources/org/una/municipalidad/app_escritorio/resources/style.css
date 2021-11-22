@@ -10,7 +10,9 @@
 {
 -fx-background-color : #1620A1;
 }
-
+#btnGenerar, #btnEliminar, #btnConsulta{
+-fx-text-fill : black;
+}
 .scroll-pane {
     -fx-background-color: #02030A;
 }
