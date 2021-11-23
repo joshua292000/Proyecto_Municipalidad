@@ -217,7 +217,7 @@ public abstract class Controller {
         HSSFSheet spreadsheet = workbook.createSheet("sample");
 
         HSSFRow row = null;
-        for (int i = 0; i <= tabAuditoriaVolumes.getItems().size(); i++) {
+        for (int i = 0; i < tabAuditoriaVolumes.getItems().size(); i++) {
             row = spreadsheet.createRow(i);
             for (int j = 0; j < tabAuditoriaVolumes.getColumns().size(); j++) {
                 if(j<tamaño){

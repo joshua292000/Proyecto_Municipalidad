@@ -1,11 +1,14 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
+import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +19,7 @@ public class AuditorController extends Controller implements Initializable {
     public VBox vboxFondo;
     public Label lblUsuario;
     public Label lblRol;
+    public JFXButton btnCerrarSesion;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,4 +57,8 @@ public class AuditorController extends Controller implements Initializable {
         loadUI("PropiedadesView",BorderPaneFondo);
     }
 
+    public void OnActionbtnCerrarSesion(ActionEvent actionEvent) {
+        ((Stage) btnCerrarSesion.getScene().getWindow()).close();
+        FlowController.getInstance().goViewInWindow("Loggin");
+    }
 }
