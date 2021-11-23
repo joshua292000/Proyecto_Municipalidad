@@ -48,8 +48,8 @@ public class FechasCobrosController {
     @ApiOperation(value = "Actualiza por medio del id", response = FechasCobrosDTO.class, tags = "FechasCobros")
     @ResponseBody
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FechasCobrosDTO cobrosModified) {
-        Optional<FechasCobrosDTO> cobrosUpdated = fechascobrosService.update(cobrosModified, id);
-        return new ResponseEntity<>(cobrosUpdated, HttpStatus.OK);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FechasCobrosDTO fechacobrosModified) {
+        Optional<FechasCobrosDTO> fechacobrosUpdated = fechascobrosService.update(fechacobrosModified, id);
+        return new ResponseEntity<>(fechacobrosUpdated, HttpStatus.OK);
     }
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 public class FechasCobrosDTO {
     private Long id;
     private String FechasCobrosImpuestos;
-    private int FechasCobrosPeriodo;
+    private Long FechasCobrosPeriodo;
     private Date FechasCobrosFecha1;
     private Date FechasCobrosFecha2;
     private Date FechasCobrosFecha3;
