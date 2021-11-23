@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.GerenteViewController">
    <children>
       <BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1154.0" style="-fx-background-color: #02030A;" stylesheets="@../resources/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -30,7 +29,8 @@
                               <Image url="@../resources/User_Avatar_2.png" />
                           </image>
                       </ImageView>
-                      <Label alignment="CENTER" contentDisplay="CENTER" text="Usuario" textFill="WHITE" />
+                  <Label fx:id="lbRol" text="Label" textFill="#fffbfb" />
+                      <Label fx:id="lbNombreUsuario" alignment="CENTER" contentDisplay="CENTER" text="Usuario" textFill="WHITE" />
                       <HBox alignment="CENTER" prefHeight="62.0" prefWidth="132.0">
                           <children>
                               <ImageView fx:id="imgCobros" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">

@@ -351,12 +351,15 @@ public class ConsultasServiceGerente {
         return para;
     }
 
-    public static CobrosDTO CrearCobrosMasivosxpropiedad() throws IOException, InterruptedException {
+    public static CobrosDTO CrearCobrosMasivosxpropiedad(Date fecha) throws IOException, InterruptedException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String fechaTexto1 = formatter.format(fecha);
+
         CobrosDTO cobro = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivoPropiedades"))
+                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivoPropiedades/"+fechaTexto1+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -370,12 +373,15 @@ public class ConsultasServiceGerente {
         return cobro;
     }
 
-    public static CobrosDTO CrearCobrosMasivosxLocal() throws IOException, InterruptedException {
+    public static CobrosDTO CrearCobrosMasivosxLocal(Date fecha) throws IOException, InterruptedException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String fechaTexto1 = formatter.format(fecha);
+
         CobrosDTO cobro = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivosLocales"))
+                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivosLocales/"+fechaTexto1+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -389,12 +395,15 @@ public class ConsultasServiceGerente {
         return cobro;
     }
 
-    public static CobrosDTO CrearCobrosMasivosxLicencias() throws IOException, InterruptedException {
+    public static CobrosDTO CrearCobrosMasivosxLicencias(Date fecha) throws IOException, InterruptedException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String fechaTexto1 = formatter.format(fecha);
+
         CobrosDTO cobro = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivoLicencias"))
+                .uri(URI.create("http://localhost:8089/cobros/CobrosMasivoLicencias/"+fechaTexto1+"/"))
                 .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
                 .header("Content-Type", "application/json")
                 .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -433,22 +442,56 @@ public class ConsultasServiceGerente {
 
     public static FechasCobrosDTO ActualizarFechasCobros(Long Id, String Impuesto, Long Periodo, Date fecha1,Date fecha2,Date fecha3,Date fecha4,Date fecha5,Date fecha6,Date fecha7,Date fecha8,Date fecha9,Date fecha10,Date fecha11,Date fecha12) throws IOException, InterruptedException {
 
-
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-        String fechaTexto1 = formatter.format(fecha1);
-        String fechaTexto2 = formatter.format(fecha2);
-        String fechaTexto3 = formatter.format(fecha3);
-        String fechaTexto4 = formatter.format(fecha4);
-        String fechaTexto5 = formatter.format(fecha5);
-        String fechaTexto6 = formatter.format(fecha6);
-        String fechaTexto7 = formatter.format(fecha7);
-        String fechaTexto8 = formatter.format(fecha8);
-        String fechaTexto9 = formatter.format(fecha9);
-        String fechaTexto10 = formatter.format(fecha10);
-        String fechaTexto11 = formatter.format(fecha11);
-        String fechaTexto12 = formatter.format(fecha12);
+        String fechaTexto1 = null;
+        String fechaTexto2 = null;
+        String fechaTexto3 = null;
+        String fechaTexto4 = null;
+        String fechaTexto5 = null;
+        String fechaTexto6 = null;
+        String fechaTexto7 = null;
+        String fechaTexto8 = null;
+        String fechaTexto9 = null;
+        String fechaTexto10 = null;
+        String fechaTexto11 = null;
+        String fechaTexto12 = null;
 
-
+        if(fecha1!=null){
+            fechaTexto1  = formatter.format(fecha1);
+        }
+        if(fecha2!=null){
+            fechaTexto2  = formatter.format(fecha2);
+        }
+        if(fecha3!=null){
+            fechaTexto3  = formatter.format(fecha3);
+        }
+        if(fecha4!=null){
+            fechaTexto4  = formatter.format(fecha4);
+        }
+        if(fecha5!=null){
+            fechaTexto5  = formatter.format(fecha5);
+        }
+        if(fecha6!=null){
+            fechaTexto6  = formatter.format(fecha6);
+        }
+        if(fecha7!=null){
+            fechaTexto6  = formatter.format(fecha7);
+        }
+        if(fecha8!=null){
+            fechaTexto8  = formatter.format(fecha8);
+        }
+        if(fecha9!=null){
+            fechaTexto9  = formatter.format(fecha9);
+        }
+        if(fecha10!=null){
+            fechaTexto10  = formatter.format(fecha10);
+        }
+        if(fecha11!=null){
+            fechaTexto11  = formatter.format(fecha11);
+        }
+        if(fecha12!=null){
+            fechaTexto12  = formatter.format(fecha12);
+        }
 
         FechasCobrosDTO fecha;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");

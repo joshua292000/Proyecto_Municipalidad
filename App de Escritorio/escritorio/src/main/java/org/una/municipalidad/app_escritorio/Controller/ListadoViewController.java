@@ -273,7 +273,7 @@ public class ListadoViewController extends Controller implements Initializable {
         this.Col5.setCellValueFactory(new PropertyValueFactory("cobrosFechaVencimiento"));
         this.Col6.setCellValueFactory(new PropertyValueFactory("Estado"));
         this.Col7.setCellValueFactory(new PropertyValueFactory("cobrosFechaPago"));
-        this.Col8.setCellValueFactory(new PropertyValueFactory("licenciacomercial"));
+        this.Col8.setCellValueFactory(new PropertyValueFactory("licenciascomerciales"));
         this.Col9.setCellValueFactory(new PropertyValueFactory("facturas"));
         this.Col10.setCellValueFactory(new PropertyValueFactory("tipocobros"));
         this.Col11.setCellValueFactory(new PropertyValueFactory("localesmercado"));
@@ -285,7 +285,7 @@ public class ListadoViewController extends Controller implements Initializable {
         Col5.setText("cobrosFechaVencimiento");
         Col6.setText("Estado");
         Col7.setText("cobrosFechaPago");
-        Col8.setText("licenciacomercial");
+        Col8.setText("licenciascomerciales");
         Col9.setText("facturas");
         Col10.setText("tipocobros");
         Col11.setText("localesmercado");

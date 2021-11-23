@@ -16,6 +16,7 @@ import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LongStringConverter;
 import lombok.SneakyThrows;
 import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
+import org.una.municipalidad.app_escritorio.DTO.CobrosDTO;
 import org.una.municipalidad.app_escritorio.DTO.FechasCobrosDTO;
 import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
@@ -91,6 +92,8 @@ public class CobrosMasivosViewController extends Controller implements Initializ
     private TableColumn<FechasCobrosDTO, Date> Fecha_10;
 
     private ObservableList<FechasCobrosDTO> options = FXCollections.observableArrayList();
+    private ObservableList<Date> fechitas = FXCollections.observableArrayList();
+    int pantallita =0;
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -117,25 +120,83 @@ public class CobrosMasivosViewController extends Controller implements Initializ
         List<FechasCobrosDTO> filaSeleccionada =  TvFechas.getSelectionModel().getSelectedItems();
         if (filaSeleccionada.size() == 1) {
             final FechasCobrosDTO fecha = filaSeleccionada.get(0);
+
+            fechitas.add(fecha.getFechasCobrosFecha1());
+            fechitas.add(fecha.getFechasCobrosFecha2());
+            fechitas.add(fecha.getFechasCobrosFecha3());
+            fechitas.add(fecha.getFechasCobrosFecha4());
+            fechitas.add(fecha.getFechasCobrosFecha5());
+            fechitas.add(fecha.getFechasCobrosFecha6());
+            fechitas.add(fecha.getFechasCobrosFecha7());
+            fechitas.add(fecha.getFechasCobrosFecha8());
+            fechitas.add(fecha.getFechasCobrosFecha9());
+            fechitas.add(fecha.getFechasCobrosFecha10());
+            fechitas.add(fecha.getFechasCobrosFecha11());
+            fechitas.add(fecha.getFechasCobrosFecha12());
+
             FechasCobrosDTO licencia = ConsultasServiceGerente.ActualizarFechasCobros(fecha.getId(),fecha.getFechasCobrosImpuestos(),fecha.getFechasCobrosPeriodo(),fecha.getFechasCobrosFecha1(),fecha.getFechasCobrosFecha2(),fecha.getFechasCobrosFecha3(),fecha.getFechasCobrosFecha4(),fecha.getFechasCobrosFecha5(),fecha.getFechasCobrosFecha6(),fecha.getFechasCobrosFecha7(),fecha.getFechasCobrosFecha8(),fecha.getFechasCobrosFecha9(),fecha.getFechasCobrosFecha10(),fecha.getFechasCobrosFecha11(),fecha.getFechasCobrosFecha12());
+
+
+            if(fecha.getFechasCobrosImpuestos().equals("Licencia Comercial") || fecha.getFechasCobrosImpuestos().equals("Timbre Licencia")) {
+                pantallita=1;
+            }else if(fecha.getFechasCobrosImpuestos().equals("Propiedades")){
+                pantallita=2;
+            }else if(fecha.getFechasCobrosImpuestos().equals("Locales de mercado")){
+                pantallita=3;
+            }
         }
+
         JOptionPane.showMessageDialog(null, "Archivo actualizado correctamente");
         BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("FechasCobros", "Actualizacion de una fecha de cobro", AppContext.getInstance().get("usuario").toString(),getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
+        System.out.println("tiene " + pantallita);
+        if(pantallita==1){
+            for(int i =0; i<fechitas.size();i++){
+                System.out.println("hola");
+                if(fechitas.get(i)!=null) {
+                    System.out.println("hola adentro");
+                    ConsultasServiceGerente.CrearCobrosMasivosxLicencias(fechitas.get(i));
+                }
+            }
+            setHola(10);
+            loadUI("ListadoView",BorderPane);
+        } else if(pantallita==2){
+            for(int i =0; i<fechitas.size();i++){
+                if(fechitas.get(i)!=null){
+                    ConsultasServiceGerente.CrearCobrosMasivosxpropiedad(fechitas.get(i));
+                }
+            }
+            setHola(10);
+            loadUI("ListadoView",BorderPane);
+        }else if(pantallita==3){
+            System.out.println("entre");
+            for(int i =0; i<fechitas.size();i++){
+                if(fechitas.get(i)!=null) {
+                    ConsultasServiceGerente.CrearCobrosMasivosxLocal(fechitas.get(i));
+                }
+            }
+            setHola(10);
+            loadUI("ListadoView",BorderPane);
+        }
+
         /*ConsultasServiceGerente.CrearCobrosMasivosxLocal();
         setHola(10);
         loadUI("ListadoView",BorderPane);*/
     }
 
     public void OnActionBtnAnual(ActionEvent actionEvent) throws IOException, InterruptedException {
-        ConsultasServiceGerente.CrearCobrosMasivosxpropiedad();
+
+        /*for(int i =0; i<fechitas.size();i++){
+            ConsultasServiceGerente.CrearCobrosMasivosxpropiedad(fechitas.get(i));
+        }
         setHola(10);
-        loadUI("ListadoView",BorderPane);
+        loadUI("ListadoView",BorderPane);*/
     }
 
     public void OnActionbtnTrimestral(ActionEvent actionEvent) throws IOException, InterruptedException {
-        ConsultasServiceGerente.CrearCobrosMasivosxLicencias();
+        /*ConsultasServiceGerente.CrearCobrosMasivosxLicencias();
+
         setHola(10);
-        loadUI("ListadoView",BorderPane);
+        loadUI("ListadoView",BorderPane);*/
     }
 
     public void llenarTabla(){
