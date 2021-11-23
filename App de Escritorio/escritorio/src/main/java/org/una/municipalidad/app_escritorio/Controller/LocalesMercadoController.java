@@ -8,8 +8,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.LocalesMercadoDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.net.URL;
 import java.util.Date;
@@ -41,6 +45,7 @@ public class LocalesMercadoController extends Controller implements Initializabl
             }
             this.Tview_LocalesMercadoLista.setItems(LocalesMercadolist);
         }
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Locales_Mercado", "Se visualizó la información de la tabla locales comerciales", AppContext.getInstance().get("usuario").toString(),Controller.getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         System.out.print(localmercado);
         LlenarTabla();
     }

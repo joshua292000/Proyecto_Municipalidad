@@ -26,22 +26,22 @@ public class FechasCobrosServiceImplementation implements FechasCobrosService{
         return Optional.ofNullable(fechascobrosDTOList);
     }
 
-    private FechasCobrosDTO getSavedCobrosDTO(FechasCobrosDTO FechasCobrosDTO) {
-        FechasCobros cobros = MapperUtils.EntityFromDto(FechasCobrosDTO, FechasCobros.class);
-        FechasCobros cobrosCreated = fechascobrosRepository.save(cobros);
-        return MapperUtils.DtoFromEntity(cobrosCreated, FechasCobrosDTO.class);
+    private FechasCobrosDTO getSavedfechaDTO(FechasCobrosDTO fechasCobrosDTO) {
+        FechasCobros fechacobro = MapperUtils.EntityFromDto(fechasCobrosDTO, FechasCobros.class);
+        FechasCobros fechacobroCreated = fechascobrosRepository.save(fechacobro);
+        return MapperUtils.DtoFromEntity(fechacobroCreated, FechasCobrosDTO.class);
     }
 
     @Override
     @Transactional
     public Optional<FechasCobrosDTO> create(FechasCobrosDTO FechasCobrosDTO) {
-        return Optional.ofNullable(getSavedCobrosDTO(FechasCobrosDTO));
+        return Optional.ofNullable(getSavedfechaDTO(FechasCobrosDTO));
     }
 
     @Override
     @Transactional
     public Optional<FechasCobrosDTO> update(FechasCobrosDTO cobrosDTO, Long id) {
         if (fechascobrosRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(getSavedCobrosDTO(cobrosDTO));
+        return Optional.ofNullable(getSavedfechaDTO(cobrosDTO));
     }
 }

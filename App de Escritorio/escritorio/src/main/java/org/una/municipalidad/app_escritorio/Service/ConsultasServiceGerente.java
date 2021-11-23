@@ -13,8 +13,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.Temporal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -428,58 +431,76 @@ public class ConsultasServiceGerente {
         return para;
     }
 
-    public static FechasCobrosDTO ActualizarFechasCobros(Long Id, String Impuesto, Integer Periodo, Date fecha1,Date fecha2,Date fecha3,Date fecha4,Date fecha5,Date fecha6,Date fecha7,Date fecha8,Date fecha9,Date fecha10,Date fecha11,Date fecha12) throws IOException, InterruptedException {
-        FechasCobrosDTO fecha = null;
+    public static FechasCobrosDTO ActualizarFechasCobros(Long Id, String Impuesto, Long Periodo, Date fecha1,Date fecha2,Date fecha3,Date fecha4,Date fecha5,Date fecha6,Date fecha7,Date fecha8,Date fecha9,Date fecha10,Date fecha11,Date fecha12) throws IOException, InterruptedException {
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String fechaTexto1 = formatter.format(fecha1);
+        String fechaTexto2 = formatter.format(fecha2);
+        String fechaTexto3 = formatter.format(fecha3);
+        String fechaTexto4 = formatter.format(fecha4);
+        String fechaTexto5 = formatter.format(fecha5);
+        String fechaTexto6 = formatter.format(fecha6);
+        String fechaTexto7 = formatter.format(fecha7);
+        String fechaTexto8 = formatter.format(fecha8);
+        String fechaTexto9 = formatter.format(fecha9);
+        String fechaTexto10 = formatter.format(fecha10);
+        String fechaTexto11 = formatter.format(fecha11);
+        String fechaTexto12 = formatter.format(fecha12);
+
+
+
+        FechasCobrosDTO fecha;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
         String json = new StringBuilder()
                 .append("{")
                 .append("\"id\":\"" )
                 .append(Id)
                 .append("\",")
-                .append("\"FechasCobrosImpuestos\":\"" )
+                .append("\"fechasCobrosImpuestos\":\"" )
                 .append(Impuesto)
                 .append("\",")
-                .append("\"FechasCobrosPeriodo\":\"" )
+                .append("\"fechasCobrosPeriodo\":\"" )
                 .append(Periodo)
                 .append("\",")
-                .append("\"FechasCobrosFecha1\":\"" )
-                .append(fecha1)
+                .append("\"fechasCobrosFecha1\":\"" )
+                .append(fechaTexto1)
                 .append("\",")
-                .append("\"FechasCobrosFecha2\":\"" )
-                .append(fecha2)
+                .append("\"fechasCobrosFecha2\":\"" )
+                .append(fechaTexto2)
                 .append("\",")
-                .append("\"FechasCobrosFecha3\":\"" )
-                .append(fecha3)
+                .append("\"fechasCobrosFecha3\":\"" )
+                .append(fechaTexto3)
                 .append("\",")
-                .append("\"FechasCobrosFecha4\":\"" )
-                .append(fecha4)
+                .append("\"fechasCobrosFecha4\":\"" )
+                .append(fechaTexto4)
                 .append("\",")
-                .append("\"FechasCobrosFecha5\":\"" )
-                .append(fecha5)
+                .append("\"fechasCobrosFecha5\":\"" )
+                .append(fechaTexto5)
                 .append("\",")
-                .append("\"FechasCobrosFecha6\":\"" )
-                .append(fecha6)
+                .append("\"fechasCobrosFecha6\":\"" )
+                .append(fechaTexto6)
                 .append("\",")
-                .append("\"FechasCobrosFecha7\":\"" )
-                .append(fecha7)
+                .append("\"fechasCobrosFecha7\":\"" )
+                .append(fechaTexto7)
                 .append("\",")
-                .append("\"FechasCobrosFecha8\":\"" )
-                .append(fecha8)
+                .append("\"fechasCobrosFecha8\":\"" )
+                .append(fechaTexto8)
                 .append("\",")
-                .append("\"FechasCobrosFecha9\":\"" )
-                .append(fecha9)
+                .append("\"fechasCobrosFecha9\":\"" )
+                .append(fechaTexto9)
                 .append("\",")
-                .append("\"FechasCobrosFecha10\":\"" )
-                .append(fecha10)
+                .append("\"fechasCobrosFecha10\":\"" )
+                .append(fechaTexto10)
                 .append("\",")
-                .append("\"FechasCobrosFecha11\":\"" )
-                .append(fecha11)
+                .append("\"fechasCobrosFecha11\":\"" )
+                .append(fechaTexto11)
                 .append("\",")
-                .append("\"FechasCobrosFecha12\":\"" )
-                .append(fecha12)
+                .append("\"fechasCobrosFecha12\":\"" )
+                .append(fechaTexto12)
                 .append("\"")
                 .append("}").toString();
-        System.out.println("jsonprove "+json+"\n");
+        System.out.println("jsonprove fecha "+json+"\n");
         HttpRequest request = HttpRequest.newBuilder()
                 .PUT(HttpRequest.BodyPublishers.ofString(json))
                 .uri(URI.create("http://localhost:8089/fechascobros/"+Id+"/"))

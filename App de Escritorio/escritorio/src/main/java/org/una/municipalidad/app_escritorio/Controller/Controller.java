@@ -34,6 +34,8 @@ public abstract class Controller {
     private static int hola;
     @FXML
     private static int Impuesto;
+    private static int Admin;
+    private static int Pantallas;
     private static String Parametro;
     private static String Parametro2;
 
@@ -78,7 +80,21 @@ public abstract class Controller {
         Controller.Impuesto = Impuesto;
     }
 
+    public static int getAdmin() {
+        return Admin;
+    }
 
+    public static void setAdmin(int admin) {
+        Admin = admin;
+    }
+
+    public static int getPantallas() {
+        return Pantallas;
+    }
+
+    public static void setPantallas(int pantallas) {
+        Pantallas = pantallas;
+    }
 
     public String getAccion() {
         return accion;
@@ -209,7 +225,7 @@ public abstract class Controller {
         HSSFSheet spreadsheet = workbook.createSheet("sample");
 
         HSSFRow row = null;
-        for (int i = 0; i <= tabAuditoriaVolumes.getItems().size(); i++) {
+        for (int i = 0; i < tabAuditoriaVolumes.getItems().size(); i++) {
             row = spreadsheet.createRow(i);
             for (int j = 0; j < tabAuditoriaVolumes.getColumns().size(); j++) {
                 if(j<tamaño){

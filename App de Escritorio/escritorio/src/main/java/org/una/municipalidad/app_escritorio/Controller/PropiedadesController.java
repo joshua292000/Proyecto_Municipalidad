@@ -8,8 +8,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.PropiedadesDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.net.URL;
 import java.util.List;
@@ -49,6 +53,7 @@ public class PropiedadesController  extends Controller implements Initializable 
             }
             this.TviewPropiedadesLista.setItems(Propiedadeslist);
         }
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Propiedades", "Se visualizó la información de la tabla propiedades", AppContext.getInstance().get("usuario").toString(),Controller.getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         System.out.print(propiedad);
         LlenarTabla();
     }

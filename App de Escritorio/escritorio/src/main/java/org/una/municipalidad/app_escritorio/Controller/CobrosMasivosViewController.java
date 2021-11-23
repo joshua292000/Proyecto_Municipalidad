@@ -13,6 +13,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.LongStringConverter;
 import lombok.SneakyThrows;
 import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.FechasCobrosDTO;
@@ -60,7 +61,7 @@ public class CobrosMasivosViewController extends Controller implements Initializ
     private TableView TvFechas;
 
     @FXML
-    private TableColumn<FechasCobrosDTO,Integer> Periodo;
+    private TableColumn<FechasCobrosDTO, Long> Periodo;
 
     @FXML
     private JFXButton btnTrimestral;
@@ -94,6 +95,7 @@ public class CobrosMasivosViewController extends Controller implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<FechasCobrosDTO> cobro = ConsultasServiceGerente.obtenerTodoFechaCobros();
+        System.out.println("picha " +cobro);
         if (cobro != null) {
             for (FechasCobrosDTO cobros : cobro) {
                 options.add(new FechasCobrosDTO(cobros.getId(), cobros.getFechasCobrosImpuestos(), cobros.getFechasCobrosPeriodo(), cobros.getFechasCobrosFecha1(), cobros.getFechasCobrosFecha2(), cobros.getFechasCobrosFecha3(), cobros.getFechasCobrosFecha4(), cobros.getFechasCobrosFecha5(), cobros.getFechasCobrosFecha6(), cobros.getFechasCobrosFecha7(), cobros.getFechasCobrosFecha8(), cobros.getFechasCobrosFecha9(),cobros.getFechasCobrosFecha10(),cobros.getFechasCobrosFecha11(),cobros.getFechasCobrosFecha12()));
@@ -140,12 +142,13 @@ public class CobrosMasivosViewController extends Controller implements Initializ
         TvFechas.setEditable(true);
         this.ID.setCellValueFactory(new PropertyValueFactory("id"));
         this.ColImpuesto.setCellValueFactory(new PropertyValueFactory("FechasCobrosImpuestos"));
+
         this.Periodo.setCellValueFactory(new PropertyValueFactory("FechasCobrosPeriodo"));
-        this.Periodo.setCellFactory(TextFieldTableCell.<FechasCobrosDTO,Integer>forTableColumn(new IntegerStringConverter()));
+        this.Periodo.setCellFactory(TextFieldTableCell.<FechasCobrosDTO,Long>forTableColumn(new LongStringConverter()));
         this.Periodo.setOnEditCommit(
                 data->{
                     FechasCobrosDTO con = data.getRowValue();
-                    con.setFechasCobrosPeriodo(data.getNewValue());
+                    con.setFechasCobrosPeriodo(Long.valueOf(data.getNewValue()));
                     System.out.println(con);
                 }
         );
