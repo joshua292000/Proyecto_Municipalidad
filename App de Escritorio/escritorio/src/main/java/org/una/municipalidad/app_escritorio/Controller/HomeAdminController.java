@@ -44,6 +44,9 @@ public class HomeAdminController extends Controller implements Initializable {
     @FXML
     private Button btnCerrarSesion;
 
+    @FXML
+    private Button btnDesarrollo;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         vbxMenuIzq.setPrefWidth(20);
@@ -69,7 +72,6 @@ public class HomeAdminController extends Controller implements Initializable {
             pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
-            System.out.println("ober");
             Node[] nodes = new Node[1];
             try {
                 nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/AutorizarRoles.fxml"));
@@ -83,10 +85,21 @@ public class HomeAdminController extends Controller implements Initializable {
             pnItems.getChildren().clear();
             pnlOverview.setStyle("-fx-background-color : #02030A");
             pnlOverview.toFront();
-            System.out.println("ober");
             Node[] nodes = new Node[1];
             try {
                 nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/CrearParametros.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (actionEvent.getSource() == btnDesarrollo) {
+            pnItems.getChildren().clear();
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/Home.fxml"));
                 pnItems.getChildren().add(nodes[0]);
             } catch (IOException e) {
                 e.printStackTrace();

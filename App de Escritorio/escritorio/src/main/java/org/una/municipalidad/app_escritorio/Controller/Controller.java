@@ -27,6 +27,7 @@ public abstract class Controller {
     private String accion;
     private static int hola;
     private static int Impuesto;
+    private static int Admin;
     private static String Parametro;
     private static String Parametro2;
 
@@ -62,6 +63,13 @@ public abstract class Controller {
         Controller.Impuesto = Impuesto;
     }
 
+    public static int getAdmin() {
+        return Admin;
+    }
+
+    public static void setAdmin(int admin) {
+        Admin = admin;
+    }
 
 
     public String getAccion() {

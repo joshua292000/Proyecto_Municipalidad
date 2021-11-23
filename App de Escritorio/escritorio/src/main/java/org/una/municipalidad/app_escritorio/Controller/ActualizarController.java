@@ -472,8 +472,9 @@ public class ActualizarController extends Controller implements Initializable {
         this.colTelefonoC.setOnEditCommit(
                 data->{
                     LicenciasComercialesDTO con = data.getRowValue();
+                    System.out.println("Tiene "+data.getRowValue().getTelefonoComercio()+"/n");
                     con.setTelefonoComercio(Long.valueOf(data.getNewValue()));
-                    System.out.println(con);
+                    System.out.println("despues "+data.getNewValue()+"/n");
                 }
         );
         this.colCorreoC.setCellValueFactory(new PropertyValueFactory("correoComercio"));
