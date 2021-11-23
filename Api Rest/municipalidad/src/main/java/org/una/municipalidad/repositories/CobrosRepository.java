@@ -59,14 +59,14 @@ public interface CobrosRepository extends JpaRepository<Cobros, Long> {
    @Query(value= "{CALL Cobrosmasivos()}", nativeQuery = true)
     public void cobrosmasivos();
 
-    @Query(value= "{CALL CobrosMasivoPropiedades()}", nativeQuery = true)
-    public void CobrosMasivoPropiedades();
+    @Query(value= "{CALL CobrosMasivoPropiedades(:Fecha_Inicial)}", nativeQuery = true)
+    public void CobrosMasivoPropiedades(@Param("Fecha_Inicial") Date Fecha_Incial);
 
-    @Query(value= "{CALL CobrosMasivosLocales()}", nativeQuery = true)
-    public void CobrosMasivosLocales();
+    @Query(value= "{CALL CobrosMasivosLocales(:Fecha_Inicial)}", nativeQuery = true)
+    public void CobrosMasivosLocales(@Param("Fecha_Inicial") Date Fecha_Incial);
 
-   @Query(value= "{CALL CobrosMasivoLicencias()}", nativeQuery = true)
-    public void CobrosMasivoLicencias();
+   @Query(value= "{CALL CobrosMasivoLicencias(:Fecha_Inicial)}", nativeQuery = true)
+    public void CobrosMasivoLicencias(@Param("Fecha_Inicial") Date Fecha_Incial);
 
 }
 

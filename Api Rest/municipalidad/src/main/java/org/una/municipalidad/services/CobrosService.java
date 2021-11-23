@@ -41,11 +41,11 @@ public interface CobrosService {
 
     public void cobrosmasivos();
 
-    public void CobrosMasivoPropiedades();
+    public void CobrosMasivoPropiedades(@Param("Fecha_Inicial") Date Fecha_Incial);
 
-    public void CobrosMasivosLocales();
+    public void CobrosMasivosLocales(@Param("Fecha_Inicial") Date Fecha_Incial);
 
-    public void CobrosMasivoLicencias();
+    public void CobrosMasivoLicencias(@Param("Fecha_Inicial") Date Fecha_Incial);
 
     public Optional<CobrosDTO> create(CobrosDTO cobrosDTO);
 
