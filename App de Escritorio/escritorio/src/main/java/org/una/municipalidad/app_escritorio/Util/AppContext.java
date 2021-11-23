@@ -67,5 +67,9 @@ public class AppContext {
         context.put(parameter, null);
     }
 
+    public String quitarRol(String hola){
+        String[] parts = hola.split("_");
+        return parts[1];
+    }
 }
 

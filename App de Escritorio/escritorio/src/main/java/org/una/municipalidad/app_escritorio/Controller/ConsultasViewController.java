@@ -8,7 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.BorderPane;
+import javafx.util.converter.IntegerStringConverter;
 import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
@@ -18,6 +21,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 
 public class ConsultasViewController extends Controller implements Initializable {
 
@@ -99,6 +103,8 @@ public class ConsultasViewController extends Controller implements Initializable
                 BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Parámetros", "Consulta a la tabla de parámetros", AppContext.getInstance().get("usuario").toString(),getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
             }
         }
+        System.out.print("parametros "+getParametro());
+        System.out.print("parametros 2 "+getParametro2());
         loadUI("ListadoView",BorderPane);
     }
 
@@ -108,6 +114,8 @@ public class ConsultasViewController extends Controller implements Initializable
     public void OnActioncbConsultas(ActionEvent actionEvent)  {
         if(cbConsultas.getValue()!=null){
             if(cbConsultas.getValue().equals("Consulta por un cobro entre dos fechas")){
+                tfFechaFin.setTextFormatter(null);
+                tfFechaInicio.setTextFormatter(null);
                 JOptionPane.showMessageDialog(null,"Por favor ingresa las fechas por las cuales quieres hacer la consulta y luego presiona el botón de Realizar consultar");
                 tfFechaInicio.setPromptText("Fecha Inicio (yyyy-MM-dd)");
                 tfFechaFin.setPromptText("Fecha Fin (yyyy-MM-dd)");
@@ -119,6 +127,7 @@ public class ConsultasViewController extends Controller implements Initializable
             }
             if(cbConsultas.getValue().equals("Consulta por cedula las Propiedades que pertenecen a un contribuyente")){
                 JOptionPane.showMessageDialog(null,"Por favor ingresa la cedula del contribuyente y luego presiona el botón de Realizar consultar");
+                integerTextField(tfFechaInicio);
                 tfFechaInicio.clear();
                 tfFechaInicio.setPromptText("Cedula contribuyente");
                 tfFechaInicio.setVisible(true);
@@ -126,6 +135,7 @@ public class ConsultasViewController extends Controller implements Initializable
                 btnConsulta.setVisible(true);
             }if(cbConsultas.getValue().equals("Consulta por cedula las Licencias comerciales que pertenecen a un contribuyente")){
                 JOptionPane.showMessageDialog(null,"Por favor ingresa la cedula del contribuyente y luego presiona el botón de Realizar consultar");
+                integerTextField(tfFechaInicio);
                 tfFechaInicio.clear();
                 tfFechaInicio.setPromptText("Cedula contribuyente");
                 tfFechaInicio.setVisible(true);
@@ -134,6 +144,7 @@ public class ConsultasViewController extends Controller implements Initializable
             }
             if(cbConsultas.getValue().equals("Consulta por cedula los Locales de mercado que pertenecen a un contribuyente")){
                 JOptionPane.showMessageDialog(null,"Por favor ingresa la cedula del contribuyente y luego presiona el botón de Realizar consultar");
+                integerTextField(tfFechaInicio);
                 tfFechaInicio.clear();
                 tfFechaInicio.setPromptText("Cedula contribuyente");
                 tfFechaInicio.setVisible(true);
@@ -150,7 +161,7 @@ public class ConsultasViewController extends Controller implements Initializable
 
     }
 
-    /*public static void integerTextField(TextField textField) {
+    public static void integerTextField(TextField textField) {
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String newText = change.getControlNewText();
             if (newText.matches("-?([0-9]*)?")) {
@@ -161,5 +172,5 @@ public class ConsultasViewController extends Controller implements Initializable
         textField.setTextFormatter(
                 new TextFormatter<Integer>(
                         new IntegerStringConverter(), 0, integerFilter));
-    }*/
+    }
 }

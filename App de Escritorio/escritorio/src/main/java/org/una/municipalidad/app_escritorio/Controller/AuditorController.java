@@ -30,7 +30,7 @@ public class AuditorController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
-        lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
+        lblRol.setText(String.valueOf(AppContext.getInstance().quitarRol(String.valueOf(AppContext.getInstance().get("roles")))));
         if(Controller.getAdmin()==1){
             String texto="Este boton se llama btnCerrarSesion";
             btnCerrarSesion.setTooltip(new Tooltip(texto));

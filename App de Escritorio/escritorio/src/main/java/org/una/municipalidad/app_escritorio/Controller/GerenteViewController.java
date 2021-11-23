@@ -10,8 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
-
+import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,8 +48,15 @@ public class GerenteViewController extends Controller implements Initializable {
     @FXML
     private JFXButton btnCerrar;
 
+    @FXML
+    private Label lbNombreUsuario;
+
+    @FXML
+    private Label lbRol;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lbRol.setText(AppContext.getInstance().quitarRol(String.valueOf(AppContext.getInstance().get("roles"))));
+        lbNombreUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
         Vbox.setPrefWidth(20);
         btnAutorizar.setVisible(false);
         btnCobros.setVisible(false);

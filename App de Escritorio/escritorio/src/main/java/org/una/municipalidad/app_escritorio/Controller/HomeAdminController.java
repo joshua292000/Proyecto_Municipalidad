@@ -54,7 +54,7 @@ public class HomeAdminController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
-        lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
+        lblRol.setText(AppContext.getInstance().quitarRol(String.valueOf(AppContext.getInstance().get("roles"))));
 
 
     }

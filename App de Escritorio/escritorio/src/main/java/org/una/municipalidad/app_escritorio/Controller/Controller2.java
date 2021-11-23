@@ -1,22 +1,15 @@
 package org.una.municipalidad.app_escritorio.Controller;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.controlsfx.control.Notifications;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 import org.una.municipalidad.app_escritorio.Util.FlowController;
 
@@ -71,7 +64,7 @@ public class Controller2 extends Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //vbxMenuIzq.setPrefWidth(20);
         lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
-        lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
+        lblRol.setText(AppContext.getInstance().quitarRol(String.valueOf(AppContext.getInstance().get("roles"))));
         if(Controller.getAdmin()==1){
             String texto="Este boton se llama btnMenus";
             btnMenus.setTooltip(new Tooltip(texto));
