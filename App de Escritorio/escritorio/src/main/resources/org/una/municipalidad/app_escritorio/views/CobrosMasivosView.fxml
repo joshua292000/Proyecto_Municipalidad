@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.CobrosMasivosViewController">
+<AnchorPane prefHeight="682.0" prefWidth="1002.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.CobrosMasivosViewController">
    <children>
-      <BorderPane fx:id="BorderPane" prefHeight="682.0" prefWidth="1002.0" stylesheets="@../resources/style.css">
+      <BorderPane fx:id="BorderPane" prefHeight="682.0" prefWidth="1002.0" stylesheets="@../resources/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #B0E0E6;" BorderPane.alignment="CENTER">
                <children>
