@@ -10,7 +10,10 @@
 {
 -fx-background-color : #1620A1;
 }
-#btnGenerar, #btnEliminar, #btnConsulta{
+#btnGenerar, #btnEliminar, #btnConsulta {
+-fx-text-fill : black;
+}
+#btnMensual, #btnAnual, #btnTrimestral{
 -fx-text-fill : black;
 }
 .scroll-pane {

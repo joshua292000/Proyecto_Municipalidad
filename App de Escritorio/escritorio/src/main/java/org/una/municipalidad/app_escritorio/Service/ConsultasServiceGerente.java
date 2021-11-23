@@ -15,6 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class ConsultasServiceGerente {
@@ -402,5 +403,96 @@ public class ConsultasServiceGerente {
             cobro=null;
         }
         return cobro;
+    }
+
+    public static List<FechasCobrosDTO> obtenerTodoFechaCobros() throws IOException, InterruptedException {
+        List<FechasCobrosDTO> para = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:8089/fechascobros"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        para = mapper.readValue(response.body(), new TypeReference<List<FechasCobrosDTO>>() {});
+        System.out.print("cobro "+para);
+        if(para.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron registros");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
+        return para;
+    }
+
+    public static FechasCobrosDTO ActualizarFechasCobros(Long Id, String Impuesto, Integer Periodo, Date fecha1,Date fecha2,Date fecha3,Date fecha4,Date fecha5,Date fecha6,Date fecha7,Date fecha8,Date fecha9,Date fecha10,Date fecha11,Date fecha12) throws IOException, InterruptedException {
+        FechasCobrosDTO fecha = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("rol");
+        String json = new StringBuilder()
+                .append("{")
+                .append("\"id\":\"" )
+                .append(Id)
+                .append("\",")
+                .append("\"FechasCobrosImpuestos\":\"" )
+                .append(Impuesto)
+                .append("\",")
+                .append("\"FechasCobrosPeriodo\":\"" )
+                .append(Periodo)
+                .append("\",")
+                .append("\"FechasCobrosFecha1\":\"" )
+                .append(fecha1)
+                .append("\",")
+                .append("\"FechasCobrosFecha2\":\"" )
+                .append(fecha2)
+                .append("\",")
+                .append("\"FechasCobrosFecha3\":\"" )
+                .append(fecha3)
+                .append("\",")
+                .append("\"FechasCobrosFecha4\":\"" )
+                .append(fecha4)
+                .append("\",")
+                .append("\"FechasCobrosFecha5\":\"" )
+                .append(fecha5)
+                .append("\",")
+                .append("\"FechasCobrosFecha6\":\"" )
+                .append(fecha6)
+                .append("\",")
+                .append("\"FechasCobrosFecha7\":\"" )
+                .append(fecha7)
+                .append("\",")
+                .append("\"FechasCobrosFecha8\":\"" )
+                .append(fecha8)
+                .append("\",")
+                .append("\"FechasCobrosFecha9\":\"" )
+                .append(fecha9)
+                .append("\",")
+                .append("\"FechasCobrosFecha10\":\"" )
+                .append(fecha10)
+                .append("\",")
+                .append("\"FechasCobrosFecha11\":\"" )
+                .append(fecha11)
+                .append("\",")
+                .append("\"FechasCobrosFecha12\":\"" )
+                .append(fecha12)
+                .append("\"")
+                .append("}").toString();
+        System.out.println("jsonprove "+json+"\n");
+        HttpRequest request = HttpRequest.newBuilder()
+                .PUT(HttpRequest.BodyPublishers.ofString(json))
+                .uri(URI.create("http://localhost:8089/fechascobros/"+Id+"/"))
+                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .header("Content-Type", "application/json")
+                .setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("status "+response.statusCode());
+
+        System.out.println("cuerpo "+response.body());
+        fecha = mapper.readValue(response.body(), new TypeReference<FechasCobrosDTO>() {});
+        return fecha;
     }
 }

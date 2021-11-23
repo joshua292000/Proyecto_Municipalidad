@@ -1,6 +1,7 @@
 package org.una.municipalidad.app_escritorio.Controller;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Control;
@@ -31,6 +32,7 @@ public abstract class Controller {
     private Stage stage;
     private String accion;
     private static int hola;
+    @FXML
     private static int Impuesto;
     private static String Parametro;
     private static String Parametro2;

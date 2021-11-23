@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import org.una.municipalidad.app_escritorio.Util.FlowController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +26,9 @@ public class GerenteViewController extends Controller implements Initializable {
     private ImageView imgConsultas;
 
     @FXML
+    private ImageView imgConsultas1;
+
+    @FXML
     private JFXButton btnAutorizar;
 
     @FXML
@@ -38,15 +43,20 @@ public class GerenteViewController extends Controller implements Initializable {
     @FXML
     private VBox Vbox;
 
+    @FXML
+    private JFXButton btnCerrar;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Vbox.setPrefWidth(20);
         btnAutorizar.setVisible(false);
         btnCobros.setVisible(false);
         btnConsultas.setVisible(false);
+        btnCerrar.setVisible(false);
         imgCobros.setTranslateX(15);
         imgAutorizar.setTranslateX(15);
         imgConsultas.setTranslateX(15);
+        imgConsultas1.setTranslateX(15);
     }
 
     @Override
@@ -65,9 +75,11 @@ public class GerenteViewController extends Controller implements Initializable {
         btnAutorizar.setVisible(true);
         btnCobros.setVisible(true);
         btnConsultas.setVisible(true);
+        btnCerrar.setVisible(true);
         imgCobros.setTranslateX(0);
         imgAutorizar.setTranslateX(0);
         imgConsultas.setTranslateX(0);
+        imgConsultas1.setTranslateX(0);
     }
 
     public void OnMouseExitedVbox(MouseEvent mouseEvent) {
@@ -75,9 +87,11 @@ public class GerenteViewController extends Controller implements Initializable {
         btnAutorizar.setVisible(false);
         btnCobros.setVisible(false);
         btnConsultas.setVisible(false);
+        btnCerrar.setVisible(false);
         imgCobros.setTranslateX(15);
         imgAutorizar.setTranslateX(15);
         imgConsultas.setTranslateX(15);
+        imgConsultas1.setTranslateX(15);
     }
 
     public void OnActionbtnConsultas(ActionEvent actionEvent) {
@@ -86,5 +100,10 @@ public class GerenteViewController extends Controller implements Initializable {
 
     public void OnActionBtnCobros(ActionEvent actionEvent) {
         loadUI("CobrosMasivosview",BorderPane);
+    }
+
+    public void OnActionbtnCerrar(ActionEvent actionEvent) {
+        ((Stage) btnCerrar.getScene().getWindow()).close();
+        FlowController.getInstance().goViewInWindow("Loggin");
     }
 }

@@ -34,7 +34,7 @@ public class FechasCobrosController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
     public ResponseEntity<?> create(@RequestBody FechasCobrosDTO fechasCobrosDTO) {
         try {
             Optional<FechasCobrosDTO> cobrosCreated = fechascobrosService.create(fechasCobrosDTO);
@@ -47,7 +47,7 @@ public class FechasCobrosController {
     @PutMapping("/{id}")
     @ApiOperation(value = "Actualiza por medio del id", response = FechasCobrosDTO.class, tags = "FechasCobros")
     @ResponseBody
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FechasCobrosDTO cobrosModified) {
         Optional<FechasCobrosDTO> cobrosUpdated = fechascobrosService.update(cobrosModified, id);
         return new ResponseEntity<>(cobrosUpdated, HttpStatus.OK);
