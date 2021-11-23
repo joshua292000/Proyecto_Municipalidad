@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.BorderPane;
@@ -20,9 +21,9 @@ import org.una.municipalidad.app_escritorio.Util.AppContext;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
-
 public class ConsultasViewController extends Controller implements Initializable {
 
     @FXML
@@ -40,11 +41,20 @@ public class ConsultasViewController extends Controller implements Initializable
     @FXML
     private BorderPane BorderPane;
 
+    @FXML
+    private DatePicker dpFechaFin;
+
+    @FXML
+    private DatePicker dpFechainicio;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         tfFechaInicio.setVisible(false);
         tfFechaFin.setVisible(false);
         btnConsulta.setVisible(false);
+        dpFechainicio.setVisible(false);
+        dpFechaFin.setVisible(false);
         ObservableList<String> items = FXCollections.observableArrayList();
         items.addAll("Consulta por un cobro entre dos fechas",
                 "Consulta por cedula las Propiedades que pertenecen a un contribuyente",
@@ -63,9 +73,12 @@ public class ConsultasViewController extends Controller implements Initializable
     public void OnActionBtnConsulta(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(cbConsultas.getValue()!=null){
             if(cbConsultas.getValue().equals("Consulta por un cobro entre dos fechas")){
-                if(!tfFechaInicio.getText().isEmpty() && !tfFechaFin.getText().isEmpty() ){
-                    setParametro(tfFechaInicio.getText());
-                    setParametro2(tfFechaFin.getText());
+                System.out.print("Fecha1 "+dpFechainicio.getValue().toString());
+                System.out.print("Fecha 2 "+dpFechaFin.getValue().toString());
+                if(dpFechainicio.getValue()!=null && dpFechaFin.getValue()!=null ){
+
+                    setParametro(dpFechainicio.getValue().toString());
+                    setParametro2(dpFechainicio.getValue().toString());
                 }else{
                     JOptionPane.showMessageDialog(null,"Alguno de los campos se encuentra vacio");
                 }
@@ -114,16 +127,12 @@ public class ConsultasViewController extends Controller implements Initializable
     public void OnActioncbConsultas(ActionEvent actionEvent)  {
         if(cbConsultas.getValue()!=null){
             if(cbConsultas.getValue().equals("Consulta por un cobro entre dos fechas")){
-                tfFechaFin.setTextFormatter(null);
-                tfFechaInicio.setTextFormatter(null);
                 JOptionPane.showMessageDialog(null,"Por favor ingresa las fechas por las cuales quieres hacer la consulta y luego presiona el botón de Realizar consultar");
-                tfFechaInicio.setPromptText("Fecha Inicio (yyyy-MM-dd)");
-                tfFechaFin.setPromptText("Fecha Fin (yyyy-MM-dd)");
-                tfFechaInicio.clear();
-                tfFechaFin.clear();
-                tfFechaInicio.setVisible(true);
-                tfFechaFin.setVisible(true);
+                tfFechaInicio.setVisible(false);
+                tfFechaFin.setVisible(false);
                 btnConsulta.setVisible(true);
+                dpFechainicio.setVisible(true);
+                dpFechaFin.setVisible(true);
             }
             if(cbConsultas.getValue().equals("Consulta por cedula las Propiedades que pertenecen a un contribuyente")){
                 JOptionPane.showMessageDialog(null,"Por favor ingresa la cedula del contribuyente y luego presiona el botón de Realizar consultar");
@@ -133,6 +142,8 @@ public class ConsultasViewController extends Controller implements Initializable
                 tfFechaInicio.setVisible(true);
                 tfFechaFin.setVisible(false);
                 btnConsulta.setVisible(true);
+                dpFechainicio.setVisible(false);
+                dpFechaFin.setVisible(false);
             }if(cbConsultas.getValue().equals("Consulta por cedula las Licencias comerciales que pertenecen a un contribuyente")){
                 JOptionPane.showMessageDialog(null,"Por favor ingresa la cedula del contribuyente y luego presiona el botón de Realizar consultar");
                 integerTextField(tfFechaInicio);
@@ -141,6 +152,8 @@ public class ConsultasViewController extends Controller implements Initializable
                 tfFechaInicio.setVisible(true);
                 tfFechaFin.setVisible(false);
                 btnConsulta.setVisible(true);
+                dpFechainicio.setVisible(false);
+                dpFechaFin.setVisible(false);
             }
             if(cbConsultas.getValue().equals("Consulta por cedula los Locales de mercado que pertenecen a un contribuyente")){
                 JOptionPane.showMessageDialog(null,"Por favor ingresa la cedula del contribuyente y luego presiona el botón de Realizar consultar");
@@ -150,12 +163,16 @@ public class ConsultasViewController extends Controller implements Initializable
                 tfFechaInicio.setVisible(true);
                 tfFechaFin.setVisible(false);
                 btnConsulta.setVisible(true);
+                dpFechainicio.setVisible(false);
+                dpFechaFin.setVisible(false);
             }
             if(cbConsultas.getValue().equals("Consulta por todos los parámetros")){
                 JOptionPane.showMessageDialog(null,"Por favor presiona el botón de Realizar consultar");
                 tfFechaInicio.setVisible(false);
                 tfFechaFin.setVisible(false);
                 btnConsulta.setVisible(true);
+                dpFechainicio.setVisible(false);
+                dpFechaFin.setVisible(false);
             }
         }
 
