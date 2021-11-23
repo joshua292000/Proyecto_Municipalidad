@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -57,6 +58,20 @@ public class GerenteViewController extends Controller implements Initializable {
         imgAutorizar.setTranslateX(15);
         imgConsultas.setTranslateX(15);
         imgConsultas1.setTranslateX(15);
+        if(Controller.getAdmin()==1){
+            String texto="Este boton se llama btnAutorizar";
+            btnAutorizar.setTooltip(new Tooltip(texto));
+
+            String texto2="Este boton se llama btnCerrar";
+            btnCerrar.setTooltip(new Tooltip(texto2));
+
+            String texto3="Este boton se llama btnCobros";
+            btnCobros.setTooltip(new Tooltip(texto3));
+
+            String texto4="Este boton se llama btnConsultas";
+            btnConsultas.setTooltip(new Tooltip(texto4));
+
+        }
     }
 
     @Override

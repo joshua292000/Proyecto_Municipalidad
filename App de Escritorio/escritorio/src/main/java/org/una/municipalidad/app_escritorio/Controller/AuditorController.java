@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,11 +21,36 @@ public class AuditorController extends Controller implements Initializable {
     public Label lblUsuario;
     public Label lblRol;
     public JFXButton btnCerrarSesion;
+    public JFXButton btnListaCobros;
+    public JFXButton btnMovimientosRealizados;
+    public JFXButton btnTodosLocalesMercado;
+    public JFXButton btnTodasLicenciasComerciales;
+    public JFXButton btnTodasPropiedades;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
         lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
+        if(Controller.getAdmin()==1){
+            String texto="Este boton se llama btnCerrarSesion";
+            btnCerrarSesion.setTooltip(new Tooltip(texto));
+
+            String texto2="Este boton se llama btnListaCobros";
+            btnListaCobros.setTooltip(new Tooltip(texto2));
+
+            String texto3="Este boton se llama btnMovimientosRealizados";
+            btnMovimientosRealizados.setTooltip(new Tooltip(texto3));
+
+            String texto4="Este boton se llama btnTodosLocalesMercado";
+            btnTodosLocalesMercado.setTooltip(new Tooltip(texto4));
+
+            String texto5="Este boton se llama btnTodasLicenciasComerciales";
+            btnTodasLicenciasComerciales.setTooltip(new Tooltip(texto5));
+
+            String texto6="Este boton se llama btnTodasPropiedades";
+            btnTodasPropiedades.setTooltip(new Tooltip(texto6));
+
+        }
     }
 
     @Override
