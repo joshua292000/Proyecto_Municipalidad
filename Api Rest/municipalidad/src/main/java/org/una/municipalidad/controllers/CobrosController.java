@@ -153,12 +153,12 @@ public class CobrosController {
         cobrosService.cobrosmasivos();
     }
 
-    @GetMapping("/CobrosMasivoPropiedades")
+    @GetMapping("/CobrosMasivoPropiedades/{Fecha_Inicial}")
     @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public ResponseEntity<?> CobrosMasivoPropiedades() {
+    public ResponseEntity<?> CobrosMasivoPropiedades(@PathVariable (value ="Fecha_Inicial")@DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha_Inicial) {
         try{
-            cobrosService.CobrosMasivoPropiedades();
+            cobrosService.CobrosMasivoPropiedades(Fecha_Inicial);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -166,12 +166,12 @@ public class CobrosController {
 
     }
 
-    @GetMapping("/CobrosMasivosLocales")
+    @GetMapping("/CobrosMasivosLocales/{Fecha_Inicial}")
     @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public ResponseEntity<?> CobrosMasivosLocales() {
+    public ResponseEntity<?> CobrosMasivosLocales(@PathVariable (value ="Fecha_Inicial")@DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha_Inicial) {
         try{
-            cobrosService.CobrosMasivosLocales();
+            cobrosService.CobrosMasivosLocales(Fecha_Inicial);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -179,12 +179,12 @@ public class CobrosController {
 
     }
 
-    @GetMapping("/CobrosMasivoLicencias")
+    @GetMapping("/CobrosMasivoLicencias/{Fecha_Inicial}")
     @ApiOperation(value = "Precedimiento almacenado", response = CobrosDTO.class, responseContainer = "CobrosDTO" , tags = "Cobros")
     @PreAuthorize("hasRole('GESTOR') or hasRole('GERENTE')")
-    public ResponseEntity<?> CobrosMasivoLicencias() {
+    public ResponseEntity<?> CobrosMasivoLicencias(@PathVariable (value ="Fecha_Inicial")@DateTimeFormat(pattern = "yyyy-MM-dd") Date Fecha_Inicial) {
         try{
-            cobrosService.CobrosMasivoLicencias();
+            cobrosService.CobrosMasivoLicencias(Fecha_Inicial);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);

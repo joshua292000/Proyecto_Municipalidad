@@ -137,20 +137,21 @@ public class CobrosServiceImplementation implements CobrosService {
 
     @Override
     @Transactional(readOnly = true)
-    public void CobrosMasivoPropiedades() {
-        cobrosRepository.CobrosMasivoPropiedades();
+    public void CobrosMasivoPropiedades(@Param("Fecha_Inicial") Date Fecha_Incial) {
+
+        cobrosRepository.CobrosMasivoPropiedades(Fecha_Incial);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public void CobrosMasivosLocales() {
-        cobrosRepository.CobrosMasivosLocales();
+    public void CobrosMasivosLocales(@Param("Fecha_Inicial") Date Fecha_Incial) {
+        cobrosRepository.CobrosMasivosLocales(Fecha_Incial);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public void CobrosMasivoLicencias() {
-        cobrosRepository.CobrosMasivoLicencias();
+    public void CobrosMasivoLicencias(@Param("Fecha_Inicial") Date Fecha_Incial) {
+        cobrosRepository.CobrosMasivoLicencias(Fecha_Incial);
     }
 
     private CobrosDTO getSavedCobrosDTO(CobrosDTO cobrosDTO) {
