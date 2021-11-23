@@ -79,6 +79,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
+            <Label fx:id="lblNombePantalla" text="Nombre de la pantalla" textFill="WHITE" translateY="40.0" />
             </children>
         </VBox>
         <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #02030A;" stylesheets="@../resources/style.css">

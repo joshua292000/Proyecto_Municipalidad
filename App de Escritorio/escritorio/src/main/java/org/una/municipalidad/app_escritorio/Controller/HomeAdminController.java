@@ -99,7 +99,7 @@ public class HomeAdminController extends Controller implements Initializable {
             pnlOverview.setStyle("-fx-background-color : #02030A");
             Node[] nodes = new Node[1];
             try {
-                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/Home.fxml"));
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/OpcionesDesarrollo.fxml"));
                 pnItems.getChildren().add(nodes[0]);
             } catch (IOException e) {
                 e.printStackTrace();
