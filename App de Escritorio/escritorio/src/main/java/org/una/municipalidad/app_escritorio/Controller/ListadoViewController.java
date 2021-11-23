@@ -121,7 +121,6 @@ public class ListadoViewController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnGenerar.setVisible(false);
         btnEliminar.setVisible(false);
-        btnImprime.setVisible(false);
         switch (Controller.getHola()){
             case 1: {
                 Consulta=1;

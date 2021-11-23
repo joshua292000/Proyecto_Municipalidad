@@ -45,6 +45,7 @@ public class LicenciasComercialesController  extends Controller implements Initi
             }
             this.TviewLicenciaComercialLista.setItems(LicenciasComercialeslist);
         }
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Licencias_Comerciales", "Se visualizó la información de la tabla licencias comerciales", AppContext.getInstance().get("usuario").toString(),Controller.getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         System.out.print(licenciacomercial);
         LlenarTabla();
     }
