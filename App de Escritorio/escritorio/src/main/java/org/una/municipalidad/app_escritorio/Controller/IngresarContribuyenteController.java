@@ -82,6 +82,15 @@ public class IngresarContribuyenteController extends Controller implements Initi
             String texto3="Este boton se llama btnBuscar";
             btnBuscar.setTooltip(new Tooltip(texto3));
 
+            String texto4="Este campo se llama txtNombre";
+            txtNombre.setTooltip(new Tooltip(texto4));
+
+            String texto5="Este campo se llama txtCedula";
+            txtCedula.setTooltip(new Tooltip(texto5));
+
+            String texto6="Este campo se llama txtApellido";
+            txtApellido.setTooltip(new Tooltip(texto6));
+
         }
     }
 
