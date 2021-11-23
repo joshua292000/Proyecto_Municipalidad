@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1154.0" style="-fx-background-color: #02030A;" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.GerenteViewController">
-    <center>
-        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="991.0" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding></VBox>
-    </center>
-    <top>
-        <HBox prefHeight="16.0" prefWidth="600.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
-    </top>
-    <left>
-        <VBox fx:id="Vbox" alignment="TOP_CENTER" onMouseEntered="#OnMouseEnteredVbox" onMouseExited="#OnMouseExitedVbox" prefHeight="682.0" prefWidth="132.0" spacing="20.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../resources/User_Avatar_2.png" />
-                    </image>
-                </ImageView>
-                <Label alignment="CENTER" contentDisplay="CENTER" text="Usuario" textFill="WHITE" />
-                <HBox alignment="CENTER" prefHeight="62.0" prefWidth="132.0">
-                    <children>
-                        <ImageView fx:id="imgCobros" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../resources/R.png" />
-                            </image>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.GerenteViewController">
+   <children>
+      <BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1154.0" style="-fx-background-color: #02030A;" stylesheets="@../resources/style.css">
+          <center>
+              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="682.0" prefWidth="991.0" BorderPane.alignment="CENTER">
+                  <padding>
+                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </padding>
+            </VBox>
+          </center>
+          <top>
+              <HBox prefHeight="16.0" prefWidth="600.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
+          </top>
+          <left>
+              <VBox fx:id="Vbox" alignment="TOP_CENTER" onMouseEntered="#OnMouseEnteredVbox" onMouseExited="#OnMouseExitedVbox" prefHeight="682.0" prefWidth="132.0" spacing="20.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER">
+                  <children>
+                      <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../resources/User_Avatar_2.png" />
+                          </image>
+                      </ImageView>
+                      <Label alignment="CENTER" contentDisplay="CENTER" text="Usuario" textFill="WHITE" />
+                      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="132.0">
+                          <children>
+                              <ImageView fx:id="imgCobros" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../resources/R.png" />
+                                  </image>
+                              </ImageView>
+                              <JFXButton fx:id="btnCobros" onAction="#OnActionBtnCobros" text="Cobros Masivos" textAlignment="CENTER" wrapText="true" />
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" prefHeight="56.0" prefWidth="132.0">
+                          <children>
+                              <ImageView fx:id="imgAutorizar" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../resources/1995688.png" />
+                                  </image>
+                              </ImageView>
+                              <JFXButton fx:id="btnAutorizar" onAction="#OnActionBtnAutorizar" prefHeight="52.0" prefWidth="94.0" text="Autorizar Gestores" textAlignment="CENTER" wrapText="true" />
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="132.0">
+                          <children>
+                              <ImageView fx:id="imgConsultas" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../resources/org.rdsp.consultaregistraduria.jpg" />
+                                  </image>
+                              </ImageView>
+                              <JFXButton fx:id="btnConsultas" onAction="#OnActionbtnConsultas" prefHeight="52.0" prefWidth="94.0" text="Consultas" />
+                          </children>
+                      </HBox>
+                      <HBox prefHeight="62.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgConsultas1" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Cambios.png" />
+                           </image>
                         </ImageView>
-                        <JFXButton fx:id="btnCobros" onAction="#OnActionBtnCobros" text="Cobros Masivos" textAlignment="CENTER" wrapText="true" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="56.0" prefWidth="132.0">
-                    <children>
-                        <ImageView fx:id="imgAutorizar" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../resources/1995688.png" />
-                            </image>
-                        </ImageView>
-                        <JFXButton fx:id="btnAutorizar" onAction="#OnActionBtnAutorizar" prefHeight="52.0" prefWidth="94.0" text="Autorizar Gestores" textAlignment="CENTER" wrapText="true" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="62.0" prefWidth="132.0">
-                    <children>
-                        <ImageView fx:id="imgConsultas" fitHeight="38.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../resources/org.rdsp.consultaregistraduria.jpg" />
-                            </image>
-                        </ImageView>
-                        <JFXButton fx:id="btnConsultas" onAction="#OnActionbtnConsultas" prefHeight="52.0" prefWidth="94.0" text="Consultas" />
-                    </children>
-                </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0" />
-            </children>
-            <padding>
-                <Insets top="20.0" />
-            </padding>
-        </VBox>
-    </left>
-    <bottom>
-        <HBox prefHeight="16.0" prefWidth="200.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
-    </bottom>
-    <right>
-        <VBox prefHeight="200.0" prefWidth="16.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
-    </right>
-</BorderPane>
+                        <JFXButton fx:id="btnCerrar" onAction="#OnActionbtnCerrar" prefHeight="52.0" prefWidth="94.0" text="Cerrar sesión " textAlignment="CENTER" wrapText="true" />
+                     </children>
+                  </HBox>
+                  </children>
+                  <padding>
+                      <Insets top="20.0" />
+                  </padding>
+              </VBox>
+          </left>
+          <bottom>
+              <HBox prefHeight="16.0" prefWidth="200.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
+          </bottom>
+          <right>
+              <VBox prefHeight="200.0" prefWidth="16.0" style="-fx-background-color: #05071F;" BorderPane.alignment="CENTER" />
+          </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

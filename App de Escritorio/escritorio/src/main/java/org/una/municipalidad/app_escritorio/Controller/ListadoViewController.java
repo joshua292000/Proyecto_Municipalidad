@@ -12,9 +12,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
 import org.una.municipalidad.app_escritorio.DTO.*;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -416,7 +419,7 @@ public class ListadoViewController extends Controller implements Initializable {
         this.Tvdatos.setItems(optionsLoc);
     }
 
-    public void OnActionBtnGenerar(ActionEvent actionEvent) throws IOException {
+    public void OnActionBtnGenerar(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(getHola()==5){
             CrearReporte(Tvdatos,ArrayCobro,ArrayCobro.length,"Cobros",options);
         }
@@ -455,7 +458,8 @@ public class ListadoViewController extends Controller implements Initializable {
                 ConsultasServiceGerente.EliminarTodoLocalesxEstado();
                 break;
         }
-
+        JOptionPane.showMessageDialog(null,"Registros eliminados correctamente");
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Cobros", "Eliminar un cobro", AppContext.getInstance().get("usuario").toString(),getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
     }
 }
 

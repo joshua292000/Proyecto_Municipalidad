@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.una.municipalidad.app_escritorio.DTO.*;
 import org.una.municipalidad.app_escritorio.Util.AppContext;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -273,7 +274,11 @@ public class ConsultasGestorService {
 
         System.out.println("cuerpo "+response.body());
         licencia = mapper.readValue(response.body(), new TypeReference<List<LicenciasComercialesDTO>>() {});
-
+        if(licencia.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron Licencias comerciales registradas para el contribuyente con cedula "+cedula);
+        }else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         return licencia;
 
     }
@@ -295,8 +300,12 @@ public class ConsultasGestorService {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         local = mapper.readValue(response.body(), new TypeReference<List<LocalesMercadoDTO>>() {});
-
-        return local;
+        if(local.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron Locales de Mercado registrados para el contribuyente con cedula "+cedula);
+        }else {
+            JOptionPane.showMessageDialog(null, "Registros localizados con éxito");
+        }
+            return local;
 
     }
 
@@ -317,7 +326,11 @@ public class ConsultasGestorService {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         propiedad = mapper.readValue(response.body(), new TypeReference<List<PropiedadesDTO>>() {});
-
+        if(propiedad.size()==0){
+            JOptionPane.showMessageDialog(null,"No se encontraron propiedades registradas para el contribuyente con cedula "+cedula);
+        }else{
+            JOptionPane.showMessageDialog(null,"Registros localizados con éxito");
+        }
         return propiedad;
 
     }
