@@ -269,10 +269,13 @@ public abstract class Controller {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(null,"Reporte creado exitosamente");
-        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro(Nombre, "Creación de reporte en la tabla "+Nombre, AppContext.getInstance().get("usuario").toString(),getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
 
+        JOptionPane.showMessageDialog(null,"Reporte creado exitosamente");
+
+        BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro(Nombre, "Creación de reporte en la tabla "+Nombre, AppContext.getInstance().get("usuario").toString(),getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         Runtime.getRuntime().exec("cmd /c start "+Nombre+".xls");
+        System.out.print(bitacora);
+
     }
     public static BooleanProperty _activo;
 

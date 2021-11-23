@@ -8,8 +8,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.SneakyThrows;
+import org.una.municipalidad.app_escritorio.DTO.BitacorasDTO;
 import org.una.municipalidad.app_escritorio.DTO.LicenciasComercialesDTO;
+import org.una.municipalidad.app_escritorio.Service.AutenticacionService;
+import org.una.municipalidad.app_escritorio.Service.ConsultasGestorService;
 import org.una.municipalidad.app_escritorio.Service.ConsultasServiceGerente;
+import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.net.URL;
 import java.util.List;
@@ -67,5 +71,6 @@ public class LicenciasComercialesController  extends Controller implements Initi
         if(getHola()==13){
             CrearReporte(TviewLicenciaComercialLista,ArrayLicencias,ArrayLicencias.length,"Licencias",LicenciasComercialeslist);
         }
+
     }
 }
