@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="690.0" prefWidth="1002.0" snapToPixel="false" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.ConsultasViewController">
    <children>
@@ -65,5 +64,7 @@
               </BorderPane>
           </children>
       </AnchorPane>
+      <DatePicker fx:id="dpFechainicio" layoutX="10.0" layoutY="10.0" prefWidth="150.0" promptText="Fecha" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="31.0" />
+      <DatePicker fx:id="dpFechaFin" prefWidth="150.0" promptText="Fecha" showWeekNumbers="true" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="31.0" />
    </children>
 </AnchorPane>
