@@ -115,6 +115,11 @@ public class IngresarPropiedadController extends Controller implements Initializ
         cbxPerteneceEstado.setItems(items);
         integerTextField(txtArea);
         integerTextField(txtfrente);
+        if(Controller.getAdmin()==1){
+            String texto="Este boton se llama btnInsertar";
+            btnInsertar.setTooltip(new Tooltip(texto));
+
+        }
     }
 
     @Override

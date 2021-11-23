@@ -35,6 +35,7 @@ public abstract class Controller {
     @FXML
     private static int Impuesto;
     private static int Admin;
+    private static int Pantallas;
     private static String Parametro;
     private static String Parametro2;
 
@@ -87,6 +88,13 @@ public abstract class Controller {
         Admin = admin;
     }
 
+    public static int getPantallas() {
+        return Pantallas;
+    }
+
+    public static void setPantallas(int pantallas) {
+        Pantallas = pantallas;
+    }
 
     public String getAccion() {
         return accion;

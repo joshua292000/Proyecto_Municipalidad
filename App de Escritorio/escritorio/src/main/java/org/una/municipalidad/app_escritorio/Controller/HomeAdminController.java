@@ -33,6 +33,9 @@ public class HomeAdminController extends Controller implements Initializable {
     private Label lblRol;
 
     @FXML
+    private Label lblNombePantalla;
+
+    @FXML
     private VBox pnItems = null;
 
     @FXML
@@ -49,22 +52,60 @@ public class HomeAdminController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        vbxMenuIzq.setPrefWidth(20);
+
         lblUsuario.setText(String.valueOf(AppContext.getInstance().get("usuario")));
         lblRol.setText(String.valueOf(AppContext.getInstance().get("roles")));
+
+
     }
 
     @Override
     public void initialize() {
-
+        if (Controller.getPantallas()==1){
+            lblNombePantalla.setText("Pantalla Gestor");
+            pnItems.getChildren().clear();
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/Home.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if (Controller.getPantallas()==2){
+            lblNombePantalla.setText("Pantalla Gerente");
+            pnItems.getChildren().clear();
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/GerentesView.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if (Controller.getPantallas()==3){
+            lblNombePantalla.setText("Pantalla Auditor");
+            pnItems.getChildren().clear();
+            pnlOverview.setStyle("-fx-background-color : #02030A");
+            pnlOverview.toFront();
+            Node[] nodes = new Node[1];
+            try {
+                nodes[0] =  FXMLLoader.load(getClass().getResource("/org/una/municipalidad/app_escritorio/views/AuditorView.fxml"));
+                pnItems.getChildren().add(nodes[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void OnMouseEnteredIzq(MouseEvent mouseEvent) {
-        vbxMenuIzq.setPrefWidth(256);
+
     }
 
     public void OnMouseExitedIzq(MouseEvent mouseEvent) {
-        vbxMenuIzq.setPrefWidth(20);
+
     }
 
     public void handleClicks(ActionEvent actionEvent) {

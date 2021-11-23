@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -60,6 +61,12 @@ public class IngresarLocalMercadoController extends Controller implements Initia
     public void initialize(URL url, ResourceBundle resourceBundle) {
         integerTextField(txtTelefono);
         integerTextField(txtMonto);
+        if(Controller.getAdmin()==1){
+
+            String texto="Este boton se llama btnInsertar";
+            btnInsertar.setTooltip(new Tooltip(texto));
+
+        }
     }
 
     @Override

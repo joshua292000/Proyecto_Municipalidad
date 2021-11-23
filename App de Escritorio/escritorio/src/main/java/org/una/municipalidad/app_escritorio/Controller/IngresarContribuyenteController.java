@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
@@ -74,6 +71,18 @@ public class IngresarContribuyenteController extends Controller implements Initi
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LlenarTabla();
+        if(Controller.getAdmin()==1){
+
+            String texto="Este boton se llama btnInsertar";
+            btnInsertar.setTooltip(new Tooltip(texto));
+
+            String texto2="Este boton se llama btnGuardar";
+            btnGuardar.setTooltip(new Tooltip(texto2));
+
+            String texto3="Este boton se llama btnBuscar";
+            btnBuscar.setTooltip(new Tooltip(texto3));
+
+        }
     }
 
     @Override

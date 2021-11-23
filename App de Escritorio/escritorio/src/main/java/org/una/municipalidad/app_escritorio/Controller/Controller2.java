@@ -90,6 +90,9 @@ public class Controller2 extends Controller implements Initializable {
 
             String texto6="Este boton se llama btnCerrarSesion";
             btnCerrarSesion.setTooltip(new Tooltip(texto6));
+
+            String texto7="Este boton se llama btnOverview";
+            btnOverview.setTooltip(new Tooltip(texto7));
         }
 
     }

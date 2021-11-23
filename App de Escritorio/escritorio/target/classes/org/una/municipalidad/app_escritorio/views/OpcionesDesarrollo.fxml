@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.municipalidad.app_escritorio.Controller.OpcionesDesarrolloController">
+   <children>
+      <Button fx:id="btnGestor" layoutX="14.0" layoutY="192.0" mnemonicParsing="false" onAction="#OnActionGestor" prefHeight="132.0" prefWidth="249.0" style="-fx-background-color: #28abda;" text="Pantalla del Gestor" textFill="#fffdfd">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAuditor" layoutX="531.0" layoutY="192.0" mnemonicParsing="false" onAction="#OnActionAuditor" prefHeight="132.0" prefWidth="249.0" style="-fx-background-color: #28abda;" text="Pantalla del Auditor" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnGerente" layoutX="273.0" layoutY="192.0" mnemonicParsing="false" onAction="#OnActionGerente" prefHeight="132.0" prefWidth="249.0" style="-fx-background-color: #28abda;" text="Pantalla del Gerente" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="129.0" layoutY="37.0" text="¿Que pantalla desea ver?" textFill="#f2f2f2">
+         <font>
+            <Font name="Elephant" size="43.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
