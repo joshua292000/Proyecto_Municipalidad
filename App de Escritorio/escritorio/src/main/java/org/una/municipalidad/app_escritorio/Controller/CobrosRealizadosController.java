@@ -21,6 +21,7 @@ import org.una.municipalidad.app_escritorio.Util.AppContext;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,7 +51,7 @@ public class CobrosRealizadosController extends Controller implements Initializa
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       IniciarDatos();
+        IniciarDatos();
     }
 
     @Override
@@ -71,7 +72,6 @@ public class CobrosRealizadosController extends Controller implements Initializa
         BitacorasDTO bitacora =  ConsultasGestorService.CrearRegistro("Cobros", "Se visualizó la información de la tabla cobros", AppContext.getInstance().get("usuario").toString(),Controller.getBitacoraFecha(), AutenticacionService.datos.get(0).getUsuarioDTO().getId());
         System.out.print(cobro);
         LlenarTabla();
-
     }
 
     public void LlenarTabla(){

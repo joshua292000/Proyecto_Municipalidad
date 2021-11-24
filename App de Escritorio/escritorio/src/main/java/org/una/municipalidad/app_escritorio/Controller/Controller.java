@@ -147,7 +147,7 @@ public abstract class Controller {
     }
 
     public String[] StringPropiedades(ObservableList<PropiedadesDTO> lista, int tamaño){
-        String arreglo[]= new String[12];
+        String arreglo[]= new String[17];
         arreglo[0]=lista.get(tamaño).getPropiedades_id().toString();
         arreglo[1]=(lista.get(tamaño).getPropiedadProvincia()==null)? " " : lista.get(tamaño).getPropiedadProvincia().toString();
         arreglo[2]=(lista.get(tamaño).getPropiedadCanton()==null)? " " : lista.get(tamaño).getPropiedadCanton().toString();
@@ -225,7 +225,7 @@ public abstract class Controller {
         HSSFSheet spreadsheet = workbook.createSheet("sample");
 
         HSSFRow row = null;
-        for (int i = 0; i < tabAuditoriaVolumes.getItems().size(); i++) {
+        for (int i = 0; i <= tabAuditoriaVolumes.getItems().size(); i++) {
             row = spreadsheet.createRow(i);
             for (int j = 0; j < tabAuditoriaVolumes.getColumns().size(); j++) {
                 if(j<tamaño){

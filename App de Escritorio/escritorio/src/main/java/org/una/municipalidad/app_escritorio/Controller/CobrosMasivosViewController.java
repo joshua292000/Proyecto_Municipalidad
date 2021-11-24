@@ -174,7 +174,7 @@ public class CobrosMasivosViewController extends Controller implements Initializ
                     ConsultasServiceGerente.CrearCobrosMasivosxLocal(fechitas.get(i));
                 }
             }
-            setHola(10);
+          setHola(10);
             loadUI("ListadoView",BorderPane);
         }
 

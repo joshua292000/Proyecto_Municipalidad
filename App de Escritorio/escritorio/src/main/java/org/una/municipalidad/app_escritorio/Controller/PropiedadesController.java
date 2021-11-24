@@ -86,8 +86,15 @@ public class PropiedadesController  extends Controller implements Initializable 
 
     @SneakyThrows
     public void OnActionbtnGenerarReporte(ActionEvent actionEvent) {
+        System.out.println(ArrayPropiedad.length);
+        System.out.println(Propiedadeslist.size());
+        System.out.println(Propiedadeslist);
+
         if(getHola()==14){
             CrearReporte(TviewPropiedadesLista,ArrayPropiedad,ArrayPropiedad.length,"Propiedades",Propiedadeslist);
+
+
         }
+
     }
 }

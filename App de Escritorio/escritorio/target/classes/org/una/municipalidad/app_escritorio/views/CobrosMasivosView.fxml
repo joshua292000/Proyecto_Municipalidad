@@ -14,7 +14,7 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #B0E0E6;" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="450.0" prefWidth="1002.0">
+                  <ScrollPane prefHeight="450.0" prefWidth="1002.0">
                      <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="1130.0">
                            <children>
